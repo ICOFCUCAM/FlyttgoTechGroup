@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
-import InfrastructureModules from '@/components/flytt/InfrastructureModules';
 import TechnologySection from '@/components/flytt/TechnologySection';
 import SiteFooter from '@/components/flytt/SiteFooter';
 
@@ -23,7 +22,6 @@ export default function TechnologyPage() {
     <>
       <Navbar />
       <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
-        <InfrastructureModules />
         <TechnologySection />
       </main>
       <SiteFooter />

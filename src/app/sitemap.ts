@@ -6,10 +6,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { path: '/', priority: 1, freq: 'weekly' },
   { path: '/platforms', priority: 0.9, freq: 'weekly' },
-  { path: '/solutions', priority: 0.9, freq: 'weekly' },
+  { path: '/infrastructure', priority: 0.8, freq: 'weekly' },
   { path: '/industries', priority: 0.7, freq: 'monthly' },
   { path: '/technology', priority: 0.7, freq: 'monthly' },
+  { path: '/solutions', priority: 0.9, freq: 'weekly' },
   { path: '/white-label', priority: 0.9, freq: 'weekly' },
+  { path: '/developers', priority: 0.7, freq: 'monthly' },
+  { path: '/company', priority: 0.5, freq: 'monthly' },
   { path: '/contact', priority: 0.5, freq: 'yearly' },
 ];
 
