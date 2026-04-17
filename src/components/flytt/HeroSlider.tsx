@@ -123,20 +123,12 @@ const HeroSlider: React.FC = () => {
       </div>
 
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[#050F22]/95 via-[#0A1F3D]/80 to-[#050F22]/95"
+        className="absolute inset-0 bg-gradient-to-r from-[#0A1F3D]/85 via-[#0A1F3D]/35 to-transparent"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-[#04101F] via-[#04101F]/40 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A1F3D]/55 to-transparent pointer-events-none"
         aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            'radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.06) 0%, transparent 55%)',
-        }}
       />
 
       <div className="relative min-h-[66vh] lg:min-h-[70vh] max-w-7xl mx-auto px-6 lg:px-8 pt-14 lg:pt-16 pb-32 flex flex-col justify-center">
@@ -148,13 +140,15 @@ const HeroSlider: React.FC = () => {
 
           <h1
             id="hero-heading"
-            className="mt-6 text-[40px] sm:text-5xl lg:text-[60px] xl:text-[72px] leading-[1.02] font-semibold tracking-tight text-white"
+            className="mt-5 text-[34px] sm:text-[40px] md:text-5xl lg:text-[56px] xl:text-[60px] leading-[1.05] font-semibold tracking-tight text-white max-w-3xl"
           >
-            Launch National-Scale Digital Platforms Without Building Infrastructure From Scratch
+            Infrastructure for{' '}
+            <span className="text-white/90">National-Scale</span>{' '}
+            Digital Platforms
           </h1>
 
-          <p className="mt-6 text-base md:text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl font-normal">
-            FlyttGo Technologies Group provides modular deployment infrastructure for logistics
+          <p className="mt-5 text-base md:text-lg text-white/80 leading-relaxed max-w-2xl font-normal">
+            FlyttGo Technologies provides modular deployment infrastructure for logistics
             marketplaces, education intelligence platforms, government service layers and enterprise
             ecosystems.
           </p>

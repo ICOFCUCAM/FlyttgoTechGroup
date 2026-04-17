@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import EnterpriseSection from '@/components/flytt/EnterpriseSection';
 import GovernmentSection from '@/components/flytt/GovernmentSection';
+import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
 import SolutionsSection from '@/components/flytt/SolutionsSection';
 import SiteFooter from '@/components/flytt/SiteFooter';
 
@@ -26,6 +27,7 @@ export default function SolutionsPage() {
       <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
         <EnterpriseSection />
         <GovernmentSection />
+        <DeploymentSpeed />
         <SolutionsSection />
       </main>
       <SiteFooter />
