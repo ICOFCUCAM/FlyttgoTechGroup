@@ -5,32 +5,38 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
-type NavLink = { label: string; href: string; id: string };
+type NavLink = {
+  label: string;
+  href: string;
+  sectionId: string;
+};
 
 const links: NavLink[] = [
-  { label: 'Platforms', href: '/#platforms', id: 'platforms' },
-  { label: 'Solutions', href: '/#government', id: 'government' },
-  { label: 'Industries', href: '/#industries', id: 'industries' },
-  { label: 'Technology', href: '/#technology', id: 'technology' },
-  { label: 'White-Label', href: '/#whitelabel', id: 'whitelabel' },
-  { label: 'Contact', href: '/#contact', id: 'contact' },
+  { label: 'Platforms', href: '/platforms', sectionId: 'platforms' },
+  { label: 'Solutions', href: '/solutions', sectionId: 'government' },
+  { label: 'Industries', href: '/industries', sectionId: 'industries' },
+  { label: 'Technology', href: '/technology', sectionId: 'technology' },
+  { label: 'White-Label', href: '/white-label', sectionId: 'whitelabel' },
+  { label: 'Contact', href: '/contact', sectionId: 'contact' },
 ];
+
+const isRouteActive = (pathname: string, href: string) => {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
-  const mobilePanelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   const closeMenu = useCallback(() => setOpen(false), []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     closeMenu();
   }, [pathname, closeMenu]);
 
-  // Close on Escape + keep focus predictable
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -43,10 +49,13 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [open, closeMenu]);
 
-  // Section tracking on homepage (IntersectionObserver)
+  // Section tracking on the homepage only
   useEffect(() => {
-    if (pathname !== '/') return;
-    const ids = links.map((l) => l.id);
+    if (pathname !== '/') {
+      setActiveSection(null);
+      return;
+    }
+    const ids = links.map((l) => l.sectionId);
     const elements = ids
       .map((id) => (typeof document !== 'undefined' ? document.getElementById(id) : null))
       .filter((el): el is HTMLElement => Boolean(el));
@@ -57,7 +66,7 @@ const Navbar: React.FC = () => {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveId(visible.target.id);
+        if (visible) setActiveSection(visible.target.id);
       },
       { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
@@ -66,10 +75,15 @@ const Navbar: React.FC = () => {
     return () => observer.disconnect();
   }, [pathname]);
 
+  const activeFor = (link: NavLink) => {
+    if (pathname === '/') return activeSection === link.sectionId;
+    return isRouteActive(pathname, link.href);
+  };
+
   return (
     <header
-      className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 supports-[backdrop-filter]:bg-white/70"
       role="banner"
+      className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 supports-[backdrop-filter]:bg-white/70"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         <Link
@@ -91,14 +105,14 @@ const Navbar: React.FC = () => {
 
         <nav aria-label="Primary" className="hidden lg:flex items-center gap-1">
           {links.map((l) => {
-            const isActive = pathname === '/' && activeId === l.id;
+            const active = activeFor(l);
             return (
               <Link
-                key={l.id}
+                key={l.href}
                 href={l.href}
-                aria-current={isActive ? 'true' : undefined}
+                aria-current={active ? 'page' : undefined}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 ${
-                  isActive
+                  active
                     ? 'text-[#0A3A6B] bg-slate-100'
                     : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
                 }`}
@@ -111,13 +125,13 @@ const Navbar: React.FC = () => {
 
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            href="/#contact"
-            className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]"
+            href="/contact"
+            className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
           >
             Sign In
           </Link>
           <Link
-            href="/#whitelabel"
+            href="/white-label"
             className="px-5 py-2.5 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md hover:bg-[#0a2f57] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
           >
             Launch Your Platform
@@ -139,21 +153,20 @@ const Navbar: React.FC = () => {
 
       <div
         id="mobile-nav-panel"
-        ref={mobilePanelRef}
         hidden={!open}
         className="lg:hidden border-t border-slate-200 bg-white"
       >
         <nav aria-label="Mobile primary" className="px-6 py-4 flex flex-col gap-1">
           {links.map((l) => {
-            const isActive = pathname === '/' && activeId === l.id;
+            const active = activeFor(l);
             return (
               <Link
-                key={l.id}
+                key={l.href}
                 href={l.href}
-                aria-current={isActive ? 'true' : undefined}
+                aria-current={active ? 'page' : undefined}
                 onClick={closeMenu}
                 className={`px-3 py-3 text-sm font-medium rounded-md ${
-                  isActive ? 'text-[#0A3A6B] bg-slate-100' : 'text-slate-700 hover:bg-slate-50'
+                  active ? 'text-[#0A3A6B] bg-slate-100' : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
                 {l.label}
@@ -161,7 +174,7 @@ const Navbar: React.FC = () => {
             );
           })}
           <Link
-            href="/#whitelabel"
+            href="/white-label"
             onClick={closeMenu}
             className="mt-2 px-5 py-3 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md text-center"
           >

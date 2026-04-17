@@ -80,7 +80,7 @@ const SolutionsSection: React.FC = () => {
   const current = tabs.find((t) => t.id === active) || tabs[0];
 
   return (
-    <section id="government" className="py-24 lg:py-32 bg-gradient-to-b from-white to-[#F5F8FC]">
+    <section id="solutions-tabs" className="py-24 lg:py-32 bg-gradient-to-b from-white to-[#F5F8FC]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
@@ -183,8 +183,6 @@ const SolutionsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* enterprise id anchor */}
-      <div id="enterprise" className="h-0" />
     </section>
   );
 };
