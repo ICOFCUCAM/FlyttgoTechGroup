@@ -14,7 +14,7 @@ const industries = [
 
 const IndustryGrid: React.FC = () => {
   return (
-    <section className="py-20 lg:py-24 bg-white border-t border-slate-100">
+    <section id="industries" className="py-20 lg:py-24 bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">

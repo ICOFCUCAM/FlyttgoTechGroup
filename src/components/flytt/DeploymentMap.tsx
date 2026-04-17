@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const nodes = [
   { city: 'Stockholm', x: 52, y: 28, active: true },
@@ -36,10 +37,13 @@ const DeploymentMap: React.FC = () => {
         <div className="mt-14 relative rounded-3xl bg-white border border-slate-200 p-6 lg:p-10 overflow-hidden">
           <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5F8FC] via-[#EEF4FA] to-[#E4EEF8]">
             {/* Background map image */}
-            <img
+            <Image
               src="https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361148730_52effefc.png"
-              alt="Deployment map"
-              className="absolute inset-0 w-full h-full object-cover opacity-60"
+              alt=""
+              role="presentation"
+              fill
+              sizes="(min-width: 1024px) 1024px, 100vw"
+              className="absolute inset-0 object-cover opacity-60"
             />
 
             {/* SVG overlay with connections and nodes */}

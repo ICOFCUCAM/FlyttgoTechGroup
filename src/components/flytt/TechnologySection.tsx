@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Cloud, Database, Cpu, Globe, Lock, Zap, Code2, Container } from 'lucide-react';
 
 const stack = [
@@ -146,11 +147,13 @@ const TechnologySection: React.FC = () => {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <div className="rounded-xl overflow-hidden border border-slate-200 shadow-xl shadow-slate-900/5">
-                <img
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-slate-200 shadow-xl shadow-slate-900/5 bg-slate-100">
+                <Image
                   src="https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361128732_1ea86120.png"
-                  alt="Education analytics dashboard"
-                  className="w-full h-auto"
+                  alt="Live operations dashboard showing dispatch, fleet heatmaps and territory analytics"
+                  fill
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  className="object-cover"
                 />
               </div>
             </div>

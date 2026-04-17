@@ -1,4 +1,7 @@
+'use client';
+
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Building2, Briefcase, Factory, Store, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 
 const tabs = [
@@ -118,7 +121,13 @@ const SolutionsSection: React.FC = () => {
         <div id={current.id} className="mt-10 grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200 shadow-lg">
             <div className="relative aspect-[16/10]">
-              <img src={current.image} alt={current.label} className="w-full h-full object-cover" />
+              <Image
+                src={current.image}
+                alt={`${current.label} deployment scene`}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-white/95 backdrop-blur flex items-center justify-center text-[#0A3A6B]">

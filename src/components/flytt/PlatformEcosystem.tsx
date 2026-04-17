@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Truck, GraduationCap, Building2, Store, Radar, ArrowUpRight, CheckCircle2, ArrowRight } from 'lucide-react';
 
 
@@ -128,13 +131,13 @@ const PlatformEcosystem: React.FC = () => {
                 </div>
 
                 <Link
-                  to={`/platforms/${p.id}`}
+                  href={`/platforms/${p.id}`}
                   onClick={(e) => e.stopPropagation()}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all"
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
                   style={{ color: p.color }}
                 >
                   Explore {p.name}
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} aria-hidden="true" />
                 </Link>
               </button>
             );
@@ -190,11 +193,11 @@ const PlatformEcosystem: React.FC = () => {
               </div>
 
               <Link
-                to={`/platforms/${current.id}`}
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:gap-3 transition-all"
+                href={`/platforms/${current.id}`}
+                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
               >
                 View {current.name} platform page
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
 
             </div>
@@ -209,11 +212,15 @@ const PlatformEcosystem: React.FC = () => {
                     {current.id}.flyttgo.platform / dashboard
                   </div>
                 </div>
-                <img
-                  src="https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361106438_daf08b2d.png"
-                  alt={`${current.name} dashboard preview`}
-                  className="w-full h-auto object-cover"
-                />
+                <div className="relative aspect-[16/10] w-full bg-slate-100">
+                  <Image
+                    src="https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361106438_daf08b2d.png"
+                    alt={`${current.name} dashboard preview`}
+                    fill
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>

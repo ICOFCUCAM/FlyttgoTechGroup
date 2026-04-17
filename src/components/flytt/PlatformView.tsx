@@ -1,5 +1,8 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRight,
   ArrowLeft,
@@ -12,7 +15,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
-import { platforms, platformList, type PlatformData } from '@/data/platforms';
+import { platforms, platformList } from '@/data/platforms';
 
 const methodColors: Record<string, string> = {
   GET: 'text-emerald-600 bg-emerald-50',
@@ -21,18 +24,20 @@ const methodColors: Record<string, string> = {
   DELETE: 'text-red-600 bg-red-50',
 };
 
-const PlatformPage: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const data: PlatformData | undefined = slug ? platforms[slug] : undefined;
+interface PlatformViewProps {
+  slug: string;
+}
+
+const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
+  const data = platforms[slug];
   const [activeEndpoint, setActiveEndpoint] = useState(0);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
     setActiveEndpoint(0);
   }, [slug]);
 
-  if (!data) return <Navigate to="/" replace />;
+  if (!data) return null;
 
   const Icon = data.icon;
   const others = platformList.filter((p) => p.slug !== data.slug);
@@ -66,10 +71,10 @@ const PlatformPage: React.FC = () => {
         />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-20 lg:pt-14 lg:pb-28">
           <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 font-medium"
+            href="/#platforms"
+            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
           >
-            <ArrowLeft size={14} />
+            <ArrowLeft size={14} aria-hidden="true" />
             Back to Platform Ecosystem
           </Link>
 
@@ -122,7 +127,14 @@ const PlatformPage: React.FC = () => {
 
             <div className="lg:col-span-6">
               <div className="relative aspect-[5/4] rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-white">
-                <img src={data.heroImage} alt={data.name} className="w-full h-full object-cover" />
+                <Image
+                  src={data.heroImage}
+                  alt={`${data.name} platform deployment scene`}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
                 <div className="absolute top-5 left-5 bg-white/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${data.color}15`, color: data.color }}>
@@ -245,7 +257,15 @@ const PlatformPage: React.FC = () => {
                     {data.slug}.flyttgo.platform
                   </div>
                 </div>
-                <img src={data.dashboardImage} alt={`${data.name} dashboard`} className="w-full h-auto" />
+                <div className="relative aspect-[16/10] w-full bg-slate-100">
+                  <Image
+                    src={data.dashboardImage}
+                    alt={`${data.name} dashboard interface`}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
 
@@ -551,10 +571,10 @@ const PlatformPage: React.FC = () => {
               Explore other platforms in the ecosystem
             </h2>
             <Link
-              to="/#platforms"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:gap-3 transition-all"
+              href="/#platforms"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
             >
-              View full ecosystem <ArrowRight size={14} />
+              View full ecosystem <ArrowRight size={14} aria-hidden="true" />
             </Link>
           </div>
 
@@ -564,8 +584,8 @@ const PlatformPage: React.FC = () => {
               return (
                 <Link
                   key={p.slug}
-                  to={`/platforms/${p.slug}`}
-                  className="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  href={`/platforms/${p.slug}`}
+                  className="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 >
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center"
@@ -591,8 +611,11 @@ const PlatformPage: React.FC = () => {
           <div className="text-xs text-slate-500">
             © {new Date().getFullYear()} FlyttGo Technologies Group AB · Platform Infrastructure Provider
           </div>
-          <Link to="/" className="text-xs font-semibold text-slate-700 hover:text-slate-900 inline-flex items-center gap-1.5">
-            <ArrowLeft size={12} /> Back to ecosystem home
+          <Link
+            href="/"
+            className="text-xs font-semibold text-slate-700 hover:text-slate-900 inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+          >
+            <ArrowLeft size={12} aria-hidden="true" /> Back to ecosystem home
           </Link>
         </div>
       </footer>
@@ -670,4 +693,4 @@ const PlatformContactForm: React.FC<{ platform: string; color: string }> = ({ pl
   );
 };
 
-export default PlatformPage;
+export default PlatformView;
