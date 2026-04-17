@@ -4,9 +4,6 @@ import HeroSlider from '@/components/flytt/HeroSlider';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
 import MultiRegion from '@/components/flytt/MultiRegion';
-import WhiteLabelStrategy from '@/components/flytt/WhiteLabelStrategy';
-import TargetUsers from '@/components/flytt/TargetUsers';
-import InfrastructureModules from '@/components/flytt/InfrastructureModules';
 import FinalCTA from '@/components/flytt/FinalCTA';
 import ContactFooter from '@/components/flytt/ContactFooter';
 
@@ -26,9 +23,6 @@ export default function HomePage() {
         <PlatformEcosystemOverview />
         <DeploymentSpeed />
         <MultiRegion />
-        <WhiteLabelStrategy />
-        <TargetUsers />
-        <InfrastructureModules />
         <FinalCTA />
         <ContactFooter />
       </main>
