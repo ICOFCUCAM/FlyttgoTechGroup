@@ -163,7 +163,7 @@ const ContactFooter: React.FC = () => {
                       <ArrowRight size={16} />
                     </button>
                     <p className="mt-3 text-xs text-slate-500 text-center">
-                      By submitting, you agree to FlyttGo's privacy policy and platform deployment terms.
+                      By submitting, you agree to FlyttGo&rsquo;s privacy policy and platform deployment terms.
                     </p>
                   </>
                 )}

@@ -541,7 +541,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   Deploy {data.name} with our platform team.
                 </h2>
                 <p className="mt-4 text-white/80 leading-relaxed">
-                  Share your deployment context and we'll schedule a technical walkthrough within one business
+                  Share your deployment context and we&rsquo;ll schedule a technical walkthrough within one business
                   day.
                 </p>
                 <div className="mt-8 space-y-2 text-sm text-white/80">
