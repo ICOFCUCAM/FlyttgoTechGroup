@@ -5,7 +5,7 @@ import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverv
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
 import MultiRegion from '@/components/flytt/MultiRegion';
 import FinalCTA from '@/components/flytt/FinalCTA';
-import ContactFooter from '@/components/flytt/ContactFooter';
+import SiteFooter from '@/components/flytt/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'Launch National-Scale Digital Platforms Without Building Infrastructure From Scratch',
@@ -24,8 +24,8 @@ export default function HomePage() {
         <DeploymentSpeed />
         <MultiRegion />
         <FinalCTA />
-        <ContactFooter />
       </main>
+      <SiteFooter />
     </>
   );
 }

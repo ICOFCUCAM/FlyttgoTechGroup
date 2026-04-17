@@ -123,29 +123,21 @@ const HeroSlider: React.FC = () => {
       </div>
 
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[#0A1F3D]/90 via-[#0A1F3D]/60 to-[#0A1F3D]/85"
+        className="absolute inset-0 bg-gradient-to-br from-[#050F22]/95 via-[#0A1F3D]/80 to-[#050F22]/95"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-[#05122A] via-transparent to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-[#04101F] via-[#04101F]/40 to-transparent"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 opacity-[0.18] pointer-events-none mix-blend-soft-light"
+        className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
-          backgroundImage:
-            'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-          backgroundSize: '72px 72px',
-          maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 90%)',
+          background:
+            'radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.06) 0%, transparent 55%)',
         }}
       />
-
-      {slides.map((s, i) => (
-        <h2 key={s.image} className="sr-only" aria-hidden={i !== index}>
-          {`Slide ${i + 1} of ${slides.length}: ${s.tag} — ${s.title}`}
-        </h2>
-      ))}
 
       <div className="relative min-h-[calc(100svh-5rem)] lg:min-h-[calc(100vh-5rem)] max-w-7xl mx-auto px-6 lg:px-8 pt-24 lg:pt-32 pb-48 flex flex-col justify-center">
         <div className="max-w-4xl motion-safe:animate-fade-up">
@@ -156,13 +148,9 @@ const HeroSlider: React.FC = () => {
 
           <h1
             id="hero-heading"
-            className="mt-8 text-[44px] sm:text-5xl lg:text-7xl xl:text-[84px] leading-[0.98] font-semibold tracking-tight"
+            className="mt-8 text-[44px] sm:text-5xl lg:text-7xl xl:text-[84px] leading-[0.98] font-semibold tracking-tight text-white"
           >
-            Launch National-Scale{' '}
-            <span className="bg-gradient-to-r from-white via-white to-[#9ED0F9] bg-clip-text text-transparent">
-              Digital Platforms
-            </span>{' '}
-            Without Building Infrastructure From Scratch
+            Launch National-Scale Digital Platforms Without Building Infrastructure From Scratch
           </h1>
 
           <p className="mt-8 text-lg md:text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl font-normal">

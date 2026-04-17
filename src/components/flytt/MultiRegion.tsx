@@ -1,6 +1,6 @@
 import React from 'react';
-import { Globe2, Compass, Sparkles } from 'lucide-react';
-import DeploymentMap from '@/components/flytt/DeploymentMap';
+import Link from 'next/link';
+import { Globe2, Compass, ArrowUpRight } from 'lucide-react';
 
 type Region = {
   code: string;
@@ -119,14 +119,15 @@ const MultiRegion: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-12 rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-          <DeploymentMap />
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/industries"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+          >
+            See deployment map &amp; industries
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </Link>
         </div>
-
-        <p className="mt-8 text-sm text-slate-500 inline-flex items-center gap-2 justify-center w-full">
-          <Sparkles size={14} className="text-[#0FB5A6]" aria-hidden="true" />
-          Additional regions available through partner deployments.
-        </p>
       </div>
     </section>
   );
