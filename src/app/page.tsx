@@ -1,21 +1,19 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import HeroSlider from '@/components/flytt/HeroSlider';
-import PlatformEcosystem from '@/components/flytt/PlatformEcosystem';
-import MetricsStrip from '@/components/flytt/MetricsStrip';
-import EnterpriseSection from '@/components/flytt/EnterpriseSection';
-import GovernmentSection from '@/components/flytt/GovernmentSection';
-import WhiteLabelSection from '@/components/flytt/WhiteLabelSection';
-import InvestorSection from '@/components/flytt/InvestorSection';
-import IndustryGrid from '@/components/flytt/IndustryGrid';
-import TechnologySection from '@/components/flytt/TechnologySection';
-import DeploymentMap from '@/components/flytt/DeploymentMap';
+import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
+import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
+import MultiRegion from '@/components/flytt/MultiRegion';
+import WhiteLabelStrategy from '@/components/flytt/WhiteLabelStrategy';
+import TargetUsers from '@/components/flytt/TargetUsers';
+import InfrastructureModules from '@/components/flytt/InfrastructureModules';
+import FinalCTA from '@/components/flytt/FinalCTA';
 import ContactFooter from '@/components/flytt/ContactFooter';
 
 export const metadata: Metadata = {
-  title: 'Smart Digital Infrastructure for Logistics, Education, Government & Enterprise',
+  title: 'Launch National-Scale Digital Platforms Without Building Infrastructure From Scratch',
   description:
-    'FlyttGo Technologies Group builds modular AI-powered platform infrastructure — logistics marketplaces, education analytics, municipal dashboards, fleet intelligence and white-label digital platforms deployable across Europe, Africa and the Middle East.',
+    'FlyttGo Technologies Group provides modular deployment infrastructure for logistics marketplaces, education intelligence platforms, government service layers and enterprise ecosystems — deployable across Europe, Africa and the Middle East in weeks, not years.',
   alternates: { canonical: '/' },
 };
 
@@ -25,15 +23,13 @@ export default function HomePage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
         <HeroSlider />
-        <PlatformEcosystem />
-        <MetricsStrip />
-        <EnterpriseSection />
-        <GovernmentSection />
-        <WhiteLabelSection />
-        <IndustryGrid />
-        <TechnologySection />
-        <DeploymentMap />
-        <InvestorSection />
+        <PlatformEcosystemOverview />
+        <DeploymentSpeed />
+        <MultiRegion />
+        <WhiteLabelStrategy />
+        <TargetUsers />
+        <InfrastructureModules />
+        <FinalCTA />
         <ContactFooter />
       </main>
     </>

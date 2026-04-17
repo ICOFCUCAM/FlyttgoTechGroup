@@ -16,48 +16,40 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    tag: 'Logistics Infrastructure',
-    title: 'Deploy Smart Logistics Platforms Across Cities and Regions',
+    tag: 'Logistics Marketplace',
+    title: 'Logistics Marketplace Infrastructure',
     caption:
-      'Enable driver coordination, dispatch intelligence and multi-zone delivery orchestration using FlyttGo logistics infrastructure modules.',
+      'Deploy branded logistics marketplaces with dispatch intelligence, driver coordination and multi-zone delivery orchestration across cities and regions.',
     image: imagery.hero.logistics.src,
     alt: imagery.hero.logistics.alt,
   },
   {
     tag: 'Student Relocation',
-    title: 'Seamless Student Moving & Campus Logistics',
+    title: 'Student Relocation Platform Stack',
     caption:
-      'Coordinate student moves across universities and campus housing using the same logistics infrastructure that powers national deployments.',
+      'Coordinate university, campus-housing and intercity student relocations on the same modular infrastructure that powers national deployments.',
     image: imagery.hero.student.src,
     alt: imagery.hero.student.alt,
   },
   {
-    tag: 'Office Relocation',
-    title: 'Enterprise-Grade Office Relocation Logistics',
+    tag: 'Government Service Layer',
+    title: 'Government Service Layer Deployment',
     caption:
-      'Plan, coordinate and track office relocations at scale with dispatch intelligence, route optimization and real-time status dashboards.',
+      'Stand up municipal dashboards, permit workflows and transport oversight for cities, ministries and regulators — as ready-to-deploy infrastructure.',
     image: imagery.hero.office.src,
-    alt: imagery.hero.office.alt,
+    alt: 'City architecture representing a government service layer deployment',
   },
   {
-    tag: 'White-Label Marketplace',
-    title: 'Launch Your Own Marketplace Platform in Weeks',
+    tag: 'White-Label Workforce',
+    title: 'White-Label Workforce Marketplace Engine',
     caption:
-      'Deploy branded logistics, service or workforce marketplaces using MarketStack infrastructure modules without building backend systems from scratch.',
+      'Launch tenant-isolated workforce and service marketplaces with branding, operator dashboards and modular expansion — without building backend systems.',
     image: imagery.hero.marketplace.src,
     alt: imagery.hero.marketplace.alt,
   },
-  {
-    tag: 'Fleet Intelligence',
-    title: 'Transform Fleet Operations with AI Platform Intelligence',
-    caption:
-      'Enable route optimization, vehicle telemetry tracking and operations analytics using FleetStack enterprise fleet intelligence infrastructure.',
-    image: imagery.hero.fleet.src,
-    alt: imagery.hero.fleet.alt,
-  },
 ];
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 6500;
 
 const HeroSlider: React.FC = () => {
   const [index, setIndex] = useState(0);
@@ -74,7 +66,6 @@ const HeroSlider: React.FC = () => {
   );
   const goTo = useCallback((i: number) => setIndex(i % slides.length), []);
 
-  // Autoplay with pause on hover/focus and reduced-motion respect
   useEffect(() => {
     if (paused || prefersReducedMotion) return;
     const t = window.setInterval(() => {
@@ -83,7 +74,6 @@ const HeroSlider: React.FC = () => {
     return () => window.clearInterval(t);
   }, [paused, prefersReducedMotion]);
 
-  // Keyboard navigation when slider region is focused
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
@@ -114,14 +104,18 @@ const HeroSlider: React.FC = () => {
         style={{
           backgroundImage:
             'linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)',
-          backgroundSize: '56px 56px',
+          backgroundSize: '64px 64px',
           maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 85%)',
         }}
       />
+      <div
+        className="absolute -top-40 -right-40 w-[640px] h-[640px] rounded-full bg-gradient-to-br from-[#1E6FD9]/15 via-[#0FB5A6]/10 to-transparent blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-24 lg:pt-24 lg:pb-32">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-6">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-28 lg:pt-28 lg:pb-36">
+        <div className="grid lg:grid-cols-12 gap-14 items-center">
+          <div className="lg:col-span-6 motion-safe:animate-[fadeUp_0.9s_ease-out_both]">
             <p className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-medium text-slate-700 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 motion-safe:animate-pulse" aria-hidden="true" />
               Platform Infrastructure · Europe · Africa · Middle East
@@ -129,60 +123,61 @@ const HeroSlider: React.FC = () => {
 
             <h1
               id="hero-heading"
-              className="mt-6 text-4xl md:text-5xl lg:text-[56px] leading-[1.05] font-semibold tracking-tight text-slate-900"
+              className="mt-7 text-[40px] sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] font-semibold tracking-tight text-slate-900"
             >
-              Smart Digital Infrastructure for{' '}
-              <span className="text-[#0A3A6B]">Logistics, Education,</span>{' '}
+              Launch National-Scale{' '}
+              <span className="text-[#0A3A6B]">Digital Platforms</span>
+              <br className="hidden sm:block" />{' '}
               <span className="bg-gradient-to-r from-[#1E6FD9] to-[#0FB5A6] bg-clip-text text-transparent">
-                Government &amp; Enterprise
+                Without Building Infrastructure
               </span>{' '}
-              Systems
+              From Scratch
             </h1>
 
-            <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-xl">
-              FlyttGo Technologies Group builds modular AI-powered platform infrastructure that enables
-              organizations to launch logistics systems, education intelligence platforms, government service
-              layers and digital marketplaces using scalable deployment architecture.
+            <p className="mt-7 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-xl">
+              FlyttGo Technologies Group provides modular deployment infrastructure for logistics
+              marketplaces, education intelligence platforms, government service layers and enterprise
+              ecosystems.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
-                href="/#whitelabel"
-                className="group inline-flex items-center gap-2 px-6 py-3.5 bg-[#0A3A6B] text-white font-semibold rounded-lg hover:bg-[#0a2f57] transition-all shadow-lg shadow-blue-900/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                href="/contact"
+                className="group inline-flex items-center gap-2 px-7 py-4 bg-[#0A3A6B] text-white font-semibold rounded-lg hover:bg-[#0a2f57] motion-safe:transition-all shadow-lg shadow-blue-900/15 hover:shadow-xl hover:shadow-blue-900/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
               >
-                Launch Your Platform
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                Deploy Your Platform
+                <ArrowRight size={18} className="motion-safe:transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </Link>
               <Link
-                href="/#platforms"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                href="#infrastructure-modules"
+                className="inline-flex items-center gap-2 px-7 py-4 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
               >
-                Explore Platform Ecosystem
+                Explore Infrastructure Modules
               </Link>
             </div>
 
-            <dl className="mt-10 pt-8 border-t border-slate-200/70 grid grid-cols-3 gap-6">
+            <dl className="mt-14 pt-8 border-t border-slate-200/70 grid grid-cols-3 gap-6">
               <div>
                 <dt className="sr-only">Infrastructure platforms</dt>
-                <dd className="text-2xl font-semibold text-slate-900 tracking-tight">5</dd>
-                <p className="text-xs text-slate-500 mt-0.5">Infrastructure Platforms</p>
+                <dd className="text-3xl font-semibold text-slate-900 tracking-tight">5</dd>
+                <p className="text-xs lg:text-sm text-slate-500 mt-1">Infrastructure Platforms</p>
               </div>
               <div>
                 <dt className="sr-only">Deployment modules</dt>
-                <dd className="text-2xl font-semibold text-slate-900 tracking-tight">18+</dd>
-                <p className="text-xs text-slate-500 mt-0.5">Deployment Modules</p>
+                <dd className="text-3xl font-semibold text-slate-900 tracking-tight">18+</dd>
+                <p className="text-xs lg:text-sm text-slate-500 mt-1">Deployment Modules</p>
               </div>
               <div>
                 <dt className="sr-only">Continents ready</dt>
-                <dd className="text-2xl font-semibold text-slate-900 tracking-tight">3</dd>
-                <p className="text-xs text-slate-500 mt-0.5">Continents Ready</p>
+                <dd className="text-3xl font-semibold text-slate-900 tracking-tight">3</dd>
+                <p className="text-xs lg:text-sm text-slate-500 mt-1">Continents Ready</p>
               </div>
             </dl>
           </div>
 
           <div
             ref={regionRef}
-            className="lg:col-span-6 relative"
+            className="lg:col-span-6 relative motion-safe:animate-[fadeUp_1.1s_ease-out_both]"
             role="region"
             aria-roledescription="carousel"
             aria-label="FlyttGo platform deployment scenes"
@@ -194,7 +189,7 @@ const HeroSlider: React.FC = () => {
             onKeyDown={onKeyDown}
           >
             <div
-              className="relative aspect-[4/3] lg:aspect-[5/4] rounded-2xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-white"
+              className="relative aspect-[4/3] lg:aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/15 border border-white ring-1 ring-slate-200/40"
               aria-live={paused ? 'polite' : 'off'}
             >
               {slides.map((s, i) => {
@@ -218,22 +213,22 @@ const HeroSlider: React.FC = () => {
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent" aria-hidden="true" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-7">
-                      <span className="inline-block px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider bg-white/95 text-[#0A3A6B] rounded-md">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-slate-900/15 to-transparent" aria-hidden="true" />
+                    <div className="absolute bottom-0 left-0 right-0 p-7 lg:p-8">
+                      <span className="inline-block px-3 py-1 text-[11px] font-semibold uppercase tracking-wider bg-white/95 text-[#0A3A6B] rounded-md">
                         {s.tag}
                       </span>
-                      <h2 className="mt-3 text-white text-xl lg:text-2xl font-semibold leading-snug max-w-lg">
+                      <h2 className="mt-4 text-white text-2xl lg:text-3xl font-semibold leading-snug tracking-tight max-w-lg">
                         {s.title}
                       </h2>
-                      <p className="mt-2 text-sm text-white/80 max-w-md leading-relaxed">{s.caption}</p>
+                      <p className="mt-3 text-sm lg:text-base text-white/80 max-w-md leading-relaxed">{s.caption}</p>
                     </div>
                   </div>
                 );
               })}
 
               <div className="absolute top-5 right-5 bg-white/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg border border-white flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center" aria-hidden="true">
+                <div className="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center" aria-hidden="true">
                   <Activity size={16} className="text-emerald-600" />
                 </div>
                 <div>
@@ -243,7 +238,7 @@ const HeroSlider: React.FC = () => {
               </div>
 
               <div className="absolute top-5 left-5 bg-white/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg border border-white flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
+                <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
                   <Globe2 size={16} className="text-[#1E6FD9]" />
                 </div>
                 <div>
@@ -257,8 +252,7 @@ const HeroSlider: React.FC = () => {
                   type="button"
                   onClick={() => go(-1)}
                   aria-label="Previous slide"
-                  aria-controls="hero-slides"
-                  className="w-9 h-9 rounded-full bg-white/95 hover:bg-white flex items-center justify-center text-slate-900 shadow-md transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]"
+                  className="w-10 h-10 rounded-full bg-white/95 hover:bg-white flex items-center justify-center text-slate-900 shadow-md motion-safe:transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]"
                 >
                   <ChevronLeft size={18} aria-hidden="true" />
                 </button>
@@ -266,19 +260,14 @@ const HeroSlider: React.FC = () => {
                   type="button"
                   onClick={() => go(1)}
                   aria-label="Next slide"
-                  aria-controls="hero-slides"
-                  className="w-9 h-9 rounded-full bg-white/95 hover:bg-white flex items-center justify-center text-slate-900 shadow-md transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]"
+                  className="w-10 h-10 rounded-full bg-white/95 hover:bg-white flex items-center justify-center text-slate-900 shadow-md motion-safe:transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]"
                 >
                   <ChevronRight size={18} aria-hidden="true" />
                 </button>
               </div>
             </div>
 
-            <div
-              className="mt-5 flex items-center justify-center gap-2"
-              role="tablist"
-              aria-label="Select slide"
-            >
+            <div className="mt-6 flex items-center justify-center gap-2" role="tablist" aria-label="Select slide">
               {slides.map((s, i) => {
                 const active = i === index;
                 return (
@@ -289,8 +278,8 @@ const HeroSlider: React.FC = () => {
                     aria-selected={active}
                     aria-label={`Go to slide ${i + 1}: ${s.tag}`}
                     onClick={() => goTo(i)}
-                    className={`h-1.5 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] ${
-                      active ? 'w-8 bg-[#0A3A6B]' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
+                    className={`h-1.5 rounded-full motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] ${
+                      active ? 'w-10 bg-[#0A3A6B]' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
                     }`}
                   />
                 );
@@ -305,11 +294,11 @@ const HeroSlider: React.FC = () => {
       </div>
 
       <div className="relative border-t border-slate-200/70 bg-white/60 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
-          <p className="text-center text-xs uppercase tracking-[0.2em] text-slate-500 font-medium">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
+          <p className="text-center text-xs uppercase tracking-[0.22em] text-slate-500 font-medium">
             Comparable Structural Positioning
           </p>
-          <ul className="mt-5 grid grid-cols-2 md:grid-cols-5 gap-6 items-center list-none">
+          <ul className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-6 items-center list-none">
             {[
               'Stripe · Infrastructure',
               'Shopify · Marketplace',
