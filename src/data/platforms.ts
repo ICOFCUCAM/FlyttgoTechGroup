@@ -6,6 +6,7 @@ import {
   Radar,
   type LucideIcon,
 } from 'lucide-react';
+import { imagery } from '@/lib/imagery';
 
 export type PricingTier = {
   name: string;
@@ -63,8 +64,8 @@ export const platforms: Record<string, PlatformData> = {
     color: '#1E6FD9',
     accentBg: 'bg-blue-50',
     gradient: 'from-[#0A3A6B] to-[#1E6FD9]',
-    heroImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776360965901_956dd2fd.png',
-    dashboardImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361106438_daf08b2d.png',
+    heroImage: imagery.platforms.flyttgo.hero,
+    dashboardImage: imagery.platforms.flyttgo.dashboard,
     modules: [
       { title: 'Dispatch Intelligence Engine', desc: 'Real-time driver assignment with territory balancing and workload distribution analytics.' },
       { title: 'Multi-Zone Routing', desc: 'AI-powered route optimization across delivery zones, cities and regional corridors.' },
@@ -141,8 +142,8 @@ export const platforms: Record<string, PlatformData> = {
     color: '#0FB5A6',
     accentBg: 'bg-teal-50',
     gradient: 'from-[#0FB5A6] to-[#1E6FD9]',
-    heroImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361007461_c29963f8.png',
-    dashboardImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361128732_1ea86120.png',
+    heroImage: imagery.platforms.edupro.hero,
+    dashboardImage: imagery.platforms.edupro.dashboard,
     modules: [
       { title: 'Attendance Intelligence', desc: 'Real-time attendance tracking with anomaly detection across schools and districts.' },
       { title: 'Institutional Performance', desc: 'Cross-school performance comparison with benchmark visualization.' },
@@ -219,8 +220,8 @@ export const platforms: Record<string, PlatformData> = {
     color: '#7C5CE6',
     accentBg: 'bg-violet-50',
     gradient: 'from-[#7C5CE6] to-[#1E6FD9]',
-    heroImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361047212_157a0e34.jpg',
-    dashboardImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361148730_52effefc.png',
+    heroImage: imagery.platforms.govstack.hero,
+    dashboardImage: imagery.platforms.govstack.dashboard,
     modules: [
       { title: 'Permit Workflow Engine', desc: 'End-to-end digital permit applications with multi-stage approval chains.' },
       { title: 'Transport Oversight Dashboard', desc: 'Fleet visibility, route monitoring and regulatory compliance analytics.' },
@@ -297,8 +298,8 @@ export const platforms: Record<string, PlatformData> = {
     color: '#E67E1E',
     accentBg: 'bg-orange-50',
     gradient: 'from-[#E67E1E] to-[#0FB5A6]',
-    heroImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361027671_eebffd68.jpg',
-    dashboardImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361106438_daf08b2d.png',
+    heroImage: imagery.platforms.marketstack.hero,
+    dashboardImage: imagery.platforms.marketstack.dashboard,
     modules: [
       { title: 'Multi-Vendor Engine', desc: 'Complete vendor onboarding, product catalogs and tenant isolation.' },
       { title: 'Order Routing Infrastructure', desc: 'Intelligent order splitting, assignment and fulfillment coordination.' },
@@ -375,8 +376,8 @@ export const platforms: Record<string, PlatformData> = {
     color: '#0A3A6B',
     accentBg: 'bg-slate-100',
     gradient: 'from-[#0A1F3D] to-[#0A3A6B]',
-    heroImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361070291_5b36825e.png',
-    dashboardImage: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361106438_daf08b2d.png',
+    heroImage: imagery.platforms.fleetstack.hero,
+    dashboardImage: imagery.platforms.fleetstack.dashboard,
     modules: [
       { title: 'Vehicle Telemetry', desc: 'Real-time GPS, fuel, engine and driver behavior data ingestion.' },
       { title: 'Route Optimization', desc: 'Multi-vehicle route planning with traffic and SLA awareness.' },

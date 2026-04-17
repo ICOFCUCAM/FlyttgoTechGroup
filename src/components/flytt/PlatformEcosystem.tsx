@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Truck, GraduationCap, Building2, Store, Radar, ArrowUpRight, CheckCircle2, ArrowRight } from 'lucide-react';
+import { imagery } from '@/lib/imagery';
 
 
 const platforms = [
@@ -214,7 +215,7 @@ const PlatformEcosystem: React.FC = () => {
                 </div>
                 <div className="relative aspect-[16/10] w-full bg-slate-100">
                   <Image
-                    src="https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361106438_daf08b2d.png"
+                    src={imagery.platforms[current.id as keyof typeof imagery.platforms]?.dashboard ?? imagery.dispatch}
                     alt={`${current.name} dashboard preview`}
                     fill
                     sizes="(min-width: 1024px) 55vw, 100vw"

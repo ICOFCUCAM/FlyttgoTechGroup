@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
+  AlertCircle,
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
   Code2,
   Layers,
+  Loader2,
   Copy,
   Check,
   ArrowUpRight,
@@ -16,6 +18,15 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import { platforms, platformList } from '@/data/platforms';
+import type { DeploymentType } from '@/lib/contact-schema';
+
+const PLATFORM_DEPLOYMENT_TYPE: Record<string, DeploymentType> = {
+  flyttgo: 'White-Label Deployment',
+  edupro: 'Education Analytics Platform',
+  govstack: 'Government / Municipal Platform',
+  marketstack: 'Marketplace Deployment Engine',
+  fleetstack: 'Enterprise Fleet Intelligence',
+};
 
 const methodColors: Record<string, string> = {
   GET: 'text-emerald-600 bg-emerald-50',
@@ -557,7 +568,11 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 </div>
               </div>
 
-              <PlatformContactForm platform={data.name} color={data.color} />
+              <PlatformContactForm
+                platform={data.name}
+                color={data.color}
+                deploymentType={PLATFORM_DEPLOYMENT_TYPE[data.slug] ?? 'White-Label Deployment'}
+              />
             </div>
           </div>
         </div>
@@ -623,69 +638,162 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
   );
 };
 
-const PlatformContactForm: React.FC<{ platform: string; color: string }> = ({ platform, color }) => {
-  const [form, setForm] = useState({ name: '', email: '', org: '', message: '' });
-  const [sent, setSent] = useState(false);
+const PlatformContactForm: React.FC<{ platform: string; color: string; deploymentType: DeploymentType }> = ({
+  platform,
+  color,
+  deploymentType,
+}) => {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    company: '',
+    country: '',
+    message: '',
+    website: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === 'submitting') return;
     if (!form.email || !form.name) return;
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      setForm({ name: '', email: '', org: '', message: '' });
-    }, 3500);
+    setStatus('submitting');
+    setErrorMessage(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-flyttgo-source': `platform/${platform.toLowerCase()}`,
+        },
+        body: JSON.stringify({
+          ...form,
+          deployment_type: deploymentType,
+        }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body?.error ?? 'Submission failed. Please try again.');
+      }
+      setStatus('success');
+      setForm({ name: '', email: '', company: '', country: '', message: '', website: '' });
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Submission failed. Please try again.');
+    }
   };
 
   return (
-    <form onSubmit={submit} className="lg:col-span-3 p-6 lg:p-8 bg-white/10 backdrop-blur rounded-2xl border border-white/15">
-      {sent ? (
-        <div className="py-10 text-center">
+    <form
+      onSubmit={submit}
+      noValidate
+      className="lg:col-span-3 p-6 lg:p-8 bg-white/10 backdrop-blur rounded-2xl border border-white/15"
+      aria-live="polite"
+    >
+      {status === 'success' ? (
+        <div className="py-10 text-center" role="status">
           <div className="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto">
-            <CheckCircle2 size={28} className="text-emerald-300" />
+            <CheckCircle2 size={28} className="text-emerald-300" aria-hidden="true" />
           </div>
           <h3 className="mt-4 text-lg font-semibold">Request received</h3>
           <p className="mt-1 text-sm text-white/80">Our {platform} deployment team will respond shortly.</p>
+          <button
+            type="button"
+            onClick={() => setStatus('idle')}
+            className="mt-5 text-sm font-semibold text-white/90 hover:text-white underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
+          >
+            Submit another inquiry
+          </button>
         </div>
       ) : (
         <>
+          <div
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}
+          >
+            <label htmlFor={`pf-website-${platform}`}>Website (leave blank)</label>
+            <input
+              id={`pf-website-${platform}`}
+              tabIndex={-1}
+              autoComplete="off"
+              value={form.website}
+              onChange={(e) => setForm({ ...form, website: e.target.value })}
+            />
+          </div>
           <div className="grid sm:grid-cols-2 gap-3">
             <input
               required
+              autoComplete="name"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="Full name"
+              aria-label="Full name"
               className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
             />
             <input
               required
               type="email"
+              autoComplete="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="Work email"
+              aria-label="Work email"
               className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
             />
           </div>
-          <input
-            value={form.org}
-            onChange={(e) => setForm({ ...form, org: e.target.value })}
-            placeholder="Organization"
-            className="mt-3 w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
-          />
+          <div className="mt-3 grid sm:grid-cols-2 gap-3">
+            <input
+              autoComplete="organization"
+              value={form.company}
+              onChange={(e) => setForm({ ...form, company: e.target.value })}
+              placeholder="Organization"
+              aria-label="Organization"
+              className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
+            />
+            <input
+              autoComplete="country-name"
+              value={form.country}
+              onChange={(e) => setForm({ ...form, country: e.target.value })}
+              placeholder="Country"
+              aria-label="Country"
+              className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
+            />
+          </div>
           <textarea
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             rows={4}
             placeholder={`Tell us about your ${platform} deployment context...`}
+            aria-label={`${platform} deployment context`}
             className="mt-3 w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50 resize-none"
           />
+          {status === 'error' && errorMessage ? (
+            <div
+              role="alert"
+              className="mt-3 flex items-start gap-2 px-3 py-2 rounded-lg bg-red-500/15 text-red-100 border border-red-400/40 text-xs"
+            >
+              <AlertCircle size={14} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span>{errorMessage}</span>
+            </div>
+          ) : null}
           <button
             type="submit"
-            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white font-semibold rounded-lg hover:bg-slate-100 transition-colors"
+            disabled={status === 'submitting'}
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white font-semibold rounded-lg hover:bg-slate-100 transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             style={{ color }}
           >
-            Request {platform} Deployment
-            <ArrowRight size={14} />
+            {status === 'submitting' ? (
+              <>
+                <Loader2 size={14} className="animate-spin" aria-hidden="true" />
+                Submitting…
+              </>
+            ) : (
+              <>
+                Request {platform} Deployment
+                <ArrowRight size={14} aria-hidden="true" />
+              </>
+            )}
           </button>
         </>
       )}

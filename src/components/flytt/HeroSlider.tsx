@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, ArrowRight, Activity, Globe2 } from 'lucide-react';
+import { imagery } from '@/lib/imagery';
 
 type Slide = {
   tag: string;
@@ -19,40 +20,40 @@ const slides: Slide[] = [
     title: 'Deploy Smart Logistics Platforms Across Cities and Regions',
     caption:
       'Enable driver coordination, dispatch intelligence and multi-zone delivery orchestration using FlyttGo logistics infrastructure modules.',
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776360965901_956dd2fd.png',
-    alt: 'FlyttGo logistics truck operating in a Scandinavian urban delivery corridor',
+    image: imagery.hero.logistics.src,
+    alt: imagery.hero.logistics.alt,
   },
   {
     tag: 'Student Relocation',
     title: 'Seamless Student Moving & Campus Logistics',
     caption:
       'Coordinate student moves across universities and campus housing using the same logistics infrastructure that powers national deployments.',
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361007461_c29963f8.png',
-    alt: 'Student relocation scene with movers loading belongings into a transport vehicle',
+    image: imagery.hero.student.src,
+    alt: imagery.hero.student.alt,
   },
   {
     tag: 'Office Relocation',
     title: 'Enterprise-Grade Office Relocation Logistics',
     caption:
       'Plan, coordinate and track office relocations at scale with dispatch intelligence, route optimization and real-time status dashboards.',
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361047212_157a0e34.jpg',
-    alt: 'Professional office relocation in progress with crews handling commercial office equipment',
+    image: imagery.hero.office.src,
+    alt: imagery.hero.office.alt,
   },
   {
     tag: 'White-Label Marketplace',
     title: 'Launch Your Own Marketplace Platform in Weeks',
     caption:
       'Deploy branded logistics, service or workforce marketplaces using MarketStack infrastructure modules without building backend systems from scratch.',
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361027671_eebffd68.jpg',
-    alt: 'Marketplace operator dashboard illustrating white-label platform configuration',
+    image: imagery.hero.marketplace.src,
+    alt: imagery.hero.marketplace.alt,
   },
   {
     tag: 'Fleet Intelligence',
     title: 'Transform Fleet Operations with AI Platform Intelligence',
     caption:
       'Enable route optimization, vehicle telemetry tracking and operations analytics using FleetStack enterprise fleet intelligence infrastructure.',
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361070291_5b36825e.png',
-    alt: 'Fleet telemetry dashboard visualizing live vehicle routes and operational metrics',
+    image: imagery.hero.fleet.src,
+    alt: imagery.hero.fleet.alt,
   },
 ];
 

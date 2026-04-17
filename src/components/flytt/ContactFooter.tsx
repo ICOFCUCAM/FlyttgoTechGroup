@@ -1,20 +1,60 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, MapPin, ArrowRight, Linkedin, Twitter, Github, CheckCircle2 } from 'lucide-react';
+import { Mail, MapPin, ArrowRight, Linkedin, Twitter, Github, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+import { DEPLOYMENT_TYPES, type DeploymentType } from '@/lib/contact-schema';
+
+type FormState = {
+  name: string;
+  email: string;
+  company: string;
+  country: string;
+  deployment_type: DeploymentType;
+  message: string;
+  website: string; // honeypot
+};
+
+const initialState: FormState = {
+  name: '',
+  email: '',
+  company: '',
+  country: '',
+  deployment_type: 'White-Label Deployment',
+  message: '',
+  website: '',
+};
 
 const ContactFooter: React.FC = () => {
-  const [form, setForm] = useState({ name: '', email: '', org: '', interest: 'White-Label Deployment', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState<FormState>(initialState);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === 'submitting') return;
     if (!form.email || !form.name) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: '', email: '', org: '', interest: 'White-Label Deployment', message: '' });
-    }, 3500);
+
+    setStatus('submitting');
+    setErrorMessage(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-flyttgo-source': 'home/contact-footer',
+        },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body?.error ?? 'Submission failed. Please try again.');
+      }
+      setStatus('success');
+      setForm(initialState);
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Submission failed. Please try again.');
+    }
   };
 
   return (
@@ -71,26 +111,51 @@ const ContactFooter: React.FC = () => {
               <form
                 onSubmit={handleSubmit}
                 className="p-8 lg:p-10 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-900/5"
+                aria-describedby="contact-form-status"
+                noValidate
               >
-                {submitted ? (
-                  <div className="py-16 text-center">
+                {status === 'success' ? (
+                  <div className="py-16 text-center" role="status" aria-live="polite">
                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mx-auto">
-                      <CheckCircle2 size={28} className="text-emerald-600" />
+                      <CheckCircle2 size={28} className="text-emerald-600" aria-hidden="true" />
                     </div>
                     <h3 className="mt-5 text-xl font-semibold text-slate-900">Inquiry received</h3>
                     <p className="mt-2 text-slate-600">
                       Our platform deployment team will contact you within one business day.
                     </p>
+                    <button
+                      type="button"
+                      onClick={() => setStatus('idle')}
+                      className="mt-6 text-sm font-semibold text-[#0A3A6B] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+                    >
+                      Submit another inquiry
+                    </button>
                   </div>
                 ) : (
                   <>
+                    <div
+                      aria-hidden="true"
+                      style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}
+                    >
+                      <label htmlFor="cf-website">Website (leave blank)</label>
+                      <input
+                        id="cf-website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={form.website}
+                        onChange={(e) => setForm({ ...form, website: e.target.value })}
+                      />
+                    </div>
+
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                        <label htmlFor="cf-name" className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                           Full name
                         </label>
                         <input
+                          id="cf-name"
                           required
+                          autoComplete="name"
                           value={form.name}
                           onChange={(e) => setForm({ ...form, name: e.target.value })}
                           className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
@@ -98,12 +163,14 @@ const ContactFooter: React.FC = () => {
                         />
                       </div>
                       <div>
-                        <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                        <label htmlFor="cf-email" className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                           Work email
                         </label>
                         <input
+                          id="cf-email"
                           required
                           type="email"
+                          autoComplete="email"
                           value={form.email}
                           onChange={(e) => setForm({ ...form, email: e.target.value })}
                           className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
@@ -112,41 +179,59 @@ const ContactFooter: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="mt-4">
-                      <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
-                        Organization
-                      </label>
-                      <input
-                        value={form.org}
-                        onChange={(e) => setForm({ ...form, org: e.target.value })}
-                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
-                        placeholder="Ministry, municipality or company"
-                      />
+                    <div className="mt-4 grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="cf-company" className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                          Organization
+                        </label>
+                        <input
+                          id="cf-company"
+                          autoComplete="organization"
+                          value={form.company}
+                          onChange={(e) => setForm({ ...form, company: e.target.value })}
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          placeholder="Ministry, municipality or company"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="cf-country" className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                          Country
+                        </label>
+                        <input
+                          id="cf-country"
+                          autoComplete="country-name"
+                          value={form.country}
+                          onChange={(e) => setForm({ ...form, country: e.target.value })}
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          placeholder="Norway"
+                        />
+                      </div>
                     </div>
 
                     <div className="mt-4">
-                      <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                      <label htmlFor="cf-deployment-type" className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                         Deployment interest
                       </label>
                       <select
-                        value={form.interest}
-                        onChange={(e) => setForm({ ...form, interest: e.target.value })}
+                        id="cf-deployment-type"
+                        value={form.deployment_type}
+                        onChange={(e) => setForm({ ...form, deployment_type: e.target.value as DeploymentType })}
                         className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                       >
-                        <option>White-Label Deployment</option>
-                        <option>Government / Municipal Platform</option>
-                        <option>Enterprise Fleet Intelligence</option>
-                        <option>Education Analytics Platform</option>
-                        <option>Marketplace Deployment Engine</option>
-                        <option>Investor / Partnership</option>
+                        {DEPLOYMENT_TYPES.map((t) => (
+                          <option key={t} value={t}>
+                            {t}
+                          </option>
+                        ))}
                       </select>
                     </div>
 
                     <div className="mt-4">
-                      <label className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                      <label htmlFor="cf-message" className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
                         Deployment context
                       </label>
                       <textarea
+                        id="cf-message"
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                         rows={4}
@@ -155,12 +240,33 @@ const ContactFooter: React.FC = () => {
                       />
                     </div>
 
+                    {status === 'error' && errorMessage ? (
+                      <div
+                        id="contact-form-status"
+                        role="alert"
+                        className="mt-4 flex items-start gap-2 px-4 py-3 rounded-lg bg-red-50 text-red-800 border border-red-200 text-sm"
+                      >
+                        <AlertCircle size={16} className="mt-0.5 flex-shrink-0" aria-hidden="true" />
+                        <span>{errorMessage}</span>
+                      </div>
+                    ) : null}
+
                     <button
                       type="submit"
-                      className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0A3A6B] text-white font-semibold rounded-lg hover:bg-[#0a2f57] transition-colors"
+                      disabled={status === 'submitting'}
+                      className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0A3A6B] text-white font-semibold rounded-lg hover:bg-[#0a2f57] transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                     >
-                      Request Deployment Consultation
-                      <ArrowRight size={16} />
+                      {status === 'submitting' ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" aria-hidden="true" />
+                          Submitting…
+                        </>
+                      ) : (
+                        <>
+                          Request Deployment Consultation
+                          <ArrowRight size={16} aria-hidden="true" />
+                        </>
+                      )}
                     </button>
                     <p className="mt-3 text-xs text-slate-500 text-center">
                       By submitting, you agree to FlyttGo&rsquo;s privacy policy and platform deployment terms.

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { imagery } from '@/lib/imagery';
 
 const nodes = [
   { city: 'Stockholm', x: 52, y: 28, active: true },
@@ -38,7 +39,7 @@ const DeploymentMap: React.FC = () => {
           <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5F8FC] via-[#EEF4FA] to-[#E4EEF8]">
             {/* Background map image */}
             <Image
-              src="https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361148730_52effefc.png"
+              src={imagery.map}
               alt=""
               role="presentation"
               fill

@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Building2, Briefcase, Factory, Store, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { imagery } from '@/lib/imagery';
 
 const tabs = [
   {
     id: 'government',
     label: 'Government & Municipal',
     icon: Building2,
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361047212_157a0e34.jpg',
+    image: imagery.solutions.government,
     headline: 'Infrastructure Platforms for Municipal and National Digital Service Environments',
     description:
       'Modular infrastructure enabling municipalities, regional authorities and national agencies to deploy analytics-enabled service coordination, transport oversight dashboards, education intelligence and citizen services.',
@@ -26,7 +27,7 @@ const tabs = [
     id: 'enterprise',
     label: 'Enterprise Logistics',
     icon: Factory,
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361070291_5b36825e.png',
+    image: imagery.solutions.enterprise,
     headline: 'Enterprise Logistics Intelligence Infrastructure for Fleet and Operations Visibility',
     description:
       'Deploy analytics-enabled coordination environments supporting fleet telemetry monitoring, dispatch intelligence orchestration, multi-region routing optimization and operations performance visibility.',
@@ -43,7 +44,7 @@ const tabs = [
     id: 'startups',
     label: 'Platform Founders',
     icon: Briefcase,
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361027671_eebffd68.jpg',
+    image: imagery.solutions.industries,
     headline: 'Launch Your Own Digital Platform Without Building Infrastructure From Scratch',
     description:
       'Founders, regional operators and emerging organizations deploy logistics coordination platforms, service marketplaces and analytics dashboards using accelerated deployment architecture.',
@@ -60,7 +61,7 @@ const tabs = [
     id: 'marketplaces',
     label: 'Marketplace Operators',
     icon: Store,
-    image: 'https://d64gsuwffb70l.cloudfront.net/69e11d90fabede744a45a3ba_1776361148730_52effefc.png',
+    image: imagery.solutions.marketplace,
     headline: 'Deploy Branded Service Marketplaces at City and Regional Scale',
     description:
       'Launch multi-vendor marketplaces supporting order routing, vendor coordination, workforce platforms and logistics-enabled digital service ecosystems using MarketStack infrastructure.',
