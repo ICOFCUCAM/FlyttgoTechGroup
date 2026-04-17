@@ -96,7 +96,7 @@ const HeroSlider: React.FC = () => {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
       onKeyDown={onKeyDown}
-      className="relative isolate min-h-[calc(100svh-5rem)] lg:min-h-[calc(100vh-5rem)] overflow-hidden bg-[#0A1F3D] text-white focus-visible:outline-none"
+      className="relative isolate min-h-[66vh] lg:min-h-[70vh] overflow-hidden bg-[#0A1F3D] text-white focus-visible:outline-none"
     >
       <div className="absolute inset-0" aria-hidden="true">
         {slides.map((s, i) => {
@@ -139,7 +139,7 @@ const HeroSlider: React.FC = () => {
         }}
       />
 
-      <div className="relative min-h-[calc(100svh-5rem)] lg:min-h-[calc(100vh-5rem)] max-w-7xl mx-auto px-6 lg:px-8 pt-24 lg:pt-32 pb-48 flex flex-col justify-center">
+      <div className="relative min-h-[66vh] lg:min-h-[70vh] max-w-7xl mx-auto px-6 lg:px-8 pt-14 lg:pt-16 pb-32 flex flex-col justify-center">
         <div className="max-w-4xl motion-safe:animate-fade-up">
           <p className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur border border-white/20 rounded-full text-xs font-semibold uppercase tracking-[0.15em]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" aria-hidden="true" />
@@ -148,18 +148,18 @@ const HeroSlider: React.FC = () => {
 
           <h1
             id="hero-heading"
-            className="mt-8 text-[44px] sm:text-5xl lg:text-7xl xl:text-[84px] leading-[0.98] font-semibold tracking-tight text-white"
+            className="mt-6 text-[40px] sm:text-5xl lg:text-[60px] xl:text-[72px] leading-[1.02] font-semibold tracking-tight text-white"
           >
             Launch National-Scale Digital Platforms Without Building Infrastructure From Scratch
           </h1>
 
-          <p className="mt-8 text-lg md:text-xl lg:text-2xl text-white/80 leading-relaxed max-w-2xl font-normal">
+          <p className="mt-6 text-base md:text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl font-normal">
             FlyttGo Technologies Group provides modular deployment infrastructure for logistics
             marketplaces, education intelligence platforms, government service layers and enterprise
             ecosystems.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2 px-7 py-4 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A1F3D]"
