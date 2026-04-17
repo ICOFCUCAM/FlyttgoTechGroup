@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
+import TargetUsers from '@/components/flytt/TargetUsers';
 import IndustryGrid from '@/components/flytt/IndustryGrid';
 import DeploymentMap from '@/components/flytt/DeploymentMap';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -23,6 +24,7 @@ export default function IndustriesPage() {
     <>
       <Navbar />
       <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
+        <TargetUsers />
         <IndustryGrid />
         <DeploymentMap />
       </main>
