@@ -387,11 +387,13 @@ const ContactFooter: React.FC = () => {
               <div>
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">Platforms</div>
                 <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">FlyttGo Logistics</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">EduPro AI</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">GovStack</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">MarketStack</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">FleetStack</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Transify</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Workverge</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Civitas</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">EduPro</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Identra</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Payvera</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Ledgera</a></li>
                 </ul>
               </div>
               <div>

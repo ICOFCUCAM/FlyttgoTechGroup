@@ -80,7 +80,7 @@ const WhiteLabelStrategy: React.FC = () => {
                 href="/platforms/flyttgo"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:gap-3 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
               >
-                See MarketStack modules
+                See marketplace modules
                 <ArrowUpRight size={14} aria-hidden="true" />
               </Link>
             </div>
