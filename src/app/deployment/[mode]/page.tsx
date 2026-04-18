@@ -13,9 +13,10 @@ interface PageProps {
   params: { mode: string };
 }
 
-export function generateStaticParams() {
-  return deploymentModes.map((m) => ({ mode: m.slug }));
-}
+// SSR per request so the layout's server-detected locale produces
+// properly-translated HTML for every /<locale>/deployment/<mode> URL.
+// (Slug enumeration for crawlers lives in sitemap.xml.)
+export const dynamic = 'force-dynamic';
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const data = deploymentModeBySlug[params.mode];

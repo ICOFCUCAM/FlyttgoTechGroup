@@ -7,9 +7,11 @@ interface PageProps {
   params: { slug: string };
 }
 
-export function generateStaticParams() {
-  return platformList.map((p) => ({ slug: p.slug }));
-}
+// SSR per request so the layout's server-detected locale produces
+// properly-translated HTML for every /<locale>/platforms/<slug> URL.
+// (Slug enumeration for crawlers lives in sitemap.xml; dropping
+// generateStaticParams lets Next honour force-dynamic correctly.)
+export const dynamic = 'force-dynamic';
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const data = platforms[params.slug];

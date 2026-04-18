@@ -14,9 +14,10 @@ interface PageProps {
   params: { sector: string };
 }
 
-export function generateStaticParams() {
-  return industrySectors.map((s) => ({ sector: s.slug }));
-}
+// SSR per request so the layout's server-detected locale produces
+// properly-translated HTML for every /<locale>/industries/<sector> URL.
+// (Slug enumeration for crawlers lives in sitemap.xml.)
+export const dynamic = 'force-dynamic';
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const data = industryBySlug[params.sector];

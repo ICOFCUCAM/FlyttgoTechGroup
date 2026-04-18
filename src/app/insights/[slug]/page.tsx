@@ -12,9 +12,10 @@ interface PageProps {
   params: { slug: string };
 }
 
-export function generateStaticParams() {
-  return insights.map((i) => ({ slug: i.slug }));
-}
+// SSR per request so the layout's server-detected locale produces
+// properly-translated HTML for every /<locale>/insights/<slug> URL.
+// (Slug enumeration for crawlers lives in sitemap.xml.)
+export const dynamic = 'force-dynamic';
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const post = insightBySlug[params.slug];

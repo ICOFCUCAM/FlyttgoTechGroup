@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
+import { headers } from 'next/headers';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Providers } from './providers';
+import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import './globals.css';
 
 const inter = Inter({
@@ -144,9 +146,30 @@ const websiteJsonLd = {
   },
 };
 
+// Reads the middleware-set `x-flyttgo-locale` header so server-rendered
+// HTML carries the right <html lang/dir> and the I18nProvider boots with
+// the correct dictionary on first paint — no English FOUC for non-EN
+// visitors, and crawlers get properly-translated HTML.
+function resolveServerLocale(): LocaleCode {
+  try {
+    const raw = headers().get('x-flyttgo-locale') ?? DEFAULT_LOCALE.toLowerCase();
+    const upper = raw.toUpperCase() as LocaleCode;
+    return LOCALES.some((l) => l.code === upper) ? upper : DEFAULT_LOCALE;
+  } catch {
+    return DEFAULT_LOCALE;
+  }
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = resolveServerLocale();
+  const meta = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang={locale.toLowerCase()}
+      dir={meta.rtl ? 'rtl' : 'ltr'}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
         <script
@@ -165,7 +188,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Providers>{children}</Providers>
+        <Providers initialLocale={locale}>{children}</Providers>
       </body>
     </html>
   );

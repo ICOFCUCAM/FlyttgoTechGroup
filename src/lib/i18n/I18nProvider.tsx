@@ -37,12 +37,24 @@ const readCookieLocale = (): LocaleCode | null => {
   return LOCALES.some((l) => l.code === raw) ? raw : null;
 };
 
-export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<LocaleCode>(DEFAULT_LOCALE);
+export function I18nProvider({
+  children,
+  initialLocale,
+}: {
+  children: React.ReactNode;
+  initialLocale?: LocaleCode;
+}) {
+  // SSR sets initialLocale from headers so first paint renders in the
+  // correct language — no English FOUC and crawlers see translated HTML.
+  const [locale, setLocaleState] = useState<LocaleCode>(
+    initialLocale ?? DEFAULT_LOCALE,
+  );
 
   useEffect(() => {
-    // Priority: middleware-set cookie (authoritative — matches the URL
-    // prefix users and crawlers actually see) > localStorage > default.
+    // If SSR already gave us a non-default locale, trust that.
+    if (initialLocale && initialLocale !== DEFAULT_LOCALE) return;
+    // Otherwise fall back to cookie > localStorage > default. Cookie is
+    // authoritative because it matches the URL prefix the middleware set.
     const fromCookie = readCookieLocale();
     if (fromCookie) {
       setLocaleState(fromCookie);
@@ -56,7 +68,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     } catch {
       /* noop */
     }
-  }, []);
+  }, [initialLocale]);
 
   useEffect(() => {
     const meta = resolveMeta(locale);
