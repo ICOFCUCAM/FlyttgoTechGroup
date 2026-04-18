@@ -66,11 +66,11 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 antialiased">
+    <div className="min-h-screen bg-white text-slate-900 dark:text-white antialiased">
       <Navbar />
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F8FC] via-white to-[#F0F5FA] border-b border-slate-200/70">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F8FC] via-white to-[#F0F5FA] border-b border-slate-200/70 dark:border-slate-800/60">
         <div
           className="absolute inset-0 opacity-[0.35] pointer-events-none"
           style={{
@@ -83,7 +83,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-20 lg:pt-14 lg:pb-28">
           <Link
             href="/#platforms"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 dark:text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
           >
             <ArrowLeft size={14} aria-hidden="true" />
             Back to Platform Ecosystem
@@ -99,13 +99,13 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 {data.subtitle}
               </div>
 
-              <h1 className="mt-6 text-4xl md:text-5xl lg:text-[56px] leading-[1.05] font-semibold tracking-tight text-slate-900">
+              <h1 className="mt-6 text-4xl md:text-5xl lg:text-[56px] leading-[1.05] font-semibold tracking-tight text-slate-900 dark:text-white">
                 {data.name}
               </h1>
               <p className="mt-4 text-xl md:text-2xl text-slate-800 font-medium leading-snug max-w-xl">
                 {data.tagline}
               </p>
-              <p className="mt-5 text-base lg:text-lg text-slate-600 leading-relaxed max-w-xl">
+              <p className="mt-5 text-base lg:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
                 {data.description}
               </p>
 
@@ -120,16 +120,16 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 </button>
                 <a
                   href="#modules"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 dark:text-white font-semibold rounded-lg border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:bg-slate-50 dark:bg-slate-900/60 transition-colors"
                 >
                   Explore Modules
                 </a>
               </div>
 
-              <div className="mt-10 pt-8 border-t border-slate-200/70 grid grid-cols-2 sm:grid-cols-4 gap-6">
+              <div className="mt-10 pt-8 border-t border-slate-200/70 dark:border-slate-800/60 grid grid-cols-2 sm:grid-cols-4 gap-6">
                 {data.keyMetrics.map((m) => (
                   <div key={m.label}>
-                    <div className="text-2xl font-semibold text-slate-900 tracking-tight">{m.value}</div>
+                    <div className="text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">{m.value}</div>
                     <div className="text-xs text-slate-500 mt-1 leading-snug">{m.label}</div>
                   </div>
                 ))}
@@ -147,18 +147,18 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                <div className="absolute top-5 left-5 bg-white/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
+                <div className="absolute top-5 left-5 bg-white dark:bg-slate-900/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${data.color}15`, color: data.color }}>
                     <Icon size={16} />
                   </div>
                   <div>
                     <div className="text-[10px] text-slate-500 uppercase tracking-wider font-medium">Platform</div>
-                    <div className="text-sm font-semibold text-slate-900">{data.name}</div>
+                    <div className="text-sm font-semibold text-slate-900 dark:text-white">{data.name}</div>
                   </div>
                 </div>
-                <div className="absolute bottom-5 right-5 bg-white/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
+                <div className="absolute bottom-5 right-5 bg-white dark:bg-slate-900/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
                   <Sparkles size={16} style={{ color: data.color }} />
-                  <div className="text-sm font-semibold text-slate-900">Production-ready</div>
+                  <div className="text-sm font-semibold text-slate-900 dark:text-white">Production-ready</div>
                 </div>
               </div>
             </div>
@@ -170,13 +170,13 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       <section id="modules" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Platform Modules
             </div>
-            <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+            <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
               Modular infrastructure you can activate independently.
             </h2>
-            <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+            <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Every {data.name} deployment includes six foundational modules — activate them together or
               independently based on your deployment roadmap.
             </p>
@@ -186,7 +186,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             {data.modules.map((m, i) => (
               <div
                 key={m.title}
-                className="group p-7 rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/80 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                className="group p-7 rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/80 dark:border-slate-800/60 hover:shadow-lg hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div
@@ -195,10 +195,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   >
                     M{i + 1}
                   </div>
-                  <ArrowUpRight size={16} className="text-slate-300 group-hover:text-slate-900 transition-colors" />
+                  <ArrowUpRight size={16} className="text-slate-300 group-hover:text-slate-900 dark:text-white transition-colors" />
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-slate-900 tracking-tight">{m.title}</h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{m.desc}</p>
+                <h3 className="mt-5 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">{m.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{m.desc}</p>
               </div>
             ))}
           </div>
@@ -209,10 +209,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       <section className="py-24 bg-gradient-to-b from-[#F7FAFD] to-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Deployment Workflow
             </div>
-            <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
+            <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
               From kickoff to production in four structured steps.
             </h2>
           </div>
@@ -221,7 +221,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             {data.workflow.map((w, i) => (
               <div
                 key={w.title}
-                className="relative p-7 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg transition-all"
+                className="relative p-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-lg transition-all"
               >
                 <div className="text-xs font-mono text-slate-400 font-semibold">STEP 0{i + 1}</div>
                 <div
@@ -230,10 +230,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 >
                   {i + 1}
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-slate-900 tracking-tight">{w.title}</h3>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{w.desc}</p>
+                <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">{w.title}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{w.desc}</p>
                 {i < data.workflow.length - 1 && (
-                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-slate-200/80 items-center justify-center z-10 shadow-sm">
+                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 items-center justify-center z-10 shadow-sm">
                     <ArrowRight size={12} className="text-slate-400" />
                   </div>
                 )}
@@ -248,19 +248,19 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 Technical Architecture
               </div>
-              <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
+              <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
                 {data.name} runs on the FlyttGo cloud-native stack.
               </h2>
-              <p className="mt-5 text-slate-600 leading-relaxed">
+              <p className="mt-5 text-slate-600 dark:text-slate-400 leading-relaxed">
                 Every layer is designed for scalability, multi-tenant isolation and regional deployment
                 portability across Europe, Africa and the Middle East.
               </p>
 
-              <div className="mt-8 rounded-xl overflow-hidden border border-slate-200/80 shadow-lg">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200/80 bg-slate-50">
+              <div className="mt-8 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800/60 shadow-lg">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200/80 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-900/60">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
@@ -268,7 +268,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                     {data.slug}.flyttgo.platform
                   </div>
                 </div>
-                <div className="relative aspect-[16/10] w-full bg-slate-100">
+                <div className="relative aspect-[16/10] w-full bg-slate-100 dark:bg-slate-800/60">
                   <Image
                     src={data.dashboardImage}
                     alt={`${data.name} dashboard interface`}
@@ -328,14 +328,14 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       <section className="py-24 bg-gradient-to-b from-white to-[#F5F8FC]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               <Code2 size={12} />
               API Preview
             </div>
-            <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
+            <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
               Build and integrate with the {data.name} API.
             </h2>
-            <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+            <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               A REST API with tenant-scoped authentication, webhook events and SDKs in TypeScript, Python and
               Go.
             </p>
@@ -343,20 +343,20 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
 
           <div className="mt-12 grid lg:grid-cols-12 gap-5">
             <div className="lg:col-span-5">
-              <div className="rounded-2xl border border-slate-200/80 bg-white overflow-hidden">
+              <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800/60 bg-white overflow-hidden">
                 {data.apiEndpoints.map((ep, i) => (
                   <button
                     key={ep.path}
                     onClick={() => setActiveEndpoint(i)}
-                    className={`w-full text-left px-5 py-4 border-b border-slate-100 last:border-b-0 transition-colors ${
-                      i === activeEndpoint ? 'bg-slate-50' : 'hover:bg-slate-50/60'
+                    className={`w-full text-left px-5 py-4 border-b border-slate-100 dark:border-slate-800 last:border-b-0 transition-colors ${
+                      i === activeEndpoint ? 'bg-slate-50 dark:bg-slate-900/60' : 'hover:bg-slate-50 dark:bg-slate-900/60'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <span className={`px-2 py-0.5 text-[10px] font-bold font-mono rounded ${methodColors[ep.method]}`}>
                         {ep.method}
                       </span>
-                      <span className="font-mono text-sm text-slate-900">{ep.path}</span>
+                      <span className="font-mono text-sm text-slate-900 dark:text-white">{ep.path}</span>
                     </div>
                     <div className="mt-1.5 text-xs text-slate-500 leading-relaxed">{ep.description}</div>
                   </button>
@@ -400,11 +400,11 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 </pre>
               </div>
 
-              <div className="mt-4 p-4 rounded-xl bg-white border border-slate-200/80 flex items-center gap-3">
+              <div className="mt-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
                   <CheckCircle2 size={16} className="text-emerald-600" />
                 </div>
-                <div className="text-sm text-slate-700">
+                <div className="text-sm text-slate-700 dark:text-slate-300">
                   SDKs available for <span className="font-mono font-semibold">TypeScript</span>,{' '}
                   <span className="font-mono font-semibold">Python</span> and{' '}
                   <span className="font-mono font-semibold">Go</span>.
@@ -419,10 +419,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Case Studies
             </div>
-            <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
+            <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
               Organizations already deploying {data.name}.
             </h2>
           </div>
@@ -431,17 +431,17 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             {data.caseStudies.map((c) => (
               <div
                 key={c.client}
-                className="p-7 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200/80 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                className="p-7 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200/80 dark:border-slate-800/60 hover:shadow-lg hover:-translate-y-0.5 transition-all"
               >
                 <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">{c.region}</div>
-                <div className="mt-2 text-lg font-semibold text-slate-900 tracking-tight">{c.client}</div>
-                <div className="mt-6 pt-6 border-t border-slate-200/80">
+                <div className="mt-2 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">{c.client}</div>
+                <div className="mt-6 pt-6 border-t border-slate-200/80 dark:border-slate-800/60">
                   <div className="text-3xl font-semibold tracking-tight" style={{ color: data.color }}>
                     {c.metric}
                   </div>
                   <div className="text-xs text-slate-500 mt-1 font-medium">{c.metricLabel}</div>
                 </div>
-                <p className="mt-5 text-sm text-slate-600 leading-relaxed">{c.summary}</p>
+                <p className="mt-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{c.summary}</p>
               </div>
             ))}
           </div>
@@ -452,13 +452,13 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       <section className="py-24 bg-gradient-to-b from-[#F5F8FC] to-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Deployment Tiers
             </div>
-            <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+            <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
               Scale from pilot to national infrastructure.
             </h2>
-            <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+            <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Every tier includes multi-tenant architecture, white-label branding and regional deployment
               compatibility.
             </p>
@@ -471,23 +471,23 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 className={`p-8 rounded-2xl border transition-all ${
                   tier.highlighted
                     ? 'bg-gradient-to-br from-[#0A1F3D] to-[#0A3A6B] text-white border-transparent shadow-xl -translate-y-2'
-                    : 'bg-white border-slate-200/80 hover:shadow-lg'
+                    : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/60 hover:shadow-lg'
                 }`}
               >
                 {tier.highlighted && (
-                  <div className="inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/15 rounded-md mb-4">
+                  <div className="inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-white dark:bg-slate-900/15 rounded-md mb-4">
                     Most Popular
                   </div>
                 )}
-                <h3 className={`text-xl font-semibold tracking-tight ${tier.highlighted ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className={`text-xl font-semibold tracking-tight ${tier.highlighted ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
                   {tier.name}
                 </h3>
-                <p className={`mt-2 text-sm ${tier.highlighted ? 'text-white/70' : 'text-slate-600'}`}>
+                <p className={`mt-2 text-sm ${tier.highlighted ? 'text-white/70' : 'text-slate-600 dark:text-slate-400'}`}>
                   {tier.description}
                 </p>
 
                 <div className="mt-6 flex items-baseline gap-1">
-                  <span className={`text-4xl font-semibold tracking-tight ${tier.highlighted ? 'text-white' : 'text-slate-900'}`}>
+                  <span className={`text-4xl font-semibold tracking-tight ${tier.highlighted ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
                     {tier.price}
                   </span>
                   <span className={`text-sm ${tier.highlighted ? 'text-white/60' : 'text-slate-500'}`}>
@@ -499,7 +499,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   onClick={scrollToForm}
                   className={`mt-6 w-full inline-flex items-center justify-center gap-2 px-5 py-3 font-semibold rounded-lg transition-colors ${
                     tier.highlighted
-                      ? 'bg-white text-[#0A3A6B] hover:bg-slate-100'
+                      ? 'bg-white text-[#0A3A6B] hover:bg-slate-100 dark:bg-slate-800/60'
                       : 'bg-slate-900 text-white hover:bg-slate-800'
                   }`}
                 >
@@ -507,11 +507,11 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   <ArrowRight size={14} />
                 </button>
 
-                <div className={`mt-7 pt-7 border-t space-y-3 ${tier.highlighted ? 'border-white/15' : 'border-slate-200/80'}`}>
+                <div className={`mt-7 pt-7 border-t space-y-3 ${tier.highlighted ? 'border-white/15' : 'border-slate-200/80 dark:border-slate-800/60'}`}>
                   {tier.features.map((f) => (
                     <div
                       key={f}
-                      className={`flex items-start gap-2.5 text-sm ${tier.highlighted ? 'text-white/90' : 'text-slate-700'}`}
+                      className={`flex items-start gap-2.5 text-sm ${tier.highlighted ? 'text-white/90' : 'text-slate-700 dark:text-slate-300'}`}
                     >
                       <CheckCircle2
                         size={16}
@@ -545,7 +545,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             />
             <div className="relative grid lg:grid-cols-5 gap-10">
               <div className="lg:col-span-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-xs font-semibold uppercase tracking-wider">
                   Start Deployment
                 </div>
                 <h2 className="mt-5 text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
@@ -582,12 +582,12 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       <section className="py-24 bg-gradient-to-b from-white to-[#F5F8FC]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-end justify-between flex-wrap gap-4">
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
               Explore other platforms in the ecosystem
             </h2>
             <Link
               href="/#platforms"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
             >
               View full ecosystem <ArrowRight size={14} aria-hidden="true" />
             </Link>
@@ -600,7 +600,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 <Link
                   key={p.slug}
                   href={`/platforms/${p.slug}`}
-                  className="group p-6 rounded-2xl bg-white border border-slate-200/80 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                  className="group p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 >
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center"
@@ -608,9 +608,9 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   >
                     <OtherIcon size={20} strokeWidth={1.75} />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900 tracking-tight">{p.name}</h3>
+                  <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">{p.name}</h3>
                   <p className="mt-1 text-xs text-slate-500">{p.subtitle}</p>
-                  <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-slate-900 group-hover:gap-2 transition-all">
+                  <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-slate-900 dark:text-white group-hover:gap-2 transition-all">
                     Explore <ArrowRight size={13} />
                   </div>
                 </Link>
@@ -621,14 +621,14 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       </section>
 
       {/* Simple footer */}
-      <footer className="bg-[#F5F8FC] border-t border-slate-200/80">
+      <footer className="bg-[#F5F8FC] border-t border-slate-200/80 dark:border-slate-800/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex flex-wrap items-center justify-between gap-4">
           <div className="text-xs text-slate-500">
             © {new Date().getFullYear()} FlyttGo Technologies Group AB · Platform Infrastructure Provider
           </div>
           <Link
             href="/"
-            className="text-xs font-semibold text-slate-700 hover:text-slate-900 inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+            className="text-xs font-semibold text-slate-700 hover:text-slate-900 dark:text-white inline-flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
           >
             <ArrowLeft size={12} aria-hidden="true" /> Back to ecosystem home
           </Link>
@@ -688,7 +688,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
     <form
       onSubmit={submit}
       noValidate
-      className="lg:col-span-3 p-6 lg:p-8 bg-white/10 backdrop-blur rounded-2xl border border-white/15"
+      className="lg:col-span-3 p-6 lg:p-8 bg-white dark:bg-slate-900/10 backdrop-blur rounded-2xl border border-white/15"
       aria-live="polite"
     >
       {status === 'success' ? (
@@ -729,7 +729,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="Full name"
               aria-label="Full name"
-              className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
+              className="px-4 py-3 bg-white dark:bg-slate-900/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
             />
             <input
               required
@@ -739,7 +739,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="Work email"
               aria-label="Work email"
-              className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
+              className="px-4 py-3 bg-white dark:bg-slate-900/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
             />
           </div>
           <div className="mt-3 grid sm:grid-cols-2 gap-3">
@@ -749,7 +749,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
               onChange={(e) => setForm({ ...form, company: e.target.value })}
               placeholder="Organization"
               aria-label="Organization"
-              className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
+              className="px-4 py-3 bg-white dark:bg-slate-900/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
             />
             <input
               autoComplete="country-name"
@@ -757,7 +757,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
               onChange={(e) => setForm({ ...form, country: e.target.value })}
               placeholder="Country"
               aria-label="Country"
-              className="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
+              className="px-4 py-3 bg-white dark:bg-slate-900/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50"
             />
           </div>
           <textarea
@@ -766,7 +766,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
             rows={4}
             placeholder={`Tell us about your ${platform} deployment context...`}
             aria-label={`${platform} deployment context`}
-            className="mt-3 w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50 resize-none"
+            className="mt-3 w-full px-4 py-3 bg-white dark:bg-slate-900/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/50 focus:outline-none focus:border-white/50 resize-none"
           />
           {status === 'error' && errorMessage ? (
             <div
@@ -780,7 +780,7 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white font-semibold rounded-lg hover:bg-slate-100 transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             style={{ color }}
           >
             {status === 'submitting' ? (

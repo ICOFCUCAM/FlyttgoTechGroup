@@ -70,16 +70,16 @@ const TargetUsers: React.FC = () => {
   return (
     <section
       aria-labelledby="target-users-heading"
-      className="relative py-28 lg:py-36 bg-white"
+      className="relative py-28 lg:py-36 bg-white dark:bg-slate-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl motion-safe:animate-fade-up">
-          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Who It&rsquo;s For
           </p>
           <h2
             id="target-users-heading"
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.05]"
+            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
           >
             Built for{' '}
             <span className="text-[#0A3A6B]">Governments, Universities,</span>{' '}
@@ -87,7 +87,7 @@ const TargetUsers: React.FC = () => {
               Operators &amp; Platform Builders
             </span>
           </h2>
-          <p className="mt-6 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
             Four distinct operator profiles, one shared infrastructure layer — each with a
             purpose-built deployment template and supporting modules.
           </p>
@@ -100,11 +100,11 @@ const TargetUsers: React.FC = () => {
               <Link
                 key={a.title}
                 href={a.href}
-                className={`group relative flex flex-col p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${a.tint} border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2`}
+                className={`group relative flex flex-col p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${a.tint} border border-slate-200/80 dark:border-slate-800/60 hover:shadow-xl hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2`}
               >
                 <div className="flex items-start justify-between">
                   <div
-                    className="w-12 h-12 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-center motion-safe:transition-transform group-hover:-rotate-6"
+                    className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm flex items-center justify-center motion-safe:transition-transform group-hover:-rotate-6"
                     style={{ color: a.accent }}
                     aria-hidden="true"
                   >
@@ -112,22 +112,22 @@ const TargetUsers: React.FC = () => {
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="text-slate-300 group-hover:text-slate-900 motion-safe:transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="text-slate-300 group-hover:text-slate-900 dark:text-white motion-safe:transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     aria-hidden="true"
                   />
                 </div>
-                <h3 className="mt-7 text-xl lg:text-2xl font-semibold tracking-tight text-slate-900 leading-tight">
+                <h3 className="mt-7 text-xl lg:text-2xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
                   {a.title}
                 </h3>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wider" style={{ color: a.accent }}>
                   {a.tagline}
                 </p>
-                <p className="mt-4 text-sm text-slate-600 leading-relaxed flex-1">{a.description}</p>
+                <p className="mt-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-1">{a.description}</p>
                 <ul className="mt-6 flex flex-wrap gap-2">
                   {a.outcomes.map((o) => (
                     <li
                       key={o}
-                      className="px-2.5 py-1 bg-white border border-slate-200/80 rounded-md text-[11px] font-medium text-slate-700"
+                      className="px-2.5 py-1 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-md text-[11px] font-medium text-slate-700 dark:text-slate-300"
                     >
                       {o}
                     </li>

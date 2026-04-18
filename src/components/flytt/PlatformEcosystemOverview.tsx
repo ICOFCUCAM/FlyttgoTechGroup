@@ -72,22 +72,22 @@ const PlatformEcosystemOverview: React.FC = () => {
     <section
       id="platforms"
       aria-labelledby="platform-overview-heading"
-      className="relative py-28 lg:py-36 bg-white"
+      className="relative py-28 lg:py-36 bg-white dark:bg-slate-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-4xl motion-safe:animate-fade-up">
-          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             <span className="w-1 h-1 rounded-full bg-[#1E6FD9]" aria-hidden="true" />
             Platform Ecosystem
           </p>
           <h2
             id="platform-overview-heading"
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.05]"
+            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
           >
             One Infrastructure Layer.{' '}
             <span className="text-[#0A3A6B]">Multiple Deployment Platforms.</span>
           </h2>
-          <p className="mt-6 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
             A unified platform infrastructure layer enabling organizations to deploy logistics,
             education, government and workforce marketplace platforms — independently or as a
             unified multi-platform environment.
@@ -101,7 +101,7 @@ const PlatformEcosystemOverview: React.FC = () => {
               <Link
                 key={t.href}
                 href={t.href}
-                className="group relative block p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-2xl hover:shadow-slate-900/5 hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                className="group relative block p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-2xl hover:shadow-slate-900/5 hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 aria-label={`${t.title}: explore platform`}
               >
                 <div
@@ -119,7 +119,7 @@ const PlatformEcosystemOverview: React.FC = () => {
                     </div>
                     <ArrowUpRight
                       size={22}
-                      className="text-slate-300 group-hover:text-slate-900 motion-safe:transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      className="text-slate-300 group-hover:text-slate-900 dark:text-white motion-safe:transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       aria-hidden="true"
                     />
                   </div>
@@ -130,10 +130,10 @@ const PlatformEcosystemOverview: React.FC = () => {
                   >
                     {t.eyebrow}
                   </p>
-                  <h3 className="mt-2 text-2xl lg:text-3xl font-semibold tracking-tight text-slate-900 leading-tight">
+                  <h3 className="mt-2 text-2xl lg:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
                     {t.title}
                   </h3>
-                  <p className="mt-4 text-base text-slate-600 leading-relaxed max-w-md">
+                  <p className="mt-4 text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">
                     {t.description}
                   </p>
 
@@ -141,7 +141,7 @@ const PlatformEcosystemOverview: React.FC = () => {
                     {t.capabilities.map((c) => (
                       <li
                         key={c}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200/80 rounded-full text-xs font-medium text-slate-700"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-full text-xs font-medium text-slate-700 dark:text-slate-300"
                       >
                         <CheckCircle2 size={12} style={{ color: t.accent }} aria-hidden="true" />
                         {c}

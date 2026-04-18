@@ -65,7 +65,7 @@ const EnterpriseSection: React.FC = () => {
     <section
       id="enterprise"
       aria-labelledby="enterprise-heading"
-      className="relative py-24 lg:py-32 bg-white"
+      className="relative py-24 lg:py-32 bg-white dark:bg-slate-950"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" aria-hidden="true" />
 
@@ -78,13 +78,13 @@ const EnterpriseSection: React.FC = () => {
             </p>
             <h2
               id="enterprise-heading"
-              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight"
+              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight"
             >
               Enterprise-grade logistics infrastructure for national fleets, regional operators and commercial transport groups.
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-lg text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Deploy the same modular infrastructure layer that powers multi-region logistics programs —
               fleet analytics, dispatch intelligence and route optimization, delivered as production-ready
               modules rather than bespoke projects.
@@ -98,7 +98,7 @@ const EnterpriseSection: React.FC = () => {
             return (
               <article
                 key={c.title}
-                className="group relative p-7 lg:p-8 rounded-2xl bg-gradient-to-br from-white to-slate-50/60 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="group relative p-7 lg:p-8 rounded-2xl bg-gradient-to-br from-white to-slate-50/60 border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]" aria-hidden="true">
@@ -106,15 +106,15 @@ const EnterpriseSection: React.FC = () => {
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="text-slate-300 group-hover:text-slate-900 transition-colors"
+                    className="text-slate-300 group-hover:text-slate-900 dark:text-white transition-colors"
                     aria-hidden="true"
                   />
                 </div>
-                <h3 className="mt-6 text-xl font-semibold text-slate-900 tracking-tight">{c.title}</h3>
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{c.description}</p>
+                <h3 className="mt-6 text-xl font-semibold text-slate-900 dark:text-white tracking-tight">{c.title}</h3>
+                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{c.description}</p>
                 <ul className="mt-6 space-y-2">
                   {c.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5 text-sm text-slate-700">
+                    <li key={b} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                       <CheckCircle2 size={16} className="text-[#1E6FD9] flex-shrink-0 mt-0.5" aria-hidden="true" />
                       <span className="leading-snug">{b}</span>
                     </li>
@@ -126,18 +126,18 @@ const EnterpriseSection: React.FC = () => {
         </div>
 
         <div className="mt-10 grid lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl border border-slate-200/80 bg-white">
+          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-800/60 bg-white">
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
               <Gauge size={14} aria-hidden="true" />
               Operational Outcomes
             </div>
-            <h3 className="mt-3 text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight leading-tight">
+            <h3 className="mt-3 text-2xl lg:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
               Measurable uplift across fleet productivity, dispatch response and route utilization.
             </h3>
-            <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-slate-100 pt-8">
+            <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-slate-100 dark:border-slate-800 pt-8">
               {stats.map((s) => (
                 <div key={s.label}>
-                  <dd className="text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+                  <dd className="text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white">
                     {s.value}
                   </dd>
                   <dt className="mt-2 text-xs lg:text-sm text-slate-500 leading-snug">{s.label}</dt>
@@ -157,7 +157,7 @@ const EnterpriseSection: React.FC = () => {
               }}
             />
             <div className="relative flex flex-col h-full">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider self-start">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-xs font-semibold uppercase tracking-wider self-start">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" aria-hidden="true" />
                 Production-Ready
               </div>
@@ -180,7 +180,7 @@ const EnterpriseSection: React.FC = () => {
               <div className="mt-auto pt-8 flex flex-col gap-3">
                 <Link
                   href="/solutions#enterprise"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
                 >
                   Explore Enterprise Deployment Solutions
                   <ArrowRight size={16} aria-hidden="true" />

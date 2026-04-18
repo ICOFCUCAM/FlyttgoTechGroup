@@ -70,7 +70,7 @@ export default function DevelopersPage() {
   return (
     <>
       <Navbar />
-      <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
+      <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <section
           aria-labelledby="developers-heading"
           className="relative py-24 lg:py-32 bg-gradient-to-b from-[#F7FAFD] via-white to-white"
@@ -83,12 +83,12 @@ export default function DevelopersPage() {
               </p>
               <h1
                 id="developers-heading"
-                className="mt-5 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.05]"
+                className="mt-5 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
               >
                 Build on the FlyttGo{' '}
                 <span className="text-[#0A3A6B]">infrastructure layer.</span>
               </h1>
-              <p className="mt-6 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
+              <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
                 REST APIs, typed SDKs, webhook events and deployment pipelines — every FlyttGo
                 module is exposed through the same developer surface area.
               </p>
@@ -102,7 +102,7 @@ export default function DevelopersPage() {
                 </Link>
                 <Link
                   href="/technology"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 dark:text-white font-semibold rounded-lg border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:bg-slate-50 dark:bg-slate-900/60 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 >
                   Review Architecture
                   <ArrowUpRight size={16} aria-hidden="true" />
@@ -116,7 +116,7 @@ export default function DevelopersPage() {
                 return (
                   <article
                     key={s.title}
-                    className="group p-7 lg:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all"
+                    className="group p-7 lg:p-8 rounded-3xl bg-white border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all"
                   >
                     <div
                       className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]"
@@ -124,10 +124,10 @@ export default function DevelopersPage() {
                     >
                       <Icon size={22} strokeWidth={1.75} />
                     </div>
-                    <h2 className="mt-6 text-xl lg:text-2xl font-semibold tracking-tight text-slate-900">
+                    <h2 className="mt-6 text-xl lg:text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
                       {s.title}
                     </h2>
-                    <p className="mt-3 text-sm lg:text-base text-slate-600 leading-relaxed">
+                    <p className="mt-3 text-sm lg:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
                       {s.description}
                     </p>
                   </article>
@@ -151,7 +151,7 @@ export default function DevelopersPage() {
               <div className="mt-8">
                 <Link
                   href="/contact?intent=developer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
                 >
                   Request Early Access
                   <ArrowRight size={16} aria-hidden="true" />

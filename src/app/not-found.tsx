@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen grid place-items-center bg-white text-slate-900 px-6">
+    <main className="min-h-screen grid place-items-center bg-white text-slate-900 dark:text-white px-6">
       <div className="text-center max-w-md">
         <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">
           Error 404
@@ -16,7 +16,7 @@ export default function NotFound() {
         <h1 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">
           This page could not be found.
         </h1>
-        <p className="mt-4 text-slate-600 leading-relaxed">
+        <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">
           The resource you requested is unavailable. Return to the FlyttGo platform home.
         </p>
         <Link

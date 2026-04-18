@@ -182,7 +182,7 @@ const HeroSlider: React.FC = () => {
 
       <div className="relative min-h-[66vh] lg:min-h-[70vh] max-w-7xl mx-auto px-6 lg:px-8 pt-14 lg:pt-16 pb-44 flex flex-col justify-center">
         <div className="max-w-4xl motion-safe:animate-fade-up">
-          <p className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur border border-white/20 rounded-full text-xs font-semibold uppercase tracking-[0.15em]">
+          <p className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900/10 backdrop-blur border border-white/20 rounded-full text-xs font-semibold uppercase tracking-[0.15em]">
             <span className="relative flex h-2 w-2" aria-hidden="true">
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-300 motion-safe:animate-ping opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-300" />
@@ -208,7 +208,7 @@ const HeroSlider: React.FC = () => {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-2 px-7 py-4 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
+              className="group inline-flex items-center gap-2 px-7 py-4 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
             >
               Deploy Your Platform
               <ArrowRight
@@ -219,7 +219,7 @@ const HeroSlider: React.FC = () => {
             </Link>
             <Link
               href="/infrastructure"
-              className="inline-flex items-center gap-2 px-7 py-4 bg-white/10 backdrop-blur border border-white/25 text-white font-semibold rounded-lg hover:bg-white/20 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
+              className="inline-flex items-center gap-2 px-7 py-4 bg-white dark:bg-slate-900/10 backdrop-blur border border-white/25 text-white font-semibold rounded-lg hover:bg-white/20 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
             >
               <Sparkles size={16} aria-hidden="true" />
               Explore Infrastructure Modules
@@ -231,7 +231,7 @@ const HeroSlider: React.FC = () => {
           aria-label="Live platform telemetry"
           className="hidden md:flex absolute right-6 lg:right-10 top-24 lg:top-28 w-[260px] flex-col gap-3 motion-safe:animate-fade-up motion-safe:[animation-delay:200ms]"
         >
-          <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-4 shadow-[0_1px_0_0_rgb(255_255_255/0.08),0_24px_48px_-16px_rgb(4_16_31/0.55)]">
+          <div className="rounded-2xl bg-white dark:bg-slate-900/10 backdrop-blur-xl border border-white/15 p-4 shadow-[0_1px_0_0_rgb(255_255_255/0.08),0_24px_48px_-16px_rgb(4_16_31/0.55)]">
             <div className="flex items-center justify-between">
               <div className="inline-flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-emerald-400/15 flex items-center justify-center text-emerald-300" aria-hidden="true">
@@ -257,7 +257,7 @@ const HeroSlider: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-4 shadow-[0_1px_0_0_rgb(255_255_255/0.08),0_24px_48px_-16px_rgb(4_16_31/0.55)]">
+          <div className="rounded-2xl bg-white dark:bg-slate-900/10 backdrop-blur-xl border border-white/15 p-4 shadow-[0_1px_0_0_rgb(255_255_255/0.08),0_24px_48px_-16px_rgb(4_16_31/0.55)]">
             <div className="inline-flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-blue-400/15 flex items-center justify-center text-blue-200" aria-hidden="true">
                 <Globe2 size={14} strokeWidth={1.75} />
@@ -269,7 +269,7 @@ const HeroSlider: React.FC = () => {
               {['Stockholm', 'Oslo', 'Berlin', 'Lagos', 'Dubai'].map((h) => (
                 <span
                   key={h}
-                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-white/10 border border-white/15 rounded-md text-[10px] text-white/80"
+                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-white dark:bg-slate-900/10 border border-white/15 rounded-md text-[10px] text-white/80"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-300" aria-hidden="true" />
                   {h}

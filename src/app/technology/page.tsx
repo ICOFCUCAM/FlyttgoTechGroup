@@ -21,7 +21,7 @@ export default function TechnologyPage() {
   return (
     <>
       <Navbar />
-      <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
+      <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <TechnologySection />
       </main>
       <SiteFooter />

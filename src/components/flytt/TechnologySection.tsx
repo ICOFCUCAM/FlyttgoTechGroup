@@ -24,16 +24,16 @@ const layers = [
 
 const TechnologySection: React.FC = () => {
   return (
-    <section id="technology" className="py-24 lg:py-32 bg-gradient-to-b from-[#F5F8FC] to-white">
+    <section id="technology" className="py-24 lg:py-32 bg-gradient-to-b from-[#F5F8FC] to-white dark:from-slate-900 dark:to-slate-950 dark:from-slate-900 dark:to-slate-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Technology Architecture
           </div>
-          <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+          <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
             Cloud-Native Infrastructure Architecture Designed for Scalable Platform Deployment
           </h2>
-          <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+          <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
             Platforms built on modular cloud-native architecture — supporting geospatial analytics, dispatch
             intelligence, multi-tenant environments and real-time operations visibility across every
             deployment context.
@@ -96,11 +96,11 @@ const TechnologySection: React.FC = () => {
           </div>
 
           {/* Tech stack grid */}
-          <div className="lg:col-span-5 p-8 rounded-3xl bg-white border border-slate-200/80">
+          <div className="lg:col-span-5 p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60">
             <div className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">
               Infrastructure Stack
             </div>
-            <h3 className="mt-2 text-2xl font-semibold text-slate-900 tracking-tight">
+            <h3 className="mt-2 text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
               Built on proven open-source infrastructure
             </h3>
 
@@ -110,10 +110,10 @@ const TechnologySection: React.FC = () => {
                 return (
                   <div
                     key={s.name}
-                    className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-white hover:border-slate-300 transition-colors"
+                    className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-900/60 hover:bg-white hover:border-slate-300 transition-colors"
                   >
                     <Icon size={18} className="text-[#0A3A6B]" strokeWidth={1.75} />
-                    <div className="mt-3 text-sm font-semibold text-slate-900">{s.name}</div>
+                    <div className="mt-3 text-sm font-semibold text-slate-900 dark:text-white">{s.name}</div>
                     <div className="text-[11px] text-slate-500 mt-0.5">{s.role}</div>
                   </div>
                 );
@@ -123,16 +123,16 @@ const TechnologySection: React.FC = () => {
         </div>
 
         {/* Dashboard showcase */}
-        <div className="mt-10 rounded-3xl border border-slate-200/80 bg-white p-8 lg:p-10">
+        <div className="mt-10 rounded-3xl border border-slate-200/80 dark:border-slate-800/60 bg-white p-8 lg:p-10">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5">
               <div className="text-xs uppercase tracking-[0.2em] text-[#0FB5A6] font-semibold">
                 Live Dashboard Preview
               </div>
-              <h3 className="mt-3 text-2xl font-semibold text-slate-900 tracking-tight">
+              <h3 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white tracking-tight">
                 Real dispatch environments, real analytics visibility
               </h3>
-              <p className="mt-3 text-slate-600 leading-relaxed">
+              <p className="mt-3 text-slate-600 dark:text-slate-400 leading-relaxed">
                 Every deployment includes operational dashboards for dispatch intelligence, fleet heatmaps,
                 territory analytics and institutional performance visibility.
               </p>
@@ -140,7 +140,7 @@ const TechnologySection: React.FC = () => {
                 {['Dispatch Engine', 'Fleet Heatmaps', 'Territory Analytics', 'Performance KPIs'].map((t) => (
                   <span
                     key={t}
-                    className="text-xs font-medium px-3 py-1.5 bg-slate-100 text-slate-700 rounded-md"
+                    className="text-xs font-medium px-3 py-1.5 bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 rounded-md"
                   >
                     {t}
                   </span>
@@ -148,7 +148,7 @@ const TechnologySection: React.FC = () => {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-slate-200/80 shadow-xl shadow-slate-900/5 bg-slate-100">
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800/60 shadow-xl shadow-slate-900/5 bg-slate-100 dark:bg-slate-800/60">
                 <Image
                   src={imagery.technology}
                   alt="Live operations dashboard showing dispatch, fleet heatmaps and territory analytics"

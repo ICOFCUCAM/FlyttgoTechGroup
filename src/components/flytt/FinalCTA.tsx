@@ -37,7 +37,7 @@ const FinalCTA: React.FC = () => {
 
           <div className="relative px-8 py-16 lg:px-20 lg:py-28">
             <div className="max-w-3xl mx-auto text-center motion-safe:animate-fade-up">
-              <p className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider">
+              <p className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-xs font-semibold uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" aria-hidden="true" />
                 Ready When You Are
               </p>
@@ -59,7 +59,7 @@ const FinalCTA: React.FC = () => {
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center gap-2 px-7 py-4 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
+                  className="group inline-flex items-center gap-2 px-7 py-4 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 motion-safe:transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
                 >
                   Deploy Your Platform
                   <ArrowRight

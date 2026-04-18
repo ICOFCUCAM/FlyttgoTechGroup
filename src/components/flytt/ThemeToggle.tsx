@@ -33,7 +33,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
         type="button"
         onClick={cycle}
         aria-label={`Theme: ${mounted ? labels[current] : 'System theme'}. Switch to ${labels[next]}.`}
-        className="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100/80 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/5"
+        className="inline-flex items-center justify-center w-9 h-9 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:bg-slate-800/60/80 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/5"
       >
         <Icon size={15} aria-hidden="true" />
       </button>
@@ -45,7 +45,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
       type="button"
       onClick={cycle}
       aria-label={`Theme: ${mounted ? labels[current] : 'System theme'}. Switch to ${labels[next]}.`}
-      className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 rounded-md motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/5"
+      className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:bg-slate-800/60/80 rounded-md motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/5"
     >
       <Icon size={14} aria-hidden="true" />
       <span className="capitalize">{mounted ? current : 'system'}</span>
