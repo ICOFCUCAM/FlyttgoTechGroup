@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Providers } from './providers';
+import Analytics from '@/components/flytt/Analytics';
 import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import './globals.css';
 
@@ -195,6 +196,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Providers initialLocale={locale}>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
