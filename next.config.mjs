@@ -47,6 +47,14 @@ const nextConfig = {
       { source: '/platforms/govstack', destination: '/platforms/civitas', permanent: true },
       { source: '/platforms/marketstack', destination: '/platforms/flyttgo', permanent: true },
       { source: '/platforms/fleetstack', destination: '/platforms/transify', permanent: true },
+      // Convenience redirects — people guess these short URLs.
+      { source: '/careers', destination: '/company/careers', permanent: true },
+      { source: '/press', destination: '/company/press', permanent: true },
+      { source: '/leadership', destination: '/company/leadership', permanent: true },
+      { source: '/about', destination: '/company', permanent: true },
+      { source: '/legal', destination: '/privacy', permanent: false },
+      { source: '/docs', destination: '/developers', permanent: false },
+      { source: '/api', destination: '/developers', permanent: false },
     ];
   },
 };
