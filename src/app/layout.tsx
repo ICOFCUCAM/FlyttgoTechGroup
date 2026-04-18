@@ -78,9 +78,72 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'FlyttGo Technologies Group',
+  alternateName: 'FlyttGo Tech Group',
+  url: siteUrl,
+  logo: `${siteUrl}/icon`,
+  description:
+    'Modular platform infrastructure for mobility, workforce, government, education, identity, payments, financial operations and marketplaces — deployed across Europe, Africa and the Middle East.',
+  foundingLocation: {
+    '@type': 'Place',
+    name: 'Oslo, Norway',
+  },
+  areaServed: [
+    { '@type': 'Place', name: 'European Union' },
+    { '@type': 'Place', name: 'Africa' },
+    { '@type': 'Place', name: 'Middle East and North Africa' },
+  ],
+  sameAs: [
+    'https://www.linkedin.com/',
+    'https://x.com/',
+    'https://github.com/',
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: 'platform@flyttgotech.com',
+      availableLanguage: ['English', 'Norwegian', 'French', 'German', 'Arabic'],
+      areaServed: ['EU', 'AF', 'MENA'],
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'technical support',
+      email: 'security@flyttgotech.com',
+      availableLanguage: ['English'],
+    },
+  ],
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'FlyttGo Technologies Group',
+  url: siteUrl,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteUrl}/platforms?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <a
           href="#main"
