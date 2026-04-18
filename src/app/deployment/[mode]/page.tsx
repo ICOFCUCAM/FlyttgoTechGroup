@@ -7,7 +7,9 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
 import { Reveal } from '@/components/flytt/Reveal';
 import { deploymentModes, deploymentModeBySlug } from '@/data/deployment-modes';
+import { localizeDeploymentMode } from '@/data/deployment-modes.i18n';
 import { T } from '@/components/flytt/T';
+import { serverLocale } from '@/lib/i18n/server';
 
 interface PageProps {
   params: { mode: string };
@@ -38,8 +40,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
 export default function DeploymentModePage({ params }: PageProps) {
-  const data = deploymentModeBySlug[params.mode];
-  if (!data) notFound();
+  const raw = deploymentModeBySlug[params.mode];
+  if (!raw) notFound();
+  const data = localizeDeploymentMode(raw, serverLocale());
   const Icon = data.icon;
 
   const breadcrumbLd = {

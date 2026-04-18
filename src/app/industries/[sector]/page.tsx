@@ -6,9 +6,11 @@ import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
 import { Reveal } from '@/components/flytt/Reveal';
-import { industrySectors, industryBySlug } from '@/data/industries';
+import { industryBySlug } from '@/data/industries';
+import { localizeIndustry } from '@/data/industries.i18n';
 import { platforms } from '@/data/platforms';
 import { T } from '@/components/flytt/T';
+import { serverLocale } from '@/lib/i18n/server';
 
 interface PageProps {
   params: { sector: string };
@@ -39,8 +41,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
 export default function IndustrySectorPage({ params }: PageProps) {
-  const data = industryBySlug[params.sector];
-  if (!data) notFound();
+  const raw = industryBySlug[params.sector];
+  if (!raw) notFound();
+  const data = localizeIndustry(raw, serverLocale());
 
   const breadcrumbLd = {
     '@context': 'https://schema.org',
