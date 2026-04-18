@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 import { Reveal } from '@/components/flytt/Reveal';
 import { ArrowRight, Briefcase, Code2, Compass, ShieldCheck } from 'lucide-react';
 
@@ -46,8 +47,8 @@ export default function LeadershipPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Company · Leadership"
-          title={<>Operating the platform layer that other organisations deploy on.</>}
+          eyebrow={<T k="company.leadership.eyebrow" />}
+          title={<T k="company.leadership.title" />}
           description="FlyttGo Technologies Group is led by a Nordic-origin team with deep experience in platform engineering, regulated deployments and multi-region operations. Named bios are shared with enterprise buyers during engagement."
           crumbs={[
             { label: 'Home', href: '/' },

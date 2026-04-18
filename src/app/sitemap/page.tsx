@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 import { platformList } from '@/data/platforms';
 import { industrySectors } from '@/data/industries';
 import { deploymentModes } from '@/data/deployment-modes';
@@ -92,9 +93,9 @@ export default function SiteMapPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Navigation"
-          title={<>Every page on flyttgotech.com, in one view.</>}
-          description="This is the human-readable companion to our XML sitemap. Use it to orient yourself across the FlyttGo Technologies Group platform ecosystem, industries, deployment modes, company and trust documentation."
+          eyebrow={<T k="sitemap.eyebrow" />}
+          title={<T k="sitemap.title" />}
+          description={<T k="sitemap.description" />}
           crumbs={[
             { label: 'Home', href: '/' },
             { label: 'Site map' },
@@ -138,7 +139,8 @@ export default function SiteMapPage() {
 
           <div className="max-w-6xl mx-auto px-6 lg:px-8 mt-14">
             <p className="text-xs text-slate-500 dark:text-slate-500">
-              Looking for the machine-readable version? <Link href="/sitemap.xml" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">/sitemap.xml</Link>.
+              <T k="sitemap.machineReadable" />{' '}
+              <Link href="/sitemap.xml" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">/sitemap.xml</Link>.
             </p>
           </div>
         </section>

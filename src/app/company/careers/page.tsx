@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 import { Reveal } from '@/components/flytt/Reveal';
 import { ArrowUpRight, Briefcase, Code2, Globe2, ShieldCheck, Users, Wrench } from 'lucide-react';
 
@@ -70,8 +71,8 @@ export default function CareersPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Company · Careers"
-          title={<>Help operators deploy national-scale platforms — without the years-long build.</>}
+          eyebrow={<T k="company.careers.eyebrow" />}
+          title={<T k="company.careers.title" />}
           description="FlyttGo Technologies Group is a Nordic-origin platform company hiring across engineering, security, deployment and commercial functions. Most roles are remote-friendly within EU timezones; public-sector roles anchor in key regional hubs."
           crumbs={[
             { label: 'Home', href: '/' },
@@ -84,7 +85,7 @@ export default function CareersPage() {
           <section className="py-14 lg:py-20">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-                Current openings
+                <T k="company.careers.openings" />
               </p>
               <ul className="mt-8 divide-y divide-slate-200/80 dark:divide-slate-800/60 border-y border-slate-200/80 dark:border-slate-800/60">
                 {roles.map((r) => {

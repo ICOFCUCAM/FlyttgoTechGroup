@@ -140,6 +140,23 @@ const en: Dictionary = {
   'legal.compliance.eyebrow': 'Trust · Compliance',
   'legal.compliance.title': 'Compliance across EU, AF and MENA jurisdictions.',
 
+  // Company sub-pages
+  'company.leadership.eyebrow': 'Company · Leadership',
+  'company.leadership.title': 'Operating the platform layer that other organisations deploy on.',
+  'company.careers.eyebrow': 'Company · Careers',
+  'company.careers.title': 'Help operators deploy national-scale platforms — without the years-long build.',
+  'company.careers.openings': 'Current openings',
+  'company.press.eyebrow': 'Company · Press',
+  'company.press.title': 'Press & media resources.',
+  'company.press.boilerplate': 'Company boilerplate',
+
+  // Sitemap page
+  'sitemap.eyebrow': 'Navigation',
+  'sitemap.title': 'Every page on flyttgotech.com, in one view.',
+  'sitemap.description':
+    'This is the human-readable companion to our XML sitemap. Use it to orient yourself across the FlyttGo Technologies Group platform ecosystem, industries, deployment modes, company and trust documentation.',
+  'sitemap.machineReadable': 'Looking for the machine-readable version?',
+
   // Common CTAs
   'cta.learnMore': 'Learn more',
   'cta.contact': 'Contact us',
@@ -266,6 +283,22 @@ const no: Dictionary = {
   'legal.security.title': 'Sikkerhet bygget for utrullinger i nasjonal skala.',
   'legal.compliance.eyebrow': 'Tillit · Samsvar',
   'legal.compliance.title': 'Samsvar i EU-, AF- og MENA-jurisdiksjoner.',
+
+  'company.leadership.eyebrow': 'Selskap · Ledelse',
+  'company.leadership.title': 'Vi driver plattformlaget som andre organisasjoner ruller ut på.',
+  'company.careers.eyebrow': 'Selskap · Karriere',
+  'company.careers.title':
+    'Hjelp operatører med å rulle ut plattformer i nasjonal skala — uten årelange byggeprosjekter.',
+  'company.careers.openings': 'Ledige stillinger',
+  'company.press.eyebrow': 'Selskap · Presse',
+  'company.press.title': 'Presse- og medieressurser.',
+  'company.press.boilerplate': 'Selskapsbeskrivelse',
+
+  'sitemap.eyebrow': 'Navigasjon',
+  'sitemap.title': 'Hver side på flyttgotech.com, i én oversikt.',
+  'sitemap.description':
+    'Dette er det menneskelesbare motstykket til XML-områdekartet vårt. Bruk det til å orientere deg i FlyttGo Technologies Groups plattformøkosystem, bransjer, utrullingsmoduser, selskap og tillitsdokumentasjon.',
+  'sitemap.machineReadable': 'Leter du etter den maskinlesbare versjonen?',
 };
 
 const fr: Dictionary = {
@@ -388,6 +421,23 @@ const fr: Dictionary = {
   'legal.security.title': 'Une sécurité conçue pour les déploiements à l’échelle nationale.',
   'legal.compliance.eyebrow': 'Confiance · Conformité',
   'legal.compliance.title': 'Conformité dans les juridictions UE, AF et MENA.',
+
+  'company.leadership.eyebrow': 'Entreprise · Direction',
+  'company.leadership.title':
+    'Nous opérons la couche de plateformes sur laquelle d’autres organisations se déploient.',
+  'company.careers.eyebrow': 'Entreprise · Carrières',
+  'company.careers.title':
+    'Aidez les opérateurs à déployer des plateformes à l’échelle nationale — sans la construction pluriannuelle.',
+  'company.careers.openings': 'Postes ouverts',
+  'company.press.eyebrow': 'Entreprise · Presse',
+  'company.press.title': 'Ressources presse et médias.',
+  'company.press.boilerplate': 'Texte institutionnel',
+
+  'sitemap.eyebrow': 'Navigation',
+  'sitemap.title': 'Toutes les pages de flyttgotech.com, en une vue.',
+  'sitemap.description':
+    'Ceci est la version lisible par un humain de notre sitemap XML. Utilisez-la pour vous repérer dans l’écosystème de plateformes FlyttGo Technologies Group, les secteurs, les modes de déploiement, l’entreprise et la documentation de confiance.',
+  'sitemap.machineReadable': 'Vous cherchez la version lisible par machine ?',
 };
 
 const de: Dictionary = {

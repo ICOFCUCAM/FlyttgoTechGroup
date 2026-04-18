@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 import { Reveal } from '@/components/flytt/Reveal';
 import { Download, FileText, Mail } from 'lucide-react';
 
@@ -21,8 +22,8 @@ export default function PressPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Company · Press"
-          title={<>Press &amp; media resources.</>}
+          eyebrow={<T k="company.press.eyebrow" />}
+          title={<T k="company.press.title" />}
           description="Boilerplate, positioning, logo assets and media contact points. Interview requests are handled through the press email below."
           crumbs={[
             { label: 'Home', href: '/' },
@@ -36,7 +37,7 @@ export default function PressPage() {
             <div className="max-w-5xl mx-auto px-6 lg:px-8 space-y-10">
               <div>
                 <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
-                  Company boilerplate
+                  <T k="company.press.boilerplate" />
                 </h2>
                 <p className="mt-4 text-[15px] text-slate-600 dark:text-slate-400 leading-relaxed">
                   {boilerplate}
