@@ -268,7 +268,18 @@ const SiteFooter: React.FC = () => {
         {/* Trust row — certifications (left) + regions + CTA (right) */}
         <div className="mt-10 pt-8 border-t border-white/5 grid md:grid-cols-2 gap-8">
           <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            <Link
+              href="/technology"
+              className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-300 hover:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-sm"
+              aria-label="Platform status — all systems operational"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              All systems operational
+            </Link>
+            <div className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
               Certifications &amp; compliance
             </div>
             <ul className="mt-4 flex flex-wrap gap-2">
