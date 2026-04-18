@@ -31,7 +31,7 @@ const PlatformEcosystemOverview: React.FC = () => {
             className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
           >
             One Infrastructure Ecosystem.{' '}
-            <span className="text-[#0A3A6B]">Seven Deployment Platforms.</span>
+            <span className="text-[#0A3A6B]">Modular Deployment Platforms.</span>
           </h2>
           <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
             FlyttGo Technologies Group builds modular deployment platforms used by governments,
