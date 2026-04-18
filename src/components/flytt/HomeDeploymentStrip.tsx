@@ -74,6 +74,12 @@ const HomeDeploymentStrip: React.FC = () => {
             );
           })}
         </ul>
+
+        <p className="mt-8 text-sm text-slate-500 dark:text-slate-500 leading-relaxed max-w-3xl">
+          Ledgera supports deployment on FlyttGo-managed infrastructure, customer cloud
+          environments and sovereign national data centers alongside Transify, Workverge, Civitas,
+          EduPro, Identra and Payvera.
+        </p>
       </div>
     </section>
   );
