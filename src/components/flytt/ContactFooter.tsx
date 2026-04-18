@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Mail, MapPin, ArrowRight, Linkedin, Twitter, Github, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { DEPLOYMENT_TYPES, type DeploymentType } from '@/lib/contact-schema';
+import TurnstileWidget from '@/components/flytt/TurnstileWidget';
 
 type Intent = 'partnership' | 'procurement' | 'demo' | 'careers' | 'press' | 'developer';
 
@@ -57,6 +58,7 @@ type FormState = {
   deployment_type: DeploymentType;
   message: string;
   website: string; // honeypot
+  turnstile_token: string;
 };
 
 const initialState: FormState = {
@@ -67,7 +69,10 @@ const initialState: FormState = {
   deployment_type: 'White-Label Deployment',
   message: '',
   website: '',
+  turnstile_token: '',
 };
+
+const TURNSTILE_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 const ContactFooter: React.FC = () => {
   const [form, setForm] = useState<FormState>(initialState);
@@ -104,6 +109,12 @@ const ContactFooter: React.FC = () => {
     e.preventDefault();
     if (status === 'submitting') return;
     if (!form.email || !form.name) return;
+    // When Turnstile is configured, require a solved token before POST.
+    if (TURNSTILE_CONFIGURED && !form.turnstile_token) {
+      setStatus('error');
+      setErrorMessage('Please complete the verification challenge and retry.');
+      return;
+    }
 
     setStatus('submitting');
     setErrorMessage(null);
@@ -125,6 +136,11 @@ const ContactFooter: React.FC = () => {
     } catch (err) {
       setStatus('error');
       setErrorMessage(err instanceof Error ? err.message : 'Submission failed. Please try again.');
+      // Token is single-use on the Turnstile side; clear client-side so
+      // the user has to solve a fresh challenge before the next retry.
+      if (TURNSTILE_CONFIGURED) {
+        setForm((f) => ({ ...f, turnstile_token: '' }));
+      }
     }
   };
 
@@ -310,6 +326,19 @@ const ContactFooter: React.FC = () => {
                       />
                     </div>
 
+                    {TURNSTILE_CONFIGURED && (
+                      <div className="mt-4">
+                        <TurnstileWidget
+                          onVerify={(token) =>
+                            setForm((f) => ({ ...f, turnstile_token: token }))
+                          }
+                          onExpire={() =>
+                            setForm((f) => ({ ...f, turnstile_token: '' }))
+                          }
+                        />
+                      </div>
+                    )}
+
                     {status === 'error' && errorMessage ? (
                       <div
                         id="contact-form-status"
@@ -323,7 +352,10 @@ const ContactFooter: React.FC = () => {
 
                     <button
                       type="submit"
-                      disabled={status === 'submitting'}
+                      disabled={
+                        status === 'submitting' ||
+                        (TURNSTILE_CONFIGURED && !form.turnstile_token)
+                      }
                       className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0A3A6B] text-white font-semibold rounded-lg hover:bg-[#0a2f57] transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                     >
                       {status === 'submitting' ? (
