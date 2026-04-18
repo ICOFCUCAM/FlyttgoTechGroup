@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, CalendarClock, Sparkles, Globe2 } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const highlights = [
   { icon: Globe2, label: 'Multi-region · EU · AF · MENA' },
@@ -9,6 +12,7 @@ const highlights = [
 ];
 
 const FinalCTA: React.FC = () => {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="final-cta-heading"
@@ -39,15 +43,15 @@ const FinalCTA: React.FC = () => {
             <div className="max-w-3xl mx-auto text-center motion-safe:animate-fade-up">
               <p className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-xs font-semibold uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" aria-hidden="true" />
-                Ready When You Are
+                {t('home.cta.eyebrow')}
               </p>
               <h2
                 id="final-cta-heading"
                 className="mt-6 text-4xl md:text-5xl lg:text-[64px] font-semibold tracking-tight leading-[1.05]"
               >
-                Start Deploying Your Platform{' '}
+                {t('home.cta.title.part1')}{' '}
                 <span className="bg-gradient-to-r from-white via-white to-[#9ED0F9] bg-clip-text text-transparent">
-                  Infrastructure Today
+                  {t('home.cta.title.part2')}
                 </span>
               </h2>
               <p className="mt-6 text-lg lg:text-xl text-white/80 leading-relaxed">
@@ -61,7 +65,7 @@ const FinalCTA: React.FC = () => {
                   href="/contact"
                   className="group inline-flex items-center gap-2 px-7 py-4 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 motion-safe:transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
                 >
-                  Deploy Your Platform
+                  {t('home.cta.primary')}
                   <ArrowRight
                     size={18}
                     className="motion-safe:transition-transform group-hover:translate-x-1"
@@ -73,7 +77,7 @@ const FinalCTA: React.FC = () => {
                   className="inline-flex items-center gap-2 px-7 py-4 border border-white/25 text-white font-semibold rounded-lg hover:bg-white/10 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
                 >
                   <CalendarClock size={16} aria-hidden="true" />
-                  Schedule Infrastructure Demo
+                  {t('home.cta.secondary')}
                 </Link>
               </div>
 

@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 import {
   ArrowUpRight,
   Building2,
@@ -18,6 +21,7 @@ const items = [
 ];
 
 const HomeIndustriesStrip: React.FC = () => {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="home-industries-heading"
@@ -27,21 +31,20 @@ const HomeIndustriesStrip: React.FC = () => {
         <div className="grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-7">
             <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-[0.18em]">
-              Industries Served
+              {t('home.industries.eyebrow')}
             </p>
             <h2
               id="home-industries-heading"
               className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
             >
-              Built for institutions and operators.
+              {t('home.industries.title')}
             </h2>
           </div>
           <div className="lg:col-span-5">
             <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-              Ministries, municipalities, universities and transport operators deploy FlyttGo
-              platforms at pilot, metro or national scale.{' '}
+              {t('home.industries.description')}{' '}
               <Link href="/industries" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">
-                Industries overview
+                {t('home.industries.cta')}
               </Link>
               .
             </p>

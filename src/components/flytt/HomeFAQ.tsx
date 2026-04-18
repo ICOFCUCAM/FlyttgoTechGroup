@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 type QA = {
   q: string;
@@ -84,6 +85,7 @@ const faqs: QA[] = [
 
 const HomeFAQ: React.FC = () => {
   const [open, setOpen] = useState<number | null>(0);
+  const { t } = useI18n();
 
   return (
     <section
@@ -94,13 +96,13 @@ const HomeFAQ: React.FC = () => {
         <div className="grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-7">
             <p className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A3A6B]/5 rounded-full text-[11px] font-semibold text-[#0A3A6B] uppercase tracking-[0.18em]">
-              Procurement &amp; Deployment FAQ
+              {t('home.faq.eyebrow')}
             </p>
             <h2
               id="home-faq-heading"
               className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
             >
-              Common questions from deployment partners.
+              {t('home.faq.title')}
             </h2>
           </div>
           <div className="lg:col-span-5">

@@ -69,6 +69,35 @@ const en: Dictionary = {
   'footer.legal.contact': 'Contact',
   'footer.social': 'Social channels',
 
+  // Home sections
+  'home.trust.heading': 'Deployed for',
+  'home.platform.eyebrow': 'Platform Ecosystem',
+  'home.platform.title.part1': 'One infrastructure ecosystem.',
+  'home.platform.title.part2': 'Modular deployment platforms.',
+  'home.platform.description':
+    'Governments, universities, transport operators and marketplace builders deploy FlyttGo platforms as modules.',
+  'home.platform.cta': 'See the full ecosystem',
+  'home.deployment.eyebrow': 'Deployment Architecture',
+  'home.deployment.title': 'Deploy on your terms.',
+  'home.deployment.description': 'Three deployment modes to match any procurement or sovereignty posture.',
+  'home.deployment.cta': 'Deployment details',
+  'home.industries.eyebrow': 'Industries Served',
+  'home.industries.title': 'Built for institutions and operators.',
+  'home.industries.description':
+    'Ministries, municipalities, universities and transport operators deploy FlyttGo platforms at pilot, metro or national scale.',
+  'home.industries.cta': 'Industries overview',
+  'home.tech.eyebrow': 'Technology Infrastructure',
+  'home.tech.title': 'Cloud-native platform stack.',
+  'home.tech.description': 'Multi-tenant, region-aware, standards-based.',
+  'home.tech.cta': 'Architecture overview',
+  'home.faq.eyebrow': 'Procurement & Deployment FAQ',
+  'home.faq.title': 'Common questions from deployment partners.',
+  'home.cta.eyebrow': 'Ready When You Are',
+  'home.cta.title.part1': 'Start Deploying Your Platform',
+  'home.cta.title.part2': 'Infrastructure Today',
+  'home.cta.primary': 'Deploy Your Platform',
+  'home.cta.secondary': 'Schedule Infrastructure Demo',
+
   // Common CTAs
   'cta.learnMore': 'Learn more',
   'cta.contact': 'Contact us',
@@ -128,6 +157,35 @@ const no: Dictionary = {
   'cta.learnMore': 'Les mer',
   'cta.contact': 'Kontakt oss',
   'cta.back': 'Tilbake',
+
+  'home.trust.heading': 'Rullet ut for',
+  'home.platform.eyebrow': 'Plattformøkosystem',
+  'home.platform.title.part1': 'Ett infrastrukturøkosystem.',
+  'home.platform.title.part2': 'Modulære utrullings­plattformer.',
+  'home.platform.description':
+    'Myndigheter, universiteter, transportoperatører og markedsplass­byggere ruller ut FlyttGo-plattformer som moduler.',
+  'home.platform.cta': 'Se hele økosystemet',
+  'home.deployment.eyebrow': 'Utrullingsarkitektur',
+  'home.deployment.title': 'Rull ut på dine vilkår.',
+  'home.deployment.description':
+    'Tre utrullingsmoduser tilpasset enhver anskaffelse eller suverenitetsposisjon.',
+  'home.deployment.cta': 'Utrullings­detaljer',
+  'home.industries.eyebrow': 'Bransjer vi betjener',
+  'home.industries.title': 'Bygget for institusjoner og operatører.',
+  'home.industries.description':
+    'Departementer, kommuner, universiteter og transportoperatører ruller ut FlyttGo-plattformer i pilot-, metro- eller nasjonal skala.',
+  'home.industries.cta': 'Bransje­oversikt',
+  'home.tech.eyebrow': 'Teknologi­infrastruktur',
+  'home.tech.title': 'Skybasert plattform-stack.',
+  'home.tech.description': 'Flerleietaker, regionsbevisst, standardbasert.',
+  'home.tech.cta': 'Arkitektur­oversikt',
+  'home.faq.eyebrow': 'Anskaffelse og utrullings-FAQ',
+  'home.faq.title': 'Vanlige spørsmål fra utrullingspartnere.',
+  'home.cta.eyebrow': 'Klar når du er det',
+  'home.cta.title.part1': 'Start utrullingen av din',
+  'home.cta.title.part2': 'plattform­infrastruktur i dag',
+  'home.cta.primary': 'Rull ut din plattform',
+  'home.cta.secondary': 'Planlegg infrastruktur­demo',
 };
 
 const fr: Dictionary = {
@@ -183,6 +241,35 @@ const fr: Dictionary = {
   'cta.learnMore': 'En savoir plus',
   'cta.contact': 'Nous contacter',
   'cta.back': 'Retour',
+
+  'home.trust.heading': 'Déployé pour',
+  'home.platform.eyebrow': 'Écosystème de plateformes',
+  'home.platform.title.part1': 'Un écosystème d’infrastructure.',
+  'home.platform.title.part2': 'Plateformes de déploiement modulaires.',
+  'home.platform.description':
+    'Gouvernements, universités, opérateurs de transport et bâtisseurs de places de marché déploient les plateformes FlyttGo en modules.',
+  'home.platform.cta': 'Voir l’écosystème complet',
+  'home.deployment.eyebrow': 'Architecture de déploiement',
+  'home.deployment.title': 'Déployez selon vos règles.',
+  'home.deployment.description':
+    'Trois modes de déploiement pour toute posture d’achat ou de souveraineté.',
+  'home.deployment.cta': 'Détails du déploiement',
+  'home.industries.eyebrow': 'Secteurs desservis',
+  'home.industries.title': 'Conçu pour les institutions et les opérateurs.',
+  'home.industries.description':
+    'Ministères, municipalités, universités et opérateurs de transport déploient les plateformes FlyttGo à l’échelle pilote, métropolitaine ou nationale.',
+  'home.industries.cta': 'Vue d’ensemble des secteurs',
+  'home.tech.eyebrow': 'Infrastructure technologique',
+  'home.tech.title': 'Stack de plateforme cloud-native.',
+  'home.tech.description': 'Multi-tenant, conscient de la région, basé sur les standards.',
+  'home.tech.cta': 'Vue d’ensemble de l’architecture',
+  'home.faq.eyebrow': 'FAQ Achats & Déploiement',
+  'home.faq.title': 'Questions fréquentes des partenaires de déploiement.',
+  'home.cta.eyebrow': 'Prêts quand vous l’êtes',
+  'home.cta.title.part1': 'Commencez à déployer votre',
+  'home.cta.title.part2': 'infrastructure de plateforme dès aujourd’hui',
+  'home.cta.primary': 'Déployer votre plateforme',
+  'home.cta.secondary': 'Planifier une démo d’infrastructure',
 };
 
 const de: Dictionary = {

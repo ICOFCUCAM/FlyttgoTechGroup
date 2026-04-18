@@ -1,12 +1,16 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Info, Link2 } from 'lucide-react';
 import { platformList } from '@/data/platforms';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const LEDGERA_TOOLTIP =
   'Ledgera integrates with Payvera for payment orchestration and supports compliance reporting across Transify, Workverge, Civitas and EduPro environments.';
 
 const PlatformEcosystemOverview: React.FC = () => {
+  const { t } = useI18n();
   return (
     <section
       id="platforms"
@@ -18,22 +22,21 @@ const PlatformEcosystemOverview: React.FC = () => {
           <div className="lg:col-span-7">
             <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-[0.18em]">
               <span className="w-1 h-1 rounded-full bg-[#1E6FD9]" aria-hidden="true" />
-              Platform Ecosystem
+              {t('home.platform.eyebrow')}
             </p>
             <h2
               id="platform-overview-heading"
               className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
             >
-              One infrastructure ecosystem.{' '}
-              <span className="text-[#0A3A6B]">Modular deployment platforms.</span>
+              {t('home.platform.title.part1')}{' '}
+              <span className="text-[#0A3A6B]">{t('home.platform.title.part2')}</span>
             </h2>
           </div>
           <div className="lg:col-span-5">
             <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-              Governments, universities, transport operators and marketplace builders deploy
-              FlyttGo platforms as modules.{' '}
+              {t('home.platform.description')}{' '}
               <Link href="/platforms" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">
-                See the full ecosystem
+                {t('home.platform.cta')}
               </Link>
               .
             </p>

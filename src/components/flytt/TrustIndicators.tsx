@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 import {
   Building2,
   Bus,
@@ -19,6 +22,7 @@ const sectors = [
 ];
 
 const TrustIndicators: React.FC = () => {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="trust-heading"
@@ -30,7 +34,7 @@ const TrustIndicators: React.FC = () => {
             id="trust-heading"
             className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-500"
           >
-            Deployed for
+            {t('home.trust.heading')}
           </h2>
           <ul
             className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-wrap items-center gap-x-10 gap-y-4"
