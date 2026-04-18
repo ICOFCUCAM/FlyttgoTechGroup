@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import Image from 'next/image';
 import { ArrowUpRight, CheckCircle2, ArrowRight, Link2 } from 'lucide-react';
 import { platformList } from '@/data/platforms';

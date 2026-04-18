@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { notFound } from 'next/navigation';
 import { ArrowRight, ArrowUpRight, CheckCircle2, AlertCircle, Server } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { Activity, CheckCircle2, Clock } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';

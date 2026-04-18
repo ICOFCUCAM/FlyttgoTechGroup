@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { usePathname } from 'next/navigation';
 import {
   Menu,

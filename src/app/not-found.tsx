@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { ArrowRight, ArrowUpRight, Home, Network } from 'lucide-react';
 
 export const metadata: Metadata = {

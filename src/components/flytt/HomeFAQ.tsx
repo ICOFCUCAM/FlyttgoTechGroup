@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { ArrowRight, ArrowUpRight, Globe2, Building2, Flag, Target } from 'lucide-react';

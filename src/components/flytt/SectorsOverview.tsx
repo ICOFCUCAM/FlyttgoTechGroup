@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { ArrowUpRight } from 'lucide-react';
 import { industrySectors } from '@/data/industries';
 import { localizeIndustry } from '@/data/industries.i18n';

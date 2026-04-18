@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import PlatformOrbitGraph from './PlatformOrbitGraph';
 import { useI18n } from '@/lib/i18n/I18nProvider';

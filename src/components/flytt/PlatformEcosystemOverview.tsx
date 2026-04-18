@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { ArrowUpRight, Info, Link2 } from 'lucide-react';
 import { platformList } from '@/data/platforms';
 import { useI18n } from '@/lib/i18n/I18nProvider';
