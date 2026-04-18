@@ -7,6 +7,7 @@ import IndustryGrid from '@/components/flytt/IndustryGrid';
 import DeploymentMap from '@/components/flytt/DeploymentMap';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
+import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
 
 // SSR so the layout's server-detected locale drives the sector card copy.
 export const dynamic = 'force-dynamic';
@@ -26,8 +27,13 @@ export const metadata: Metadata = {
 };
 
 export default function IndustriesPage() {
+  const ld = breadcrumbListLd([
+    { name: 'Home', href: '/' },
+    { name: 'Industries', href: '/industries' },
+  ]);
   return (
     <>
+      <script {...jsonLdScript(ld)} />
       <Navbar />
       <main
         id="main"

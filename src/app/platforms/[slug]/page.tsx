@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { platforms, platformList } from '@/data/platforms';
+import { platforms } from '@/data/platforms';
 import PlatformView from '@/components/flytt/PlatformView';
+import { canonicalFor, languageAlternates } from '@/lib/seo/canonical';
 
 interface PageProps {
   params: { slug: string };
@@ -21,16 +22,19 @@ export function generateMetadata({ params }: PageProps): Metadata {
 
   const title = `${data.name} — ${data.subtitle}`;
   const description = data.description;
-  const canonical = `/platforms/${data.slug}`;
+  const path = `/platforms/${data.slug}`;
 
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: {
+      canonical: canonicalFor(path),
+      languages: languageAlternates(path),
+    },
     openGraph: {
       title,
       description,
-      url: canonical,
+      url: canonicalFor(path),
       type: 'website',
       images: data.heroImage ? [{ url: data.heroImage, alt: data.name }] : undefined,
     },

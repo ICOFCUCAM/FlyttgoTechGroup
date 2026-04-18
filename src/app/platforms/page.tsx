@@ -4,6 +4,7 @@ import PlatformEcosystem from '@/components/flytt/PlatformEcosystem';
 import TechnologySection from '@/components/flytt/TechnologySection';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
+import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: 'Platform Ecosystem — Mobility, Workforce, Government, Education, Identity, Payments, Financial Ops & Marketplace',
@@ -20,8 +21,13 @@ export const metadata: Metadata = {
 };
 
 export default function PlatformsPage() {
+  const ld = breadcrumbListLd([
+    { name: 'Home', href: '/' },
+    { name: 'Platforms', href: '/platforms' },
+  ]);
   return (
     <>
+      <script {...jsonLdScript(ld)} />
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PlatformEcosystem />

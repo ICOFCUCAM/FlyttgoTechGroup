@@ -11,6 +11,7 @@ import { localizeIndustry } from '@/data/industries.i18n';
 import { platforms } from '@/data/platforms';
 import { T } from '@/components/flytt/T';
 import { serverLocale } from '@/lib/i18n/server';
+import { canonicalFor, languageAlternates } from '@/lib/seo/canonical';
 
 interface PageProps {
   params: { sector: string };
@@ -24,15 +25,18 @@ export const dynamic = 'force-dynamic';
 export function generateMetadata({ params }: PageProps): Metadata {
   const data = industryBySlug[params.sector];
   if (!data) return { title: 'Industry not found', robots: { index: false, follow: false } };
-  const canonical = `/industries/${data.slug}`;
+  const path = `/industries/${data.slug}`;
   return {
     title: `${data.name} — Platform Infrastructure`,
     description: data.description,
-    alternates: { canonical },
+    alternates: {
+      canonical: canonicalFor(path),
+      languages: languageAlternates(path),
+    },
     openGraph: {
       title: `${data.name} · FlyttGo Technologies Group`,
       description: data.description,
-      url: canonical,
+      url: canonicalFor(path),
       type: 'website',
     },
   };

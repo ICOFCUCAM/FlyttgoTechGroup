@@ -10,6 +10,7 @@ import { deploymentModes, deploymentModeBySlug } from '@/data/deployment-modes';
 import { localizeDeploymentMode } from '@/data/deployment-modes.i18n';
 import { T } from '@/components/flytt/T';
 import { serverLocale } from '@/lib/i18n/server';
+import { canonicalFor, languageAlternates } from '@/lib/seo/canonical';
 
 interface PageProps {
   params: { mode: string };
@@ -23,15 +24,18 @@ export const dynamic = 'force-dynamic';
 export function generateMetadata({ params }: PageProps): Metadata {
   const data = deploymentModeBySlug[params.mode];
   if (!data) return { title: 'Deployment mode not found', robots: { index: false, follow: false } };
-  const canonical = `/deployment/${data.slug}`;
+  const path = `/deployment/${data.slug}`;
   return {
     title: `${data.name} — Deployment Mode`,
     description: data.description,
-    alternates: { canonical },
+    alternates: {
+      canonical: canonicalFor(path),
+      languages: languageAlternates(path),
+    },
     openGraph: {
       title: `${data.name} · FlyttGo Technologies Group`,
       description: data.description,
-      url: canonical,
+      url: canonicalFor(path),
       type: 'website',
     },
   };

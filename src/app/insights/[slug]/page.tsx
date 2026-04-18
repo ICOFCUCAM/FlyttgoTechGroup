@@ -7,6 +7,7 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 import Breadcrumbs from '@/components/flytt/Breadcrumbs';
 import InsightBlocks from '@/components/flytt/InsightBlocks';
 import { insights, insightBySlug, insightDateFormat } from '@/data/insights';
+import { canonicalFor, languageAlternates } from '@/lib/seo/canonical';
 
 interface PageProps {
   params: { slug: string };
@@ -22,15 +23,18 @@ export function generateMetadata({ params }: PageProps): Metadata {
   if (!post) {
     return { title: 'Insight not found', robots: { index: false, follow: false } };
   }
-  const canonical = `/insights/${post.slug}`;
+  const path = `/insights/${post.slug}`;
   return {
     title: post.title,
     description: post.dek,
-    alternates: { canonical },
+    alternates: {
+      canonical: canonicalFor(path),
+      languages: languageAlternates(path),
+    },
     openGraph: {
       title: post.title,
       description: post.dek,
-      url: canonical,
+      url: canonicalFor(path),
       type: 'article',
       publishedTime: post.publishedOn,
       authors: [post.author],

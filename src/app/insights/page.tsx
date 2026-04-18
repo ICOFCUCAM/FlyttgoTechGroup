@@ -5,6 +5,7 @@ import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
 import { insights, insightDateFormat } from '@/data/insights';
+import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: 'Insights — Platform infrastructure notes',
@@ -21,8 +22,13 @@ export const metadata: Metadata = {
 };
 
 export default function InsightsIndexPage() {
+  const ld = breadcrumbListLd([
+    { name: 'Home', href: '/' },
+    { name: 'Insights', href: '/insights' },
+  ]);
   return (
     <>
+      <script {...jsonLdScript(ld)} />
       <Navbar />
       <main
         id="main"
