@@ -87,6 +87,33 @@ export default function CompanyPage() {
                   <ArrowUpRight size={16} aria-hidden="true" />
                 </Link>
               </div>
+
+              <nav
+                aria-label="Company sections"
+                className="mt-10 flex flex-wrap items-center gap-3 text-sm"
+              >
+                <Link
+                  href="/company/leadership"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:bg-white motion-safe:transition-colors text-slate-700 dark:text-slate-300"
+                >
+                  Leadership
+                  <ArrowUpRight size={12} className="text-slate-400" aria-hidden="true" />
+                </Link>
+                <Link
+                  href="/company/careers"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:bg-white motion-safe:transition-colors text-slate-700 dark:text-slate-300"
+                >
+                  Careers
+                  <ArrowUpRight size={12} className="text-slate-400" aria-hidden="true" />
+                </Link>
+                <Link
+                  href="/company/press"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:bg-white motion-safe:transition-colors text-slate-700 dark:text-slate-300"
+                >
+                  Press &amp; media
+                  <ArrowUpRight size={12} className="text-slate-400" aria-hidden="true" />
+                </Link>
+              </nav>
             </div>
 
             <div className="mt-16 grid md:grid-cols-2 gap-5">

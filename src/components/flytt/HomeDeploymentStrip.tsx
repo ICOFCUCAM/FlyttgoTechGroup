@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { ArrowUpRight, CloudCog, ServerCog, ShieldCheck } from 'lucide-react';
 
 const modes = [
-  { icon: CloudCog, title: 'FlyttGo-managed', blurb: 'Fully managed SaaS with region-aware hosting.', accent: '#1E6FD9' },
-  { icon: ServerCog, title: 'Customer cloud', blurb: 'Runs inside your AWS, Azure or GCP tenancy.', accent: '#0FB5A6' },
-  { icon: ShieldCheck, title: 'Sovereign datacenter', blurb: 'Self-hosted for public-sector procurement.', accent: '#7C5CE6' },
+  { icon: CloudCog, title: 'FlyttGo-managed', blurb: 'Fully managed SaaS with region-aware hosting.', accent: '#1E6FD9', href: '/deployment/managed' },
+  { icon: ServerCog, title: 'Customer cloud', blurb: 'Runs inside your AWS, Azure or GCP tenancy.', accent: '#0FB5A6', href: '/deployment/customer-cloud' },
+  { icon: ShieldCheck, title: 'Sovereign datacenter', blurb: 'Self-hosted for public-sector procurement.', accent: '#7C5CE6', href: '/deployment/sovereign' },
 ];
 
 const HomeDeploymentStrip: React.FC = () => {
@@ -44,7 +44,7 @@ const HomeDeploymentStrip: React.FC = () => {
             return (
               <li key={m.title}>
                 <Link
-                  href="/deployment"
+                  href={m.href}
                   className="group flex items-start gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
                 >
                   <span

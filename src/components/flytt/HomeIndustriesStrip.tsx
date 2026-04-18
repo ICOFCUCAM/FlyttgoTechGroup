@@ -10,11 +10,11 @@ import {
 } from 'lucide-react';
 
 const items = [
-  { icon: Landmark, label: 'Governments & ministries' },
-  { icon: Building2, label: 'Municipalities' },
-  { icon: GraduationCap, label: 'Universities & education' },
-  { icon: Truck, label: 'Transport operators' },
-  { icon: Briefcase, label: 'Enterprise workforce programmes' },
+  { icon: Landmark, label: 'Governments & ministries', href: '/industries/government' },
+  { icon: Building2, label: 'Municipalities', href: '/industries/government' },
+  { icon: GraduationCap, label: 'Universities & education', href: '/industries/education' },
+  { icon: Truck, label: 'Transport operators', href: '/industries/transport' },
+  { icon: Briefcase, label: 'Enterprise workforce programmes', href: '/industries/enterprise' },
 ];
 
 const HomeIndustriesStrip: React.FC = () => {
@@ -54,7 +54,7 @@ const HomeIndustriesStrip: React.FC = () => {
             return (
               <li key={it.label}>
                 <Link
-                  href="/industries"
+                  href={it.href}
                   className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900 motion-safe:transition-colors text-sm font-medium text-slate-700 dark:text-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
                 >
                   <Icon size={14} className="text-[#0A3A6B] dark:text-[#9ED0F9]" strokeWidth={1.75} aria-hidden="true" />

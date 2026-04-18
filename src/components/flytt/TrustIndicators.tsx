@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import {
   Building2,
   Bus,
@@ -9,12 +10,12 @@ import {
 } from 'lucide-react';
 
 const sectors = [
-  { label: 'Ministries', icon: Landmark },
-  { label: 'Municipalities', icon: Building2 },
-  { label: 'Universities', icon: GraduationCap },
-  { label: 'Transport operators', icon: Bus },
-  { label: 'Enterprise fleets', icon: Truck },
-  { label: 'Regulated marketplaces', icon: ShieldCheck },
+  { label: 'Ministries', icon: Landmark, href: '/industries/government' },
+  { label: 'Municipalities', icon: Building2, href: '/industries/government' },
+  { label: 'Universities', icon: GraduationCap, href: '/industries/education' },
+  { label: 'Transport operators', icon: Bus, href: '/industries/transport' },
+  { label: 'Enterprise fleets', icon: Truck, href: '/industries/enterprise' },
+  { label: 'Regulated marketplaces', icon: ShieldCheck, href: '/industries/marketplaces' },
 ];
 
 const TrustIndicators: React.FC = () => {
@@ -38,12 +39,14 @@ const TrustIndicators: React.FC = () => {
             {sectors.map((s) => {
               const Icon = s.icon;
               return (
-                <li
-                  key={s.label}
-                  className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-500 motion-safe:transition-colors hover:text-slate-800 dark:hover:text-slate-300"
-                >
-                  <Icon size={16} strokeWidth={1.6} aria-hidden="true" />
-                  <span className="text-sm font-medium tracking-tight">{s.label}</span>
+                <li key={s.label}>
+                  <Link
+                    href={s.href}
+                    className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-500 motion-safe:transition-colors hover:text-slate-800 dark:hover:text-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-sm"
+                  >
+                    <Icon size={16} strokeWidth={1.6} aria-hidden="true" />
+                    <span className="text-sm font-medium tracking-tight">{s.label}</span>
+                  </Link>
                 </li>
               );
             })}

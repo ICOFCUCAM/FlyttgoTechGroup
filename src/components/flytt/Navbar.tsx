@@ -349,9 +349,15 @@ const Navbar: React.FC = () => {
                         <div className="text-[10px] uppercase tracking-[0.2em] font-semibold text-white/60">
                           Featured
                         </div>
-                        <div className="mt-2 text-lg font-semibold tracking-tight">{l.dropdown.feature.title}</div>
+                        <div className="mt-2 text-lg font-semibold tracking-tight">
+                          {l.dropdown.feature.titleKey
+                            ? t(l.dropdown.feature.titleKey)
+                            : l.dropdown.feature.title}
+                        </div>
                         <p className="mt-2 text-[13px] text-white/70 leading-relaxed">
-                          {l.dropdown.feature.description}
+                          {l.dropdown.feature.descriptionKey
+                            ? t(l.dropdown.feature.descriptionKey)
+                            : l.dropdown.feature.description}
                         </p>
                         <div className="mt-auto pt-5">
                           <Link
@@ -359,7 +365,9 @@ const Navbar: React.FC = () => {
                             onClick={() => setOpenDropdown(null)}
                             className="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:gap-2.5 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A1F3D] rounded-sm"
                           >
-                            {l.dropdown.feature.cta}
+                            {l.dropdown.feature.ctaKey
+                              ? t(l.dropdown.feature.ctaKey)
+                              : l.dropdown.feature.cta}
                             <ArrowUpRight size={14} aria-hidden="true" />
                           </Link>
                         </div>
