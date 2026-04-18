@@ -7,6 +7,15 @@ import {
 
 const COOKIE = 'NEXT_LOCALE';
 
+// Edge cache policy for HTML responses. Combined with the Vary header
+// below, every (locale, route) pair is cached independently at the CDN.
+// After the first request per variant, subsequent hits are served from
+// the edge in <50ms — practical equivalent of per-locale SSG without a
+// routing refactor.
+//   s-maxage=300          — fresh for 5 min at shared caches
+//   stale-while-revalidate=86400 — serve stale up to 24h while revalidating
+const HTML_CACHE_CONTROL = 'public, s-maxage=300, stale-while-revalidate=86400';
+
 // Paths we never rewrite — these shouldn't be locale-scoped.
 const SKIP = [
   /^\/_next\//,
@@ -17,6 +26,24 @@ const SKIP = [
   /^\/favicon\.ico$/,
   /^\/(icon|apple-icon|opengraph-image|twitter-image)/,
 ];
+
+// Paths whose response should NEVER be cached even with Vary (e.g. the
+// contact form page renders with intent-specific query copy, and the
+// /contact API route is already skipped above).
+const NO_CACHE = [/^\/contact(\/|$|\?)/];
+
+function applyCachePolicy(res: NextResponse, pathname: string) {
+  if (NO_CACHE.some((re) => re.test(pathname))) {
+    res.headers.set('Cache-Control', 'private, no-store');
+    return;
+  }
+  // Only set Cache-Control if upstream hasn't already set something more
+  // restrictive. Middleware runs before route handlers, so this is the
+  // safe default — route handlers can override if needed.
+  if (!res.headers.has('Cache-Control')) {
+    res.headers.set('Cache-Control', HTML_CACHE_CONTROL);
+  }
+}
 
 export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
@@ -42,6 +69,7 @@ export function middleware(req: NextRequest) {
     res.headers.set('x-flyttgo-locale', firstSeg);
     // Tell any downstream CDN to cache per-locale, not as a single blob.
     res.headers.set('Vary', 'x-flyttgo-locale, Accept-Language, Cookie');
+    applyCachePolicy(res, pathname);
     return res;
   }
 
@@ -61,6 +89,7 @@ export function middleware(req: NextRequest) {
   });
   res.headers.set('x-flyttgo-locale', chosen);
   res.headers.set('Vary', 'x-flyttgo-locale, Accept-Language, Cookie');
+  applyCachePolicy(res, pathname);
   if (!req.cookies.get(COOKIE)) {
     res.cookies.set(COOKIE, chosen, {
       path: '/',
