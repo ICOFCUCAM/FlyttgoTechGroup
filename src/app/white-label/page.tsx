@@ -3,6 +3,7 @@ import Navbar from '@/components/flytt/Navbar';
 import WhiteLabelStrategy from '@/components/flytt/WhiteLabelStrategy';
 import WhiteLabelSection from '@/components/flytt/WhiteLabelSection';
 import SiteFooter from '@/components/flytt/SiteFooter';
+import { Reveal } from '@/components/flytt/Reveal';
 
 export const metadata: Metadata = {
   title: 'White-Label Deployment — Launch Your Own Platform',
@@ -24,7 +25,9 @@ export default function WhiteLabelPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <WhiteLabelStrategy />
-        <WhiteLabelSection />
+        <Reveal>
+          <WhiteLabelSection />
+        </Reveal>
       </main>
       <SiteFooter />
     </>

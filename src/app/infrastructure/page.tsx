@@ -6,7 +6,7 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 export const metadata: Metadata = {
   title: 'Infrastructure — Modular Platform Components',
   description:
-    'Six composable infrastructure modules — payments, identity, marketplace engine, relocation intelligence, admin dashboards and analytics — powering every FlyttGo deployment.',
+    'Composable infrastructure modules — payments, identity, marketplace engine, mobility intelligence, admin dashboards and analytics — powering every FlyttGo deployment.',
   alternates: { canonical: '/infrastructure' },
   openGraph: {
     title: 'FlyttGo Infrastructure Modules',

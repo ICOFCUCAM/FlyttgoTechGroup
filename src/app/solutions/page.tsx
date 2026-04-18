@@ -5,6 +5,7 @@ import GovernmentSection from '@/components/flytt/GovernmentSection';
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
 import SolutionsSection from '@/components/flytt/SolutionsSection';
 import SiteFooter from '@/components/flytt/SiteFooter';
+import { Reveal } from '@/components/flytt/Reveal';
 
 export const metadata: Metadata = {
   title: 'Solutions — Enterprise Logistics & Government Deployment Infrastructure',
@@ -26,9 +27,15 @@ export default function SolutionsPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <EnterpriseSection />
-        <GovernmentSection />
-        <DeploymentSpeed />
-        <SolutionsSection />
+        <Reveal>
+          <GovernmentSection />
+        </Reveal>
+        <Reveal>
+          <DeploymentSpeed />
+        </Reveal>
+        <Reveal>
+          <SolutionsSection />
+        </Reveal>
       </main>
       <SiteFooter />
     </>
