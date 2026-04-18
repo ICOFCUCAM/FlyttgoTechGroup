@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
 import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
+import ScrollToTop from '@/components/flytt/ScrollToTop';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = React.useState(
@@ -26,6 +27,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <AppProvider>
             <CommandPaletteProvider>
               {children}
+              <ScrollToTop />
               <Toaster />
               <Sonner />
             </CommandPaletteProvider>
