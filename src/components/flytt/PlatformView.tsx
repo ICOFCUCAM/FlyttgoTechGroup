@@ -21,6 +21,7 @@ import Breadcrumbs from '@/components/flytt/Breadcrumbs';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import { platforms, platformList } from '@/data/platforms';
 import { localizePlatform } from '@/data/platforms.i18n';
+import { insights, insightDateFormat } from '@/data/insights';
 import type { DeploymentType } from '@/lib/contact-schema';
 
 const PLATFORM_DEPLOYMENT_TYPE: Record<string, DeploymentType> = {
@@ -595,6 +596,76 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
           </div>
         </div>
       </section>
+
+      {/* FURTHER READING — 2 most recent insights, surfaced on every platform */}
+      {insights.length > 0 && (
+        <section className="py-20 bg-[#F7FAFD] dark:bg-slate-900/60 border-t border-slate-200/70 dark:border-slate-800/60">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+                  Further reading
+                </p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
+                  From the FlyttGo team
+                </h2>
+              </div>
+              <Link
+                href="/insights"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:gap-3 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+              >
+                All insights
+                <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
+            <ul className="grid md:grid-cols-2 gap-5">
+              {insights.slice(0, 2).map((post) => {
+                const Icon = post.icon;
+                return (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/insights/${post.slug}`}
+                      className="group flex flex-col h-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+                    >
+                      <div className="flex items-start justify-between">
+                        <span
+                          className="w-10 h-10 rounded-xl flex items-center justify-center"
+                          style={{ backgroundColor: `${post.accent}14`, color: post.accent }}
+                          aria-hidden="true"
+                        >
+                          <Icon size={18} strokeWidth={1.75} />
+                        </span>
+                        <ArrowUpRight
+                          size={14}
+                          className="text-slate-300 group-hover:text-slate-700 dark:group-hover:text-white motion-safe:transition-colors"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <p
+                        className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em]"
+                        style={{ color: post.accent }}
+                      >
+                        {post.eyebrow}
+                      </p>
+                      <h3 className="mt-2 text-lg font-semibold tracking-tight text-slate-900 dark:text-white leading-snug group-hover:underline underline-offset-4">
+                        {post.title}
+                      </h3>
+                      <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-1">
+                        {post.dek}
+                      </p>
+                      <div className="mt-4 flex items-center gap-3 text-xs text-slate-500">
+                        <span>{insightDateFormat(post.publishedOn)}</span>
+                        <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" aria-hidden="true" />
+                        <span>{post.readMinutes} min read</span>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* EXPLORE OTHER PLATFORMS */}
       <section className="py-24 bg-gradient-to-b from-white to-[#F5F8FC]">
