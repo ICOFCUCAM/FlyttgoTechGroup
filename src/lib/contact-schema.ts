@@ -26,6 +26,9 @@ export const contactInputSchema = z.object({
   message: z.string().trim().max(4000).optional().or(z.literal('').transform(() => undefined)),
   // Honeypot: submitted only by bots. Must be empty.
   website: z.string().max(0).optional(),
+  // Cloudflare Turnstile token. Only verified server-side when
+  // TURNSTILE_SECRET_KEY is set; omitted in development.
+  turnstile_token: z.string().max(2048).optional(),
 });
 
 export type ContactInput = z.infer<typeof contactInputSchema>;

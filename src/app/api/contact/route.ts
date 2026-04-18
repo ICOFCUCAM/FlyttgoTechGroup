@@ -3,9 +3,17 @@ import { ZodError } from 'zod';
 import { contactInputSchema } from '@/lib/contact-schema';
 import { getSupabaseServerClient } from '@/lib/supabase';
 import { getResendClient, getNotificationAddresses } from '@/lib/resend';
+import { clientIp, rateLimit } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+
+// Reject request bodies larger than this before parsing. Contact forms
+// don't need more than ~10 KB; anything larger is an attack surface.
+const MAX_BODY_BYTES = 32 * 1024;
+const RATE_LIMIT_MAX = 5; // requests per IP
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 
 function escapeHtml(input: string): string {
   return input
@@ -16,7 +24,59 @@ function escapeHtml(input: string): string {
     .replace(/'/g, '&#39;');
 }
 
+function siteOrigin(): string | null {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL;
+  if (!raw) return null;
+  try {
+    return new URL(raw).origin;
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(request: Request) {
+  // 1) Origin check — only enforce when configured AND the request sent
+  //    an Origin header. Browsers always send Origin on cross-site POST;
+  //    the absence of Origin on a same-origin POST is allowed.
+  const expected = siteOrigin();
+  const origin = request.headers.get('origin');
+  if (expected && origin && origin !== expected) {
+    return NextResponse.json({ error: 'Origin not allowed.' }, { status: 403 });
+  }
+
+  // 2) Rate limit — per-IP sliding window. Returns 429 with the standard
+  //    rate-limit headers so clients can back off gracefully.
+  const ip = clientIp(request.headers);
+  const rl = rateLimit(
+    `contact:${ip}`,
+    RATE_LIMIT_MAX,
+    RATE_LIMIT_WINDOW_MS,
+  );
+  if (!rl.ok) {
+    const retryAfter = Math.max(1, Math.ceil((rl.resetAt - Date.now()) / 1000));
+    return NextResponse.json(
+      { error: 'Too many requests. Please wait a few minutes.' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(retryAfter),
+          'X-RateLimit-Limit': String(RATE_LIMIT_MAX),
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': String(Math.ceil(rl.resetAt / 1000)),
+        },
+      },
+    );
+  }
+
+  // 3) Body size — cut oversized submissions at the edge, before Zod.
+  const contentLength = request.headers.get('content-length');
+  if (contentLength && Number(contentLength) > MAX_BODY_BYTES) {
+    return NextResponse.json(
+      { error: 'Request body too large.' },
+      { status: 413 },
+    );
+  }
+
   let json: unknown;
   try {
     json = await request.json();
@@ -43,6 +103,16 @@ export async function POST(request: Request) {
   // Honeypot: bots fill this field; silently succeed without side effects.
   if (input.website && input.website.length > 0) {
     return NextResponse.json({ ok: true }, { status: 200 });
+  }
+
+  // Cloudflare Turnstile — verified only when TURNSTILE_SECRET_KEY is set.
+  // Gracefully no-op in environments without captcha configured.
+  const captcha = await verifyTurnstile(input.turnstile_token, ip);
+  if (!captcha.ok) {
+    return NextResponse.json(
+      { error: 'Captcha verification failed. Please retry.' },
+      { status: 400 },
+    );
   }
 
   const source = (() => {
