@@ -98,6 +98,48 @@ const en: Dictionary = {
   'home.cta.primary': 'Deploy Your Platform',
   'home.cta.secondary': 'Schedule Infrastructure Demo',
 
+  // Industry sector page template
+  'sector.challenges': 'Typical challenges',
+  'sector.outcomes': 'FlyttGo outcomes',
+  'sector.platforms.heading': 'Platforms deployed for this sector',
+  'sector.platforms.subheading': 'Modular platforms, sector-sized.',
+  'sector.deployment.heading': 'Deployment pattern',
+  'sector.cta.description':
+    'Share your program context and our deployment engineering team will respond within one business day with a scoping outline and reference architecture.',
+  'sector.cta.button': 'Start a deployment conversation',
+  'sector.cta.review': 'Review deployment architecture',
+
+  // Deployment mode page template
+  'mode.characteristics': 'Characteristics',
+  'mode.timeline': 'Timeline',
+  'mode.regions': 'Region coverage',
+  'mode.scope': 'Scope a deployment',
+  'mode.bestFit': 'Best fit',
+
+  // Status page
+  'status.eyebrow': 'Platform status',
+  'status.title': 'All systems operational.',
+  'status.description':
+    'Real-time status for FlyttGo Technologies Group platform infrastructure. Incidents, maintenance windows and regional degradations are published here before they reach customer dashboards.',
+  'status.components': 'Component health',
+  'status.updated': 'Updated',
+  'status.operational': 'Operational',
+  'status.incidents.title': 'Incident history & enterprise SLAs',
+  'status.incidents.description':
+    'Post-mortems, uptime dashboards and per-region SLA reports are available to enterprise customers inside the deployment portal.',
+  'status.incidents.cta': 'Request SLA documentation',
+
+  // Legal pages — shared
+  'legal.effective': 'Effective',
+  'legal.privacy.eyebrow': 'Legal · Privacy',
+  'legal.privacy.title': 'How FlyttGo handles your data — transparently.',
+  'legal.terms.eyebrow': 'Legal · Terms',
+  'legal.terms.title': 'Terms of service for flyttgotech.com.',
+  'legal.security.eyebrow': 'Trust · Security',
+  'legal.security.title': 'Security engineered for national-scale deployments.',
+  'legal.compliance.eyebrow': 'Trust · Compliance',
+  'legal.compliance.title': 'Compliance across EU, AF and MENA jurisdictions.',
+
   // Common CTAs
   'cta.learnMore': 'Learn more',
   'cta.contact': 'Contact us',
@@ -186,6 +228,44 @@ const no: Dictionary = {
   'home.cta.title.part2': 'plattform­infrastruktur i dag',
   'home.cta.primary': 'Rull ut din plattform',
   'home.cta.secondary': 'Planlegg infrastruktur­demo',
+
+  'sector.challenges': 'Typiske utfordringer',
+  'sector.outcomes': 'FlyttGo-resultater',
+  'sector.platforms.heading': 'Plattformer rullet ut for denne sektoren',
+  'sector.platforms.subheading': 'Modulære plattformer, tilpasset sektoren.',
+  'sector.deployment.heading': 'Utrullingsmønster',
+  'sector.cta.description':
+    'Del konteksten for programmet ditt, så svarer vårt utrullingsteam innen én virkedag med en omfangsskisse og referansearkitektur.',
+  'sector.cta.button': 'Start en utrullingssamtale',
+  'sector.cta.review': 'Se utrullingsarkitekturen',
+
+  'mode.characteristics': 'Egenskaper',
+  'mode.timeline': 'Tidslinje',
+  'mode.regions': 'Regionsdekning',
+  'mode.scope': 'Avklar utrulling',
+  'mode.bestFit': 'Best egnet',
+
+  'status.eyebrow': 'Plattformstatus',
+  'status.title': 'Alle systemer i drift.',
+  'status.description':
+    'Sanntidsstatus for FlyttGo Technologies Groups plattforminfrastruktur. Hendelser, vedlikeholdsvinduer og regionale nedganger publiseres her før de når kundedashbord.',
+  'status.components': 'Komponenthelse',
+  'status.updated': 'Oppdatert',
+  'status.operational': 'I drift',
+  'status.incidents.title': 'Hendelseshistorikk og bedrifts-SLA',
+  'status.incidents.description':
+    'Post mortems, oppetidsdashbord og regionale SLA-rapporter er tilgjengelige for bedriftskunder i utrullingsportalen.',
+  'status.incidents.cta': 'Be om SLA-dokumentasjon',
+
+  'legal.effective': 'Gjelder fra',
+  'legal.privacy.eyebrow': 'Juridisk · Personvern',
+  'legal.privacy.title': 'Slik håndterer FlyttGo dataene dine — åpent.',
+  'legal.terms.eyebrow': 'Juridisk · Vilkår',
+  'legal.terms.title': 'Vilkår for bruk av flyttgotech.com.',
+  'legal.security.eyebrow': 'Tillit · Sikkerhet',
+  'legal.security.title': 'Sikkerhet bygget for utrullinger i nasjonal skala.',
+  'legal.compliance.eyebrow': 'Tillit · Samsvar',
+  'legal.compliance.title': 'Samsvar i EU-, AF- og MENA-jurisdiksjoner.',
 };
 
 const fr: Dictionary = {
@@ -270,6 +350,44 @@ const fr: Dictionary = {
   'home.cta.title.part2': 'infrastructure de plateforme dès aujourd’hui',
   'home.cta.primary': 'Déployer votre plateforme',
   'home.cta.secondary': 'Planifier une démo d’infrastructure',
+
+  'sector.challenges': 'Défis courants',
+  'sector.outcomes': 'Résultats FlyttGo',
+  'sector.platforms.heading': 'Plateformes déployées pour ce secteur',
+  'sector.platforms.subheading': 'Plateformes modulaires, à l’échelle du secteur.',
+  'sector.deployment.heading': 'Schéma de déploiement',
+  'sector.cta.description':
+    'Partagez le contexte de votre programme et notre équipe d’ingénierie de déploiement répondra sous un jour ouvré avec un cadrage et une architecture de référence.',
+  'sector.cta.button': 'Démarrer une conversation de déploiement',
+  'sector.cta.review': 'Voir l’architecture de déploiement',
+
+  'mode.characteristics': 'Caractéristiques',
+  'mode.timeline': 'Calendrier',
+  'mode.regions': 'Couverture régionale',
+  'mode.scope': 'Cadrer un déploiement',
+  'mode.bestFit': 'Cas idéaux',
+
+  'status.eyebrow': 'État de la plateforme',
+  'status.title': 'Tous les systèmes opérationnels.',
+  'status.description':
+    'État en temps réel de l’infrastructure de plateforme FlyttGo Technologies Group. Incidents, fenêtres de maintenance et dégradations régionales sont publiés ici avant d’atteindre les tableaux de bord clients.',
+  'status.components': 'Santé des composants',
+  'status.updated': 'Mis à jour',
+  'status.operational': 'Opérationnel',
+  'status.incidents.title': 'Historique des incidents & SLA entreprise',
+  'status.incidents.description':
+    'Post-mortems, tableaux de bord de disponibilité et rapports de SLA par région sont disponibles pour les clients entreprise dans le portail de déploiement.',
+  'status.incidents.cta': 'Demander la documentation SLA',
+
+  'legal.effective': 'En vigueur',
+  'legal.privacy.eyebrow': 'Juridique · Confidentialité',
+  'legal.privacy.title': 'Comment FlyttGo traite vos données — en toute transparence.',
+  'legal.terms.eyebrow': 'Juridique · Conditions',
+  'legal.terms.title': 'Conditions d’utilisation de flyttgotech.com.',
+  'legal.security.eyebrow': 'Confiance · Sécurité',
+  'legal.security.title': 'Une sécurité conçue pour les déploiements à l’échelle nationale.',
+  'legal.compliance.eyebrow': 'Confiance · Conformité',
+  'legal.compliance.title': 'Conformité dans les juridictions UE, AF et MENA.',
 };
 
 const de: Dictionary = {

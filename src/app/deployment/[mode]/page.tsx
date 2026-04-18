@@ -7,6 +7,7 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
 import { Reveal } from '@/components/flytt/Reveal';
 import { deploymentModes, deploymentModeBySlug } from '@/data/deployment-modes';
+import { T } from '@/components/flytt/T';
 
 interface PageProps {
   params: { mode: string };
@@ -87,7 +88,7 @@ export default function DeploymentModePage({ params }: PageProps) {
                   <Icon size={20} strokeWidth={1.75} />
                 </div>
                 <h2 className="mt-5 text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
-                  Characteristics
+                  <T k="mode.characteristics" />
                 </h2>
                 <dl className="mt-6 divide-y divide-slate-200/80 dark:divide-slate-800/60">
                   {data.characteristics.map((c) => (
@@ -106,13 +107,13 @@ export default function DeploymentModePage({ params }: PageProps) {
               <div className="p-8 rounded-3xl bg-[#0A1F3D] text-white">
                 <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
                   <Clock size={13} aria-hidden="true" />
-                  Timeline
+                  <T k="mode.timeline" />
                 </div>
                 <p className="mt-3 text-base leading-relaxed">{data.timeline}</p>
 
                 <div className="mt-6 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
                   <Globe2 size={13} aria-hidden="true" />
-                  Region coverage
+                  <T k="mode.regions" />
                 </div>
                 <ul className="mt-3 space-y-1.5">
                   {data.regions.map((r) => (
@@ -126,7 +127,7 @@ export default function DeploymentModePage({ params }: PageProps) {
                   href="/contact?intent=partnership"
                   className="mt-8 inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#0A3A6B] text-sm font-semibold rounded-md hover:bg-slate-100 motion-safe:transition-colors"
                 >
-                  Scope a deployment
+                  <T k="mode.scope" />
                   <ArrowRight size={14} aria-hidden="true" />
                 </Link>
               </div>
@@ -138,7 +139,7 @@ export default function DeploymentModePage({ params }: PageProps) {
           <section className="py-14 lg:py-20 bg-[#F7FAFD] dark:bg-slate-900/60 border-t border-slate-200/70 dark:border-slate-800/60">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-                Best fit
+                <T k="mode.bestFit" />
               </p>
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
                 Where {data.name.toLowerCase()} shines.

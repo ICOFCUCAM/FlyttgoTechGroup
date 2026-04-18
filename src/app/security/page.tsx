@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 import {
   Activity,
   Eye,
@@ -64,8 +65,8 @@ export default function SecurityPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Trust · Security"
-          title={<>Security engineered for national-scale deployments.</>}
+          eyebrow={<T k="legal.security.eyebrow" />}
+          title={<T k="legal.security.title" />}
           description="FlyttGo platforms are built for regulated enterprise and public-sector workloads — tenant-isolated, continuously monitored and independently audited. This page summarizes our program; full documentation is shared under NDA."
           crumbs={[
             { label: 'Home', href: '/' },

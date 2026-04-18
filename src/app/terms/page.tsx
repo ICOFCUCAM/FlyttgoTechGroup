@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
@@ -55,8 +56,8 @@ export default function TermsPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Legal · Terms"
-          title={<>Terms of service for flyttgotech.com.</>}
+          eyebrow={<T k="legal.terms.eyebrow" />}
+          title={<T k="legal.terms.title" />}
           description="These public terms govern access to FlyttGo Technologies Group marketing surfaces. Platform deployments, API access and enterprise licensing are covered by dedicated commercial contracts."
           crumbs={[
             { label: 'Home', href: '/' },
@@ -68,7 +69,7 @@ export default function TermsPage() {
         <section className="py-14 lg:py-20">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">
-              Effective · {new Date().toISOString().slice(0, 10)}
+              <T k="legal.effective" /> · {new Date().toISOString().slice(0, 10)}
             </p>
             <div className="mt-8 space-y-10">
               {sections.map((s) => (

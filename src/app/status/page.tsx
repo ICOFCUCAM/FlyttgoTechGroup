@@ -4,6 +4,7 @@ import { Activity, CheckCircle2, Clock } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import Breadcrumbs from '@/components/flytt/Breadcrumbs';
+import { T } from '@/components/flytt/T';
 
 export const metadata: Metadata = {
   title: 'Platform status',
@@ -52,16 +53,13 @@ export default function StatusPage() {
               </div>
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-                  Platform status
+                  <T k="status.eyebrow" />
                 </p>
                 <h1 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.08]">
-                  All systems operational.
+                  <T k="status.title" />
                 </h1>
                 <p className="mt-3 text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-                  Real-time status for FlyttGo Technologies Group platform
-                  infrastructure. Incidents, maintenance windows and regional
-                  degradations are published here before they reach customer
-                  dashboards.
+                  <T k="status.description" />
                 </p>
               </div>
             </div>
@@ -72,11 +70,11 @@ export default function StatusPage() {
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <div className="flex items-center justify-between gap-4 mb-6">
               <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
-                Component health
+                <T k="status.components" />
               </h2>
               <p className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-500 font-mono">
                 <Clock size={12} aria-hidden="true" />
-                Updated {now.toISOString().replace('T', ' ').slice(0, 16)} UTC
+                <T k="status.updated" /> {now.toISOString().replace('T', ' ').slice(0, 16)} UTC
               </p>
             </div>
 
@@ -88,7 +86,7 @@ export default function StatusPage() {
                   </span>
                   <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-emerald-600 dark:text-emerald-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-                    Operational
+                    <T k="status.operational" />
                   </span>
                 </li>
               ))}
@@ -99,17 +97,15 @@ export default function StatusPage() {
                 <Activity size={18} className="text-[#1E6FD9] mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <div>
                   <h3 className="text-base font-semibold tracking-tight">
-                    Incident history &amp; enterprise SLAs
+                    <T k="status.incidents.title" />
                   </h3>
                   <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                    Post-mortems, uptime dashboards and per-region SLA reports
-                    are available to enterprise customers inside the deployment
-                    portal.{' '}
+                    <T k="status.incidents.description" />{' '}
                     <Link
                       href="/contact?intent=procurement"
                       className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4"
                     >
-                      Request SLA documentation
+                      <T k="status.incidents.cta" />
                     </Link>
                     .
                   </p>

@@ -2,7 +2,7 @@ import React from 'react';
 import Breadcrumbs, { type Crumb } from '@/components/flytt/Breadcrumbs';
 
 type Props = {
-  eyebrow: string;
+  eyebrow: React.ReactNode;
   title: React.ReactNode;
   description?: React.ReactNode;
   crumbs?: Crumb[];

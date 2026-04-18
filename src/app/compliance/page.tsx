@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 import { ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -61,8 +62,8 @@ export default function CompliancePage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Trust · Compliance"
-          title={<>Compliance across EU, AF and MENA jurisdictions.</>}
+          eyebrow={<T k="legal.compliance.eyebrow" />}
+          title={<T k="legal.compliance.title" />}
           description="FlyttGo platforms are engineered to satisfy the compliance and sovereignty requirements of regulated enterprise and public-sector deployments. This page summarises the frameworks we support; per-deployment attestations are shared under NDA."
           crumbs={[
             { label: 'Home', href: '/' },

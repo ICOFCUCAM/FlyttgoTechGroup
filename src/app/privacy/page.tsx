@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
+import { T } from '@/components/flytt/T';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -60,8 +61,8 @@ export default function PrivacyPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          eyebrow="Legal · Privacy"
-          title={<>How FlyttGo handles your data — transparently.</>}
+          eyebrow={<T k="legal.privacy.eyebrow" />}
+          title={<T k="legal.privacy.title" />}
           description="This policy explains how FlyttGo Technologies Group collects, processes and protects personal data across our marketing surfaces and platform deployments. Enterprise customers receive a Data Processing Agreement alongside their deployment contract."
           crumbs={[
             { label: 'Home', href: '/' },
@@ -73,7 +74,7 @@ export default function PrivacyPage() {
         <section className="py-14 lg:py-20">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">
-              Effective · {new Date().toISOString().slice(0, 10)}
+              <T k="legal.effective" /> · {new Date().toISOString().slice(0, 10)}
             </p>
             <div className="mt-8 space-y-10">
               {sections.map((s) => (

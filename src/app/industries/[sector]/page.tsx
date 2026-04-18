@@ -8,6 +8,7 @@ import PageHero from '@/components/flytt/PageHero';
 import { Reveal } from '@/components/flytt/Reveal';
 import { industrySectors, industryBySlug } from '@/data/industries';
 import { platforms } from '@/data/platforms';
+import { T } from '@/components/flytt/T';
 
 interface PageProps {
   params: { sector: string };
@@ -81,7 +82,7 @@ export default function IndustrySectorPage({ params }: PageProps) {
               <div>
                 <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-slate-500 font-semibold">
                   <AlertCircle size={13} className="text-rose-500" aria-hidden="true" />
-                  Typical challenges
+                  <T k="sector.challenges" />
                 </div>
                 <ul className="mt-5 space-y-3">
                   {data.challenges.map((c) => (
@@ -95,7 +96,7 @@ export default function IndustrySectorPage({ params }: PageProps) {
               <div>
                 <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-slate-500 font-semibold">
                   <CheckCircle2 size={13} className="text-emerald-500" aria-hidden="true" />
-                  FlyttGo outcomes
+                  <T k="sector.outcomes" />
                 </div>
                 <ul className="mt-5 space-y-3">
                   {data.outcomes.map((o) => (
@@ -114,10 +115,10 @@ export default function IndustrySectorPage({ params }: PageProps) {
           <section className="py-14 lg:py-20 bg-[#F7FAFD] dark:bg-slate-900/60 border-y border-slate-200/70 dark:border-slate-800/60">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-                Platforms deployed for this sector
+                <T k="sector.platforms.heading" />
               </p>
               <h2 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
-                Modular platforms, sector-sized.
+                <T k="sector.platforms.subheading" />
               </h2>
               <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {data.platforms.map((slug) => {
@@ -158,7 +159,7 @@ export default function IndustrySectorPage({ params }: PageProps) {
               <div>
                 <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-slate-500 font-semibold">
                   <Server size={13} className="text-[#1E6FD9]" aria-hidden="true" />
-                  Deployment pattern
+                  <T k="sector.deployment.heading" />
                 </div>
                 <h2 className="mt-4 text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
                   How {data.name.toLowerCase()} deployments typically ship.
@@ -170,7 +171,7 @@ export default function IndustrySectorPage({ params }: PageProps) {
                   href="/deployment"
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:gap-3 motion-safe:transition-all"
                 >
-                  Review deployment architecture
+                  <T k="sector.cta.review" />
                   <ArrowUpRight size={14} aria-hidden="true" />
                 </Link>
               </div>
@@ -179,14 +180,13 @@ export default function IndustrySectorPage({ params }: PageProps) {
                   Scope a {data.name.toLowerCase()} deployment.
                 </h3>
                 <p className="mt-3 text-white/80 leading-relaxed">
-                  Share your program context and our deployment engineering team will respond within
-                  one business day with a scoping outline and reference architecture.
+                  <T k="sector.cta.description" />
                 </p>
                 <Link
                   href="/contact?intent=partnership"
                   className="mt-6 inline-flex items-center gap-2 px-5 py-3 bg-white text-[#0A3A6B] text-sm font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-colors"
                 >
-                  Start a deployment conversation
+                  <T k="sector.cta.button" />
                   <ArrowRight size={14} aria-hidden="true" />
                 </Link>
               </div>
