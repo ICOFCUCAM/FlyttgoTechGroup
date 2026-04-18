@@ -7,6 +7,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
+import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = React.useState(
@@ -23,9 +24,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <AppProvider>
-            {children}
-            <Toaster />
-            <Sonner />
+            <CommandPaletteProvider>
+              {children}
+              <Toaster />
+              <Sonner />
+            </CommandPaletteProvider>
           </AppProvider>
         </TooltipProvider>
       </QueryClientProvider>
