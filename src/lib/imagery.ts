@@ -101,6 +101,10 @@ export const imagery = {
       hero: photo(sceneIds.paymentsConsole),
       dashboard: photo(sceneIds.financeDashboard),
     },
+    ledgera: {
+      hero: photo(sceneIds.financeDashboard),
+      dashboard: photo(sceneIds.dataVisualization),
+    },
     flyttgo: {
       hero: photo(sceneIds.scandinavianLogisticsTruck),
       dashboard: photo(sceneIds.dispatchDashboard),
