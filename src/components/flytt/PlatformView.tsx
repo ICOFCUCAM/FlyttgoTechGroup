@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import Breadcrumbs from '@/components/flytt/Breadcrumbs';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 import { platforms, platformList } from '@/data/platforms';
 import type { DeploymentType } from '@/lib/contact-schema';
 
@@ -45,6 +46,12 @@ interface PlatformViewProps {
 
 const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
   const data = platforms[slug];
+  const { t } = useI18n();
+  const tv = (key: string, vars?: Record<string, string>) => {
+    let out = t(key);
+    if (vars) for (const [k, v] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, v);
+    return out;
+  };
   const [activeEndpoint, setActiveEndpoint] = useState(0);
   const [copied, setCopied] = useState(false);
 
@@ -97,7 +104,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             className="mt-3 inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 dark:text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
           >
             <ArrowLeft size={14} aria-hidden="true" />
-            Back to Platform Ecosystem
+            {t('platform.back')}
           </Link>
 
           <div className="mt-10 grid lg:grid-cols-12 gap-12 items-center">
@@ -126,14 +133,14 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   className="group inline-flex items-center gap-2 px-6 py-3.5 text-white font-semibold rounded-lg transition-all shadow-lg shadow-blue-900/10"
                   style={{ backgroundColor: data.color }}
                 >
-                  Start Deployment
+                  {t('platform.cta.start')}
                   <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
                 </button>
                 <a
                   href="#modules"
                   className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 dark:text-white font-semibold rounded-lg border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:bg-slate-50 dark:bg-slate-900/60 transition-colors"
                 >
-                  Explore Modules
+                  {t('platform.cta.modules')}
                 </a>
               </div>
 
@@ -169,7 +176,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 </div>
                 <div className="absolute bottom-5 right-5 bg-white dark:bg-slate-900/95 backdrop-blur rounded-xl px-4 py-3 shadow-lg flex items-center gap-3">
                   <Sparkles size={16} style={{ color: data.color }} />
-                  <div className="text-sm font-semibold text-slate-900 dark:text-white">Production-ready</div>
+                  <div className="text-sm font-semibold text-slate-900 dark:text-white">{t('platform.hero.production')}</div>
                 </div>
               </div>
             </div>
@@ -182,10 +189,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-              Platform Modules
+              {t('platform.modules.eyebrow')}
             </div>
             <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Modular infrastructure you can activate independently.
+              {t('platform.modules.title')}
             </h2>
             <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Every {data.name} deployment ships with foundational modules — activate them together or
@@ -221,10 +228,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-              Deployment Workflow
+              {t('platform.workflow.eyebrow')}
             </div>
             <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-              From kickoff to production in four structured steps.
+              {t('platform.workflow.title')}
             </h2>
           </div>
 
@@ -234,7 +241,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 key={w.title}
                 className="relative p-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-lg transition-all"
               >
-                <div className="text-xs font-mono text-slate-400 font-semibold">STEP 0{i + 1}</div>
+                <div className="text-xs font-mono text-slate-400 font-semibold uppercase tracking-wider">{t('platform.workflow.step')} 0{i + 1}</div>
                 <div
                   className="mt-4 w-12 h-12 rounded-xl flex items-center justify-center text-white font-semibold"
                   style={{ background: `linear-gradient(135deg, ${data.color}, ${data.color}dd)` }}
@@ -260,14 +267,13 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-                Technical Architecture
+                {t('platform.tech.eyebrow')}
               </div>
               <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-                {data.name} runs on the FlyttGo cloud-native stack.
+                {tv('platform.tech.title', { name: data.name })}
               </h2>
               <p className="mt-5 text-slate-600 dark:text-slate-400 leading-relaxed">
-                Every layer is designed for scalability, multi-tenant isolation and regional deployment
-                portability across Europe, Africa and the Middle East.
+                {t('platform.tech.description')}
               </p>
 
               <div className="mt-8 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800/60 shadow-lg">
@@ -303,7 +309,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 />
                 <div className="relative">
                   <div className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">
-                    Architecture Layers
+                    {t('platform.arch.layers')}
                   </div>
                   <h3 className="mt-2 text-2xl font-semibold tracking-tight">{data.name} Stack</h3>
 
@@ -431,10 +437,10 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-              Case Studies
+              {t('platform.case.eyebrow')}
             </div>
             <h2 className="mt-5 text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Organizations already deploying {data.name}.
+              {tv('platform.case.title', { name: data.name })}
             </h2>
           </div>
 
@@ -464,14 +470,13 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-              Deployment Tiers
+              {t('platform.pricing.eyebrow')}
             </div>
             <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Scale from pilot to national infrastructure.
+              {t('platform.pricing.title')}
             </h2>
             <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              Every tier includes multi-tenant architecture, white-label branding and regional deployment
-              compatibility.
+              {t('platform.pricing.description')}
             </p>
           </div>
 
@@ -487,7 +492,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
               >
                 {tier.highlighted && (
                   <div className="inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-white dark:bg-slate-900/15 rounded-md mb-4">
-                    Most Popular
+                    {t('platform.pricing.popular')}
                   </div>
                 )}
                 <h3 className={`text-xl font-semibold tracking-tight ${tier.highlighted ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
@@ -514,7 +519,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                       : 'bg-slate-900 text-white hover:bg-slate-800'
                   }`}
                 >
-                  {tier.price === 'Custom' ? 'Contact Sales' : 'Start Deployment'}
+                  {tier.price === 'Custom' ? t('cta.contact') : t('platform.cta.start')}
                   <ArrowRight size={14} />
                 </button>
 
@@ -556,8 +561,8 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             />
             <div className="relative grid lg:grid-cols-5 gap-10">
               <div className="lg:col-span-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-xs font-semibold uppercase tracking-wider">
-                  Start Deployment
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-xs font-semibold uppercase tracking-wider">
+                  {t('platform.cta.start')}
                 </div>
                 <h2 className="mt-5 text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
                   Deploy {data.name} with our platform team.
@@ -594,7 +599,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-end justify-between flex-wrap gap-4">
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
-              Explore other platforms in the ecosystem
+              {t('platform.related.title')}
             </h2>
             <Link
               href="/#platforms"
@@ -654,6 +659,12 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
   color,
   deploymentType,
 }) => {
+  const { t } = useI18n();
+  const tv = (key: string, vars?: Record<string, string>) => {
+    let out = t(key);
+    if (vars) for (const [k, v] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, v);
+    return out;
+  };
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -707,14 +718,14 @@ const PlatformContactForm: React.FC<{ platform: string; color: string; deploymen
           <div className="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto">
             <CheckCircle2 size={28} className="text-emerald-300" aria-hidden="true" />
           </div>
-          <h3 className="mt-4 text-lg font-semibold">Request received</h3>
-          <p className="mt-1 text-sm text-white/80">Our {platform} deployment team will respond shortly.</p>
+          <h3 className="mt-4 text-lg font-semibold">{t('platform.form.received')}</h3>
+          <p className="mt-1 text-sm text-white/80">{tv('platform.form.respond', { platform })}</p>
           <button
             type="button"
             onClick={() => setStatus('idle')}
             className="mt-5 text-sm font-semibold text-white/90 hover:text-white underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm"
           >
-            Submit another inquiry
+            {t('platform.form.another')}
           </button>
         </div>
       ) : (

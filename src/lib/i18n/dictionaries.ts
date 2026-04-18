@@ -157,6 +157,34 @@ const en: Dictionary = {
     'This is the human-readable companion to our XML sitemap. Use it to orient yourself across the FlyttGo Technologies Group platform ecosystem, industries, deployment modes, company and trust documentation.',
   'sitemap.machineReadable': 'Looking for the machine-readable version?',
 
+  // Platform detail pages (chrome — product copy stays in data/platforms.ts)
+  'platform.back': 'Back to Platform Ecosystem',
+  'platform.hero.platform': 'Platform',
+  'platform.hero.production': 'Production-ready',
+  'platform.cta.start': 'Start Deployment',
+  'platform.cta.modules': 'Explore Modules',
+  'platform.modules.eyebrow': 'Platform Modules',
+  'platform.modules.title': 'Modular infrastructure you can activate independently.',
+  'platform.workflow.eyebrow': 'Deployment Workflow',
+  'platform.workflow.title': 'From kickoff to production in four structured steps.',
+  'platform.workflow.step': 'Step',
+  'platform.tech.eyebrow': 'Technical Architecture',
+  'platform.tech.title': '{name} runs on the FlyttGo cloud-native stack.',
+  'platform.tech.description':
+    'Every layer is designed for scalability, multi-tenant isolation and regional deployment portability across Europe, Africa and the Middle East.',
+  'platform.arch.layers': 'Architecture Layers',
+  'platform.case.eyebrow': 'Case Studies',
+  'platform.case.title': 'Organizations already deploying {name}.',
+  'platform.pricing.eyebrow': 'Deployment Tiers',
+  'platform.pricing.title': 'Scale from pilot to national infrastructure.',
+  'platform.pricing.description':
+    'Every tier includes multi-tenant architecture, white-label branding and regional deployment compatibility.',
+  'platform.pricing.popular': 'Most Popular',
+  'platform.related.title': 'Explore other platforms in the ecosystem',
+  'platform.form.received': 'Request received',
+  'platform.form.respond': 'Our {platform} deployment team will respond shortly.',
+  'platform.form.another': 'Submit another inquiry',
+
   // Common CTAs
   'cta.learnMore': 'Learn more',
   'cta.contact': 'Contact us',
@@ -299,6 +327,33 @@ const no: Dictionary = {
   'sitemap.description':
     'Dette er det menneskelesbare motstykket til XML-områdekartet vårt. Bruk det til å orientere deg i FlyttGo Technologies Groups plattformøkosystem, bransjer, utrullingsmoduser, selskap og tillitsdokumentasjon.',
   'sitemap.machineReadable': 'Leter du etter den maskinlesbare versjonen?',
+
+  'platform.back': 'Tilbake til plattformøkosystemet',
+  'platform.hero.platform': 'Plattform',
+  'platform.hero.production': 'Produksjonsklar',
+  'platform.cta.start': 'Start utrulling',
+  'platform.cta.modules': 'Utforsk moduler',
+  'platform.modules.eyebrow': 'Plattformmoduler',
+  'platform.modules.title': 'Modulær infrastruktur du kan aktivere uavhengig.',
+  'platform.workflow.eyebrow': 'Utrullings­arbeidsflyt',
+  'platform.workflow.title': 'Fra kickoff til produksjon i fire strukturerte trinn.',
+  'platform.workflow.step': 'Trinn',
+  'platform.tech.eyebrow': 'Teknisk arkitektur',
+  'platform.tech.title': '{name} kjører på FlyttGos skybaserte stack.',
+  'platform.tech.description':
+    'Hvert lag er designet for skalerbarhet, flerleietaker-isolasjon og regional utrullings­portabilitet på tvers av Europa, Afrika og Midtøsten.',
+  'platform.arch.layers': 'Arkitekturlag',
+  'platform.case.eyebrow': 'Kundecase',
+  'platform.case.title': 'Organisasjoner som allerede ruller ut {name}.',
+  'platform.pricing.eyebrow': 'Utrullingsnivåer',
+  'platform.pricing.title': 'Skalér fra pilot til nasjonal infrastruktur.',
+  'platform.pricing.description':
+    'Hvert nivå inkluderer flerleietaker-arkitektur, white-label-branding og regional utrullings­kompatibilitet.',
+  'platform.pricing.popular': 'Mest populær',
+  'platform.related.title': 'Utforsk andre plattformer i økosystemet',
+  'platform.form.received': 'Forespørsel mottatt',
+  'platform.form.respond': 'Vårt {platform}-utrullings­team svarer snart.',
+  'platform.form.another': 'Send en ny forespørsel',
 };
 
 const fr: Dictionary = {
@@ -438,6 +493,33 @@ const fr: Dictionary = {
   'sitemap.description':
     'Ceci est la version lisible par un humain de notre sitemap XML. Utilisez-la pour vous repérer dans l’écosystème de plateformes FlyttGo Technologies Group, les secteurs, les modes de déploiement, l’entreprise et la documentation de confiance.',
   'sitemap.machineReadable': 'Vous cherchez la version lisible par machine ?',
+
+  'platform.back': 'Retour à l’écosystème de plateformes',
+  'platform.hero.platform': 'Plateforme',
+  'platform.hero.production': 'Prêt pour la production',
+  'platform.cta.start': 'Démarrer le déploiement',
+  'platform.cta.modules': 'Explorer les modules',
+  'platform.modules.eyebrow': 'Modules de plateforme',
+  'platform.modules.title': 'Infrastructure modulaire activable indépendamment.',
+  'platform.workflow.eyebrow': 'Flux de déploiement',
+  'platform.workflow.title': 'Du lancement à la production en quatre étapes structurées.',
+  'platform.workflow.step': 'Étape',
+  'platform.tech.eyebrow': 'Architecture technique',
+  'platform.tech.title': '{name} s’exécute sur le stack cloud-native FlyttGo.',
+  'platform.tech.description':
+    'Chaque couche est conçue pour l’évolutivité, l’isolation multi-tenant et la portabilité régionale à travers l’Europe, l’Afrique et le Moyen-Orient.',
+  'platform.arch.layers': 'Couches d’architecture',
+  'platform.case.eyebrow': 'Études de cas',
+  'platform.case.title': 'Organisations qui déploient déjà {name}.',
+  'platform.pricing.eyebrow': 'Niveaux de déploiement',
+  'platform.pricing.title': 'Du pilote à l’infrastructure nationale.',
+  'platform.pricing.description':
+    'Chaque niveau inclut l’architecture multi-tenant, le marquage white-label et la compatibilité de déploiement régional.',
+  'platform.pricing.popular': 'Le plus populaire',
+  'platform.related.title': 'Explorer d’autres plateformes de l’écosystème',
+  'platform.form.received': 'Demande reçue',
+  'platform.form.respond': 'Notre équipe de déploiement {platform} répondra sous peu.',
+  'platform.form.another': 'Envoyer une autre demande',
 };
 
 const de: Dictionary = {
@@ -561,6 +643,29 @@ const de: Dictionary = {
   'sitemap.eyebrow': 'Navigation',
   'sitemap.title': 'Jede Seite auf flyttgotech.com in einer Übersicht.',
   'sitemap.machineReadable': 'Suchen Sie die maschinen­lesbare Version?',
+
+  'platform.back': 'Zurück zum Plattform-Ökosystem',
+  'platform.hero.platform': 'Plattform',
+  'platform.hero.production': 'Produktionsbereit',
+  'platform.cta.start': 'Bereitstellung starten',
+  'platform.cta.modules': 'Module erkunden',
+  'platform.modules.eyebrow': 'Plattform-Module',
+  'platform.modules.title': 'Modulare Infrastruktur, unabhängig aktivierbar.',
+  'platform.workflow.eyebrow': 'Bereitstellungs-Ablauf',
+  'platform.workflow.title': 'Vom Kickoff zur Produktion in vier strukturierten Schritten.',
+  'platform.workflow.step': 'Schritt',
+  'platform.tech.eyebrow': 'Technische Architektur',
+  'platform.tech.title': '{name} läuft auf dem cloud-nativen FlyttGo-Stack.',
+  'platform.arch.layers': 'Architektur-Schichten',
+  'platform.case.eyebrow': 'Fallstudien',
+  'platform.case.title': 'Organisationen, die {name} bereits bereitstellen.',
+  'platform.pricing.eyebrow': 'Bereitstellungs-Stufen',
+  'platform.pricing.title': 'Vom Pilot zur nationalen Infrastruktur skalieren.',
+  'platform.pricing.popular': 'Am beliebtesten',
+  'platform.related.title': 'Weitere Plattformen des Ökosystems entdecken',
+  'platform.form.received': 'Anfrage erhalten',
+  'platform.form.respond': 'Unser {platform}-Bereitstellungs­team meldet sich in Kürze.',
+  'platform.form.another': 'Weitere Anfrage senden',
 };
 
 const es: Dictionary = {
@@ -678,6 +783,29 @@ const es: Dictionary = {
   'sitemap.eyebrow': 'Navegación',
   'sitemap.title': 'Cada página de flyttgotech.com, en una vista.',
   'sitemap.machineReadable': '¿Buscas la versión legible por máquina?',
+
+  'platform.back': 'Volver al ecosistema de plataformas',
+  'platform.hero.platform': 'Plataforma',
+  'platform.hero.production': 'Listo para producción',
+  'platform.cta.start': 'Iniciar despliegue',
+  'platform.cta.modules': 'Explorar módulos',
+  'platform.modules.eyebrow': 'Módulos de plataforma',
+  'platform.modules.title': 'Infraestructura modular que puedes activar de forma independiente.',
+  'platform.workflow.eyebrow': 'Flujo de despliegue',
+  'platform.workflow.title': 'De kickoff a producción en cuatro pasos estructurados.',
+  'platform.workflow.step': 'Paso',
+  'platform.tech.eyebrow': 'Arquitectura técnica',
+  'platform.tech.title': '{name} se ejecuta sobre el stack cloud-native de FlyttGo.',
+  'platform.arch.layers': 'Capas de arquitectura',
+  'platform.case.eyebrow': 'Casos de éxito',
+  'platform.case.title': 'Organizaciones que ya despliegan {name}.',
+  'platform.pricing.eyebrow': 'Niveles de despliegue',
+  'platform.pricing.title': 'Escala de piloto a infraestructura nacional.',
+  'platform.pricing.popular': 'Más popular',
+  'platform.related.title': 'Explora otras plataformas del ecosistema',
+  'platform.form.received': 'Solicitud recibida',
+  'platform.form.respond': 'Nuestro equipo de despliegue de {platform} responderá en breve.',
+  'platform.form.another': 'Enviar otra solicitud',
 };
 
 const sv: Dictionary = {
@@ -1014,6 +1142,29 @@ const ar: Dictionary = {
   'sitemap.eyebrow': 'التنقل',
   'sitemap.title': 'كل صفحة في flyttgotech.com في عرض واحد.',
   'sitemap.machineReadable': 'هل تبحث عن النسخة الخاصة بالآلة؟',
+
+  'platform.back': 'العودة إلى منظومة المنصات',
+  'platform.hero.platform': 'منصة',
+  'platform.hero.production': 'جاهز للإنتاج',
+  'platform.cta.start': 'ابدأ النشر',
+  'platform.cta.modules': 'استكشاف الوحدات',
+  'platform.modules.eyebrow': 'وحدات المنصة',
+  'platform.modules.title': 'بنية تحتية معيارية يمكن تفعيلها باستقلالية.',
+  'platform.workflow.eyebrow': 'سير عمل النشر',
+  'platform.workflow.title': 'من البدء إلى الإنتاج في أربع خطوات منظمة.',
+  'platform.workflow.step': 'خطوة',
+  'platform.tech.eyebrow': 'البنية التقنية',
+  'platform.tech.title': '{name} تعمل على حزمة FlyttGo السحابية الأصل.',
+  'platform.arch.layers': 'طبقات البنية',
+  'platform.case.eyebrow': 'دراسات حالة',
+  'platform.case.title': 'مؤسسات تنشر {name} بالفعل.',
+  'platform.pricing.eyebrow': 'مستويات النشر',
+  'platform.pricing.title': 'من التجربة إلى البنية التحتية الوطنية.',
+  'platform.pricing.popular': 'الأكثر شعبية',
+  'platform.related.title': 'استكشاف منصات أخرى في المنظومة',
+  'platform.form.received': 'تم استلام الطلب',
+  'platform.form.respond': 'سيرد فريق نشر {platform} قريباً.',
+  'platform.form.another': 'إرسال طلب آخر',
 };
 
 export const DICTIONARIES: Record<LocaleCode, Dictionary> = {
