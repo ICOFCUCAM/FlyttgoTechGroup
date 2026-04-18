@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import HeroSlider from '@/components/flytt/HeroSlider';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
-import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
+import InfrastructureModules from '@/components/flytt/InfrastructureModules';
 import MultiRegion from '@/components/flytt/MultiRegion';
 import FinalCTA from '@/components/flytt/FinalCTA';
 import SiteFooter from '@/components/flytt/SiteFooter';
 
 export const metadata: Metadata = {
-  title: 'Launch National-Scale Digital Platforms Without Building Infrastructure From Scratch',
+  title: 'Infrastructure for National-Scale Digital Platforms',
   description:
-    'FlyttGo Technologies Group provides modular deployment infrastructure for logistics marketplaces, education intelligence platforms, government service layers and enterprise ecosystems — deployable across Europe, Africa and the Middle East in weeks, not years.',
+    'FlyttGo Technologies provides modular deployment infrastructure for logistics marketplaces, education intelligence platforms, government service layers and enterprise ecosystems — deployable across Europe, Africa and the Middle East.',
   alternates: { canonical: '/' },
 };
 
@@ -21,7 +21,7 @@ export default function HomePage() {
       <main id="main" className="min-h-screen bg-white text-slate-900 antialiased">
         <HeroSlider />
         <PlatformEcosystemOverview />
-        <DeploymentSpeed />
+        <InfrastructureModules />
         <MultiRegion />
         <FinalCTA />
       </main>

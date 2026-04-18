@@ -50,22 +50,23 @@ const Navbar: React.FC = () => {
   return (
     <header
       role="banner"
-      className="sticky top-0 z-50 bg-white/70 supports-[backdrop-filter]:bg-white/60 backdrop-blur-xl border-b border-slate-200/70"
+      className="sticky top-0 z-50 bg-white/90 supports-[backdrop-filter]:bg-white/80 backdrop-blur-md border-b border-slate-200"
     >
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 h-14 lg:h-16 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-[68px] flex items-center justify-between gap-8">
         <Link
           href="/"
-          aria-label="FlyttGo Technologies Group — home"
-          className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-md"
+          aria-label="FlyttGo Technologies — home"
+          className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-md"
         >
-          <div className="w-7 h-7 rounded-md bg-gradient-to-br from-[#0A3A6B] to-[#1E6FD9] flex items-center justify-center" aria-hidden="true">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#0A3A6B] to-[#1E6FD9] flex items-center justify-center" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M4 12L10 6L14 10L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M4 18L10 12L14 16L20 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
             </svg>
           </div>
-          <span className="font-semibold text-slate-900 tracking-tight text-[15px]">
-            FlyttGo<span className="hidden sm:inline text-slate-400 font-normal"> / Technologies</span>
+          <span className="text-[15px] tracking-tight text-slate-900">
+            <span className="font-semibold">FlyttGo</span>
+            <span className="hidden sm:inline font-medium text-slate-500"> Technologies</span>
           </span>
         </Link>
 
@@ -77,10 +78,10 @@ const Navbar: React.FC = () => {
                 key={l.href}
                 href={l.href}
                 aria-current={active ? 'page' : undefined}
-                className={`px-3 py-1.5 text-[13px] font-medium rounded-md motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 ${
+                className={`px-4 py-2 text-sm font-medium rounded-md motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 ${
                   active
-                    ? 'text-slate-900 bg-slate-900/5'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.04]'
+                    ? 'text-[#0A3A6B] bg-slate-100/80'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
                 }`}
               >
                 {l.label}
@@ -89,16 +90,16 @@ const Navbar: React.FC = () => {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/contact"
-            className="px-3 py-1.5 text-[13px] font-medium text-slate-600 hover:text-slate-900 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-md"
+            className="text-sm font-medium text-slate-600 hover:text-slate-900 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-md px-2"
           >
             Sign in
           </Link>
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-1.5 px-4 py-1.5 text-[13px] font-semibold bg-[#0A3A6B] text-white rounded-md hover:bg-[#0a2f57] motion-safe:transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+            className="group inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md hover:bg-[#0a2f57] motion-safe:transition-colors shadow-md shadow-[#0A3A6B]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
           >
             Deploy Your Platform
             <ArrowRight size={14} className="motion-safe:transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
