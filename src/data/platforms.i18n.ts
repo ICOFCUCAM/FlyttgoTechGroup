@@ -25,6 +25,24 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'Transify fournit dispatch, routage et télématique pour les flottes d’entreprise, les autorités de transport et les places de marché construites sur l’infrastructure FlyttGo.',
     },
+    DE: {
+      subtitle: 'Mobilitäts­infrastruktur',
+      tagline: 'Koordinieren Sie Flotten, Dispatch und regionale Bewegung im Stadtmaßstab.',
+      description:
+        'Transify liefert Dispatch, Routing und Telematik für Unternehmensflotten, Verkehrs­behörden und Marktplätze auf der FlyttGo-Infrastruktur.',
+    },
+    ES: {
+      subtitle: 'Infraestructura de movilidad',
+      tagline: 'Coordina flotas, despacho y movilidad regional a escala de ciudad.',
+      description:
+        'Transify ofrece despacho, enrutamiento y telemática para flotas empresariales, autoridades de transporte y marketplaces construidos sobre la infraestructura FlyttGo.',
+    },
+    AR: {
+      subtitle: 'بنية تحتية للتنقل',
+      tagline: 'نسّق الأساطيل والإرسال والحركة الإقليمية على مستوى المدينة.',
+      description:
+        'يوفّر Transify الإرسال والتوجيه والتلمترية لأساطيل الشركات وهيئات النقل والأسواق المبنية على بنية FlyttGo التحتية.',
+    },
   },
   workverge: {
     NO: {
@@ -38,6 +56,24 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       tagline: 'Vérifiez, intégrez et déployez des programmes de main-d’œuvre à travers les régions.',
       description:
         'Workverge gère l’intégration, la certification, les plannings d’équipes et la coordination terrain pour les opérateurs déployant des effectifs à grande échelle.',
+    },
+    DE: {
+      subtitle: 'Personal­infrastruktur',
+      tagline: 'Verifizieren, onboarden und regionale Personal­programme ausrollen.',
+      description:
+        'Workverge übernimmt Onboarding, Zertifizierung, Schichtplanung und Einsatz­koordination für Betreiber, die Personal im großen Maßstab bereitstellen.',
+    },
+    ES: {
+      subtitle: 'Infraestructura de fuerza laboral',
+      tagline: 'Verifica, integra y despliega programas de fuerza laboral en todas las regiones.',
+      description:
+        'Workverge gestiona incorporación, certificación, planificación de turnos y coordinación de personal en campo para operadores que despliegan fuerza laboral a escala.',
+    },
+    AR: {
+      subtitle: 'بنية تحتية للقوى العاملة',
+      tagline: 'تحقّق من القوى العاملة وهيّئها وانشر برامجها عبر المناطق.',
+      description:
+        'يدير Workverge الإعداد والاعتماد وجدولة المناوبات وتنسيق العمالة الميدانية للمشغلين الذين ينشرون قوى عاملة على نطاق واسع.',
     },
   },
   civitas: {
@@ -53,6 +89,24 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'Civitas est la plateforme pour les services publics numériques — permis, services aux citoyens et tableaux de bord inter-agences — prête pour un déploiement souverain.',
     },
+    DE: {
+      subtitle: 'Öffentliche Dienstleistungen',
+      tagline: 'Rollen Sie Genehmigungs­workflows, Dashboards und Bürger­dienste als modulare Infrastruktur aus.',
+      description:
+        'Civitas ist die Plattform für digitale Verwaltungs­dienstleistungen — Genehmigungen, Bürger­services und ressort­übergreifende Dashboards — bereit für souveräne Bereitstellung.',
+    },
+    ES: {
+      subtitle: 'Servicios públicos',
+      tagline: 'Despliega workflows de permisos, paneles y servicios al ciudadano como infraestructura modular.',
+      description:
+        'Civitas es la plataforma para servicios públicos digitales — permisos, servicios al ciudadano y paneles interagenciales — lista para despliegue soberano.',
+    },
+    AR: {
+      subtitle: 'الخدمات العامة',
+      tagline: 'انشر مسارات التصاريح ولوحات المعلومات وخدمات المواطنين كبنية تحتية معيارية.',
+      description:
+        'Civitas هي منصة الخدمات الحكومية الرقمية — التصاريح وخدمات المواطنين ولوحات المعلومات بين الجهات — جاهزة للنشر السيادي.',
+    },
   },
   edupro: {
     NO: {
@@ -67,6 +121,9 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'EduPro est la plateforme d’intelligence éducative — admissions, bourses, analyses institutionnelles — opérée avec isolation par tenant pour chaque ministère ou université.',
     },
+    DE: { subtitle: 'Bildungsintelligenz' },
+    ES: { subtitle: 'Inteligencia educativa' },
+    AR: { subtitle: 'ذكاء تعليمي' },
   },
   identra: {
     NO: {
@@ -81,6 +138,9 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'Identra fournit l’identité — fédération OIDC/SAML, workflows KYC/KYB, intégration eID nationale — comme module indépendant sur l’infrastructure FlyttGo.',
     },
+    DE: { subtitle: 'Identitäts­infrastruktur' },
+    ES: { subtitle: 'Infraestructura de identidad' },
+    AR: { subtitle: 'بنية تحتية للهوية' },
   },
   payvera: {
     NO: {
@@ -95,6 +155,9 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'Payvera orchestre les paiements — rails cartes, SEPA, rails nationaux, conformité PSD2, réconciliation — pour entreprises et opérateurs publics.',
     },
+    DE: { subtitle: 'Zahlungs­infrastruktur' },
+    ES: { subtitle: 'Infraestructura de pagos' },
+    AR: { subtitle: 'بنية تحتية للمدفوعات' },
   },
   ledgera: {
     NO: {
@@ -109,6 +172,9 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'Ledgera automatise les opérations financières — plan comptable, réconciliations, reporting fiscal, assistance IA — intégré à Payvera et aux autres modules FlyttGo.',
     },
+    DE: { subtitle: 'Finanz­operationen' },
+    ES: { subtitle: 'Operaciones financieras' },
+    AR: { subtitle: 'العمليات المالية' },
   },
   flyttgo: {
     NO: {
@@ -123,6 +189,9 @@ export const PLATFORM_I18N: Record<string, Overlay> = {
       description:
         'FlyttGo est le moteur de place de marché — app client, app conducteur, dispatch, paiements — qui tourne sur l’infrastructure Transify. Lancez votre propre place de marché sur la même stack.',
     },
+    DE: { subtitle: 'Umzugs­marktplatz' },
+    ES: { subtitle: 'Marketplace de mudanzas' },
+    AR: { subtitle: 'سوق الانتقال' },
   },
 };
 
