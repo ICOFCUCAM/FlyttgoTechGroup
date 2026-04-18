@@ -107,6 +107,14 @@ export default {
           from: { width: '0%' },
           to: { width: '100%' },
         },
+        orbit: {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        'orbit-counter': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(-360deg)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -116,6 +124,8 @@ export default {
         'fade-up': 'fade-up 0.9s ease-out both',
         'fade-up-slow': 'fade-up-delayed 1.2s ease-out both',
         'bar-grow': 'bar-grow 1s ease-out both',
+        orbit: 'orbit 120s linear infinite',
+        'orbit-counter': 'orbit-counter 120s linear infinite',
       },
       // Layered shadow stack: every elevation pairs a 1px hairline highlight
       // with a soft, focused ambient blur — feels closer to Linear / Stripe
