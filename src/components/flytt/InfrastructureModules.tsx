@@ -188,7 +188,7 @@ const InfrastructureModules: React.FC = () => {
                         className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium ${
                           isFeatured
                             ? 'bg-white/10 border border-white/20 text-white/85'
-                            : 'bg-slate-50 border border-slate-200 text-slate-700'
+                            : 'bg-slate-50 border border-slate-200/80 text-slate-700'
                         }`}
                       >
                         {s}
@@ -215,7 +215,7 @@ const InfrastructureModules: React.FC = () => {
         <div className="mt-12 flex justify-center">
           <Link
             href="/technology"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200/80 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
             See full architecture
             <ArrowUpRight size={16} aria-hidden="true" />

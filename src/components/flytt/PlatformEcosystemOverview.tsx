@@ -101,7 +101,7 @@ const PlatformEcosystemOverview: React.FC = () => {
               <Link
                 key={t.href}
                 href={t.href}
-                className="group relative block p-8 lg:p-10 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-2xl hover:shadow-slate-900/5 hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                className="group relative block p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-2xl hover:shadow-slate-900/5 hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 aria-label={`${t.title}: explore platform`}
               >
                 <div
@@ -141,7 +141,7 @@ const PlatformEcosystemOverview: React.FC = () => {
                     {t.capabilities.map((c) => (
                       <li
                         key={c}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-medium text-slate-700"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200/80 rounded-full text-xs font-medium text-slate-700"
                       >
                         <CheckCircle2 size={12} style={{ color: t.accent }} aria-hidden="true" />
                         {c}

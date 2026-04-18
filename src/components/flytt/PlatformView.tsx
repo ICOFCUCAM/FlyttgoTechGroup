@@ -120,7 +120,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 </button>
                 <a
                   href="#modules"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 transition-colors"
                 >
                   Explore Modules
                 </a>
@@ -186,7 +186,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             {data.modules.map((m, i) => (
               <div
                 key={m.title}
-                className="group p-7 rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                className="group p-7 rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/80 hover:shadow-lg hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div
@@ -221,7 +221,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             {data.workflow.map((w, i) => (
               <div
                 key={w.title}
-                className="relative p-7 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all"
+                className="relative p-7 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg transition-all"
               >
                 <div className="text-xs font-mono text-slate-400 font-semibold">STEP 0{i + 1}</div>
                 <div
@@ -233,7 +233,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 <h3 className="mt-4 text-lg font-semibold text-slate-900 tracking-tight">{w.title}</h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">{w.desc}</p>
                 {i < data.workflow.length - 1 && (
-                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-slate-200 items-center justify-center z-10 shadow-sm">
+                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-slate-200/80 items-center justify-center z-10 shadow-sm">
                     <ArrowRight size={12} className="text-slate-400" />
                   </div>
                 )}
@@ -259,8 +259,8 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 portability across Europe, Africa and the Middle East.
               </p>
 
-              <div className="mt-8 rounded-xl overflow-hidden border border-slate-200 shadow-lg">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200 bg-slate-50">
+              <div className="mt-8 rounded-xl overflow-hidden border border-slate-200/80 shadow-lg">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200/80 bg-slate-50">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
@@ -343,7 +343,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
 
           <div className="mt-12 grid lg:grid-cols-12 gap-5">
             <div className="lg:col-span-5">
-              <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+              <div className="rounded-2xl border border-slate-200/80 bg-white overflow-hidden">
                 {data.apiEndpoints.map((ep, i) => (
                   <button
                     key={ep.path}
@@ -400,7 +400,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 </pre>
               </div>
 
-              <div className="mt-4 p-4 rounded-xl bg-white border border-slate-200 flex items-center gap-3">
+              <div className="mt-4 p-4 rounded-xl bg-white border border-slate-200/80 flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
                   <CheckCircle2 size={16} className="text-emerald-600" />
                 </div>
@@ -431,11 +431,11 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
             {data.caseStudies.map((c) => (
               <div
                 key={c.client}
-                className="p-7 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                className="p-7 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200/80 hover:shadow-lg hover:-translate-y-0.5 transition-all"
               >
                 <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">{c.region}</div>
                 <div className="mt-2 text-lg font-semibold text-slate-900 tracking-tight">{c.client}</div>
-                <div className="mt-6 pt-6 border-t border-slate-200">
+                <div className="mt-6 pt-6 border-t border-slate-200/80">
                   <div className="text-3xl font-semibold tracking-tight" style={{ color: data.color }}>
                     {c.metric}
                   </div>
@@ -471,7 +471,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 className={`p-8 rounded-2xl border transition-all ${
                   tier.highlighted
                     ? 'bg-gradient-to-br from-[#0A1F3D] to-[#0A3A6B] text-white border-transparent shadow-xl -translate-y-2'
-                    : 'bg-white border-slate-200 hover:shadow-lg'
+                    : 'bg-white border-slate-200/80 hover:shadow-lg'
                 }`}
               >
                 {tier.highlighted && (
@@ -507,7 +507,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                   <ArrowRight size={14} />
                 </button>
 
-                <div className={`mt-7 pt-7 border-t space-y-3 ${tier.highlighted ? 'border-white/15' : 'border-slate-200'}`}>
+                <div className={`mt-7 pt-7 border-t space-y-3 ${tier.highlighted ? 'border-white/15' : 'border-slate-200/80'}`}>
                   {tier.features.map((f) => (
                     <div
                       key={f}
@@ -600,7 +600,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 <Link
                   key={p.slug}
                   href={`/platforms/${p.slug}`}
-                  className="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                  className="group p-6 rounded-2xl bg-white border border-slate-200/80 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 >
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center"
@@ -621,7 +621,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
       </section>
 
       {/* Simple footer */}
-      <footer className="bg-[#F5F8FC] border-t border-slate-200">
+      <footer className="bg-[#F5F8FC] border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10 flex flex-wrap items-center justify-between gap-4">
           <div className="text-xs text-slate-500">
             © {new Date().getFullYear()} FlyttGo Technologies Group AB · Platform Infrastructure Provider

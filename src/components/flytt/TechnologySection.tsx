@@ -96,7 +96,7 @@ const TechnologySection: React.FC = () => {
           </div>
 
           {/* Tech stack grid */}
-          <div className="lg:col-span-5 p-8 rounded-3xl bg-white border border-slate-200">
+          <div className="lg:col-span-5 p-8 rounded-3xl bg-white border border-slate-200/80">
             <div className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">
               Infrastructure Stack
             </div>
@@ -110,7 +110,7 @@ const TechnologySection: React.FC = () => {
                 return (
                   <div
                     key={s.name}
-                    className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:border-slate-300 transition-colors"
+                    className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/60 hover:bg-white hover:border-slate-300 transition-colors"
                   >
                     <Icon size={18} className="text-[#0A3A6B]" strokeWidth={1.75} />
                     <div className="mt-3 text-sm font-semibold text-slate-900">{s.name}</div>
@@ -123,7 +123,7 @@ const TechnologySection: React.FC = () => {
         </div>
 
         {/* Dashboard showcase */}
-        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 lg:p-10">
+        <div className="mt-10 rounded-3xl border border-slate-200/80 bg-white p-8 lg:p-10">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-5">
               <div className="text-xs uppercase tracking-[0.2em] text-[#0FB5A6] font-semibold">
@@ -148,7 +148,7 @@ const TechnologySection: React.FC = () => {
               </div>
             </div>
             <div className="lg:col-span-7">
-              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-slate-200 shadow-xl shadow-slate-900/5 bg-slate-100">
+              <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-slate-200/80 shadow-xl shadow-slate-900/5 bg-slate-100">
                 <Image
                   src={imagery.technology}
                   alt="Live operations dashboard showing dispatch, fleet heatmaps and territory analytics"

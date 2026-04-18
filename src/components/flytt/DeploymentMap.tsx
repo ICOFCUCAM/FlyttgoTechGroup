@@ -35,7 +35,7 @@ const DeploymentMap: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-14 relative rounded-3xl bg-white border border-slate-200 p-6 lg:p-10 overflow-hidden">
+        <div className="mt-14 relative rounded-3xl bg-white border border-slate-200/80 p-6 lg:p-10 overflow-hidden">
           <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5F8FC] via-[#EEF4FA] to-[#E4EEF8]">
             {/* Background map image */}
             <Image
@@ -98,7 +98,7 @@ const DeploymentMap: React.FC = () => {
               { r: 'Middle East', desc: 'GCC and Levant infrastructure-ready environments', color: '#0FB5A6' },
               { r: 'Africa', desc: 'North · West · East regional deployment readiness', color: '#7C5CE6' },
             ].map((r) => (
-              <div key={r.r} className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <div key={r.r} className="p-5 rounded-xl bg-slate-50 border border-slate-200/80">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: r.color }} />
                   <span className="text-sm font-semibold text-slate-900">{r.r}</span>

@@ -93,7 +93,7 @@ const WhiteLabelStrategy: React.FC = () => {
             return (
               <article
                 key={p.title}
-                className="group relative p-8 lg:p-10 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all"
+                className="group relative p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all"
               >
                 <div
                   className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B] motion-safe:transition-transform group-hover:-rotate-3"

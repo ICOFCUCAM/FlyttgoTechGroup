@@ -94,7 +94,7 @@ const PlatformEcosystem: React.FC = () => {
                 className={`group text-left p-7 rounded-2xl border transition-all duration-300 ${
                   isActive
                     ? 'bg-white border-slate-300 shadow-xl shadow-slate-900/5 -translate-y-1'
-                    : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5'
+                    : 'bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5'
                 }`}
               >
                 <div className="flex items-start justify-between">
@@ -171,7 +171,7 @@ const PlatformEcosystem: React.FC = () => {
         </div>
 
         {/* Active platform deep-view */}
-        <div className="mt-10 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-8 lg:p-12">
+        <div className="mt-10 rounded-3xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-white p-8 lg:p-12">
           <div className="grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-5">
               <div
@@ -204,8 +204,8 @@ const PlatformEcosystem: React.FC = () => {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-xl shadow-slate-900/5 bg-white">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200 bg-slate-50">
+              <div className="rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl shadow-slate-900/5 bg-white">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200/80 bg-slate-50">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />

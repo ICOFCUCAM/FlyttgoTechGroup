@@ -124,7 +124,7 @@ const MultiRegion: React.FC = () => {
           {regions.map((r) => (
             <article
               key={r.code}
-              className={`group relative p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${r.tint} border border-slate-200 hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all`}
+              className={`group relative p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${r.tint} border border-slate-200/80 hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all`}
             >
               <div className="flex items-center justify-between">
                 <div
@@ -145,7 +145,7 @@ const MultiRegion: React.FC = () => {
                 {r.hubs.map((h) => (
                   <li
                     key={h}
-                    className="inline-flex items-center px-2.5 py-1 bg-white border border-slate-200 rounded-md text-xs font-medium text-slate-700 shadow-sm"
+                    className="inline-flex items-center px-2.5 py-1 bg-white border border-slate-200/80 rounded-md text-xs font-medium text-slate-700 shadow-sm"
                   >
                     {h}
                   </li>
@@ -170,7 +170,7 @@ const MultiRegion: React.FC = () => {
         <div className="mt-12 flex justify-center">
           <Link
             href="/industries"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200/80 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
           >
             See deployment map &amp; industries
             <ArrowUpRight size={16} aria-hidden="true" />

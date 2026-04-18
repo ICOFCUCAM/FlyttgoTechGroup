@@ -94,7 +94,7 @@ const GovernmentSection: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider shadow-sm">
+            <p className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200/80 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider shadow-sm">
               <Landmark size={12} aria-hidden="true" />
               Government Deployment
             </p>
@@ -120,7 +120,7 @@ const GovernmentSection: React.FC = () => {
             return (
               <article
                 key={p.title}
-                className="group relative p-7 lg:p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="group relative p-7 lg:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div
@@ -159,7 +159,7 @@ const GovernmentSection: React.FC = () => {
         </div>
 
         <div className="mt-10 grid lg:grid-cols-12 gap-6">
-          <aside className="lg:col-span-5 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200">
+          <aside className="lg:col-span-5 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80">
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
               <BarChart3 size={14} aria-hidden="true" />
               Institutional Trust

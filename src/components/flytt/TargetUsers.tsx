@@ -100,11 +100,11 @@ const TargetUsers: React.FC = () => {
               <Link
                 key={a.title}
                 href={a.href}
-                className={`group relative flex flex-col p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${a.tint} border border-slate-200 hover:shadow-xl hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2`}
+                className={`group relative flex flex-col p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${a.tint} border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2`}
               >
                 <div className="flex items-start justify-between">
                   <div
-                    className="w-12 h-12 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center motion-safe:transition-transform group-hover:-rotate-6"
+                    className="w-12 h-12 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-center motion-safe:transition-transform group-hover:-rotate-6"
                     style={{ color: a.accent }}
                     aria-hidden="true"
                   >
@@ -127,7 +127,7 @@ const TargetUsers: React.FC = () => {
                   {a.outcomes.map((o) => (
                     <li
                       key={o}
-                      className="px-2.5 py-1 bg-white border border-slate-200 rounded-md text-[11px] font-medium text-slate-700"
+                      className="px-2.5 py-1 bg-white border border-slate-200/80 rounded-md text-[11px] font-medium text-slate-700"
                     >
                       {o}
                     </li>
