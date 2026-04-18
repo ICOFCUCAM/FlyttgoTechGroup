@@ -133,7 +133,7 @@ const TopUtilityBar: React.FC = () => {
                       optionRefs.current[i] = el;
                     }}
                     onClick={() => select(lang.code)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm motion-safe:transition-colors focus-visible:outline-none focus-visible:bg-slate-100 dark:focus-visible:bg-white/10 ${
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm motion-safe:transition-colors focus-visible:outline-none focus-visible:bg-slate-100 dark:focus-visible:bg-white/10 ${
                       selected
                         ? 'bg-[#0A3A6B]/5 dark:bg-white/5 text-[#0A3A6B] dark:text-white'
                         : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'

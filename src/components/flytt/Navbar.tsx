@@ -412,7 +412,7 @@ const Navbar: React.FC = () => {
         <button
           ref={toggleRef}
           type="button"
-          className="lg:hidden p-1.5 text-slate-700 dark:text-slate-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+          className="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-slate-700 dark:text-slate-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-panel"
           aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}

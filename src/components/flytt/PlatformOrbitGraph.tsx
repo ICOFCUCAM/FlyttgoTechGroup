@@ -119,12 +119,11 @@ const PlatformOrbitGraph: React.FC = () => {
   return (
     <div className="relative w-full max-w-[580px] mx-auto">
       {/* Desktop / tablet — premium orbit graph */}
-      <div
+      <nav
         className="group hidden sm:block relative aspect-square"
-        role="img"
-        aria-label="FlyttGo Technologies Group platform ecosystem — FlyttGoTech infrastructure core connected to Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and FlyttGo. Hover to pause."
+        aria-label="FlyttGo platform ecosystem — 8 platforms orbiting the FlyttGoTech infrastructure core"
       >
-        <svg viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} className="w-full h-full overflow-visible" aria-hidden="true">
+        <svg viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} className="w-full h-full overflow-visible">
           <defs>
             <radialGradient id="bg-glow" cx="50%" cy="50%" r="55%">
               <stop offset="0%" stopColor="#1E6FD9" stopOpacity="0.55" />
@@ -164,11 +163,13 @@ const PlatformOrbitGraph: React.FC = () => {
           </g>
 
           {/* Faint orbit ring */}
-          <circle cx={CENTER} cy={CENTER} r={RING_RADIUS} fill="none" stroke="rgba(158,208,249,0.12)" strokeDasharray="2 5" />
+          <circle aria-hidden="true" cx={CENTER} cy={CENTER} r={RING_RADIUS} fill="none" stroke="rgba(158,208,249,0.12)" strokeDasharray="2 5" />
 
           {/* Rotating layer — spokes, arcs, pills all rotate together.
               Pauses on hover/focus so the user can read a pill. */}
           <g className="motion-safe:animate-orbit group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] [transform-box:fill-box] [transform-origin:center]">
+            {/* Decorative: spokes, arcs, endpoint dots, pulses — hidden from AT. */}
+            <g aria-hidden="true">
             {/* Spokes from core to each node */}
             {nodes.map((n) => {
               const { x, y } = toXY(n.angle, n.radius);
@@ -230,14 +231,19 @@ const PlatformOrbitGraph: React.FC = () => {
                 />
               </g>
             ))}
+            </g>
 
-            {/* Platform pills — positioned on orbit, counter-rotated to stay upright */}
+            {/* Platform pills — positioned on orbit, counter-rotated to stay upright.
+                Siblings of the aria-hidden decorative group so AT announces
+                each pill's Link aria-label normally. */}
             {nodes.map((n) => (
               <Pill key={n.slug} node={n} />
             ))}
           </g>
 
-          {/* Center core — visually dominant. Halo breathes slowly. */}
+          {/* Center core — visually dominant. Halo breathes slowly.
+              Purely decorative — nav wrapper already describes the graph. */}
+          <g aria-hidden="true">
           <circle
             cx={CENTER}
             cy={CENTER}
@@ -280,8 +286,9 @@ const PlatformOrbitGraph: React.FC = () => {
           >
             Infrastructure Core
           </text>
+          </g>
         </svg>
-      </div>
+      </nav>
 
       {/* Mobile fallback — stacked platform badges */}
       <ul className="sm:hidden grid grid-cols-2 gap-2" aria-label="FlyttGo platforms">
