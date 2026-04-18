@@ -514,6 +514,53 @@ const de: Dictionary = {
   'home.cta.title.part2': 'Plattform-Infrastruktur heute',
   'home.cta.primary': 'Ihre Plattform bereitstellen',
   'home.cta.secondary': 'Infrastruktur-Demo planen',
+
+  'sector.challenges': 'Typische Herausforderungen',
+  'sector.outcomes': 'FlyttGo-Ergebnisse',
+  'sector.platforms.heading': 'Für diese Branche bereitgestellte Plattformen',
+  'sector.platforms.subheading': 'Modulare Plattformen, branchengerecht.',
+  'sector.deployment.heading': 'Bereitstellungs­muster',
+  'sector.cta.button': 'Bereitstellungs­gespräch starten',
+  'sector.cta.review': 'Bereitstellungs­architektur ansehen',
+
+  'mode.characteristics': 'Merkmale',
+  'mode.timeline': 'Zeitplan',
+  'mode.regions': 'Regionen­abdeckung',
+  'mode.scope': 'Bereitstellung planen',
+  'mode.bestFit': 'Am besten geeignet',
+
+  'status.eyebrow': 'Plattform-Status',
+  'status.title': 'Alle Systeme betriebsbereit.',
+  'status.components': 'Komponenten­zustand',
+  'status.updated': 'Aktualisiert',
+  'status.operational': 'In Betrieb',
+  'status.incidents.title': 'Vorfallverlauf & Enterprise-SLAs',
+  'status.incidents.cta': 'SLA-Dokumentation anfordern',
+
+  'legal.effective': 'Gültig ab',
+  'legal.privacy.eyebrow': 'Rechtliches · Datenschutz',
+  'legal.privacy.title': 'Wie FlyttGo mit Ihren Daten umgeht — transparent.',
+  'legal.terms.eyebrow': 'Rechtliches · Nutzungs­bedingungen',
+  'legal.terms.title': 'Nutzungs­bedingungen für flyttgotech.com.',
+  'legal.security.eyebrow': 'Vertrauen · Sicherheit',
+  'legal.security.title': 'Sicherheit, gebaut für nationale Bereitstellungen.',
+  'legal.compliance.eyebrow': 'Vertrauen · Compliance',
+  'legal.compliance.title': 'Compliance in EU-, AF- und MENA-Rechtsräumen.',
+
+  'company.leadership.eyebrow': 'Unternehmen · Führung',
+  'company.leadership.title':
+    'Wir betreiben die Plattformschicht, auf der andere Organisationen bereitstellen.',
+  'company.careers.eyebrow': 'Unternehmen · Karriere',
+  'company.careers.title':
+    'Helfen Sie Betreibern, nationale Plattformen bereitzustellen — ohne mehrjährigen Aufbau.',
+  'company.careers.openings': 'Offene Stellen',
+  'company.press.eyebrow': 'Unternehmen · Presse',
+  'company.press.title': 'Presse- und Medienressourcen.',
+  'company.press.boilerplate': 'Unternehmens­beschreibung',
+
+  'sitemap.eyebrow': 'Navigation',
+  'sitemap.title': 'Jede Seite auf flyttgotech.com in einer Übersicht.',
+  'sitemap.machineReadable': 'Suchen Sie die maschinen­lesbare Version?',
 };
 
 const es: Dictionary = {
@@ -584,6 +631,53 @@ const es: Dictionary = {
   'home.cta.title.part2': 'infraestructura de plataforma hoy',
   'home.cta.primary': 'Despliega tu plataforma',
   'home.cta.secondary': 'Agendar demo de infraestructura',
+
+  'sector.challenges': 'Desafíos típicos',
+  'sector.outcomes': 'Resultados con FlyttGo',
+  'sector.platforms.heading': 'Plataformas desplegadas para este sector',
+  'sector.platforms.subheading': 'Plataformas modulares, a la medida del sector.',
+  'sector.deployment.heading': 'Patrón de despliegue',
+  'sector.cta.button': 'Iniciar una conversación de despliegue',
+  'sector.cta.review': 'Ver la arquitectura de despliegue',
+
+  'mode.characteristics': 'Características',
+  'mode.timeline': 'Cronograma',
+  'mode.regions': 'Cobertura regional',
+  'mode.scope': 'Planificar un despliegue',
+  'mode.bestFit': 'Mejor encaje',
+
+  'status.eyebrow': 'Estado de la plataforma',
+  'status.title': 'Todos los sistemas operativos.',
+  'status.components': 'Salud de componentes',
+  'status.updated': 'Actualizado',
+  'status.operational': 'Operativo',
+  'status.incidents.title': 'Historial de incidentes y SLA enterprise',
+  'status.incidents.cta': 'Solicitar documentación SLA',
+
+  'legal.effective': 'Vigencia',
+  'legal.privacy.eyebrow': 'Legal · Privacidad',
+  'legal.privacy.title': 'Cómo FlyttGo gestiona tus datos — con transparencia.',
+  'legal.terms.eyebrow': 'Legal · Términos',
+  'legal.terms.title': 'Términos de servicio de flyttgotech.com.',
+  'legal.security.eyebrow': 'Confianza · Seguridad',
+  'legal.security.title': 'Seguridad diseñada para despliegues a escala nacional.',
+  'legal.compliance.eyebrow': 'Confianza · Cumplimiento',
+  'legal.compliance.title': 'Cumplimiento en jurisdicciones UE, AF y MENA.',
+
+  'company.leadership.eyebrow': 'Empresa · Liderazgo',
+  'company.leadership.title':
+    'Operamos la capa de plataformas sobre la que otras organizaciones despliegan.',
+  'company.careers.eyebrow': 'Empresa · Carreras',
+  'company.careers.title':
+    'Ayuda a operadores a desplegar plataformas a escala nacional — sin la construcción de años.',
+  'company.careers.openings': 'Vacantes actuales',
+  'company.press.eyebrow': 'Empresa · Prensa',
+  'company.press.title': 'Recursos de prensa y medios.',
+  'company.press.boilerplate': 'Descripción corporativa',
+
+  'sitemap.eyebrow': 'Navegación',
+  'sitemap.title': 'Cada página de flyttgotech.com, en una vista.',
+  'sitemap.machineReadable': '¿Buscas la versión legible por máquina?',
 };
 
 const sv: Dictionary = {
@@ -873,6 +967,53 @@ const ar: Dictionary = {
   'home.cta.title.part2': 'بنيتك التحتية للمنصة اليوم',
   'home.cta.primary': 'انشر منصتك',
   'home.cta.secondary': 'حجز عرض توضيحي للبنية التحتية',
+
+  'sector.challenges': 'تحديات شائعة',
+  'sector.outcomes': 'نتائج FlyttGo',
+  'sector.platforms.heading': 'المنصات المنشورة لهذا القطاع',
+  'sector.platforms.subheading': 'منصات معيارية بحجم القطاع.',
+  'sector.deployment.heading': 'نمط النشر',
+  'sector.cta.button': 'ابدأ محادثة نشر',
+  'sector.cta.review': 'استعراض هيكل النشر',
+
+  'mode.characteristics': 'الخصائص',
+  'mode.timeline': 'الجدول الزمني',
+  'mode.regions': 'تغطية المناطق',
+  'mode.scope': 'تحديد نطاق النشر',
+  'mode.bestFit': 'الأنسب لـ',
+
+  'status.eyebrow': 'حالة المنصة',
+  'status.title': 'جميع الأنظمة تعمل.',
+  'status.components': 'صحة المكونات',
+  'status.updated': 'تم التحديث',
+  'status.operational': 'قيد التشغيل',
+  'status.incidents.title': 'سجل الحوادث واتفاقيات SLA للمؤسسات',
+  'status.incidents.cta': 'طلب وثائق SLA',
+
+  'legal.effective': 'سارٍ من',
+  'legal.privacy.eyebrow': 'قانوني · الخصوصية',
+  'legal.privacy.title': 'كيف تتعامل FlyttGo مع بياناتك — بشفافية.',
+  'legal.terms.eyebrow': 'قانوني · الشروط',
+  'legal.terms.title': 'شروط الخدمة لموقع flyttgotech.com.',
+  'legal.security.eyebrow': 'الثقة · الأمن',
+  'legal.security.title': 'أمن مصمَّم لعمليات النشر بالمقياس الوطني.',
+  'legal.compliance.eyebrow': 'الثقة · الامتثال',
+  'legal.compliance.title': 'الامتثال عبر الاتحاد الأوروبي وإفريقيا والشرق الأوسط.',
+
+  'company.leadership.eyebrow': 'الشركة · القيادة',
+  'company.leadership.title':
+    'نُشغِّل طبقة المنصات التي تنتشر عليها المؤسسات الأخرى.',
+  'company.careers.eyebrow': 'الشركة · الوظائف',
+  'company.careers.title':
+    'ساعد المشغلين في نشر منصات بمقياس وطني — دون سنوات من البناء.',
+  'company.careers.openings': 'الوظائف المتاحة',
+  'company.press.eyebrow': 'الشركة · الإعلام',
+  'company.press.title': 'موارد الإعلام والصحافة.',
+  'company.press.boilerplate': 'نبذة عن الشركة',
+
+  'sitemap.eyebrow': 'التنقل',
+  'sitemap.title': 'كل صفحة في flyttgotech.com في عرض واحد.',
+  'sitemap.machineReadable': 'هل تبحث عن النسخة الخاصة بالآلة؟',
 };
 
 export const DICTIONARIES: Record<LocaleCode, Dictionary> = {
