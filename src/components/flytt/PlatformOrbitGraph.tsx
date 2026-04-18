@@ -24,8 +24,7 @@ type OrbitNode = {
 
 const VIEWBOX = 600;
 const CENTER = VIEWBOX / 2;
-const INNER_RADIUS = 205;
-const OUTER_RADIUS = 268;
+const RING_RADIUS = 215;
 const PILL_W = 132;
 const PILL_H = 46;
 
@@ -34,27 +33,18 @@ const toXY = (angleDeg: number, radius: number) => {
   return { x: CENTER + radius * Math.cos(rad), y: CENTER + radius * Math.sin(rad) };
 };
 
-// Transify anchors at 12 o'clock so the outer FlyttGo marketplace pill
-// sits directly above it — visually reinforcing "marketplace on mobility infra".
-const innerNodes: OrbitNode[] = [
-  { slug: 'transify', name: 'Transify', subtitle: 'Mobility', icon: Route, angle: 0, radius: INNER_RADIUS, accent: '#60A5FA' },
-  { slug: 'workverge', name: 'Workverge', subtitle: 'Workforce', icon: UserCheck, angle: 360 / 7, radius: INNER_RADIUS, accent: '#5EEAD4' },
-  { slug: 'civitas', name: 'Civitas', subtitle: 'Gov Services', icon: Landmark, angle: (360 / 7) * 2, radius: INNER_RADIUS, accent: '#A78BFA' },
-  { slug: 'edupro', name: 'EduPro', subtitle: 'Education', icon: GraduationCap, angle: (360 / 7) * 3, radius: INNER_RADIUS, accent: '#FBBF24' },
-  { slug: 'identra', name: 'Identra', subtitle: 'Identity', icon: Fingerprint, angle: (360 / 7) * 4, radius: INNER_RADIUS, accent: '#F472B6' },
-  { slug: 'payvera', name: 'Payvera', subtitle: 'Payments', icon: CreditCard, angle: (360 / 7) * 5, radius: INNER_RADIUS, accent: '#34D399' },
-  { slug: 'ledgera', name: 'Ledgera', subtitle: 'Financial Ops', icon: Calculator, angle: (360 / 7) * 6, radius: INNER_RADIUS, accent: '#2DD4BF' },
+// All 8 platforms sit on one ring at 45° spacing around the FlyttGoTech core.
+const STEP = 360 / 8;
+const nodes: OrbitNode[] = [
+  { slug: 'transify', name: 'Transify', subtitle: 'Mobility', icon: Route, angle: 0, radius: RING_RADIUS, accent: '#60A5FA' },
+  { slug: 'workverge', name: 'Workverge', subtitle: 'Workforce', icon: UserCheck, angle: STEP, radius: RING_RADIUS, accent: '#5EEAD4' },
+  { slug: 'civitas', name: 'Civitas', subtitle: 'Gov Services', icon: Landmark, angle: STEP * 2, radius: RING_RADIUS, accent: '#A78BFA' },
+  { slug: 'edupro', name: 'EduPro', subtitle: 'Education', icon: GraduationCap, angle: STEP * 3, radius: RING_RADIUS, accent: '#FBBF24' },
+  { slug: 'identra', name: 'Identra', subtitle: 'Identity', icon: Fingerprint, angle: STEP * 4, radius: RING_RADIUS, accent: '#F472B6' },
+  { slug: 'payvera', name: 'Payvera', subtitle: 'Payments', icon: CreditCard, angle: STEP * 5, radius: RING_RADIUS, accent: '#34D399' },
+  { slug: 'ledgera', name: 'Ledgera', subtitle: 'Financial Ops', icon: Calculator, angle: STEP * 6, radius: RING_RADIUS, accent: '#2DD4BF' },
+  { slug: 'flyttgo', name: 'FlyttGo', subtitle: 'Marketplace', icon: Truck, angle: STEP * 7, radius: RING_RADIUS, accent: '#FCD34D' },
 ];
-
-const outerNode: OrbitNode = {
-  slug: 'flyttgo',
-  name: 'FlyttGo',
-  subtitle: 'Marketplace',
-  icon: Truck,
-  angle: 0,
-  radius: OUTER_RADIUS,
-  accent: '#FCD34D',
-};
 
 // Deterministic pseudo-random starfield so the component stays a pure server
 // component (no hydration mismatch).
@@ -69,9 +59,6 @@ const STARS: { x: number; y: number; r: number; o: number }[] = Array.from({ len
     o: 0.2 + (seed / 233280) * 0.6,
   };
 });
-
-const transifyPos = toXY(0, INNER_RADIUS);
-const flyttgoPos = toXY(0, OUTER_RADIUS);
 
 // Quadratic Bezier arc from A to B that bulges outward past the orbit ring,
 // producing the "spider web" feel between adjacent platform pills.
@@ -127,7 +114,7 @@ const PlatformOrbitGraph: React.FC = () => {
       <div
         className="hidden sm:block relative aspect-square"
         role="img"
-        aria-label="FlyttGo Technologies Group platform ecosystem — FlyttGoTech infrastructure core connected to Transify, Workverge, Civitas, EduPro, Identra, Payvera and Ledgera, with the FlyttGo marketplace running on Transify"
+        aria-label="FlyttGo Technologies Group platform ecosystem — FlyttGoTech infrastructure core connected to Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and FlyttGo"
       >
         <svg viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} className="w-full h-full overflow-visible" aria-hidden="true">
           <defs>
@@ -168,14 +155,13 @@ const PlatformOrbitGraph: React.FC = () => {
             ))}
           </g>
 
-          {/* Faint orbit rings */}
-          <circle cx={CENTER} cy={CENTER} r={INNER_RADIUS} fill="none" stroke="rgba(158,208,249,0.12)" strokeDasharray="2 5" />
-          <circle cx={CENTER} cy={CENTER} r={OUTER_RADIUS} fill="none" stroke="rgba(158,208,249,0.07)" strokeDasharray="2 7" />
+          {/* Faint orbit ring */}
+          <circle cx={CENTER} cy={CENTER} r={RING_RADIUS} fill="none" stroke="rgba(158,208,249,0.12)" strokeDasharray="2 5" />
 
           {/* Rotating layer — spokes, arcs, pills all rotate together */}
           <g className="motion-safe:animate-orbit [transform-box:fill-box] [transform-origin:center]">
-            {/* Spokes from core to each inner node */}
-            {innerNodes.map((n) => {
+            {/* Spokes from core to each node */}
+            {nodes.map((n) => {
               const { x, y } = toXY(n.angle, n.radius);
               return (
                 <line
@@ -190,9 +176,9 @@ const PlatformOrbitGraph: React.FC = () => {
               );
             })}
 
-            {/* Outer arcs connecting adjacent inner nodes (spider-web feel) */}
-            {innerNodes.map((n, i) => {
-              const next = innerNodes[(i + 1) % innerNodes.length];
+            {/* Outer arcs connecting adjacent nodes (spider-web feel) */}
+            {nodes.map((n, i) => {
+              const next = nodes[(i + 1) % nodes.length];
               return (
                 <path
                   key={`arc-${n.slug}`}
@@ -205,18 +191,8 @@ const PlatformOrbitGraph: React.FC = () => {
               );
             })}
 
-            {/* Transify → FlyttGo connection (marketplace sits on mobility infra) */}
-            <line
-              x1={transifyPos.x}
-              y1={transifyPos.y}
-              x2={flyttgoPos.x}
-              y2={flyttgoPos.y}
-              stroke="url(#spoke-gradient)"
-              strokeWidth="1.1"
-            />
-
             {/* Small glowing dot at each connection endpoint */}
-            {innerNodes.map((n) => {
+            {nodes.map((n) => {
               const { x, y } = toXY(n.angle, n.radius);
               return (
                 <g key={`dot-${n.slug}`}>
@@ -225,16 +201,11 @@ const PlatformOrbitGraph: React.FC = () => {
                 </g>
               );
             })}
-            <g>
-              <circle cx={flyttgoPos.x} cy={flyttgoPos.y} r="5" fill={outerNode.accent} fillOpacity="0.28" />
-              <circle cx={flyttgoPos.x} cy={flyttgoPos.y} r="1.6" fill="#E6F2FF" />
-            </g>
 
             {/* Platform pills — positioned on orbit, counter-rotated to stay upright */}
-            {innerNodes.map((n) => (
+            {nodes.map((n) => (
               <Pill key={n.slug} node={n} />
             ))}
-            <Pill node={outerNode} />
           </g>
 
           {/* Center core — static, visually dominant */}
@@ -290,7 +261,7 @@ const PlatformOrbitGraph: React.FC = () => {
             </div>
           </div>
         </li>
-        {[...innerNodes, outerNode].map((n) => {
+        {nodes.map((n) => {
           const Icon = n.icon;
           return (
             <li key={n.slug}>
