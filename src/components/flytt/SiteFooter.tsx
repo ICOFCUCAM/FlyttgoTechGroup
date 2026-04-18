@@ -70,6 +70,7 @@ const groups: FooterGroup[] = [
       { label: 'Developer portal', href: '/developers' },
       { label: 'API reference', href: '/developers' },
       { label: 'Solution briefs', href: '/solutions' },
+      { label: 'Insights', href: '/insights' },
       { label: 'White-label program', href: '/white-label' },
       { label: 'Managed deployment', href: '/deployment/managed' },
       { label: 'Customer cloud', href: '/deployment/customer-cloud' },

@@ -8,6 +8,7 @@ import { T } from '@/components/flytt/T';
 import { platformList } from '@/data/platforms';
 import { industrySectors } from '@/data/industries';
 import { deploymentModes } from '@/data/deployment-modes';
+import { insights } from '@/data/insights';
 
 export const metadata: Metadata = {
   title: 'Site map',
@@ -63,6 +64,17 @@ const sections: Section[] = [
       { label: 'White-label program', href: '/white-label' },
       { label: 'Technology architecture', href: '/technology' },
       { label: 'Developer portal', href: '/developers' },
+    ],
+  },
+  {
+    heading: 'Insights',
+    links: [
+      { label: 'All insights', href: '/insights' },
+      ...insights.map((i) => ({
+        label: i.title,
+        href: `/insights/${i.slug}`,
+        note: i.eyebrow,
+      })),
     ],
   },
   {

@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { platformList } from '@/data/platforms';
 import { industrySectors } from '@/data/industries';
 import { deploymentModes } from '@/data/deployment-modes';
+import { insights } from '@/data/insights';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
@@ -15,6 +16,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/solutions', priority: 0.7, freq: 'monthly' },
   { path: '/white-label', priority: 0.7, freq: 'monthly' },
   { path: '/developers', priority: 0.6, freq: 'monthly' },
+  { path: '/insights', priority: 0.7, freq: 'weekly' },
   { path: '/company', priority: 0.5, freq: 'monthly' },
   { path: '/company/leadership', priority: 0.4, freq: 'monthly' },
   { path: '/company/careers', priority: 0.6, freq: 'weekly' },
@@ -58,10 +60,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const insightEntries: MetadataRoute.Sitemap = insights.map((i) => ({
+    url: `${siteUrl}/insights/${i.slug}`,
+    lastModified: new Date(i.publishedOn),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
   return [
     ...staticEntries,
     ...platformEntries,
     ...industryEntries,
     ...deploymentEntries,
+    ...insightEntries,
   ];
 }
