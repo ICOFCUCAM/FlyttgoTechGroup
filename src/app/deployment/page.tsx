@@ -3,6 +3,7 @@ import Navbar from '@/components/flytt/Navbar';
 import DeploymentArchitecture from '@/components/flytt/DeploymentArchitecture';
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
 import SiteFooter from '@/components/flytt/SiteFooter';
+import { Reveal } from '@/components/flytt/Reveal';
 
 export const metadata: Metadata = {
   title: 'Deployment — Flexible Deployment Architecture',
@@ -24,7 +25,9 @@ export default function DeploymentPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <DeploymentArchitecture />
-        <DeploymentSpeed />
+        <Reveal>
+          <DeploymentSpeed />
+        </Reveal>
       </main>
       <SiteFooter />
     </>

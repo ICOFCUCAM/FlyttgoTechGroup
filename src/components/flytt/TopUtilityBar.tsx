@@ -30,13 +30,18 @@ const STORAGE_KEY = 'flyttgo.lang';
 const TopUtilityBar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<Language>(LANGUAGES[0]);
+  const [focusIdx, setFocusIdx] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       const match = LANGUAGES.find((l) => l.code === saved);
-      if (match) setActive(match);
+      if (match) {
+        setActive(match);
+        setFocusIdx(LANGUAGES.indexOf(match));
+      }
     } catch {
       /* noop */
     }
@@ -54,14 +59,20 @@ const TopUtilityBar: React.FC = () => {
     };
     document.addEventListener('mousedown', onClick);
     document.addEventListener('keydown', onKey);
+    // Focus the currently selected option when opening
+    const timer = window.setTimeout(() => {
+      optionRefs.current[focusIdx]?.focus();
+    }, 0);
     return () => {
       document.removeEventListener('mousedown', onClick);
       document.removeEventListener('keydown', onKey);
+      window.clearTimeout(timer);
     };
-  }, [open]);
+  }, [open, focusIdx]);
 
   const select = useCallback((lang: Language) => {
     setActive(lang);
+    setFocusIdx(LANGUAGES.indexOf(lang));
     setOpen(false);
     try {
       window.localStorage.setItem(STORAGE_KEY, lang.code);
@@ -74,6 +85,33 @@ const TopUtilityBar: React.FC = () => {
       /* noop */
     }
   }, []);
+
+  const handleListKey = (e: React.KeyboardEvent<HTMLUListElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocusIdx((i) => {
+        const next = (i + 1) % LANGUAGES.length;
+        optionRefs.current[next]?.focus();
+        return next;
+      });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocusIdx((i) => {
+        const next = (i - 1 + LANGUAGES.length) % LANGUAGES.length;
+        optionRefs.current[next]?.focus();
+        return next;
+      });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      setFocusIdx(0);
+      optionRefs.current[0]?.focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      const last = LANGUAGES.length - 1;
+      setFocusIdx(last);
+      optionRefs.current[last]?.focus();
+    }
+  };
 
   return (
     <div className="bg-[#0A1F3D] text-slate-200 border-b border-white/5">
@@ -118,13 +156,14 @@ const TopUtilityBar: React.FC = () => {
           <ul
             role="listbox"
             aria-label="Language"
+            onKeyDown={handleListKey}
             className={`absolute right-0 top-full mt-2 w-56 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_20px_40px_-12px_rgb(15_23_42/0.24)] overflow-hidden z-50 motion-safe:transition-all motion-safe:duration-150 ${
               open
                 ? 'opacity-100 translate-y-0 pointer-events-auto'
                 : 'opacity-0 -translate-y-1 pointer-events-none'
             }`}
           >
-            {LANGUAGES.map((lang) => {
+            {LANGUAGES.map((lang, i) => {
               const selected = lang.code === active.code;
               return (
                 <li key={lang.code}>
@@ -132,8 +171,11 @@ const TopUtilityBar: React.FC = () => {
                     type="button"
                     role="option"
                     aria-selected={selected}
+                    ref={(el) => {
+                      optionRefs.current[i] = el;
+                    }}
                     onClick={() => select(lang)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm motion-safe:transition-colors focus-visible:outline-none ${
+                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm motion-safe:transition-colors focus-visible:outline-none focus-visible:bg-slate-100 dark:focus-visible:bg-white/10 ${
                       selected
                         ? 'bg-[#0A3A6B]/5 dark:bg-white/5 text-[#0A3A6B] dark:text-white'
                         : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'

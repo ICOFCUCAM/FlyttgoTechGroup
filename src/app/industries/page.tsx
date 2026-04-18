@@ -4,6 +4,7 @@ import TargetUsers from '@/components/flytt/TargetUsers';
 import IndustryGrid from '@/components/flytt/IndustryGrid';
 import DeploymentMap from '@/components/flytt/DeploymentMap';
 import SiteFooter from '@/components/flytt/SiteFooter';
+import { Reveal } from '@/components/flytt/Reveal';
 
 export const metadata: Metadata = {
   title: 'Industries — Transport, Education, Government, Marketplaces & Enterprise Operations',
@@ -25,8 +26,12 @@ export default function IndustriesPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <TargetUsers />
-        <IndustryGrid />
-        <DeploymentMap />
+        <Reveal>
+          <IndustryGrid />
+        </Reveal>
+        <Reveal>
+          <DeploymentMap />
+        </Reveal>
       </main>
       <SiteFooter />
     </>

@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
+import Breadcrumbs from '@/components/flytt/Breadcrumbs';
 import { platforms, platformList } from '@/data/platforms';
 import type { DeploymentType } from '@/lib/contact-schema';
 
@@ -27,6 +28,7 @@ const PLATFORM_DEPLOYMENT_TYPE: Record<string, DeploymentType> = {
   edupro: 'Education Analytics Platform',
   identra: 'White-Label Deployment',
   payvera: 'White-Label Deployment',
+  ledgera: 'White-Label Deployment',
   flyttgo: 'Marketplace Deployment Engine',
 };
 
@@ -83,9 +85,16 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
           }}
         />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-20 lg:pt-14 lg:pb-28">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Platforms', href: '/platforms' },
+              { label: data.name },
+            ]}
+          />
           <Link
             href="/#platforms"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 dark:text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
+            className="mt-3 inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 dark:text-white font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
           >
             <ArrowLeft size={14} aria-hidden="true" />
             Back to Platform Ecosystem
