@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
 import { ThemeToggle } from '@/components/flytt/ThemeToggle';
+import TopUtilityBar from '@/components/flytt/TopUtilityBar';
 
 type DropdownItem = {
   label: string;
@@ -203,6 +204,7 @@ const Navbar: React.FC = () => {
           : 'bg-white/80 supports-[backdrop-filter]:bg-white/60 backdrop-blur-sm border-b border-transparent'
       }`}
     >
+      <TopUtilityBar />
       <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-[68px] flex items-center justify-between gap-8">
         <Link
           href="/"
