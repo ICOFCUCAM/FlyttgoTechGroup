@@ -20,6 +20,7 @@ import Navbar from '@/components/flytt/Navbar';
 import Breadcrumbs from '@/components/flytt/Breadcrumbs';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import { platforms, platformList } from '@/data/platforms';
+import { localizePlatform } from '@/data/platforms.i18n';
 import type { DeploymentType } from '@/lib/contact-schema';
 
 const PLATFORM_DEPLOYMENT_TYPE: Record<string, DeploymentType> = {
@@ -45,8 +46,9 @@ interface PlatformViewProps {
 }
 
 const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
-  const data = platforms[slug];
-  const { t } = useI18n();
+  const raw = platforms[slug];
+  const { t, locale } = useI18n();
+  const data = raw ? localizePlatform(raw, locale) : raw;
   const tv = (key: string, vars?: Record<string, string>) => {
     let out = t(key);
     if (vars) for (const [k, v] of Object.entries(vars)) out = out.replaceAll(`{${k}}`, v);

@@ -6,6 +6,8 @@ import {
   localizeDeploymentMode,
   DEPLOYMENT_MODE_I18N,
 } from '@/data/deployment-modes.i18n';
+import { platformList } from '@/data/platforms';
+import { localizePlatform, PLATFORM_I18N } from '@/data/platforms.i18n';
 
 describe('localizeIndustry', () => {
   it('returns the English default when no override is registered', () => {
@@ -51,6 +53,51 @@ describe('localizeIndustry', () => {
           override.outcomes?.length,
           `${s.slug} ${locale} outcomes count`,
         ).toBe(s.outcomes.length);
+      }
+    }
+  });
+});
+
+describe('localizePlatform', () => {
+  it('returns the English default when no override is registered', () => {
+    const transify = platformList.find((p) => p.slug === 'transify')!;
+    const localized = localizePlatform(transify, 'SV');
+    expect(localized.subtitle).toBe(transify.subtitle);
+    expect(localized.tagline).toBe(transify.tagline);
+    expect(localized.description).toBe(transify.description);
+  });
+
+  it('applies a Norwegian override when one exists', () => {
+    const transify = platformList.find((p) => p.slug === 'transify')!;
+    const localized = localizePlatform(transify, 'NO');
+    expect(localized.subtitle).not.toBe(transify.subtitle);
+    expect(localized.tagline).not.toBe(transify.tagline);
+    // Non-overridden product fields preserved
+    expect(localized.color).toBe(transify.color);
+    expect(localized.modules).toBe(transify.modules);
+    expect(localized.pricing).toBe(transify.pricing);
+  });
+
+  it('covers NO + FR for every platform', () => {
+    for (const p of platformList) {
+      expect(
+        PLATFORM_I18N[p.slug]?.NO,
+        `platform "${p.slug}" missing NO override`,
+      ).toBeDefined();
+      expect(
+        PLATFORM_I18N[p.slug]?.FR,
+        `platform "${p.slug}" missing FR override`,
+      ).toBeDefined();
+    }
+  });
+
+  it('NO + FR overrides include subtitle, tagline, and description', () => {
+    for (const p of platformList) {
+      for (const locale of ['NO', 'FR'] as const) {
+        const override = PLATFORM_I18N[p.slug]![locale]!;
+        expect(override.subtitle, `${p.slug} ${locale} subtitle`).toBeTruthy();
+        expect(override.tagline, `${p.slug} ${locale} tagline`).toBeTruthy();
+        expect(override.description, `${p.slug} ${locale} description`).toBeTruthy();
       }
     }
   });
