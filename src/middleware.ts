@@ -1,14 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import {
+  isSupportedLocale as isSupported,
+  pickAcceptLanguage,
+  type MiddlewareLocale as Locale,
+} from '@/lib/i18n/accept-language';
 
-// Kept in-sync with src/lib/i18n/locales.ts. Duplicated here so middleware
-// stays pure-runtime (no bundler transforms).
-const SUPPORTED = ['en', 'no', 'fr', 'de', 'es', 'sv', 'da', 'nl', 'pt', 'ar'] as const;
-type Locale = (typeof SUPPORTED)[number];
-const DEFAULT: Locale = 'en';
 const COOKIE = 'NEXT_LOCALE';
-
-const isSupported = (v: string): v is Locale =>
-  (SUPPORTED as readonly string[]).includes(v);
 
 // Paths we never rewrite — these shouldn't be locale-scoped.
 const SKIP = [
@@ -20,27 +17,6 @@ const SKIP = [
   /^\/favicon\.ico$/,
   /^\/(icon|apple-icon|opengraph-image|twitter-image)/,
 ];
-
-function pickAcceptLanguage(header: string | null): Locale {
-  if (!header) return DEFAULT;
-  // Parse "en-GB,en;q=0.9,nb;q=0.8,fr;q=0.7"
-  const parts = header
-    .split(',')
-    .map((p) => p.trim())
-    .map((p) => {
-      const [tag, qRaw] = p.split(';');
-      const q = qRaw ? parseFloat(qRaw.split('=')[1] ?? '1') : 1;
-      return { tag: tag.toLowerCase(), q: Number.isFinite(q) ? q : 0 };
-    })
-    .sort((a, b) => b.q - a.q);
-  for (const { tag } of parts) {
-    const primary = tag.split('-')[0];
-    // Norwegian comes through as nb/nn; map both to "no".
-    const normalized = primary === 'nb' || primary === 'nn' ? 'no' : primary;
-    if (isSupported(normalized)) return normalized;
-  }
-  return DEFAULT;
-}
 
 export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
