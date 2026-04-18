@@ -40,6 +40,8 @@ export function middleware(req: NextRequest) {
     // Hint for downstream (metadata, layout) — Server Components can read
     // this via headers().
     res.headers.set('x-flyttgo-locale', firstSeg);
+    // Tell any downstream CDN to cache per-locale, not as a single blob.
+    res.headers.set('Vary', 'x-flyttgo-locale, Accept-Language, Cookie');
     return res;
   }
 
@@ -58,6 +60,7 @@ export function middleware(req: NextRequest) {
     },
   });
   res.headers.set('x-flyttgo-locale', chosen);
+  res.headers.set('Vary', 'x-flyttgo-locale, Accept-Language, Cookie');
   if (!req.cookies.get(COOKIE)) {
     res.cookies.set(COOKIE, chosen, {
       path: '/',
