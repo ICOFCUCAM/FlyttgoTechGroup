@@ -6,6 +6,18 @@ import { insights } from '@/data/insights';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
+const LOCALES = ['en', 'no', 'fr', 'de', 'es', 'sv', 'da', 'nl', 'pt', 'ar'] as const;
+
+const localeAlternates = (path: string): Record<string, string> => {
+  const clean = path === '/' ? '' : path;
+  const map: Record<string, string> = {};
+  for (const l of LOCALES) {
+    map[l] = l === 'en' ? `${siteUrl}${path}` : `${siteUrl}/${l}${clean}`;
+  }
+  map['x-default'] = `${siteUrl}${path}`;
+  return map;
+};
+
 const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { path: '/', priority: 1, freq: 'weekly' },
   { path: '/platforms', priority: 0.9, freq: 'weekly' },
@@ -37,35 +49,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: r.freq,
     priority: r.priority,
+    alternates: { languages: localeAlternates(r.path) },
   }));
 
-  const platformEntries: MetadataRoute.Sitemap = platformList.map((p) => ({
-    url: `${siteUrl}/platforms/${p.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.8,
-  }));
+  const platformEntries: MetadataRoute.Sitemap = platformList.map((p) => {
+    const path = `/platforms/${p.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
 
-  const industryEntries: MetadataRoute.Sitemap = industrySectors.map((s) => ({
-    url: `${siteUrl}/industries/${s.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+  const industryEntries: MetadataRoute.Sitemap = industrySectors.map((s) => {
+    const path = `/industries/${s.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
 
-  const deploymentEntries: MetadataRoute.Sitemap = deploymentModes.map((m) => ({
-    url: `${siteUrl}/deployment/${m.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
+  const deploymentEntries: MetadataRoute.Sitemap = deploymentModes.map((m) => {
+    const path = `/deployment/${m.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
 
-  const insightEntries: MetadataRoute.Sitemap = insights.map((i) => ({
-    url: `${siteUrl}/insights/${i.slug}`,
-    lastModified: new Date(i.publishedOn),
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+  const insightEntries: MetadataRoute.Sitemap = insights.map((i) => {
+    const path = `/insights/${i.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: new Date(i.publishedOn),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
 
   return [
     ...staticEntries,

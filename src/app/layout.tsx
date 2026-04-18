@@ -22,11 +22,25 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
+const LOCALES_META = ['en', 'no', 'fr', 'de', 'es', 'sv', 'da', 'nl', 'pt', 'ar'] as const;
+
+// Root-level hreflang alternates. Pages that define their own
+// `alternates.canonical` keep their canonical URL; this sets the default
+// per-language alternate mapping for the homepage and pages that don't
+// override it.
+const languageAlternates = Object.fromEntries(
+  LOCALES_META.map((l) => [l, l === 'en' ? '/' : `/${l}`]),
+);
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: 'FlyttGo Technologies Group — Smart Digital Infrastructure for Logistics, Education, Government & Enterprise',
     template: '%s · FlyttGo Technologies Group',
+  },
+  alternates: {
+    canonical: '/',
+    languages: { ...languageAlternates, 'x-default': '/' },
   },
   description:
     'FlyttGo Technologies Group builds modular AI-powered platform infrastructure — logistics marketplaces, education analytics, municipal dashboards, fleet intelligence and white-label digital platforms — deployable across Europe, Africa and the Middle East.',

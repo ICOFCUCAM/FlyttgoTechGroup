@@ -1,12 +1,17 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { Check, ChevronDown, Globe2, Phone } from 'lucide-react';
 import { LOCALES, type LocaleCode, type LocaleMeta } from '@/lib/i18n/locales';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
+const LOCALE_PREFIX_RE = /^\/(en|no|fr|de|es|sv|da|nl|pt|ar)(\/|$)/i;
+
 const TopUtilityBar: React.FC = () => {
   const { locale, setLocale, t } = useI18n();
+  const router = useRouter();
+  const pathname = usePathname() ?? '/';
   const meta: LocaleMeta = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
 
   const [open, setOpen] = useState(false);
@@ -42,6 +47,11 @@ const TopUtilityBar: React.FC = () => {
     setLocale(code);
     setFocusIdx(LOCALES.findIndex((l) => l.code === code));
     setOpen(false);
+    // Navigate to the locale-prefixed version of the current URL so the
+    // address bar, share links and crawlers all reflect the chosen locale.
+    const clean = pathname.replace(LOCALE_PREFIX_RE, '/');
+    const next = code === 'EN' ? clean : `/${code.toLowerCase()}${clean === '/' ? '' : clean}`;
+    router.push(next || '/');
   };
 
   const handleListKey = (e: React.KeyboardEvent<HTMLUListElement>) => {

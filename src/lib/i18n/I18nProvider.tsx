@@ -29,10 +29,25 @@ const I18nContext = createContext<I18nContextShape | null>(null);
 const resolveMeta = (code: LocaleCode): LocaleMeta =>
   LOCALES.find((l) => l.code === code) ?? LOCALES[0];
 
+const readCookieLocale = (): LocaleCode | null => {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]+)/);
+  if (!match) return null;
+  const raw = decodeURIComponent(match[1]).toUpperCase() as LocaleCode;
+  return LOCALES.some((l) => l.code === raw) ? raw : null;
+};
+
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<LocaleCode>(DEFAULT_LOCALE);
 
   useEffect(() => {
+    // Priority: middleware-set cookie (authoritative — matches the URL
+    // prefix users and crawlers actually see) > localStorage > default.
+    const fromCookie = readCookieLocale();
+    if (fromCookie) {
+      setLocaleState(fromCookie);
+      return;
+    }
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY) as LocaleCode | null;
       if (saved && LOCALES.some((l) => l.code === saved)) {
@@ -54,6 +69,11 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     setLocaleState(code);
     try {
       window.localStorage.setItem(STORAGE_KEY, code);
+      // Mirror to cookie so the middleware sees the change on the next
+      // request — keeps hreflang + canonical URL in sync.
+      document.cookie = `NEXT_LOCALE=${code.toLowerCase()}; Path=/; Max-Age=${
+        60 * 60 * 24 * 365
+      }; SameSite=Lax`;
     } catch {
       /* noop */
     }
