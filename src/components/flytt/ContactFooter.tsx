@@ -77,7 +77,7 @@ const ContactFooter: React.FC = () => {
 
               <div className="mt-8 space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[#0A3A6B]">
+                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#0A3A6B]">
                     <Mail size={18} />
                   </div>
                   <div>
@@ -86,7 +86,7 @@ const ContactFooter: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[#0A3A6B]">
+                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#0A3A6B]">
                     <MapPin size={18} />
                   </div>
                   <div>
@@ -96,7 +96,7 @@ const ContactFooter: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-10 p-5 rounded-xl bg-white border border-slate-200">
+              <div className="mt-10 p-5 rounded-xl bg-white border border-slate-200/80">
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">
                   Expected Response
                 </div>
@@ -110,7 +110,7 @@ const ContactFooter: React.FC = () => {
             <div className="lg:col-span-7">
               <form
                 onSubmit={handleSubmit}
-                className="p-8 lg:p-10 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-900/5"
+                className="p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-xl shadow-slate-900/5"
                 aria-describedby="contact-form-status"
                 noValidate
               >
@@ -158,7 +158,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="name"
                           value={form.name}
                           onChange={(e) => setForm({ ...form, name: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="Anna Lindqvist"
                         />
                       </div>
@@ -173,7 +173,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="email"
                           value={form.email}
                           onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="anna@organization.eu"
                         />
                       </div>
@@ -189,7 +189,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="organization"
                           value={form.company}
                           onChange={(e) => setForm({ ...form, company: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="Ministry, municipality or company"
                         />
                       </div>
@@ -202,7 +202,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="country-name"
                           value={form.country}
                           onChange={(e) => setForm({ ...form, country: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="Norway"
                         />
                       </div>
@@ -216,7 +216,7 @@ const ContactFooter: React.FC = () => {
                         id="cf-deployment-type"
                         value={form.deployment_type}
                         onChange={(e) => setForm({ ...form, deployment_type: e.target.value as DeploymentType })}
-                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                       >
                         {DEPLOYMENT_TYPES.map((t) => (
                           <option key={t} value={t}>
@@ -235,7 +235,7 @@ const ContactFooter: React.FC = () => {
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                         rows={4}
-                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white resize-none"
+                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white resize-none"
                         placeholder="Briefly describe your deployment objective, target region, and timeline."
                       />
                     </div>
@@ -280,7 +280,7 @@ const ContactFooter: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-[#F5F8FC] to-[#EAF0F7] border-t border-slate-200">
+      <footer className="bg-gradient-to-b from-[#F5F8FC] to-[#EAF0F7] border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
           <div className="grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
@@ -305,7 +305,7 @@ const ContactFooter: React.FC = () => {
                 {[Linkedin, Twitter, Github].map((Icon, i) => (
                   <button
                     key={i}
-                    className="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
+                    className="w-9 h-9 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
                   >
                     <Icon size={16} />
                   </button>
@@ -356,7 +356,7 @@ const ContactFooter: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-14 pt-8 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-14 pt-8 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-4">
             <div className="text-xs text-slate-500">
               © {new Date().getFullYear()} FlyttGo Technologies Group AB · Platform Infrastructure Provider
             </div>

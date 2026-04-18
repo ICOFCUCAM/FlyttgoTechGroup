@@ -40,7 +40,7 @@ const InvestorSection: React.FC = () => {
               {architecture.map((a, i) => (
                 <div
                   key={a.layer}
-                  className="relative p-4 rounded-xl border border-slate-200 bg-white flex items-center gap-4"
+                  className="relative p-4 rounded-xl border border-slate-200/80 bg-white flex items-center gap-4"
                   style={{ marginLeft: `${i * 8}px` }}
                 >
                   <div className="w-1 h-10 rounded-full" style={{ backgroundColor: a.color }} />
@@ -61,9 +61,9 @@ const InvestorSection: React.FC = () => {
                 return (
                   <div
                     key={p.title}
-                    className="p-7 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                    className="p-7 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-slate-200/80 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                   >
-                    <div className="w-11 h-11 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[#0A3A6B]">
+                    <div className="w-11 h-11 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#0A3A6B]">
                       <Icon size={20} strokeWidth={1.75} />
                     </div>
                     <h3 className="mt-4 text-lg font-semibold text-slate-900 tracking-tight">{p.title}</h3>
@@ -110,7 +110,7 @@ const InvestorSection: React.FC = () => {
             </div>
 
             {/* Cross-industry activation grid */}
-            <div className="mt-6 p-6 rounded-2xl bg-white border border-slate-200">
+            <div className="mt-6 p-6 rounded-2xl bg-white border border-slate-200/80">
               <div className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold mb-4">
                 Cross-industry platform activation
               </div>

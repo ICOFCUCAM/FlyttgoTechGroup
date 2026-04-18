@@ -121,7 +121,7 @@ const WhiteLabelSection: React.FC = () => {
             return (
               <article
                 key={p.title}
-                className="group relative p-7 lg:p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="group relative p-7 lg:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div
@@ -172,7 +172,7 @@ const WhiteLabelSection: React.FC = () => {
               return (
                 <div
                   key={w.title}
-                  className="relative p-7 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all"
+                  className="relative p-7 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all"
                 >
                   <div className="text-xs font-mono text-slate-400 font-semibold">STEP 0{i + 1}</div>
                   <div className="mt-4 w-12 h-12 rounded-xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]" aria-hidden="true">
@@ -181,7 +181,7 @@ const WhiteLabelSection: React.FC = () => {
                   <h3 className="mt-4 text-lg font-semibold text-slate-900 tracking-tight">{w.title}</h3>
                   <p className="mt-2 text-sm text-slate-600 leading-relaxed">{w.desc}</p>
                   {i < workflow.length - 1 && (
-                    <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-slate-200 items-center justify-center z-10 shadow-sm" aria-hidden="true">
+                    <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-slate-200/80 items-center justify-center z-10 shadow-sm" aria-hidden="true">
                       <ArrowRight size={12} className="text-slate-400" />
                     </div>
                   )}
@@ -192,7 +192,7 @@ const WhiteLabelSection: React.FC = () => {
         </div>
 
         <div className="mt-10 grid lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200">
+          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80">
             <h3 className="text-xl font-semibold text-slate-900 tracking-tight">
               Configure every layer of your deployment
             </h3>
@@ -205,9 +205,9 @@ const WhiteLabelSection: React.FC = () => {
                 return (
                   <div
                     key={c.title}
-                    className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-all"
+                    className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-all"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[#1E6FD9]" aria-hidden="true">
+                    <div className="w-9 h-9 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#1E6FD9]" aria-hidden="true">
                       <Icon size={18} strokeWidth={1.75} />
                     </div>
                     <div className="mt-3 text-sm font-semibold text-slate-900">{c.title}</div>
@@ -282,7 +282,7 @@ const WhiteLabelSection: React.FC = () => {
             ].map((s) => (
               <div
                 key={s}
-                className="p-4 bg-white border border-slate-200 rounded-xl text-center text-sm font-medium text-slate-700 hover:border-[#1E6FD9] hover:text-[#0A3A6B] transition-colors"
+                className="p-4 bg-white border border-slate-200/80 rounded-xl text-center text-sm font-medium text-slate-700 hover:border-[#1E6FD9] hover:text-[#0A3A6B] transition-colors"
               >
                 {s}
               </div>

@@ -102,7 +102,7 @@ export default function DevelopersPage() {
                 </Link>
                 <Link
                   href="/technology"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 >
                   Review Architecture
                   <ArrowUpRight size={16} aria-hidden="true" />
@@ -116,7 +116,7 @@ export default function DevelopersPage() {
                 return (
                   <article
                     key={s.title}
-                    className="group p-7 lg:p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all"
+                    className="group p-7 lg:p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all"
                   >
                     <div
                       className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]"

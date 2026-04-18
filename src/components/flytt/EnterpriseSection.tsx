@@ -98,7 +98,7 @@ const EnterpriseSection: React.FC = () => {
             return (
               <article
                 key={c.title}
-                className="group relative p-7 lg:p-8 rounded-2xl bg-gradient-to-br from-white to-slate-50/60 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="group relative p-7 lg:p-8 rounded-2xl bg-gradient-to-br from-white to-slate-50/60 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]" aria-hidden="true">
@@ -126,7 +126,7 @@ const EnterpriseSection: React.FC = () => {
         </div>
 
         <div className="mt-10 grid lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl border border-slate-200 bg-white">
+          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl border border-slate-200/80 bg-white">
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
               <Gauge size={14} aria-hidden="true" />
               Operational Outcomes

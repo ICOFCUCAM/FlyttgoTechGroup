@@ -81,7 +81,7 @@ export default function CompanyPage() {
                 </Link>
                 <Link
                   href="/platforms"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-slate-900 font-semibold rounded-lg border border-slate-200/80 hover:border-slate-300 hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                 >
                   Explore platforms
                   <ArrowUpRight size={16} aria-hidden="true" />
@@ -95,7 +95,7 @@ export default function CompanyPage() {
                 return (
                   <article
                     key={p.title}
-                    className="p-8 lg:p-10 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl motion-safe:transition-shadow"
+                    className="p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl motion-safe:transition-shadow"
                   >
                     <div
                       className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]"
@@ -114,7 +114,7 @@ export default function CompanyPage() {
               })}
             </div>
 
-            <dl className="mt-10 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200 shadow-sm grid sm:grid-cols-4 gap-6">
+            <dl className="mt-10 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-sm grid sm:grid-cols-4 gap-6">
               <div>
                 <dt className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Headquarters</dt>
                 <dd className="mt-1 text-base font-semibold text-slate-900">Stockholm · Nordic EU</dd>

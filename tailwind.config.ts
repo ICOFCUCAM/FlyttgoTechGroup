@@ -117,6 +117,19 @@ export default {
         'fade-up-slow': 'fade-up-delayed 1.2s ease-out both',
         'bar-grow': 'bar-grow 1s ease-out both',
       },
+      // Layered shadow stack: every elevation pairs a 1px hairline highlight
+      // with a soft, focused ambient blur — feels closer to Linear / Stripe
+      // / Vercel than Tailwind's default uniform blur.
+      boxShadow: {
+        sm: '0 1px 0 0 rgb(15 23 42 / 0.04)',
+        DEFAULT:
+          '0 1px 0 0 rgb(15 23 42 / 0.04), 0 4px 12px -4px rgb(15 23 42 / 0.08)',
+        md: '0 1px 0 0 rgb(15 23 42 / 0.04), 0 6px 16px -6px rgb(15 23 42 / 0.10)',
+        lg: '0 1px 0 0 rgb(15 23 42 / 0.04), 0 12px 28px -8px rgb(15 23 42 / 0.12)',
+        xl: '0 1px 0 0 rgb(15 23 42 / 0.04), 0 20px 40px -12px rgb(15 23 42 / 0.16)',
+        '2xl': '0 1px 0 0 rgb(15 23 42 / 0.04), 0 32px 64px -20px rgb(15 23 42 / 0.20)',
+        inner: 'inset 0 1px 0 0 rgb(255 255 255 / 0.6), inset 0 0 0 1px rgb(15 23 42 / 0.04)',
+      },
       typography: {
         DEFAULT: {
           css: {

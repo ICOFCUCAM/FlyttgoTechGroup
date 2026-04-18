@@ -97,7 +97,7 @@ const SolutionsSection: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mt-12 flex flex-wrap gap-2 border-b border-slate-200">
+        <div className="mt-12 flex flex-wrap gap-2 border-b border-slate-200/80">
           {tabs.map((t) => {
             const Icon = t.icon;
             const isActive = active === t.id;
@@ -120,7 +120,7 @@ const SolutionsSection: React.FC = () => {
 
         {/* Tab content */}
         <div id={current.id} className="mt-10 grid lg:grid-cols-12 gap-10 items-start">
-          <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200 shadow-lg">
+          <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200/80 shadow-lg">
             <div className="relative aspect-[16/10]">
               <Image
                 src={current.image}
@@ -157,7 +157,7 @@ const SolutionsSection: React.FC = () => {
               ))}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-slate-200">
+            <div className="mt-6 pt-6 border-t border-slate-200/80">
               <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold mb-3">
                 Target Deployment Segments
               </div>
@@ -165,7 +165,7 @@ const SolutionsSection: React.FC = () => {
                 {current.segments.map((s) => (
                   <span
                     key={s}
-                    className="px-3 py-1.5 text-xs font-medium bg-white border border-slate-200 text-slate-700 rounded-md"
+                    className="px-3 py-1.5 text-xs font-medium bg-white border border-slate-200/80 text-slate-700 rounded-md"
                   >
                     {s}
                   </span>

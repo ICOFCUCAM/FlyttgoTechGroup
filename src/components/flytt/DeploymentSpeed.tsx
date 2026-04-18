@@ -80,7 +80,7 @@ const DeploymentSpeed: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-16 rounded-3xl border border-slate-200 bg-white p-6 lg:p-12 shadow-sm">
+        <div className="mt-16 rounded-3xl border border-slate-200/80 bg-white p-6 lg:p-12 shadow-sm">
           <div className="grid grid-cols-[auto_1fr_auto] gap-x-6 lg:gap-x-10 gap-y-2 items-center text-xs uppercase tracking-[0.18em] text-slate-400 font-semibold">
             <div>Approach</div>
             <div className="hidden lg:block">Relative Timeline</div>
@@ -113,7 +113,7 @@ const DeploymentSpeed: React.FC = () => {
                   {r.steps.map((s, i) => (
                     <li
                       key={s}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/80 text-xs font-medium text-slate-700"
                     >
                       <span className="font-mono text-[10px] text-slate-400">0{i + 1}</span>
                       {s}

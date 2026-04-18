@@ -23,6 +23,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
+import { ThemeToggle } from '@/components/flytt/ThemeToggle';
 
 type DropdownItem = {
   label: string;
@@ -380,14 +381,15 @@ const Navbar: React.FC = () => {
             type="button"
             onClick={toggleCommandPalette}
             aria-label="Search platforms, modules and pages"
-            className="group inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 text-[13px] text-slate-500 bg-white border border-slate-200 rounded-md hover:text-slate-700 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+            className="group inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 text-[13px] text-slate-500 bg-white border border-slate-200/80 rounded-md hover:text-slate-700 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
             <Search size={13} aria-hidden="true" />
             <span className="hidden xl:inline">Search</span>
-            <kbd className="ml-1 font-mono text-[10px] text-slate-400 bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5">
+            <kbd className="ml-1 font-mono text-[10px] text-slate-400 bg-slate-50 border border-slate-200/80 rounded px-1.5 py-0.5">
               ⌘K
             </kbd>
           </button>
+          <ThemeToggle compact />
           <Link
             href="/contact"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md px-2"
@@ -419,7 +421,7 @@ const Navbar: React.FC = () => {
       <div
         id="mobile-nav-panel"
         hidden={!mobileOpen}
-        className="lg:hidden border-t border-slate-200 bg-white/95 backdrop-blur-xl"
+        className="lg:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-xl"
       >
         <nav aria-label="Mobile primary" className="px-5 py-4 flex flex-col gap-1">
           {primaryLinks.map((l) => {
@@ -438,7 +440,7 @@ const Navbar: React.FC = () => {
               </Link>
             );
           })}
-          <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-slate-200">
+          <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-slate-200/80">
             <button
               type="button"
               onClick={() => {
@@ -451,10 +453,13 @@ const Navbar: React.FC = () => {
                 <Search size={14} aria-hidden="true" />
                 Search
               </span>
-              <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5">
+              <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 border border-slate-200/80 rounded px-1.5 py-0.5">
                 ⌘K
               </kbd>
             </button>
+            <div className="px-1 py-1">
+              <ThemeToggle />
+            </div>
             <Link
               href="/contact"
               onClick={closeMobile}

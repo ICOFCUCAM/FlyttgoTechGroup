@@ -91,6 +91,16 @@
 
   body {
     @apply bg-background text-foreground font-sans dark:bg-background dark:text-foreground;
+    font-feature-settings: 'cv11', 'ss03';
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tighter optical sizing on display headings */
+  h1, h2 {
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
   }
 
   pre, code {

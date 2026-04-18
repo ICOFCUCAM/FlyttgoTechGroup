@@ -4,8 +4,11 @@ import { Providers } from './providers';
 import './globals.css';
 
 const inter = Inter({
+  // Variable font with optical sizing: omit `weight` so Google serves the
+  // full variable font; CSS `font-optical-sizing: auto` (set in globals.css)
+  // then lets large display sizes render with tighter Display letterforms
+  // while body text stays optically balanced.
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
   display: 'swap',
 });

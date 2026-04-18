@@ -37,9 +37,9 @@ const IndustryGrid: React.FC = () => {
             return (
               <div
                 key={ind.title}
-                className="group p-6 rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200 hover:border-[#1E6FD9]/40 hover:shadow-lg transition-all"
+                className="group p-6 rounded-2xl bg-gradient-to-br from-white to-slate-50/50 border border-slate-200/80 hover:border-[#1E6FD9]/40 hover:shadow-lg transition-all"
               >
-                <div className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-[#0A3A6B] group-hover:bg-[#0A3A6B] group-hover:text-white group-hover:border-[#0A3A6B] transition-colors">
+                <div className="w-11 h-11 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center text-[#0A3A6B] group-hover:bg-[#0A3A6B] group-hover:text-white group-hover:border-[#0A3A6B] transition-colors">
                   <Icon size={20} strokeWidth={1.75} />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-slate-900 tracking-tight">{ind.title}</h3>
