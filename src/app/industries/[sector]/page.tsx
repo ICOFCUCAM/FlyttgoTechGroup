@@ -34,12 +34,33 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
+
 export default function IndustrySectorPage({ params }: PageProps) {
   const data = industryBySlug[params.sector];
   if (!data) notFound();
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Industries', item: `${siteUrl}/industries` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: data.name,
+        item: `${siteUrl}/industries/${data.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
