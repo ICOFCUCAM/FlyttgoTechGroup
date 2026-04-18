@@ -9,6 +9,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
 import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
 import ScrollToTop from '@/components/flytt/ScrollToTop';
+import { I18nProvider } from '@/lib/i18n/I18nProvider';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = React.useState(
@@ -24,14 +25,16 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider defaultTheme="light">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <AppProvider>
-            <CommandPaletteProvider>
-              {children}
-              <ScrollToTop />
-              <Toaster />
-              <Sonner />
-            </CommandPaletteProvider>
-          </AppProvider>
+          <I18nProvider>
+            <AppProvider>
+              <CommandPaletteProvider>
+                {children}
+                <ScrollToTop />
+                <Toaster />
+                <Sonner />
+              </CommandPaletteProvider>
+            </AppProvider>
+          </I18nProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>

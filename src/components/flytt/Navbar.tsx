@@ -23,6 +23,7 @@ import {
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
 import { ThemeToggle } from '@/components/flytt/ThemeToggle';
 import TopUtilityBar from '@/components/flytt/TopUtilityBar';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 type DropdownItem = {
   label: string;
@@ -38,14 +39,18 @@ type DropdownColumn = {
 
 type NavLink = {
   label: string;
+  labelKey?: string;
   href: string;
   dropdown?: {
     columns: DropdownColumn[];
     feature?: {
       title: string;
+      titleKey?: string;
       description: string;
+      descriptionKey?: string;
       href: string;
       cta: string;
+      ctaKey?: string;
     };
   };
 };
@@ -53,6 +58,7 @@ type NavLink = {
 const primaryLinks: NavLink[] = [
   {
     label: 'Platforms',
+    labelKey: 'nav.platforms',
     href: '/platforms',
     dropdown: {
       columns: [
@@ -77,18 +83,21 @@ const primaryLinks: NavLink[] = [
       ],
       feature: {
         title: 'Platform Ecosystem',
+        titleKey: 'nav.feature.title',
         description:
           'Modular infrastructure platforms plus the FlyttGo marketplace — licensed independently, deployed together.',
+        descriptionKey: 'nav.feature.description',
         href: '/platforms',
         cta: 'Explore the ecosystem',
+        ctaKey: 'nav.feature.cta',
       },
     },
   },
-  { label: 'Industries', href: '/industries' },
-  { label: 'Deployment', href: '/deployment' },
-  { label: 'Technology', href: '/technology' },
-  { label: 'Company', href: '/company' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Industries', labelKey: 'nav.industries', href: '/industries' },
+  { label: 'Deployment', labelKey: 'nav.deployment', href: '/deployment' },
+  { label: 'Technology', labelKey: 'nav.technology', href: '/technology' },
+  { label: 'Company', labelKey: 'nav.company', href: '/company' },
+  { label: 'Contact', labelKey: 'nav.contact', href: '/contact' },
 ];
 
 const isRouteActive = (pathname: string, href: string) => {
@@ -101,6 +110,8 @@ type IndicatorState = { left: number; width: number; opacity: number };
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const { toggle: toggleCommandPalette } = useCommandPalette();
+  const { t } = useI18n();
+  const label = (l: NavLink) => (l.labelKey ? t(l.labelKey) : l.label);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -259,7 +270,7 @@ const Navbar: React.FC = () => {
                       active ? 'text-[#0A3A6B]' : 'text-slate-600 hover:text-slate-900 dark:text-white'
                     }`}
                   >
-                    {l.label}
+                    {label(l)}
                     {hasDropdown && (
                       <ChevronDown
                         size={13}
@@ -297,7 +308,7 @@ const Navbar: React.FC = () => {
                     : 'opacity-0 -translate-y-1 pointer-events-none'
                 }`}
                 role="menu"
-                aria-label={`${l.label} menu`}
+                aria-label={`${label(l)} menu`}
               >
                 <div className="w-[760px] max-w-[min(94vw,760px)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_24px_48px_-12px_rgb(15_23_42/0.18)] overflow-hidden">
                   <div className="grid grid-cols-[1fr_240px]">
@@ -365,11 +376,11 @@ const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={toggleCommandPalette}
-            aria-label="Search platforms, modules and pages"
+            aria-label={t('nav.search')}
             className="group inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 text-[13px] text-slate-500 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-md hover:text-slate-700 dark:text-slate-300 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
             <Search size={13} aria-hidden="true" />
-            <span className="hidden xl:inline">Search</span>
+            <span className="hidden xl:inline">{t('nav.search')}</span>
             <kbd className="ml-1 font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded px-1.5 py-0.5">
               ⌘K
             </kbd>
@@ -379,13 +390,13 @@ const Navbar: React.FC = () => {
             href="/contact"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md px-2"
           >
-            Sign in
+            {t('nav.signin')}
           </Link>
           <Link
             href="/contact"
             className="group inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md hover:bg-[#0a2f57] motion-safe:transition-colors shadow-[0_1px_0_0_rgb(10_58_107/0.6),0_6px_18px_-6px_rgb(10_58_107/0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
-            Deploy Your Platform
+            {t('nav.cta.primary')}
             <ArrowRight size={14} className="motion-safe:transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
         </div>
@@ -421,7 +432,7 @@ const Navbar: React.FC = () => {
                   active ? 'text-[#0A3A6B] bg-slate-100 dark:bg-slate-800/60' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/60'
                 }`}
               >
-                {l.label}
+                {label(l)}
               </Link>
             );
           })}
@@ -436,7 +447,7 @@ const Navbar: React.FC = () => {
             >
               <span className="inline-flex items-center gap-2">
                 <Search size={14} aria-hidden="true" />
-                Search
+                {t('nav.search')}
               </span>
               <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded px-1.5 py-0.5">
                 ⌘K
@@ -450,14 +461,14 @@ const Navbar: React.FC = () => {
               onClick={closeMobile}
               className="px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/60 rounded-md"
             >
-              Sign in
+              {t('nav.signin')}
             </Link>
             <Link
               href="/contact"
               onClick={closeMobile}
               className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md"
             >
-              Deploy Your Platform
+              {t('nav.cta.primary')}
               <ArrowRight size={14} aria-hidden="true" />
             </Link>
           </div>

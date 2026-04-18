@@ -1,9 +1,13 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import PlatformOrbitGraph from './PlatformOrbitGraph';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const HeroSlider: React.FC = () => {
+  const { t } = useI18n();
   return (
     <section
       id="top"
@@ -44,22 +48,19 @@ const HeroSlider: React.FC = () => {
                 className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse"
                 aria-hidden="true"
               />
-              Platform Infrastructure · EU · AF · MENA
+              {t('hero.eyebrow')}
             </p>
 
             <h1
               id="hero-heading"
               className="mt-6 text-[32px] sm:text-[38px] md:text-[44px] lg:text-[48px] xl:text-[54px] leading-[1.08] font-semibold tracking-tight text-white"
             >
-              Deploy National-Scale Digital Infrastructure Platforms{' '}
-              <span className="text-[#9ED0F9]">Without Building Systems From Scratch</span>
+              {t('hero.title.part1')}{' '}
+              <span className="text-[#9ED0F9]">{t('hero.title.part2')}</span>
             </h1>
 
             <p className="mt-5 text-base md:text-lg text-white/80 leading-relaxed max-w-2xl font-normal">
-              FlyttGo Technologies Group designs modular platforms supporting mobility
-              coordination, workforce systems, education intelligence, financial operations
-              automation, identity verification, and government service delivery across cities
-              and regions.
+              {t('hero.subtitle')}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -68,7 +69,7 @@ const HeroSlider: React.FC = () => {
                 className="group inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] text-sm font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
               >
                 <Sparkles size={15} aria-hidden="true" />
-                Explore Platform Ecosystem
+                {t('hero.cta.primary')}
                 <ArrowRight
                   size={16}
                   className="motion-safe:transition-transform group-hover:translate-x-0.5"
@@ -79,7 +80,7 @@ const HeroSlider: React.FC = () => {
                 href="/contact?intent=partnership"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/10 backdrop-blur border border-white/20 text-white text-sm font-semibold rounded-lg hover:bg-white/20 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
               >
-                Request Partnership Discussion
+                {t('hero.cta.secondary')}
               </Link>
             </div>
           </div>

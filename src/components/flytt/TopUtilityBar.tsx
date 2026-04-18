@@ -1,51 +1,20 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Check, ChevronDown, Globe2, Phone } from 'lucide-react';
-
-type Language = {
-  code: string;
-  label: string;
-  native: string;
-  flag: string;
-};
-
-// 10 languages spanning EU / AF / MENA. Wire a real i18n layer
-// (next-intl, next-i18next) separately; this component is the UI surface.
-const LANGUAGES: Language[] = [
-  { code: 'EN', label: 'English', native: 'English', flag: '🇬🇧' },
-  { code: 'NO', label: 'Norwegian', native: 'Norsk', flag: '🇳🇴' },
-  { code: 'FR', label: 'French', native: 'Français', flag: '🇫🇷' },
-  { code: 'DE', label: 'German', native: 'Deutsch', flag: '🇩🇪' },
-  { code: 'ES', label: 'Spanish', native: 'Español', flag: '🇪🇸' },
-  { code: 'SV', label: 'Swedish', native: 'Svenska', flag: '🇸🇪' },
-  { code: 'DA', label: 'Danish', native: 'Dansk', flag: '🇩🇰' },
-  { code: 'NL', label: 'Dutch', native: 'Nederlands', flag: '🇳🇱' },
-  { code: 'PT', label: 'Portuguese', native: 'Português', flag: '🇵🇹' },
-  { code: 'AR', label: 'Arabic', native: 'العربية', flag: '🇸🇦' },
-];
-
-const STORAGE_KEY = 'flyttgo.lang';
+import { LOCALES, type LocaleCode, type LocaleMeta } from '@/lib/i18n/locales';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const TopUtilityBar: React.FC = () => {
+  const { locale, setLocale, t } = useI18n();
+  const meta: LocaleMeta = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
+
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<Language>(LANGUAGES[0]);
-  const [focusIdx, setFocusIdx] = useState(0);
+  const [focusIdx, setFocusIdx] = useState(
+    LOCALES.findIndex((l) => l.code === locale) || 0,
+  );
   const rootRef = useRef<HTMLDivElement>(null);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      const match = LANGUAGES.find((l) => l.code === saved);
-      if (match) {
-        setActive(match);
-        setFocusIdx(LANGUAGES.indexOf(match));
-      }
-    } catch {
-      /* noop */
-    }
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -59,7 +28,6 @@ const TopUtilityBar: React.FC = () => {
     };
     document.addEventListener('mousedown', onClick);
     document.addEventListener('keydown', onKey);
-    // Focus the currently selected option when opening
     const timer = window.setTimeout(() => {
       optionRefs.current[focusIdx]?.focus();
     }, 0);
@@ -70,34 +38,24 @@ const TopUtilityBar: React.FC = () => {
     };
   }, [open, focusIdx]);
 
-  const select = useCallback((lang: Language) => {
-    setActive(lang);
-    setFocusIdx(LANGUAGES.indexOf(lang));
+  const select = (code: LocaleCode) => {
+    setLocale(code);
+    setFocusIdx(LOCALES.findIndex((l) => l.code === code));
     setOpen(false);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, lang.code);
-      document.documentElement.setAttribute('lang', lang.code.toLowerCase());
-      document.documentElement.setAttribute(
-        'dir',
-        lang.code === 'AR' ? 'rtl' : 'ltr',
-      );
-    } catch {
-      /* noop */
-    }
-  }, []);
+  };
 
   const handleListKey = (e: React.KeyboardEvent<HTMLUListElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       setFocusIdx((i) => {
-        const next = (i + 1) % LANGUAGES.length;
+        const next = (i + 1) % LOCALES.length;
         optionRefs.current[next]?.focus();
         return next;
       });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setFocusIdx((i) => {
-        const next = (i - 1 + LANGUAGES.length) % LANGUAGES.length;
+        const next = (i - 1 + LOCALES.length) % LOCALES.length;
         optionRefs.current[next]?.focus();
         return next;
       });
@@ -107,7 +65,7 @@ const TopUtilityBar: React.FC = () => {
       optionRefs.current[0]?.focus();
     } else if (e.key === 'End') {
       e.preventDefault();
-      const last = LANGUAGES.length - 1;
+      const last = LOCALES.length - 1;
       setFocusIdx(last);
       optionRefs.current[last]?.focus();
     }
@@ -128,7 +86,7 @@ const TopUtilityBar: React.FC = () => {
             className="hidden sm:inline-flex items-center text-slate-400 before:content-['|'] before:mr-5 before:text-slate-600"
             aria-hidden="true"
           >
-            Platform Infrastructure · Enterprise &amp; Public Sector
+            {t('utility.tagline')}
           </span>
         </div>
 
@@ -138,14 +96,14 @@ const TopUtilityBar: React.FC = () => {
             onClick={() => setOpen((v) => !v)}
             aria-haspopup="listbox"
             aria-expanded={open}
-            aria-label={`Select language — current: ${active.label}`}
+            aria-label={`${t('utility.language')} — ${meta.label}`}
             className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-slate-200 hover:bg-white/5 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A1F3D]"
           >
             <Globe2 size={12} className="text-slate-400" aria-hidden="true" />
             <span className="text-base leading-none" aria-hidden="true">
-              {active.flag}
+              {meta.flag}
             </span>
-            <span className="font-medium tracking-wide">{active.code}</span>
+            <span className="font-medium tracking-wide">{meta.code}</span>
             <ChevronDown
               size={12}
               aria-hidden="true"
@@ -155,7 +113,7 @@ const TopUtilityBar: React.FC = () => {
 
           <ul
             role="listbox"
-            aria-label="Language"
+            aria-label={t('utility.language')}
             onKeyDown={handleListKey}
             className={`absolute right-0 top-full mt-2 w-56 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_20px_40px_-12px_rgb(15_23_42/0.24)] overflow-hidden z-50 motion-safe:transition-all motion-safe:duration-150 ${
               open
@@ -163,8 +121,8 @@ const TopUtilityBar: React.FC = () => {
                 : 'opacity-0 -translate-y-1 pointer-events-none'
             }`}
           >
-            {LANGUAGES.map((lang, i) => {
-              const selected = lang.code === active.code;
+            {LOCALES.map((lang, i) => {
+              const selected = lang.code === locale;
               return (
                 <li key={lang.code}>
                   <button
@@ -174,7 +132,7 @@ const TopUtilityBar: React.FC = () => {
                     ref={(el) => {
                       optionRefs.current[i] = el;
                     }}
-                    onClick={() => select(lang)}
+                    onClick={() => select(lang.code)}
                     className={`w-full flex items-center gap-3 px-3 py-2 text-sm motion-safe:transition-colors focus-visible:outline-none focus-visible:bg-slate-100 dark:focus-visible:bg-white/10 ${
                       selected
                         ? 'bg-[#0A3A6B]/5 dark:bg-white/5 text-[#0A3A6B] dark:text-white'

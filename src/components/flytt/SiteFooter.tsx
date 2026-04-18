@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import {
@@ -11,15 +13,18 @@ import {
   ShieldCheck,
   Twitter,
 } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
-type Group = {
-  heading: string;
+type FooterGroup = {
+  headingKey: string;
+  headingFallback: string;
   links: { label: string; href: string }[];
 };
 
-const groups: Group[] = [
+const groups: FooterGroup[] = [
   {
-    heading: 'Platforms',
+    headingKey: 'footer.group.platforms',
+    headingFallback: 'Platforms',
     links: [
       { label: 'Transify — Mobility', href: '/platforms/transify' },
       { label: 'Workverge — Workforce', href: '/platforms/workverge' },
@@ -33,36 +38,42 @@ const groups: Group[] = [
     ],
   },
   {
-    heading: 'Industries',
+    headingKey: 'footer.group.industries',
+    headingFallback: 'Industries',
     links: [
-      { label: 'Government & municipal', href: '/industries' },
-      { label: 'Education & ministries', href: '/industries' },
-      { label: 'Transport & logistics', href: '/industries' },
-      { label: 'Enterprise operations', href: '/industries' },
-      { label: 'Marketplace operators', href: '/industries' },
-      { label: 'Deployment modes', href: '/deployment' },
+      { label: 'Government & municipal', href: '/industries/government' },
+      { label: 'Education & ministries', href: '/industries/education' },
+      { label: 'Transport & logistics', href: '/industries/transport' },
+      { label: 'Enterprise operations', href: '/industries/enterprise' },
+      { label: 'Marketplace operators', href: '/industries/marketplaces' },
+      { label: 'Freight & logistics networks', href: '/industries/logistics' },
+      { label: 'All industries', href: '/industries' },
     ],
   },
   {
-    heading: 'Company',
+    headingKey: 'footer.group.company',
+    headingFallback: 'Company',
     links: [
       { label: 'About FlyttGo Tech Group', href: '/company' },
-      { label: 'Leadership', href: '/company' },
-      { label: 'Careers', href: '/company' },
-      { label: 'Press & media', href: '/company' },
+      { label: 'Leadership', href: '/company/leadership' },
+      { label: 'Careers', href: '/company/careers' },
+      { label: 'Press & media', href: '/company/press' },
       { label: 'Partnership inquiries', href: '/contact?intent=partnership' },
       { label: 'Contact', href: '/contact' },
     ],
   },
   {
-    heading: 'Resources',
+    headingKey: 'footer.group.resources',
+    headingFallback: 'Resources',
     links: [
       { label: 'Technology architecture', href: '/technology' },
       { label: 'Developer portal', href: '/developers' },
       { label: 'API reference', href: '/developers' },
       { label: 'Solution briefs', href: '/solutions' },
       { label: 'White-label program', href: '/white-label' },
-      { label: 'Deploy your platform', href: '/contact' },
+      { label: 'Managed deployment', href: '/deployment/managed' },
+      { label: 'Customer cloud', href: '/deployment/customer-cloud' },
+      { label: 'Sovereign datacenter', href: '/deployment/sovereign' },
     ],
   },
 ];
@@ -95,15 +106,18 @@ const socials = [
   { label: 'GitHub', href: 'https://github.com/', icon: Github },
 ];
 
-const legalLinks = [
-  { label: 'Privacy', href: '/contact' },
-  { label: 'Terms', href: '/contact' },
-  { label: 'Security', href: '/contact' },
-  { label: 'Compliance', href: '/contact' },
-  { label: 'Contact', href: '/contact' },
+type LegalLink = { key: string; fallback: string; href: string };
+
+const legalLinks: LegalLink[] = [
+  { key: 'footer.legal.privacy', fallback: 'Privacy', href: '/privacy' },
+  { key: 'footer.legal.terms', fallback: 'Terms', href: '/terms' },
+  { key: 'footer.legal.security', fallback: 'Security', href: '/security' },
+  { key: 'footer.legal.compliance', fallback: 'Compliance', href: '/compliance' },
+  { key: 'footer.legal.contact', fallback: 'Contact', href: '/contact' },
 ];
 
 const SiteFooter: React.FC = () => {
+  const { t } = useI18n();
   return (
     <footer
       className="relative bg-[#050F22] text-slate-300 border-t border-white/5"
@@ -160,9 +174,7 @@ const SiteFooter: React.FC = () => {
             </Link>
 
             <p className="mt-5 text-sm text-slate-400 leading-relaxed max-w-sm">
-              Modular platform infrastructure for logistics, education,
-              government and enterprise operators — deployed across Europe,
-              Africa and the Middle East.
+              {t('footer.tagline')}
             </p>
 
             <ul className="mt-6 space-y-2.5 text-sm">
@@ -220,25 +232,28 @@ const SiteFooter: React.FC = () => {
             className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8"
             aria-label="Footer"
           >
-            {groups.map((g) => (
-              <div key={g.heading}>
-                <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
-                  {g.heading}
+            {groups.map((g) => {
+              const heading = t(g.headingKey) || g.headingFallback;
+              return (
+                <div key={g.headingKey}>
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+                    {heading}
+                  </div>
+                  <ul className="mt-4 space-y-3">
+                    {g.links.map((l) => (
+                      <li key={`${g.headingKey}-${l.label}`}>
+                        <Link
+                          href={l.href}
+                          className="text-sm text-slate-400 hover:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-sm"
+                        >
+                          {l.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="mt-4 space-y-3">
-                  {g.links.map((l) => (
-                    <li key={`${g.heading}-${l.label}`}>
-                      <Link
-                        href={l.href}
-                        className="text-sm text-slate-400 hover:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-sm"
-                      >
-                        {l.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              );
+            })}
           </nav>
         </div>
 
@@ -246,7 +261,7 @@ const SiteFooter: React.FC = () => {
         <div className="mt-14 pt-8 border-t border-white/5">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
             <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              Enterprise
+              {t('footer.enterprise')}
             </span>
             {enterpriseLinks.map((l) => (
               <Link
@@ -277,10 +292,10 @@ const SiteFooter: React.FC = () => {
                 <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
               </span>
-              All systems operational
+              {t('footer.status')}
             </Link>
             <div className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              Certifications &amp; compliance
+              {t('footer.certifications')}
             </div>
             <ul className="mt-4 flex flex-wrap gap-2">
               {certifications.map((c) => (
@@ -296,7 +311,7 @@ const SiteFooter: React.FC = () => {
           </div>
           <div className="md:text-right">
             <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              Deployment regions
+              {t('footer.regions')}
             </div>
             <ul className="mt-4 flex flex-wrap md:justify-end gap-2">
               {regions.map((r) => (
@@ -315,7 +330,7 @@ const SiteFooter: React.FC = () => {
               href="/contact"
               className="mt-5 inline-flex items-center gap-2 px-4 py-2 bg-white text-[#0A1F3D] text-sm font-semibold rounded-md hover:bg-slate-100 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22]"
             >
-              Deploy your platform
+              {t('footer.deploy')}
               <ArrowRight size={13} aria-hidden="true" />
             </Link>
           </div>
@@ -325,7 +340,7 @@ const SiteFooter: React.FC = () => {
         <div className="mt-10 pt-8 border-t border-white/5 grid grid-cols-2 lg:grid-cols-4 gap-6">
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              Company
+              {t('footer.regulatory.company')}
             </div>
             <p className="mt-2 text-[13px] text-slate-300 leading-snug">
               FlyttGo Technologies Group AB
@@ -335,7 +350,7 @@ const SiteFooter: React.FC = () => {
           </div>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              VAT
+              {t('footer.regulatory.vat')}
             </div>
             <p className="mt-2 text-[13px] text-slate-300 leading-snug">
               EU VAT registered
@@ -345,7 +360,7 @@ const SiteFooter: React.FC = () => {
           </div>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              Security
+              {t('footer.regulatory.security')}
             </div>
             <p className="mt-2 text-[13px] text-slate-300 leading-snug">
               24/7 infrastructure monitoring
@@ -360,7 +375,7 @@ const SiteFooter: React.FC = () => {
           </div>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-              Support
+              {t('footer.regulatory.support')}
             </div>
             <p className="mt-2 text-[13px] text-slate-300 leading-snug">
               Enterprise SLA · 24/7
@@ -383,12 +398,12 @@ const SiteFooter: React.FC = () => {
           </p>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {legalLinks.map((l) => (
-              <li key={l.label}>
+              <li key={l.key}>
                 <Link
                   href={l.href}
                   className="text-xs text-slate-500 hover:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-sm"
                 >
-                  {l.label}
+                  {t(l.key) || l.fallback}
                 </Link>
               </li>
             ))}
