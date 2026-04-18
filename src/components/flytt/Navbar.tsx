@@ -24,6 +24,15 @@ import {
   Lock,
   ShieldCheck,
   BookOpen,
+  Building2,
+  Bus,
+  ShoppingBag,
+  CloudCog,
+  ServerCog,
+  Briefcase,
+  Newspaper,
+  Users,
+  Compass,
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
@@ -99,8 +108,60 @@ const primaryLinks: NavLink[] = [
       },
     },
   },
-  { label: 'Industries', labelKey: 'nav.industries', href: '/industries' },
-  { label: 'Deployment', labelKey: 'nav.deployment', href: '/deployment' },
+  {
+    label: 'Industries',
+    labelKey: 'nav.industries',
+    href: '/industries',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Public sector',
+          items: [
+            { label: 'Government & municipal', description: 'Citizen services and sovereign deployment', href: '/industries/government', icon: Landmark },
+            { label: 'Education & ministries', description: 'Admissions, scholarships, institutional analytics', href: '/industries/education', icon: GraduationCap },
+          ],
+        },
+        {
+          heading: 'Transport, enterprise & commerce',
+          items: [
+            { label: 'Transport & logistics', description: 'Dispatch, telematics, regional mobility', href: '/industries/transport', icon: Bus },
+            { label: 'Enterprise operations', description: 'Internal platforms on customer-cloud tenancy', href: '/industries/enterprise', icon: Building2 },
+            { label: 'Marketplace operators', description: 'Regulated multi-sided platforms', href: '/industries/marketplaces', icon: ShoppingBag },
+            { label: 'Freight & logistics networks', description: 'Port-to-inland corridor coordination', href: '/industries/logistics', icon: Truck },
+          ],
+        },
+      ],
+      feature: {
+        title: 'All industries',
+        description: 'Every sector on one page — see the full range of FlyttGo deployments.',
+        href: '/industries',
+        cta: 'Industries overview',
+      },
+    },
+  },
+  {
+    label: 'Deployment',
+    labelKey: 'nav.deployment',
+    href: '/deployment',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Deployment modes',
+          items: [
+            { label: 'FlyttGo-managed', description: 'Fully managed SaaS, region-aware', href: '/deployment/managed', icon: CloudCog },
+            { label: 'Customer cloud', description: 'Runs inside your AWS, Azure or GCP tenancy', href: '/deployment/customer-cloud', icon: ServerCog },
+            { label: 'Sovereign datacenter', description: 'Self-hosted for public-sector procurement', href: '/deployment/sovereign', icon: ShieldCheck },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Deployment architecture',
+        description: 'Three modes to match any procurement or sovereignty posture.',
+        href: '/deployment',
+        cta: 'Compare all modes',
+      },
+    },
+  },
   {
     label: 'Technology',
     labelKey: 'nav.technology',
@@ -133,7 +194,30 @@ const primaryLinks: NavLink[] = [
       },
     },
   },
-  { label: 'Company', labelKey: 'nav.company', href: '/company' },
+  {
+    label: 'Company',
+    labelKey: 'nav.company',
+    href: '/company',
+    dropdown: {
+      columns: [
+        {
+          heading: 'About FlyttGo',
+          items: [
+            { label: 'Company overview', description: 'Nordic-origin platform infrastructure company', href: '/company', icon: Compass },
+            { label: 'Leadership', description: 'Platform, security, deployment, commercial', href: '/company/leadership', icon: Users },
+            { label: 'Careers', description: 'Open roles across engineering and commercial', href: '/company/careers', icon: Briefcase },
+            { label: 'Press & media', description: 'Boilerplate, logos, media contacts', href: '/company/press', icon: Newspaper },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Talk to partnerships',
+        description: 'Scope a deployment with our partnership and deployment engineering team.',
+        href: '/contact?intent=partnership',
+        cta: 'Start a conversation',
+      },
+    },
+  },
   { label: 'Contact', labelKey: 'nav.contact', href: '/contact' },
 ];
 
