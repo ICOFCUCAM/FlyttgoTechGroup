@@ -103,6 +103,10 @@ export default {
           from: { transform: 'scaleX(0)' },
           to: { transform: 'scaleX(1)' },
         },
+        progressBar: {
+          from: { width: '0%' },
+          to: { width: '100%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
