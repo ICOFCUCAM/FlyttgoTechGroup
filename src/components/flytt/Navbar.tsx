@@ -8,16 +8,13 @@ import {
   X,
   ArrowRight,
   ChevronDown,
-  Truck,
+  Route,
+  UserCheck,
+  Landmark,
   GraduationCap,
-  Building2,
-  Store,
-  Radar,
-  CreditCard,
   Fingerprint,
-  Sparkles,
-  LayoutDashboard,
-  BarChart3,
+  CreditCard,
+  Truck,
   Search,
   ArrowUpRight,
   type LucideIcon,
@@ -60,51 +57,34 @@ const primaryLinks: NavLink[] = [
         {
           heading: 'Infrastructure Platforms',
           items: [
-            { label: 'FlyttGo Logistics', description: 'Dispatch, driver and delivery orchestration', href: '/platforms/flyttgo', icon: Truck },
-            { label: 'EduPro AI', description: 'Attendance + institutional analytics', href: '/platforms/edupro', icon: GraduationCap },
-            { label: 'GovStack', description: 'Municipal & ministry dashboards', href: '/platforms/govstack', icon: Building2 },
-            { label: 'MarketStack', description: 'Branded service marketplaces', href: '/platforms/marketstack', icon: Store },
-            { label: 'FleetStack', description: 'Fleet telemetry + route optimization', href: '/platforms/fleetstack', icon: Radar },
+            { label: 'Transify', description: 'Mobility infrastructure platform', href: '/platforms/transify', icon: Route },
+            { label: 'Workverge', description: 'Workforce coordination infrastructure', href: '/platforms/workverge', icon: UserCheck },
+            { label: 'Civitas', description: 'Digital government services platform', href: '/platforms/civitas', icon: Landmark },
+            { label: 'EduPro', description: 'Education intelligence infrastructure', href: '/platforms/edupro', icon: GraduationCap },
+            { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
+            { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
+          ],
+        },
+        {
+          heading: 'Marketplace Platform',
+          items: [
+            { label: 'FlyttGo', description: 'Smart moving & transport marketplace — runs on Transify', href: '/platforms/flyttgo', icon: Truck },
           ],
         },
       ],
       feature: {
         title: 'Platform Ecosystem',
-        description: 'Five modular platforms on one infrastructure layer.',
+        description: 'Six infrastructure platforms + one marketplace running on top of them.',
         href: '/platforms',
-        cta: 'Explore all platforms',
-      },
-    },
-  },
-  {
-    label: 'Infrastructure',
-    href: '/infrastructure',
-    dropdown: {
-      columns: [
-        {
-          heading: 'Modules',
-          items: [
-            { label: 'Payments layer', description: 'Multi-provider, ledger & payouts', href: '/infrastructure#infrastructure-modules', icon: CreditCard },
-            { label: 'Identity layer', description: 'OAuth, SSO, RBAC, audit logs', href: '/infrastructure#infrastructure-modules', icon: Fingerprint },
-            { label: 'Marketplace engine', description: 'Multi-vendor orchestration', href: '/infrastructure#infrastructure-modules', icon: Store },
-            { label: 'Relocation intelligence', description: 'Routing, demand, territory balance', href: '/infrastructure#infrastructure-modules', icon: Sparkles },
-            { label: 'Admin dashboards', description: 'Dispatch, tenant, support consoles', href: '/infrastructure#infrastructure-modules', icon: LayoutDashboard },
-            { label: 'Analytics layer', description: 'Real-time + geospatial pipelines', href: '/infrastructure#infrastructure-modules', icon: BarChart3 },
-          ],
-        },
-      ],
-      feature: {
-        title: 'Modular Infrastructure',
-        description: 'Activate together or independently, per tenant and region.',
-        href: '/technology',
-        cta: 'Review architecture',
+        cta: 'Explore the ecosystem',
       },
     },
   },
   { label: 'Industries', href: '/industries' },
+  { label: 'Deployment', href: '/deployment' },
   { label: 'Technology', href: '/technology' },
-  { label: 'Developers', href: '/developers' },
   { label: 'Company', href: '/company' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const isRouteActive = (pathname: string, href: string) => {
@@ -314,9 +294,9 @@ const Navbar: React.FC = () => {
                 role="menu"
                 aria-label={`${l.label} menu`}
               >
-                <div className="w-[640px] max-w-[min(90vw,640px)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_24px_48px_-12px_rgb(15_23_42/0.18)] overflow-hidden">
+                <div className="w-[760px] max-w-[min(94vw,760px)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_24px_48px_-12px_rgb(15_23_42/0.18)] overflow-hidden">
                   <div className="grid grid-cols-[1fr_240px]">
-                    <div className="p-4">
+                    <div className="p-4 grid sm:grid-cols-2 gap-4">
                       {l.dropdown.columns.map((col) => (
                         <div key={col.heading}>
                           <div className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-[0.18em] text-slate-400 font-semibold">

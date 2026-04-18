@@ -1,0 +1,32 @@
+import type { Metadata } from 'next';
+import Navbar from '@/components/flytt/Navbar';
+import DeploymentArchitecture from '@/components/flytt/DeploymentArchitecture';
+import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
+import SiteFooter from '@/components/flytt/SiteFooter';
+
+export const metadata: Metadata = {
+  title: 'Deployment — Flexible Deployment Architecture',
+  description:
+    'FlyttGo platforms support three deployment modes: FlyttGo-managed infrastructure, inside customer cloud environments, or within sovereign national data centers.',
+  alternates: { canonical: '/deployment' },
+  openGraph: {
+    title: 'FlyttGo Deployment Architecture',
+    description:
+      'Managed, customer-cloud and sovereign national-datacenter deployment options.',
+    url: '/deployment',
+    type: 'website',
+  },
+};
+
+export default function DeploymentPage() {
+  return (
+    <>
+      <Navbar />
+      <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+        <DeploymentArchitecture />
+        <DeploymentSpeed />
+      </main>
+      <SiteFooter />
+    </>
+  );
+}

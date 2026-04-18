@@ -1,19 +1,18 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import HeroSlider from '@/components/flytt/HeroSlider';
-import StatStrip from '@/components/flytt/StatStrip';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
-import InfrastructureModules from '@/components/flytt/InfrastructureModules';
-import MultiRegion from '@/components/flytt/MultiRegion';
-import CaseStudyCard from '@/components/flytt/CaseStudyCard';
+import DeploymentArchitecture from '@/components/flytt/DeploymentArchitecture';
+import TargetUsers from '@/components/flytt/TargetUsers';
+import TechnologySection from '@/components/flytt/TechnologySection';
 import FinalCTA from '@/components/flytt/FinalCTA';
 import ComplianceBand from '@/components/flytt/ComplianceBand';
 import SiteFooter from '@/components/flytt/SiteFooter';
 
 export const metadata: Metadata = {
-  title: 'Infrastructure for National-Scale Digital Platforms',
+  title: 'Deploy National-Scale Digital Infrastructure Platforms Without Building Systems From Scratch',
   description:
-    'FlyttGo Technologies provides modular deployment infrastructure for logistics marketplaces, education intelligence platforms, government service layers and enterprise ecosystems — deployable across Europe, Africa and the Middle East.',
+    'FlyttGo Technologies Group designs modular digital infrastructure platforms — Transify mobility, Workverge workforce coordination, Civitas government services, EduPro education intelligence, Identra identity and Payvera payments — plus the FlyttGo marketplace running on top of Transify.',
   alternates: { canonical: '/' },
 };
 
@@ -23,11 +22,10 @@ export default function HomePage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <HeroSlider />
-        <StatStrip />
         <PlatformEcosystemOverview />
-        <InfrastructureModules />
-        <MultiRegion />
-        <CaseStudyCard />
+        <DeploymentArchitecture />
+        <TargetUsers />
+        <TechnologySection />
         <FinalCTA />
         <ComplianceBand />
       </main>

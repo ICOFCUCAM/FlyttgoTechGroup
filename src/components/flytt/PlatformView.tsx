@@ -21,11 +21,13 @@ import { platforms, platformList } from '@/data/platforms';
 import type { DeploymentType } from '@/lib/contact-schema';
 
 const PLATFORM_DEPLOYMENT_TYPE: Record<string, DeploymentType> = {
-  flyttgo: 'White-Label Deployment',
+  transify: 'Enterprise Fleet Intelligence',
+  workverge: 'White-Label Deployment',
+  civitas: 'Government / Municipal Platform',
   edupro: 'Education Analytics Platform',
-  govstack: 'Government / Municipal Platform',
-  marketstack: 'Marketplace Deployment Engine',
-  fleetstack: 'Enterprise Fleet Intelligence',
+  identra: 'White-Label Deployment',
+  payvera: 'White-Label Deployment',
+  flyttgo: 'Marketplace Deployment Engine',
 };
 
 const methodColors: Record<string, string> = {

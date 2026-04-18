@@ -12,6 +12,14 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
+  async redirects() {
+    return [
+      // Legacy platform slugs renamed during the Transify / Workverge / Civitas / Identra / Payvera repositioning.
+      { source: '/platforms/govstack', destination: '/platforms/civitas', permanent: true },
+      { source: '/platforms/marketstack', destination: '/platforms/flyttgo', permanent: true },
+      { source: '/platforms/fleetstack', destination: '/platforms/transify', permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -3,119 +3,81 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Truck, GraduationCap, Building2, Store, Radar, ArrowUpRight, CheckCircle2, ArrowRight } from 'lucide-react';
-import { imagery } from '@/lib/imagery';
+import { ArrowUpRight, CheckCircle2, ArrowRight, Link2 } from 'lucide-react';
+import { platformList } from '@/data/platforms';
 
-
-const platforms = [
-  {
-    id: 'flyttgo',
-    name: 'FlyttGo',
-    subtitle: 'Logistics Infrastructure Platform',
-    icon: Truck,
-    color: '#1E6FD9',
-    bg: 'bg-blue-50',
-    desc: 'Deploy logistics coordination systems supporting dispatch intelligence, fleet routing optimization and multi-zone delivery orchestration across cities and regions.',
-    capabilities: ['Driver coordination', 'Dispatch optimization', 'Multi-zone routing', 'Same-day deployment'],
-  },
-  {
-    id: 'edupro',
-    name: 'EduPro AI',
-    subtitle: 'Education Intelligence Platform',
-    icon: GraduationCap,
-    color: '#0FB5A6',
-    bg: 'bg-teal-50',
-    desc: 'Deploy education analytics platforms supporting attendance monitoring, institutional performance visibility and national-scale education intelligence dashboards.',
-    capabilities: ['Attendance analytics', 'Performance monitoring', 'Institution dashboards', 'Ministry reporting'],
-  },
-  {
-    id: 'govstack',
-    name: 'GovStack',
-    subtitle: 'Municipal Infrastructure Platform',
-    icon: Building2,
-    color: '#7C5CE6',
-    bg: 'bg-violet-50',
-    desc: 'Deploy municipal service coordination platforms supporting permit workflows, transport analytics dashboards and citizen service orchestration.',
-    capabilities: ['Permit workflows', 'Transport coordination', 'Service analytics', 'Citizen services'],
-  },
-  {
-    id: 'marketstack',
-    name: 'MarketStack',
-    subtitle: 'Marketplace Deployment Engine',
-    icon: Store,
-    color: '#E67E1E',
-    bg: 'bg-orange-50',
-    desc: 'Deploy branded service marketplaces supporting vendor coordination, order routing infrastructure and workforce platforms without custom backend development.',
-    capabilities: ['Multi-vendor marketplaces', 'Order orchestration', 'White-label deployment', 'Service ecosystems'],
-  },
-  {
-    id: 'fleetstack',
-    name: 'FleetStack',
-    subtitle: 'Fleet Intelligence Platform',
-    icon: Radar,
-    color: '#0A3A6B',
-    bg: 'bg-slate-100 dark:bg-slate-800/60',
-    desc: 'Deploy enterprise fleet analytics environments supporting vehicle telemetry tracking, route optimization intelligence and operations performance monitoring.',
-    capabilities: ['Vehicle telemetry', 'Route optimization', 'Fleet performance', 'Operations dashboards'],
-  },
-];
+const accentTint: Record<string, string> = {
+  transify: 'bg-blue-50 dark:bg-blue-950/20',
+  workverge: 'bg-teal-50 dark:bg-teal-950/20',
+  civitas: 'bg-violet-50 dark:bg-violet-950/20',
+  edupro: 'bg-emerald-50 dark:bg-emerald-950/20',
+  identra: 'bg-indigo-50 dark:bg-indigo-950/20',
+  payvera: 'bg-amber-50 dark:bg-amber-950/20',
+  flyttgo: 'bg-orange-50 dark:bg-orange-950/20',
+};
 
 const PlatformEcosystem: React.FC = () => {
-  const [active, setActive] = useState('flyttgo');
-  const current = platforms.find((p) => p.id === active) || platforms[0];
+  const [active, setActive] = useState(platformList[0].slug);
+  const current = platformList.find((p) => p.slug === active) ?? platformList[0];
+  const CurrentIcon = current.icon;
 
   return (
     <section id="platforms" className="relative py-24 lg:py-32 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-            <span className="w-1 h-1 rounded-full bg-[#1E6FD9]" />
+          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+            <span className="w-1 h-1 rounded-full bg-[#1E6FD9]" aria-hidden="true" />
             Platform Ecosystem
-          </div>
+          </p>
           <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-            A Modular Infrastructure Platform Ecosystem for Cities, Enterprises and Digital Marketplaces
+            A Modular Platform Ecosystem for Governments, Institutions and Operators
           </h2>
           <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            FlyttGo Technologies Group provides a unified infrastructure layer enabling organizations to deploy
-            logistics coordination systems, education intelligence platforms, municipal service dashboards,
-            marketplace ecosystems and enterprise fleet analytics environments using configurable platform modules.
+            Six infrastructure platforms — mobility, workforce, government, education, identity and
+            payments — plus one marketplace platform (FlyttGo) that runs on top of Transify.
           </p>
         </div>
 
         {/* Platform cards grid */}
         <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {platforms.map((p) => {
+          {platformList.map((p) => {
             const Icon = p.icon;
-            const isActive = active === p.id;
+            const isActive = active === p.slug;
+            const isMarketplace = p.category === 'marketplace';
             return (
               <button
-                key={p.id}
-                onClick={() => setActive(p.id)}
+                key={p.slug}
+                onClick={() => setActive(p.slug)}
                 className={`group text-left p-7 rounded-2xl border transition-all duration-300 ${
                   isActive
-                    ? 'bg-white dark:bg-slate-900 border-slate-300 shadow-xl shadow-slate-900/5 -translate-y-1'
+                    ? 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 shadow-xl shadow-slate-900/5 -translate-y-1'
                     : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div
-                    className={`w-12 h-12 rounded-xl ${p.bg} flex items-center justify-center`}
+                    className={`w-12 h-12 rounded-xl ${accentTint[p.slug] ?? 'bg-slate-100'} flex items-center justify-center`}
                     style={{ color: p.color }}
+                    aria-hidden="true"
                   >
                     <Icon size={22} strokeWidth={1.75} />
                   </div>
                   <ArrowUpRight
                     size={18}
-                    className="text-slate-400 group-hover:text-slate-900 dark:text-white transition-colors"
+                    className="text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors"
+                    aria-hidden="true"
                   />
                 </div>
                 <div className="mt-5">
                   <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                    {p.subtitle}
+                    {isMarketplace ? 'Marketplace Platform' : 'Infrastructure Platform'}
                   </div>
                   <h3 className="mt-1 text-xl font-semibold text-slate-900 dark:text-white tracking-tight">{p.name}</h3>
+                  <p className="text-sm text-slate-500 mt-0.5">{p.subtitle}</p>
                 </div>
-                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">{p.desc}</p>
+                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                  {p.description}
+                </p>
 
                 <div className="mt-5 pt-5 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1.5">
                   {p.capabilities.slice(0, 2).map((c) => (
@@ -126,13 +88,22 @@ const PlatformEcosystem: React.FC = () => {
                       {c}
                     </span>
                   ))}
-                  <span className="text-[11px] font-medium px-2 py-1 bg-slate-50 dark:bg-slate-900/60 text-slate-500 rounded-md">
-                    +{p.capabilities.length - 2} more
-                  </span>
+                  {p.capabilities.length > 2 && (
+                    <span className="text-[11px] font-medium px-2 py-1 bg-slate-50 dark:bg-slate-900/60 text-slate-500 rounded-md">
+                      +{p.capabilities.length - 2} more
+                    </span>
+                  )}
                 </div>
 
+                {p.dependsOn && (
+                  <p className="mt-4 inline-flex items-center gap-1.5 text-[11px] text-slate-500">
+                    <Link2 size={11} aria-hidden="true" />
+                    Runs on Transify infrastructure
+                  </p>
+                )}
+
                 <Link
-                  href={`/platforms/${p.id}`}
+                  href={`/platforms/${p.slug}`}
                   onClick={(e) => e.stopPropagation()}
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
                   style={{ color: p.color }}
@@ -143,46 +114,23 @@ const PlatformEcosystem: React.FC = () => {
               </button>
             );
           })}
-
-
-          {/* Orchestration tile */}
-          <div className="p-7 rounded-2xl bg-gradient-to-br from-[#0A3A6B] to-[#1E6FD9] text-white flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.75" />
-                  <circle cx="12" cy="4" r="2" stroke="white" strokeWidth="1.75" />
-                  <circle cx="12" cy="20" r="2" stroke="white" strokeWidth="1.75" />
-                  <circle cx="4" cy="12" r="2" stroke="white" strokeWidth="1.75" />
-                  <circle cx="20" cy="12" r="2" stroke="white" strokeWidth="1.75" />
-                  <path d="M12 6V9M12 15V18M6 12H9M15 12H18" stroke="white" strokeWidth="1.75" />
-                </svg>
-              </div>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight">Ecosystem Orchestration</h3>
-              <p className="mt-3 text-sm text-white/80 leading-relaxed">
-                Platform modules operate independently or as unified multi-platform deployments — sharing
-                data, analytics and deployment architecture.
-              </p>
-            </div>
-            <div className="mt-5 pt-5 border-t border-white/15 text-xs text-white/70 font-medium uppercase tracking-wider">
-              5 Platforms · 1 Infrastructure
-            </div>
-          </div>
         </div>
 
         {/* Active platform deep-view */}
-        <div className="mt-10 rounded-3xl border border-slate-200/80 dark:border-slate-800/60 bg-gradient-to-br from-slate-50 to-white p-8 lg:p-12">
+        <div className="mt-10 rounded-3xl border border-slate-200/80 dark:border-slate-800/60 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 p-8 lg:p-12">
           <div className="grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-5">
               <div
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
-                style={{ backgroundColor: current.bg === 'bg-slate-100 dark:bg-slate-800/60' ? '#f1f5f9' : undefined, color: current.color }}
+                style={{ backgroundColor: `${current.color}10`, color: current.color }}
               >
-                <current.icon size={14} />
+                <CurrentIcon size={14} />
                 {current.subtitle}
               </div>
-              <h3 className="mt-4 text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">{current.name}</h3>
-              <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">{current.desc}</p>
+              <h3 className="mt-4 text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">
+                {current.name}
+              </h3>
+              <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">{current.description}</p>
 
               <div className="mt-6 space-y-2.5">
                 {current.capabilities.map((c) => (
@@ -194,28 +142,27 @@ const PlatformEcosystem: React.FC = () => {
               </div>
 
               <Link
-                href={`/platforms/${current.id}`}
+                href={`/platforms/${current.slug}`}
                 className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 rounded-sm"
               >
                 View {current.name} platform page
                 <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
-
             </div>
 
             <div className="lg:col-span-7">
-              <div className="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/60 shadow-xl shadow-slate-900/5 bg-white">
+              <div className="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/60 shadow-xl shadow-slate-900/5 bg-white dark:bg-slate-900">
                 <div className="flex items-center gap-1.5 px-4 py-3 border-b border-slate-200/80 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-900/60">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                   <div className="ml-3 text-xs text-slate-500 font-mono">
-                    {current.id}.flyttgo.platform / dashboard
+                    {current.slug}.flyttgo.platform / dashboard
                   </div>
                 </div>
-                <div className="relative aspect-[16/10] w-full bg-slate-100 dark:bg-slate-800/60">
+                <div className="relative aspect-[16/10] w-full bg-slate-100">
                   <Image
-                    src={imagery.platforms[current.id as keyof typeof imagery.platforms]?.dashboard ?? imagery.dispatch}
+                    src={current.dashboardImage}
                     alt={`${current.name} dashboard preview`}
                     fill
                     sizes="(min-width: 1024px) 55vw, 100vw"

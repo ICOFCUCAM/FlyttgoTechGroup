@@ -28,7 +28,7 @@ const CaseStudyCard: React.FC = () => {
                 className="mt-5 text-3xl md:text-4xl lg:text-[44px] font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
               >
                 How a Nordic transport authority deployed{' '}
-                <span className="text-[#0A3A6B]">GovStack</span> in{' '}
+                <span className="text-[#0A3A6B]">Civitas</span> in{' '}
                 <span className="bg-gradient-to-r from-[#1E6FD9] to-[#0FB5A6] bg-clip-text text-transparent">
                   4 weeks.
                 </span>
@@ -65,10 +65,10 @@ const CaseStudyCard: React.FC = () => {
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/platforms/govstack"
+                  href="/platforms/civitas"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0A3A6B] text-white text-sm font-semibold rounded-lg hover:bg-[#0a2f57] motion-safe:transition-colors shadow-[0_1px_0_0_rgb(10_58_107/0.6),0_6px_18px_-6px_rgb(10_58_107/0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
                 >
-                  Read the GovStack brief
+                  Read the Civitas brief
                   <ArrowUpRight size={14} aria-hidden="true" />
                 </Link>
                 <Link
