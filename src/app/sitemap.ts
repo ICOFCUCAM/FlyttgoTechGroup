@@ -15,6 +15,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/developers', priority: 0.6, freq: 'monthly' },
   { path: '/company', priority: 0.5, freq: 'monthly' },
   { path: '/contact', priority: 0.5, freq: 'yearly' },
+  { path: '/status', priority: 0.6, freq: 'daily' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

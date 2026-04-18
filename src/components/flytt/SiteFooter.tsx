@@ -73,7 +73,7 @@ const enterpriseLinks = [
   { label: 'API access', href: '/developers' },
   { label: 'Developer portal', href: '/developers' },
   { label: 'Solution briefs', href: '/solutions' },
-  { label: 'Status', href: '/technology' },
+  { label: 'Status', href: '/status' },
 ];
 
 const certifications = [
@@ -269,7 +269,7 @@ const SiteFooter: React.FC = () => {
         <div className="mt-10 pt-8 border-t border-white/5 grid md:grid-cols-2 gap-8">
           <div>
             <Link
-              href="/technology"
+              href="/status"
               className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-300 hover:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-sm"
               aria-label="Platform status — all systems operational"
             >

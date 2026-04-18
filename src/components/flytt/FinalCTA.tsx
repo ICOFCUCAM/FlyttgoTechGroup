@@ -4,15 +4,15 @@ import { ArrowRight, CalendarClock, Sparkles, Globe2 } from 'lucide-react';
 
 const highlights = [
   { icon: Globe2, label: 'Multi-region · EU · AF · MENA' },
-  { icon: Sparkles, label: '5 platforms · 18+ modules' },
-  { icon: CalendarClock, label: '2–6 week deployment cycle' },
+  { icon: Sparkles, label: 'Modular platforms · Independent licensing' },
+  { icon: CalendarClock, label: '60–120 day deployment cycle' },
 ];
 
 const FinalCTA: React.FC = () => {
   return (
     <section
       aria-labelledby="final-cta-heading"
-      className="relative py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-white to-[#F5F8FC]"
+      className="relative py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-white to-[#F5F8FC] dark:from-slate-950 dark:to-slate-900"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-br from-[#0A1F3D] via-[#0A3A6B] to-[#1E6FD9] text-white shadow-2xl shadow-slate-900/20">
@@ -37,7 +37,7 @@ const FinalCTA: React.FC = () => {
 
           <div className="relative px-8 py-16 lg:px-20 lg:py-28">
             <div className="max-w-3xl mx-auto text-center motion-safe:animate-fade-up">
-              <p className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-xs font-semibold uppercase tracking-wider">
+              <p className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-xs font-semibold uppercase tracking-wider">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" aria-hidden="true" />
                 Ready When You Are
               </p>
