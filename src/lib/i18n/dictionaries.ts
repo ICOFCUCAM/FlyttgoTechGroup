@@ -320,6 +320,32 @@ const de: Dictionary = {
   'cta.learnMore': 'Mehr erfahren',
   'cta.contact': 'Kontakt aufnehmen',
   'cta.back': 'Zurück',
+
+  'home.trust.heading': 'Bereitgestellt für',
+  'home.platform.eyebrow': 'Plattform-Ökosystem',
+  'home.platform.title.part1': 'Ein Infrastruktur-Ökosystem.',
+  'home.platform.title.part2': 'Modulare Bereitstellungs­plattformen.',
+  'home.platform.description':
+    'Regierungen, Universitäten, Transportunternehmen und Marktplatzbetreiber setzen FlyttGo-Plattformen als Module ein.',
+  'home.platform.cta': 'Das Ökosystem erkunden',
+  'home.deployment.eyebrow': 'Bereitstellungs­architektur',
+  'home.deployment.title': 'Bereitstellen nach Ihren Regeln.',
+  'home.deployment.description':
+    'Drei Bereitstellungs­modi für jede Beschaffungs- oder Souveränitäts­anforderung.',
+  'home.deployment.cta': 'Details zur Bereitstellung',
+  'home.industries.eyebrow': 'Bediente Branchen',
+  'home.industries.title': 'Gebaut für Institutionen und Betreiber.',
+  'home.tech.eyebrow': 'Technologie­infrastruktur',
+  'home.tech.title': 'Cloud-nativer Plattform-Stack.',
+  'home.tech.description': 'Multi-Mandanten, regionsbewusst, standardbasiert.',
+  'home.tech.cta': 'Architektur-Überblick',
+  'home.faq.eyebrow': 'Beschaffungs- & Bereitstellungs-FAQ',
+  'home.faq.title': 'Häufige Fragen von Bereitstellungs­partnern.',
+  'home.cta.eyebrow': 'Bereit, wenn Sie es sind',
+  'home.cta.title.part1': 'Starten Sie die Bereitstellung Ihrer',
+  'home.cta.title.part2': 'Plattform-Infrastruktur heute',
+  'home.cta.primary': 'Ihre Plattform bereitstellen',
+  'home.cta.secondary': 'Infrastruktur-Demo planen',
 };
 
 const es: Dictionary = {
@@ -366,6 +392,30 @@ const es: Dictionary = {
   'cta.learnMore': 'Saber más',
   'cta.contact': 'Contáctanos',
   'cta.back': 'Atrás',
+
+  'home.trust.heading': 'Desplegado para',
+  'home.platform.eyebrow': 'Ecosistema de plataformas',
+  'home.platform.title.part1': 'Un ecosistema de infraestructura.',
+  'home.platform.title.part2': 'Plataformas de despliegue modulares.',
+  'home.platform.description':
+    'Gobiernos, universidades, operadores de transporte y creadores de marketplaces despliegan las plataformas FlyttGo como módulos.',
+  'home.platform.cta': 'Ver el ecosistema completo',
+  'home.deployment.eyebrow': 'Arquitectura de despliegue',
+  'home.deployment.title': 'Despliega en tus términos.',
+  'home.deployment.description':
+    'Tres modos de despliegue para cualquier postura de compra o soberanía.',
+  'home.deployment.cta': 'Detalles del despliegue',
+  'home.industries.eyebrow': 'Sectores atendidos',
+  'home.industries.title': 'Construido para instituciones y operadores.',
+  'home.tech.eyebrow': 'Infraestructura tecnológica',
+  'home.tech.title': 'Stack de plataforma cloud-native.',
+  'home.faq.eyebrow': 'FAQ de compras y despliegue',
+  'home.faq.title': 'Preguntas frecuentes de socios de despliegue.',
+  'home.cta.eyebrow': 'Listos cuando tú lo estés',
+  'home.cta.title.part1': 'Empieza a desplegar tu',
+  'home.cta.title.part2': 'infraestructura de plataforma hoy',
+  'home.cta.primary': 'Despliega tu plataforma',
+  'home.cta.secondary': 'Agendar demo de infraestructura',
 };
 
 const sv: Dictionary = {
@@ -552,6 +602,29 @@ const ar: Dictionary = {
   'cta.learnMore': 'اعرف المزيد',
   'cta.contact': 'تواصل معنا',
   'cta.back': 'رجوع',
+
+  'home.trust.heading': 'تم النشر لدى',
+  'home.platform.eyebrow': 'منظومة المنصات',
+  'home.platform.title.part1': 'منظومة بنية تحتية واحدة.',
+  'home.platform.title.part2': 'منصات نشر معيارية.',
+  'home.platform.description':
+    'تنشر الحكومات والجامعات ومشغلو النقل وبناة الأسواق منصات FlyttGo كوحدات معيارية.',
+  'home.platform.cta': 'استكشاف المنظومة كاملة',
+  'home.deployment.eyebrow': 'هيكل النشر',
+  'home.deployment.title': 'انشر وفق شروطك.',
+  'home.deployment.description': 'ثلاثة أنماط للنشر تناسب أي شراء أو متطلبات سيادية.',
+  'home.deployment.cta': 'تفاصيل النشر',
+  'home.industries.eyebrow': 'القطاعات التي نخدمها',
+  'home.industries.title': 'مصمَّم للمؤسسات والمشغلين.',
+  'home.tech.eyebrow': 'البنية التقنية',
+  'home.tech.title': 'حزمة منصة سحابية الأصل.',
+  'home.faq.eyebrow': 'الأسئلة الشائعة للشراء والنشر',
+  'home.faq.title': 'أسئلة شائعة من شركاء النشر.',
+  'home.cta.eyebrow': 'جاهزون حين تكون جاهزاً',
+  'home.cta.title.part1': 'ابدأ نشر',
+  'home.cta.title.part2': 'بنيتك التحتية للمنصة اليوم',
+  'home.cta.primary': 'انشر منصتك',
+  'home.cta.secondary': 'حجز عرض توضيحي للبنية التحتية',
 };
 
 export const DICTIONARIES: Record<LocaleCode, Dictionary> = {
