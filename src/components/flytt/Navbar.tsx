@@ -77,7 +77,8 @@ const primaryLinks: NavLink[] = [
       ],
       feature: {
         title: 'Platform Ecosystem',
-        description: 'Six infrastructure platforms + one marketplace running on top of them.',
+        description:
+          'Modular infrastructure platforms plus the FlyttGo marketplace — licensed independently, deployed together.',
         href: '/platforms',
         cta: 'Explore the ecosystem',
       },

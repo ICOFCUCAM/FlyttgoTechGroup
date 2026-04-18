@@ -89,12 +89,35 @@
     @apply border-border;
   }
 
+  html {
+    /* Sticky header = utility bar (~36px) + nav (~68px). Keep anchored
+       scroll targets below it so in-page links land clear of the chrome. */
+    scroll-padding-top: 112px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans dark:bg-background dark:text-foreground;
     font-feature-settings: 'cv11', 'ss03';
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Polite focus ring fallback across interactive elements */
+  :focus-visible {
+    outline-offset: 2px;
+  }
+
+  /* Selection color tuned to brand */
+  ::selection {
+    background-color: rgba(30, 111, 217, 0.22);
+    color: inherit;
   }
 
   /* Tighter optical sizing on display headings */

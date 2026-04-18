@@ -188,7 +188,7 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
               Modular infrastructure you can activate independently.
             </h2>
             <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              Every {data.name} deployment includes six foundational modules — activate them together or
+              Every {data.name} deployment ships with foundational modules — activate them together or
               independently based on your deployment roadmap.
             </p>
           </div>
