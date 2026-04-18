@@ -217,7 +217,7 @@ const Navbar: React.FC = () => {
       role="banner"
       className={`sticky top-0 z-50 motion-safe:transition-shadow motion-safe:duration-200 ${
         scrolled
-          ? 'bg-white/92 supports-[backdrop-filter]:bg-white/85 backdrop-blur-md shadow-[0_1px_0_0_rgb(15_23_42/0.06),0_6px_18px_-8px_rgb(15_23_42/0.18)] border-b border-slate-200/70'
+          ? 'bg-white dark:bg-slate-900/92 supports-[backdrop-filter]:bg-white dark:bg-slate-900/85 backdrop-blur-md shadow-[0_1px_0_0_rgb(15_23_42/0.06),0_6px_18px_-8px_rgb(15_23_42/0.18)] border-b border-slate-200/70 dark:border-slate-800/60'
           : 'bg-white/80 supports-[backdrop-filter]:bg-white/60 backdrop-blur-sm border-b border-transparent'
       }`}
     >
@@ -234,7 +234,7 @@ const Navbar: React.FC = () => {
             </svg>
           </div>
           <span className="flex flex-col leading-none">
-            <span className="text-[15px] tracking-tight text-slate-900">
+            <span className="text-[15px] tracking-tight text-slate-900 dark:text-white">
               <span className="font-semibold">FlyttGo</span>
               <span className="hidden sm:inline font-medium text-slate-500"> Technologies</span>
             </span>
@@ -271,7 +271,7 @@ const Navbar: React.FC = () => {
                     aria-haspopup={hasDropdown ? 'menu' : undefined}
                     aria-expanded={hasDropdown ? dropdownOpen : undefined}
                     className={`inline-flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-md motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] ${
-                      active ? 'text-[#0A3A6B]' : 'text-slate-600 hover:text-slate-900'
+                      active ? 'text-[#0A3A6B]' : 'text-slate-600 hover:text-slate-900 dark:text-white'
                     }`}
                   >
                     {l.label}
@@ -279,7 +279,7 @@ const Navbar: React.FC = () => {
                       <ChevronDown
                         size={13}
                         aria-hidden="true"
-                        className={`text-slate-400 motion-safe:transition-transform ${dropdownOpen ? 'rotate-180 text-slate-600' : ''}`}
+                        className={`text-slate-400 motion-safe:transition-transform ${dropdownOpen ? 'rotate-180 text-slate-600 dark:text-slate-400' : ''}`}
                       />
                     )}
                   </Link>
@@ -314,7 +314,7 @@ const Navbar: React.FC = () => {
                 role="menu"
                 aria-label={`${l.label} menu`}
               >
-                <div className="w-[640px] max-w-[min(90vw,640px)] rounded-2xl bg-white border border-slate-200/80 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_24px_48px_-12px_rgb(15_23_42/0.18)] overflow-hidden">
+                <div className="w-[640px] max-w-[min(90vw,640px)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_24px_48px_-12px_rgb(15_23_42/0.18)] overflow-hidden">
                   <div className="grid grid-cols-[1fr_240px]">
                     <div className="p-4">
                       {l.dropdown.columns.map((col) => (
@@ -331,13 +331,13 @@ const Navbar: React.FC = () => {
                                     href={item.href}
                                     role="menuitem"
                                     onClick={() => setOpenDropdown(null)}
-                                    className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40"
+                                    className="flex items-start gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:bg-slate-900/60 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40"
                                   >
-                                    <span className="mt-0.5 w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-[#0A3A6B] flex-shrink-0" aria-hidden="true">
+                                    <span className="mt-0.5 w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800/60 flex items-center justify-center text-[#0A3A6B] flex-shrink-0" aria-hidden="true">
                                       <Icon size={16} strokeWidth={1.75} />
                                     </span>
                                     <span className="flex flex-col leading-tight">
-                                      <span className="text-sm font-semibold text-slate-900 tracking-tight">{item.label}</span>
+                                      <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">{item.label}</span>
                                       <span className="mt-0.5 text-[12px] text-slate-500 leading-snug">{item.description}</span>
                                     </span>
                                   </Link>
@@ -381,18 +381,18 @@ const Navbar: React.FC = () => {
             type="button"
             onClick={toggleCommandPalette}
             aria-label="Search platforms, modules and pages"
-            className="group inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 text-[13px] text-slate-500 bg-white border border-slate-200/80 rounded-md hover:text-slate-700 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+            className="group inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 text-[13px] text-slate-500 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-md hover:text-slate-700 dark:text-slate-300 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
             <Search size={13} aria-hidden="true" />
             <span className="hidden xl:inline">Search</span>
-            <kbd className="ml-1 font-mono text-[10px] text-slate-400 bg-slate-50 border border-slate-200/80 rounded px-1.5 py-0.5">
+            <kbd className="ml-1 font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded px-1.5 py-0.5">
               ⌘K
             </kbd>
           </button>
           <ThemeToggle compact />
           <Link
             href="/contact"
-            className="text-sm font-medium text-slate-600 hover:text-slate-900 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md px-2"
+            className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md px-2"
           >
             Sign in
           </Link>
@@ -408,7 +408,7 @@ const Navbar: React.FC = () => {
         <button
           ref={toggleRef}
           type="button"
-          className="lg:hidden p-1.5 text-slate-700 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+          className="lg:hidden p-1.5 text-slate-700 dark:text-slate-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-panel"
           aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -421,7 +421,7 @@ const Navbar: React.FC = () => {
       <div
         id="mobile-nav-panel"
         hidden={!mobileOpen}
-        className="lg:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-xl"
+        className="lg:hidden border-t border-slate-200/80 dark:border-slate-800/60 bg-white/95 backdrop-blur-xl"
       >
         <nav aria-label="Mobile primary" className="px-5 py-4 flex flex-col gap-1">
           {primaryLinks.map((l) => {
@@ -433,27 +433,27 @@ const Navbar: React.FC = () => {
                 aria-current={active ? 'page' : undefined}
                 onClick={closeMobile}
                 className={`px-3 py-2.5 text-sm font-medium rounded-md ${
-                  active ? 'text-[#0A3A6B] bg-slate-100' : 'text-slate-700 hover:bg-slate-50'
+                  active ? 'text-[#0A3A6B] bg-slate-100 dark:bg-slate-800/60' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/60'
                 }`}
               >
                 {l.label}
               </Link>
             );
           })}
-          <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-slate-200/80">
+          <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-slate-200/80 dark:border-slate-800/60">
             <button
               type="button"
               onClick={() => {
                 closeMobile();
                 toggleCommandPalette();
               }}
-              className="inline-flex items-center justify-between px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-md"
+              className="inline-flex items-center justify-between px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-900/60 rounded-md"
             >
               <span className="inline-flex items-center gap-2">
                 <Search size={14} aria-hidden="true" />
                 Search
               </span>
-              <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 border border-slate-200/80 rounded px-1.5 py-0.5">
+              <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded px-1.5 py-0.5">
                 ⌘K
               </kbd>
             </button>
@@ -463,7 +463,7 @@ const Navbar: React.FC = () => {
             <Link
               href="/contact"
               onClick={closeMobile}
-              className="px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-md"
+              className="px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/60 rounded-md"
             >
               Sign in
             </Link>

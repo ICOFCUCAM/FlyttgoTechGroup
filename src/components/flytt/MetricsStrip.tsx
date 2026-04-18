@@ -50,15 +50,15 @@ const Counter: React.FC<{ to: number; suffix: string }> = ({ to, suffix }) => {
 
 const MetricsStrip: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-r from-[#F5F8FC] to-[#EEF4FA] border-y border-slate-200/70">
+    <section className="py-16 bg-gradient-to-r from-[#F5F8FC] to-[#EEF4FA] border-y border-slate-200/70 dark:border-slate-800/60">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
           {metrics.map((m) => (
-            <div key={m.label} className="text-center lg:text-left lg:border-l lg:border-slate-200/80 lg:pl-6 first:lg:border-l-0 first:lg:pl-0">
-              <div className="text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900">
+            <div key={m.label} className="text-center lg:text-left lg:border-l lg:border-slate-200/80 dark:border-slate-800/60 lg:pl-6 first:lg:border-l-0 first:lg:pl-0">
+              <div className="text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white">
                 <Counter to={m.value} suffix={m.suffix} />
               </div>
-              <div className="mt-2 text-sm text-slate-600 leading-snug">{m.label}</div>
+              <div className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-snug">{m.label}</div>
             </div>
           ))}
         </div>

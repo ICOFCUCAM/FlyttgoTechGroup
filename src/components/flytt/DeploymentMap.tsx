@@ -23,19 +23,19 @@ const DeploymentMap: React.FC = () => {
     <section className="py-24 lg:py-32 bg-gradient-to-b from-white to-[#F5F8FC]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Global Deployment Readiness
           </div>
-          <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+          <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
             Infrastructure Ready for Europe, Africa and the Middle East
           </h2>
-          <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+          <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
             FlyttGo modules are portable across three continents — supporting phased expansion from city-level
             deployments to national and regional rollouts.
           </p>
         </div>
 
-        <div className="mt-14 relative rounded-3xl bg-white border border-slate-200/80 p-6 lg:p-10 overflow-hidden">
+        <div className="mt-14 relative rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 p-6 lg:p-10 overflow-hidden">
           <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5F8FC] via-[#EEF4FA] to-[#E4EEF8]">
             {/* Background map image */}
             <Image
@@ -78,15 +78,15 @@ const DeploymentMap: React.FC = () => {
             </svg>
 
             {/* Region labels */}
-            <div className="absolute top-6 left-6 px-3 py-1.5 bg-white/95 backdrop-blur rounded-full text-xs font-semibold text-slate-700 shadow">
+            <div className="absolute top-6 left-6 px-3 py-1.5 bg-white dark:bg-slate-900/95 backdrop-blur rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 shadow">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#1E6FD9] mr-2" />
               Europe · 6 Cities
             </div>
-            <div className="absolute top-6 right-6 px-3 py-1.5 bg-white/95 backdrop-blur rounded-full text-xs font-semibold text-slate-700 shadow">
+            <div className="absolute top-6 right-6 px-3 py-1.5 bg-white dark:bg-slate-900/95 backdrop-blur rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 shadow">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#0FB5A6] mr-2" />
               Middle East · 3 Hubs
             </div>
-            <div className="absolute bottom-6 left-6 px-3 py-1.5 bg-white/95 backdrop-blur rounded-full text-xs font-semibold text-slate-700 shadow">
+            <div className="absolute bottom-6 left-6 px-3 py-1.5 bg-white dark:bg-slate-900/95 backdrop-blur rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 shadow">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#7C5CE6] mr-2" />
               Africa · 4 Regions
             </div>
@@ -98,12 +98,12 @@ const DeploymentMap: React.FC = () => {
               { r: 'Middle East', desc: 'GCC and Levant infrastructure-ready environments', color: '#0FB5A6' },
               { r: 'Africa', desc: 'North · West · East regional deployment readiness', color: '#7C5CE6' },
             ].map((r) => (
-              <div key={r.r} className="p-5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <div key={r.r} className="p-5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: r.color }} />
-                  <span className="text-sm font-semibold text-slate-900">{r.r}</span>
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white">{r.r}</span>
                 </div>
-                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{r.desc}</p>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{r.desc}</p>
               </div>
             ))}
           </div>

@@ -60,47 +60,47 @@ const ContactFooter: React.FC = () => {
   return (
     <>
       {/* Contact section */}
-      <section id="contact" className="py-24 lg:py-32 bg-gradient-to-b from-[#F5F8FC] to-white">
+      <section id="contact" className="py-24 lg:py-32 bg-gradient-to-b from-[#F5F8FC] to-white dark:from-slate-900 dark:to-slate-950 dark:from-slate-900 dark:to-slate-950">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A3A6B]/5 rounded-full text-xs font-semibold text-[#0A3A6B] uppercase tracking-wider">
                 Start Deployment
               </div>
-              <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+              <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
                 Deploy your platform with FlyttGo infrastructure
               </h2>
-              <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+              <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
                 Share your deployment context — logistics, education, government or marketplace — and our
                 platform deployment team will respond within one business day.
               </p>
 
               <div className="mt-8 space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#0A3A6B]">
+                  <div className="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 flex items-center justify-center text-[#0A3A6B]">
                     <Mail size={18} />
                   </div>
                   <div>
                     <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Deployments</div>
-                    <div className="text-sm font-semibold text-slate-900 mt-0.5">platforms@flyttgo.tech</div>
+                    <div className="text-sm font-semibold text-slate-900 dark:text-white mt-0.5">platforms@flyttgo.tech</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#0A3A6B]">
+                  <div className="w-10 h-10 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 flex items-center justify-center text-[#0A3A6B]">
                     <MapPin size={18} />
                   </div>
                   <div>
                     <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Headquarters</div>
-                    <div className="text-sm font-semibold text-slate-900 mt-0.5">Stockholm · Nordic EU</div>
+                    <div className="text-sm font-semibold text-slate-900 dark:text-white mt-0.5">Stockholm · Nordic EU</div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10 p-5 rounded-xl bg-white border border-slate-200/80">
+              <div className="mt-10 p-5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60">
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">
                   Expected Response
                 </div>
-                <div className="mt-2 flex items-center gap-2 text-sm font-medium text-slate-900">
+                <div className="mt-2 flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   1 business day · Platform Deployment Team
                 </div>
@@ -110,7 +110,7 @@ const ContactFooter: React.FC = () => {
             <div className="lg:col-span-7">
               <form
                 onSubmit={handleSubmit}
-                className="p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-xl shadow-slate-900/5"
+                className="p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-xl shadow-slate-900/5"
                 aria-describedby="contact-form-status"
                 noValidate
               >
@@ -119,8 +119,8 @@ const ContactFooter: React.FC = () => {
                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center mx-auto">
                       <CheckCircle2 size={28} className="text-emerald-600" aria-hidden="true" />
                     </div>
-                    <h3 className="mt-5 text-xl font-semibold text-slate-900">Inquiry received</h3>
-                    <p className="mt-2 text-slate-600">
+                    <h3 className="mt-5 text-xl font-semibold text-slate-900 dark:text-white">Inquiry received</h3>
+                    <p className="mt-2 text-slate-600 dark:text-slate-400">
                       Our platform deployment team will contact you within one business day.
                     </p>
                     <button
@@ -158,7 +158,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="name"
                           value={form.name}
                           onChange={(e) => setForm({ ...form, name: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="Anna Lindqvist"
                         />
                       </div>
@@ -173,7 +173,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="email"
                           value={form.email}
                           onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="anna@organization.eu"
                         />
                       </div>
@@ -189,7 +189,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="organization"
                           value={form.company}
                           onChange={(e) => setForm({ ...form, company: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="Ministry, municipality or company"
                         />
                       </div>
@@ -202,7 +202,7 @@ const ContactFooter: React.FC = () => {
                           autoComplete="country-name"
                           value={form.country}
                           onChange={(e) => setForm({ ...form, country: e.target.value })}
-                          className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                          className="mt-2 w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                           placeholder="Norway"
                         />
                       </div>
@@ -216,7 +216,7 @@ const ContactFooter: React.FC = () => {
                         id="cf-deployment-type"
                         value={form.deployment_type}
                         onChange={(e) => setForm({ ...form, deployment_type: e.target.value as DeploymentType })}
-                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
+                        className="mt-2 w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white"
                       >
                         {DEPLOYMENT_TYPES.map((t) => (
                           <option key={t} value={t}>
@@ -235,7 +235,7 @@ const ContactFooter: React.FC = () => {
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                         rows={4}
-                        className="mt-2 w-full px-4 py-3 bg-slate-50 border border-slate-200/80 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white resize-none"
+                        className="mt-2 w-full px-4 py-3 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm focus:outline-none focus:border-[#1E6FD9] focus:bg-white resize-none"
                         placeholder="Briefly describe your deployment objective, target region, and timeline."
                       />
                     </div>
@@ -280,7 +280,7 @@ const ContactFooter: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-[#F5F8FC] to-[#EAF0F7] border-t border-slate-200/80">
+      <footer className="bg-gradient-to-b from-[#F5F8FC] to-[#EAF0F7] border-t border-slate-200/80 dark:border-slate-800/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
           <div className="grid lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
@@ -292,11 +292,11 @@ const ContactFooter: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <div className="font-semibold text-slate-900 tracking-tight text-[15px]">FlyttGo</div>
+                  <div className="font-semibold text-slate-900 dark:text-white tracking-tight text-[15px]">FlyttGo</div>
                   <div className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-medium">Technologies Group</div>
                 </div>
               </div>
-              <p className="mt-5 text-sm text-slate-600 leading-relaxed max-w-sm">
+              <p className="mt-5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
                 Smart digital infrastructure for logistics, education, government and enterprise systems —
                 deployed across Europe, Africa and the Middle East.
               </p>
@@ -305,7 +305,7 @@ const ContactFooter: React.FC = () => {
                 {[Linkedin, Twitter, Github].map((Icon, i) => (
                   <button
                     key={i}
-                    className="w-9 h-9 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
+                    className="w-9 h-9 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 flex items-center justify-center text-slate-600 hover:text-slate-900 dark:text-white hover:border-slate-300 transition-colors"
                   >
                     <Icon size={16} />
                   </button>
@@ -316,27 +316,27 @@ const ContactFooter: React.FC = () => {
             <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div>
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">Platforms</div>
-                <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">FlyttGo Logistics</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">EduPro AI</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">GovStack</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">MarketStack</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">FleetStack</a></li>
+                <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">FlyttGo Logistics</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">EduPro AI</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">GovStack</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">MarketStack</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">FleetStack</a></li>
                 </ul>
               </div>
               <div>
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">Solutions</div>
-                <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">White-Label Deployment</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Government Platforms</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Enterprise Fleet</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Education Analytics</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Marketplace Engine</a></li>
+                <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">White-Label Deployment</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Government Platforms</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Enterprise Fleet</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Education Analytics</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Marketplace Engine</a></li>
                 </ul>
               </div>
               <div>
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">Regions</div>
-                <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
+                <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
                   <li>Europe</li>
                   <li>Middle East</li>
                   <li>Africa</li>
@@ -345,26 +345,26 @@ const ContactFooter: React.FC = () => {
               </div>
               <div>
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">Company</div>
-                <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">About</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Technology</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Partners</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Careers</a></li>
-                  <li><a className="hover:text-slate-900 transition-colors cursor-pointer">Press</a></li>
+                <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">About</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Technology</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Partners</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Careers</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Press</a></li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div className="mt-14 pt-8 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-14 pt-8 border-t border-slate-200/80 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-4">
             <div className="text-xs text-slate-500">
               © {new Date().getFullYear()} FlyttGo Technologies Group AB · Platform Infrastructure Provider
             </div>
             <div className="flex items-center gap-6 text-xs text-slate-500">
-              <a className="hover:text-slate-900 cursor-pointer">Privacy</a>
-              <a className="hover:text-slate-900 cursor-pointer">Terms</a>
-              <a className="hover:text-slate-900 cursor-pointer">Security</a>
-              <a className="hover:text-slate-900 cursor-pointer">Compliance</a>
+              <a className="hover:text-slate-900 dark:text-white cursor-pointer">Privacy</a>
+              <a className="hover:text-slate-900 dark:text-white cursor-pointer">Terms</a>
+              <a className="hover:text-slate-900 dark:text-white cursor-pointer">Security</a>
+              <a className="hover:text-slate-900 dark:text-white cursor-pointer">Compliance</a>
             </div>
           </div>
         </div>

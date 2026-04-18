@@ -19,8 +19,8 @@ const rows: Row[] = [
     widthClass: 'w-full',
     toneLabel: 'Slow · Custom',
     barClass: 'bg-gradient-to-r from-slate-300/70 via-slate-300 to-slate-400',
-    trackClass: 'bg-slate-100',
-    textClass: 'text-slate-600',
+    trackClass: 'bg-slate-100 dark:bg-slate-800/60',
+    textClass: 'text-slate-600 dark:text-slate-400',
     steps: ['Scoping', 'Architecture', 'Custom backend', 'Integrations', 'Hardening', 'Rollout'],
   },
   {
@@ -29,7 +29,7 @@ const rows: Row[] = [
     widthClass: 'w-[14%]',
     toneLabel: 'Production-Ready',
     barClass: 'bg-gradient-to-r from-[#0A3A6B] via-[#1E6FD9] to-[#0FB5A6]',
-    trackClass: 'bg-slate-100',
+    trackClass: 'bg-slate-100 dark:bg-slate-800/60',
     textClass: 'text-[#0A3A6B]',
     steps: ['Template', 'Branding', 'Module activation', 'Deploy'],
   },
@@ -57,7 +57,7 @@ const DeploymentSpeed: React.FC = () => {
   return (
     <section
       aria-labelledby="deployment-speed-heading"
-      className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-[#F7FAFD] to-white"
+      className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-[#F7FAFD] to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl motion-safe:animate-fade-up">
@@ -67,20 +67,20 @@ const DeploymentSpeed: React.FC = () => {
           </p>
           <h2
             id="deployment-speed-heading"
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.05]"
+            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
           >
             Launch Platforms in Weeks —{' '}
             <span className="bg-gradient-to-r from-[#1E6FD9] to-[#0FB5A6] bg-clip-text text-transparent">
               Not Years
             </span>
           </h2>
-          <p className="mt-6 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
             Organizations compress deployment from multi-year custom builds into weeks by activating
             modular infrastructure instead of engineering every layer from scratch.
           </p>
         </div>
 
-        <div className="mt-16 rounded-3xl border border-slate-200/80 bg-white p-6 lg:p-12 shadow-sm">
+        <div className="mt-16 rounded-3xl border border-slate-200/80 dark:border-slate-800/60 bg-white dark:bg-slate-900 p-6 lg:p-12 shadow-sm">
           <div className="grid grid-cols-[auto_1fr_auto] gap-x-6 lg:gap-x-10 gap-y-2 items-center text-xs uppercase tracking-[0.18em] text-slate-400 font-semibold">
             <div>Approach</div>
             <div className="hidden lg:block">Relative Timeline</div>
@@ -91,7 +91,7 @@ const DeploymentSpeed: React.FC = () => {
             {rows.map((r) => (
               <div key={r.label} className="grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-y-4 lg:gap-x-10 lg:items-center">
                 <div>
-                  <div className="text-base lg:text-lg font-semibold text-slate-900 tracking-tight">
+                  <div className="text-base lg:text-lg font-semibold text-slate-900 dark:text-white tracking-tight">
                     {r.label}
                   </div>
                   <div className={`mt-1 text-xs uppercase tracking-wider font-semibold ${r.textClass}`}>
@@ -113,7 +113,7 @@ const DeploymentSpeed: React.FC = () => {
                   {r.steps.map((s, i) => (
                     <li
                       key={s}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/80 text-xs font-medium text-slate-700"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 text-xs font-medium text-slate-700 dark:text-slate-300"
                     >
                       <span className="font-mono text-[10px] text-slate-400">0{i + 1}</span>
                       {s}
@@ -124,7 +124,7 @@ const DeploymentSpeed: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-12 pt-10 border-t border-slate-100 grid md:grid-cols-3 gap-6">
+          <div className="mt-12 pt-10 border-t border-slate-100 dark:border-slate-800 grid md:grid-cols-3 gap-6">
             {accelerators.map((a) => {
               const Icon = a.icon;
               return (
@@ -136,8 +136,8 @@ const DeploymentSpeed: React.FC = () => {
                     <Icon size={20} strokeWidth={1.75} />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-slate-900 tracking-tight">{a.title}</h3>
-                    <p className="mt-1.5 text-sm text-slate-600 leading-relaxed">{a.desc}</p>
+                    <h3 className="text-base font-semibold text-slate-900 dark:text-white tracking-tight">{a.title}</h3>
+                    <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{a.desc}</p>
                   </div>
                 </div>
               );

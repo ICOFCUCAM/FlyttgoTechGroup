@@ -81,7 +81,7 @@ const InfrastructureModules: React.FC = () => {
     <section
       id="infrastructure-modules"
       aria-labelledby="infrastructure-modules-heading"
-      className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-[#F7FAFD] to-white"
+      className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-[#F7FAFD] to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
     >
       <div
         className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
@@ -97,17 +97,17 @@ const InfrastructureModules: React.FC = () => {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <Reveal className="max-w-3xl">
-          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-[0.18em]">
+          <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-[0.18em]">
             Infrastructure Modules
           </p>
           <h2
             id="infrastructure-modules-heading"
-            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.05]"
+            className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
           >
             Modular Infrastructure{' '}
             <span className="text-[#0A3A6B]">Components</span>
           </h2>
-          <p className="mt-6 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
+          <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
             Six composable modules that power every FlyttGo deployment. Activate together or
             independently, per tenant and region.
           </p>
@@ -120,7 +120,7 @@ const InfrastructureModules: React.FC = () => {
             const outer =
               isFeatured
                 ? 'md:col-span-2 lg:col-span-2 lg:row-span-2 row-span-2 bg-gradient-to-br from-[#0A1F3D] via-[#0A3A6B] to-[#1E6FD9] text-white border-transparent'
-                : 'bg-white border border-slate-200/80 shadow-[0_1px_0_0_rgb(15_23_42/0.04)] hover:shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_20px_40px_-16px_rgb(15_23_42/0.18)]';
+                : 'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04)] hover:shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_20px_40px_-16px_rgb(15_23_42/0.18)]';
             const delay = i * 60;
             return (
               <Reveal
@@ -169,14 +169,14 @@ const InfrastructureModules: React.FC = () => {
                   </div>
                   <h3
                     className={`mt-7 font-semibold tracking-tight ${
-                      isFeatured ? 'text-white text-2xl lg:text-3xl' : 'text-slate-900 text-xl lg:text-2xl'
+                      isFeatured ? 'text-white text-2xl lg:text-3xl' : 'text-slate-900 dark:text-white text-xl lg:text-2xl'
                     }`}
                   >
                     {m.name}
                   </h3>
                   <p
                     className={`mt-3 text-sm leading-relaxed ${
-                      isFeatured ? 'text-white/80 max-w-md' : 'text-slate-600'
+                      isFeatured ? 'text-white/80 max-w-md' : 'text-slate-600 dark:text-slate-400'
                     }`}
                   >
                     {m.description}
@@ -188,7 +188,7 @@ const InfrastructureModules: React.FC = () => {
                         className={`inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium ${
                           isFeatured
                             ? 'bg-white/10 border border-white/20 text-white/85'
-                            : 'bg-slate-50 border border-slate-200/80 text-slate-700'
+                            : 'bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 text-slate-700 dark:text-slate-300'
                         }`}
                       >
                         {s}
@@ -215,7 +215,7 @@ const InfrastructureModules: React.FC = () => {
         <div className="mt-12 flex justify-center">
           <Link
             href="/technology"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200/80 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white font-semibold rounded-lg hover:bg-slate-50 dark:bg-slate-900/60 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
             See full architecture
             <ArrowUpRight size={16} aria-hidden="true" />

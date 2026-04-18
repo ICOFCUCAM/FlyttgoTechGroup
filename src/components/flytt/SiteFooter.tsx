@@ -131,7 +131,7 @@ const SiteFooter: React.FC = () => {
                 {regions.map((r) => (
                   <li
                     key={r.code}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-xs font-medium text-slate-200"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900/5 border border-white/10 rounded-md text-xs font-medium text-slate-200"
                   >
                     <span className="font-mono text-[10px] text-slate-500 tracking-[0.14em]">
                       {r.code}
@@ -144,7 +144,7 @@ const SiteFooter: React.FC = () => {
 
             <Link
               href="/contact"
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#0A1F3D] text-sm font-semibold rounded-md hover:bg-slate-100 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22]"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#0A1F3D] text-sm font-semibold rounded-md hover:bg-slate-100 dark:bg-slate-800/60 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22]"
             >
               Deploy Your Platform
               <ArrowRight size={14} aria-hidden="true" />

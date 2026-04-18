@@ -82,7 +82,7 @@ const WhiteLabelSection: React.FC = () => {
     <section
       id="whitelabel"
       aria-labelledby="whitelabel-heading"
-      className="py-24 lg:py-32 bg-gradient-to-b from-[#F7FAFD] to-white"
+      className="py-24 lg:py-32 bg-gradient-to-b from-[#F7FAFD] to-white dark:from-slate-900 dark:to-slate-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-10 items-end">
@@ -93,13 +93,13 @@ const WhiteLabelSection: React.FC = () => {
             </p>
             <h2
               id="whitelabel-heading"
-              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight"
+              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight"
             >
               Launch your own infrastructure platform on FlyttGo — branded, tenant-isolated, production-ready.
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-lg text-slate-600 leading-relaxed">
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Organizations retain brand identity, domain control and platform ownership — while deploying on
               a modular, multi-tenant infrastructure layer built for rapid regional rollout.
             </p>
@@ -121,7 +121,7 @@ const WhiteLabelSection: React.FC = () => {
             return (
               <article
                 key={p.title}
-                className="group relative p-7 lg:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                className="group relative p-7 lg:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-start justify-between">
                   <div
@@ -133,20 +133,20 @@ const WhiteLabelSection: React.FC = () => {
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="text-slate-300 group-hover:text-slate-900 transition-colors"
+                    className="text-slate-300 group-hover:text-slate-900 dark:text-white transition-colors"
                     aria-hidden="true"
                   />
                 </div>
                 <p className="mt-6 text-[11px] uppercase tracking-wider font-semibold" style={{ color: p.accent }}>
                   {p.eyebrow}
                 </p>
-                <h3 className="mt-1.5 text-xl font-semibold text-slate-900 tracking-tight leading-snug">
+                <h3 className="mt-1.5 text-xl font-semibold text-slate-900 dark:text-white tracking-tight leading-snug">
                   {p.title}
                 </h3>
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{p.description}</p>
+                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{p.description}</p>
                 <ul className="mt-6 space-y-2">
                   {p.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5 text-sm text-slate-700">
+                    <li key={b} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                       <CheckCircle2 size={16} className="flex-shrink-0 mt-0.5" style={{ color: p.accent }} aria-hidden="true" />
                       <span className="leading-snug">{b}</span>
                     </li>
@@ -172,16 +172,16 @@ const WhiteLabelSection: React.FC = () => {
               return (
                 <div
                   key={w.title}
-                  className="relative p-7 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all"
+                  className="relative p-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/60 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all"
                 >
                   <div className="text-xs font-mono text-slate-400 font-semibold">STEP 0{i + 1}</div>
                   <div className="mt-4 w-12 h-12 rounded-xl bg-gradient-to-br from-[#EEF4FA] to-[#E0EBF7] flex items-center justify-center text-[#0A3A6B]" aria-hidden="true">
                     <Icon size={22} strokeWidth={1.75} />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900 tracking-tight">{w.title}</h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{w.desc}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white tracking-tight">{w.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{w.desc}</p>
                   {i < workflow.length - 1 && (
-                    <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-slate-200/80 items-center justify-center z-10 shadow-sm" aria-hidden="true">
+                    <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 items-center justify-center z-10 shadow-sm" aria-hidden="true">
                       <ArrowRight size={12} className="text-slate-400" />
                     </div>
                   )}
@@ -192,11 +192,11 @@ const WhiteLabelSection: React.FC = () => {
         </div>
 
         <div className="mt-10 grid lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl bg-white border border-slate-200/80">
-            <h3 className="text-xl font-semibold text-slate-900 tracking-tight">
+          <div className="lg:col-span-7 p-8 lg:p-10 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60">
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-white tracking-tight">
               Configure every layer of your deployment
             </h3>
-            <p className="mt-2 text-sm text-slate-600">
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
               Retain full brand identity, domain control and platform ownership across every module.
             </p>
             <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -205,12 +205,12 @@ const WhiteLabelSection: React.FC = () => {
                 return (
                   <div
                     key={c.title}
-                    className="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-all"
+                    className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-900/60/50 hover:bg-white hover:border-slate-300 transition-all"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-white border border-slate-200/80 flex items-center justify-center text-[#1E6FD9]" aria-hidden="true">
+                    <div className="w-9 h-9 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 flex items-center justify-center text-[#1E6FD9]" aria-hidden="true">
                       <Icon size={18} strokeWidth={1.75} />
                     </div>
-                    <div className="mt-3 text-sm font-semibold text-slate-900">{c.title}</div>
+                    <div className="mt-3 text-sm font-semibold text-slate-900 dark:text-white">{c.title}</div>
                   </div>
                 );
               })}
@@ -228,7 +228,7 @@ const WhiteLabelSection: React.FC = () => {
               }}
             />
             <div className="relative flex flex-col h-full">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-xs font-semibold uppercase tracking-wider self-start">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-slate-900/10 rounded-full text-xs font-semibold uppercase tracking-wider self-start">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" aria-hidden="true" />
                 Infrastructure Ready
               </div>
@@ -251,7 +251,7 @@ const WhiteLabelSection: React.FC = () => {
               <div className="mt-auto pt-8 flex flex-col gap-3">
                 <Link
                   href="/white-label"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] font-semibold rounded-lg hover:bg-slate-100 dark:bg-slate-800/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A3A6B]"
                 >
                   Launch Your Platform
                   <ArrowRight size={16} aria-hidden="true" />
@@ -282,7 +282,7 @@ const WhiteLabelSection: React.FC = () => {
             ].map((s) => (
               <div
                 key={s}
-                className="p-4 bg-white border border-slate-200/80 rounded-xl text-center text-sm font-medium text-slate-700 hover:border-[#1E6FD9] hover:text-[#0A3A6B] transition-colors"
+                className="p-4 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-xl text-center text-sm font-medium text-slate-700 dark:text-slate-300 hover:border-[#1E6FD9] hover:text-[#0A3A6B] transition-colors"
               >
                 {s}
               </div>

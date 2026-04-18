@@ -67,7 +67,7 @@ const MultiRegion: React.FC = () => {
     <section
       id="regions"
       aria-labelledby="multi-region-heading"
-      className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-[#F7FAFD] to-white overflow-hidden"
+      className="relative py-28 lg:py-36 bg-gradient-to-b from-white via-[#F7FAFD] to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 overflow-hidden"
     >
       <div
         aria-hidden="true"
@@ -99,20 +99,20 @@ const MultiRegion: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-10 items-end motion-safe:animate-fade-up">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+            <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               <Globe2 size={12} aria-hidden="true" />
               Multi-Region Capability
             </p>
             <h2
               id="multi-region-heading"
-              className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 leading-[1.05]"
+              className="mt-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
               Multi-Region{' '}
               <span className="text-[#0A3A6B]">Deployment Architecture</span>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-lg lg:text-xl text-slate-600 leading-relaxed">
+            <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
               A single infrastructure layer with tenant-scoped isolation, regional data residency
               options and country-level rollout templates — ready to deploy across Europe, Africa
               and the Middle East.
@@ -124,7 +124,7 @@ const MultiRegion: React.FC = () => {
           {regions.map((r) => (
             <article
               key={r.code}
-              className={`group relative p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${r.tint} border border-slate-200/80 hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all`}
+              className={`group relative p-7 lg:p-8 rounded-3xl bg-gradient-to-br ${r.tint} border border-slate-200/80 dark:border-slate-800/60 hover:shadow-xl hover:-translate-y-0.5 motion-safe:transition-all`}
             >
               <div className="flex items-center justify-between">
                 <div
@@ -135,23 +135,23 @@ const MultiRegion: React.FC = () => {
                 </div>
                 <Compass size={16} className="text-slate-400" aria-hidden="true" />
               </div>
-              <h3 className="mt-4 text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight">
+              <h3 className="mt-4 text-2xl lg:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">
                 {r.name}
               </h3>
-              <p className="mt-3 text-sm lg:text-base text-slate-600 leading-relaxed">
+              <p className="mt-3 text-sm lg:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
                 {r.description}
               </p>
               <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${r.name} deployment hubs`}>
                 {r.hubs.map((h) => (
                   <li
                     key={h}
-                    className="inline-flex items-center px-2.5 py-1 bg-white border border-slate-200/80 rounded-md text-xs font-medium text-slate-700 shadow-sm"
+                    className="inline-flex items-center px-2.5 py-1 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-md text-xs font-medium text-slate-700 dark:text-slate-300 shadow-sm"
                   >
                     {h}
                   </li>
                 ))}
               </ul>
-              <div className="mt-7 pt-5 border-t border-slate-200/70 flex items-center justify-between">
+              <div className="mt-7 pt-5 border-t border-slate-200/70 dark:border-slate-800/60 flex items-center justify-between">
                 <span className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
                   Tenant-scoped · Data-resident
                 </span>
@@ -170,7 +170,7 @@ const MultiRegion: React.FC = () => {
         <div className="mt-12 flex justify-center">
           <Link
             href="/industries"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200/80 text-slate-900 font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white font-semibold rounded-lg hover:bg-slate-50 dark:bg-slate-900/60 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
           >
             See deployment map &amp; industries
             <ArrowUpRight size={16} aria-hidden="true" />

@@ -84,20 +84,20 @@ const SolutionsSection: React.FC = () => {
     <section id="solutions-tabs" className="py-24 lg:py-32 bg-gradient-to-b from-white to-[#F5F8FC]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Solutions by Segment
           </div>
-          <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 leading-tight">
+          <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
             Infrastructure for Governments, Enterprises, Founders and Marketplaces
           </h2>
-          <p className="mt-5 text-lg text-slate-600 leading-relaxed">
+          <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
             FlyttGo Technologies Group infrastructure operates across multiple industries simultaneously —
             supporting institutional deployments, commercial operations and emerging platform ecosystems.
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="mt-12 flex flex-wrap gap-2 border-b border-slate-200/80">
+        <div className="mt-12 flex flex-wrap gap-2 border-b border-slate-200/80 dark:border-slate-800/60">
           {tabs.map((t) => {
             const Icon = t.icon;
             const isActive = active === t.id;
@@ -108,7 +108,7 @@ const SolutionsSection: React.FC = () => {
                 className={`inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold transition-colors border-b-2 -mb-px ${
                   isActive
                     ? 'border-[#0A3A6B] text-[#0A3A6B]'
-                    : 'border-transparent text-slate-500 hover:text-slate-900'
+                    : 'border-transparent text-slate-500 hover:text-slate-900 dark:text-white'
                 }`}
               >
                 <Icon size={16} />
@@ -120,7 +120,7 @@ const SolutionsSection: React.FC = () => {
 
         {/* Tab content */}
         <div id={current.id} className="mt-10 grid lg:grid-cols-12 gap-10 items-start">
-          <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200/80 shadow-lg">
+          <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/60 shadow-lg">
             <div className="relative aspect-[16/10]">
               <Image
                 src={current.image}
@@ -143,21 +143,21 @@ const SolutionsSection: React.FC = () => {
           </div>
 
           <div className="lg:col-span-5">
-            <h3 className="text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight leading-tight">
+            <h3 className="text-2xl lg:text-3xl font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
               {current.headline}
             </h3>
-            <p className="mt-4 text-slate-600 leading-relaxed">{current.description}</p>
+            <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed">{current.description}</p>
 
             <div className="mt-6 space-y-2.5">
               {current.capabilities.map((c) => (
-                <div key={c} className="flex items-start gap-2.5 text-sm text-slate-700">
+                <div key={c} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                   <CheckCircle2 size={16} className="text-[#0FB5A6] flex-shrink-0 mt-0.5" />
                   {c}
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-slate-200/80">
+            <div className="mt-6 pt-6 border-t border-slate-200/80 dark:border-slate-800/60">
               <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold mb-3">
                 Target Deployment Segments
               </div>
@@ -165,7 +165,7 @@ const SolutionsSection: React.FC = () => {
                 {current.segments.map((s) => (
                   <span
                     key={s}
-                    className="px-3 py-1.5 text-xs font-medium bg-white border border-slate-200/80 text-slate-700 rounded-md"
+                    className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 text-slate-700 dark:text-slate-300 rounded-md"
                   >
                     {s}
                   </span>

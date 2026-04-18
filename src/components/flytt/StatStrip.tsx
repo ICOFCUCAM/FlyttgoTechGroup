@@ -48,7 +48,7 @@ const StatStrip: React.FC = () => {
   return (
     <section
       aria-labelledby="stat-strip-heading"
-      className="relative py-16 lg:py-20 bg-white border-b border-slate-200/80"
+      className="relative py-16 lg:py-20 bg-white dark:bg-slate-950 border-b border-slate-200/80 dark:border-slate-800/60"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <h2 id="stat-strip-heading" className="sr-only">
@@ -70,7 +70,7 @@ const StatStrip: React.FC = () => {
                   <Icon size={13} strokeWidth={1.75} className="text-[#0A3A6B]" aria-hidden="true" />
                   <span>{s.label}</span>
                 </div>
-                <dd className="mt-3 text-[40px] lg:text-[52px] leading-none font-semibold tracking-tight text-slate-900">
+                <dd className="mt-3 text-[40px] lg:text-[52px] leading-none font-semibold tracking-tight text-slate-900 dark:text-white">
                   <CountUp
                     to={s.to}
                     prefix={s.prefix}
@@ -79,7 +79,7 @@ const StatStrip: React.FC = () => {
                     ariaLabel={`${s.prefix ?? ''}${s.to}${s.suffix ?? ''} ${s.label}`}
                   />
                 </dd>
-                <dt className="mt-3 text-sm text-slate-600 leading-relaxed max-w-xs">{s.sub}</dt>
+                <dt className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-xs">{s.sub}</dt>
               </div>
             );
           })}

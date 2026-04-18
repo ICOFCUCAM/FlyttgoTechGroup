@@ -20,7 +20,7 @@ const ComplianceBand: React.FC = () => {
   return (
     <section
       aria-labelledby="compliance-band-heading"
-      className="relative bg-white border-t border-slate-200/80"
+      className="relative bg-white dark:bg-slate-950 border-t border-slate-200/80 dark:border-slate-800/60"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14 lg:py-16">
         <Reveal>
@@ -37,16 +37,16 @@ const ComplianceBand: React.FC = () => {
               return (
                 <li
                   key={b.label}
-                  className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200/80 bg-white motion-safe:transition-colors hover:border-slate-300"
+                  className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200/80 dark:border-slate-800/60 bg-white motion-safe:transition-colors hover:border-slate-300"
                 >
                   <span
-                    className="w-9 h-9 rounded-lg bg-slate-100 text-[#0A3A6B] flex items-center justify-center flex-shrink-0"
+                    className="w-9 h-9 rounded-lg bg-slate-100 dark:bg-slate-800/60 text-[#0A3A6B] flex items-center justify-center flex-shrink-0"
                     aria-hidden="true"
                   >
                     <Icon size={16} strokeWidth={1.75} />
                   </span>
                   <span className="flex flex-col leading-tight">
-                    <span className="text-sm font-semibold text-slate-900 tracking-tight">{b.label}</span>
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">{b.label}</span>
                     <span className="mt-0.5 text-[11px] text-slate-500">{b.sub}</span>
                   </span>
                 </li>
