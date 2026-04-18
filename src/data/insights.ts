@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { Building2, Layers, ShieldCheck } from 'lucide-react';
+import { Building2, Globe2, Layers, ShieldCheck } from 'lucide-react';
 
 export type Insight = {
   slug: string;
@@ -27,6 +27,82 @@ export type InsightBlock =
   | { type: 'callout'; title: string; text: string };
 
 export const insights: Insight[] = [
+  {
+    slug: 'multi-region-data-residency',
+    title:
+      'Running FlyttGo across EU, AF and MENA — a data residency playbook',
+    dek: 'How platform deployments hold data-residency guarantees across three continents without sacrificing operational velocity.',
+    eyebrow: 'Operations',
+    icon: Globe2,
+    accent: '#0FB5A6',
+    author: 'FlyttGo Platform Engineering',
+    publishedOn: '2026-04-02',
+    authorRole: 'Platform SRE',
+    readMinutes: 8,
+    tags: ['Operations', 'Compliance', 'Architecture'],
+    content: [
+      {
+        type: 'p',
+        text:
+          'Operators deploying across multiple jurisdictions ask the same early question: where does our data live, and can we prove it? This is the pattern we ship for customers running simultaneously in the EU, Africa and MENA.',
+      },
+      {
+        type: 'h2',
+        text: 'The three-tier residency model',
+      },
+      {
+        type: 'p',
+        text:
+          'Every FlyttGo tenant runs under one of three residency tiers: managed EU, customer cloud, or sovereign datacenter. A single operator can run different tiers for different regions — EU managed for efficiency, GCC sovereign for national compliance, customer-cloud in South Africa to satisfy POPIA.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Managed EU — region-locked tenants under GDPR, Data Processing Agreement with the FlyttGo-managed infrastructure entity.',
+          'Customer cloud — your AWS / Azure / GCP tenancy, your contractual terms, your residency posture.',
+          'Sovereign — national datacenter, national key management, optional air-gap.',
+        ],
+      },
+      {
+        type: 'h2',
+        text: 'How data stays in-region',
+      },
+      {
+        type: 'p',
+        text:
+          'Each tenant declares a primary region at provisioning. Database, object storage and queue clusters are all pinned. Cross-region reads only happen through explicit federation (e.g., a regulator dashboard) and go through an access layer that records every cross-border access in a tamper-evident log.',
+      },
+      {
+        type: 'callout',
+        title: 'What we never do',
+        text: 'We never replicate tenant data across regions for operational convenience. Cross-region access happens only through explicit, audited federation — and only when the customer has enabled it in the deployment portal.',
+      },
+      {
+        type: 'h2',
+        text: 'Keys and secrets',
+      },
+      {
+        type: 'p',
+        text:
+          'Encryption keys live with the tenant. Managed deployments use FlyttGo-operated HSMs region-locked to the primary region. Customer-cloud deployments integrate with the customer\'s KMS (AWS KMS, Azure Key Vault, GCP KMS). Sovereign deployments use national HSMs, with quarterly key rotation under the customer SOC\'s control.',
+      },
+      {
+        type: 'h2',
+        text: 'Cross-border programmes',
+      },
+      {
+        type: 'p',
+        text:
+          'Programmes that span regions — freight corridors, regional student ID federations, cross-border payments — run as federations of independent per-region tenants that exchange only the specific message types required for the corridor. The default is no sharing; sharing is a per-data-class decision documented in the DPA.',
+      },
+      {
+        type: 'quote',
+        text:
+          'The point of data residency is not where the bytes sit. It is whether you can prove, to an auditor, that every access respects the jurisdictional constraint.',
+        cite: 'FlyttGo Residency Playbook',
+      },
+    ],
+  },
   {
     slug: 'choosing-your-deployment-mode',
     title:
