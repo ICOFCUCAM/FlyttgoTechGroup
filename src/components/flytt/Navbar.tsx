@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Fingerprint,
   CreditCard,
+  Calculator,
   Truck,
   Search,
   ArrowUpRight,
@@ -63,6 +64,7 @@ const primaryLinks: NavLink[] = [
             { label: 'EduPro', description: 'Education intelligence infrastructure', href: '/platforms/edupro', icon: GraduationCap },
             { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
             { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
+            { label: 'Ledgera', description: 'Financial operations & bookkeeping infrastructure', href: '/platforms/ledgera', icon: Calculator },
           ],
         },
         {

@@ -17,6 +17,7 @@ const groups: Group[] = [
       { label: 'EduPro', href: '/platforms/edupro' },
       { label: 'Identra', href: '/platforms/identra' },
       { label: 'Payvera', href: '/platforms/payvera' },
+      { label: 'Ledgera', href: '/platforms/ledgera' },
       { label: 'FlyttGo (marketplace)', href: '/platforms/flyttgo' },
       { label: 'All platforms', href: '/platforms' },
     ],

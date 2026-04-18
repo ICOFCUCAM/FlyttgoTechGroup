@@ -18,6 +18,7 @@ import {
   GraduationCap,
   Fingerprint,
   CreditCard,
+  Calculator,
   Truck,
   Network,
   Briefcase,
@@ -46,6 +47,7 @@ const platformIcon: Record<string, LucideIcon> = {
   edupro: GraduationCap,
   identra: Fingerprint,
   payvera: CreditCard,
+  ledgera: Calculator,
   flyttgo: Truck,
 };
 
