@@ -56,7 +56,7 @@ const launchPaths: LaunchPath[] = [
     description:
       'Deliver branded municipal coordination platforms — permit workflows, citizen service orchestration and transport oversight — deployable as pilot, metro-scale or national environments.',
     bullets: ['Permit workflows', 'Citizen services', 'Cross-agency coordination'],
-    href: '/platforms/govstack',
+    href: '/platforms/civitas',
     accent: '#7C5CE6',
   },
 ];

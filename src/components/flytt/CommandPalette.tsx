@@ -12,24 +12,20 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 import {
-  Building2,
-  GraduationCap,
-  Truck,
-  Store,
-  Radar,
-  Network,
+  Route,
+  UserCheck,
   Landmark,
-  Rocket,
-  Code2,
-  BarChart3,
-  CreditCard,
+  GraduationCap,
   Fingerprint,
-  LayoutDashboard,
-  Sparkles,
-  Globe2,
-  MessageCircle,
+  CreditCard,
+  Truck,
+  Network,
   Briefcase,
+  Code2,
+  ServerCog,
   Building,
+  MessageCircle,
+  Globe2,
   type LucideIcon,
 } from 'lucide-react';
 import { platformList } from '@/data/platforms';
@@ -39,34 +35,28 @@ type Entry = {
   label: string;
   description?: string;
   href: string;
-  group: 'Platforms' | 'Infrastructure' | 'Navigate' | 'Company';
+  group: 'Platforms' | 'Navigate' | 'Company';
   icon: LucideIcon;
 };
 
 const platformIcon: Record<string, LucideIcon> = {
-  flyttgo: Truck,
+  transify: Route,
+  workverge: UserCheck,
+  civitas: Landmark,
   edupro: GraduationCap,
-  govstack: Building2,
-  marketstack: Store,
-  fleetstack: Radar,
+  identra: Fingerprint,
+  payvera: CreditCard,
+  flyttgo: Truck,
 };
 
 const staticEntries: Entry[] = [
   {
     id: 'nav-platforms',
     label: 'Platforms',
-    description: 'Explore the 5-platform infrastructure ecosystem',
+    description: 'Explore the platform ecosystem',
     href: '/platforms',
     group: 'Navigate',
     icon: Network,
-  },
-  {
-    id: 'nav-infrastructure',
-    label: 'Infrastructure modules',
-    description: 'Composable components — payments, identity, marketplace engine, analytics',
-    href: '/infrastructure',
-    group: 'Navigate',
-    icon: Sparkles,
   },
   {
     id: 'nav-industries',
@@ -77,6 +67,14 @@ const staticEntries: Entry[] = [
     icon: Briefcase,
   },
   {
+    id: 'nav-deployment',
+    label: 'Deployment',
+    description: 'Managed, customer-cloud or sovereign national datacenter',
+    href: '/deployment',
+    group: 'Navigate',
+    icon: ServerCog,
+  },
+  {
     id: 'nav-technology',
     label: 'Technology',
     description: 'Cloud-native platform architecture',
@@ -85,33 +83,9 @@ const staticEntries: Entry[] = [
     icon: Code2,
   },
   {
-    id: 'nav-solutions',
-    label: 'Solutions',
-    description: 'Enterprise · Government · Deployment speed · Tabbed solutions',
-    href: '/solutions',
-    group: 'Navigate',
-    icon: Landmark,
-  },
-  {
-    id: 'nav-white-label',
-    label: 'White-label',
-    description: 'Launch a branded platform on FlyttGo infrastructure',
-    href: '/white-label',
-    group: 'Navigate',
-    icon: Rocket,
-  },
-  {
-    id: 'nav-developers',
-    label: 'Developers',
-    description: 'REST APIs · SDKs · webhooks · deployment guides',
-    href: '/developers',
-    group: 'Navigate',
-    icon: Code2,
-  },
-  {
     id: 'nav-company',
     label: 'Company',
-    description: 'About FlyttGo Technologies',
+    description: 'About FlyttGo Technologies Group',
     href: '/company',
     group: 'Company',
     icon: Building,
@@ -124,15 +98,6 @@ const staticEntries: Entry[] = [
     group: 'Company',
     icon: MessageCircle,
   },
-];
-
-const infrastructureEntries: Entry[] = [
-  { id: 'module-payments', label: 'Payments layer', href: '/infrastructure#infrastructure-modules', group: 'Infrastructure', icon: CreditCard },
-  { id: 'module-identity', label: 'Identity layer', href: '/infrastructure#infrastructure-modules', group: 'Infrastructure', icon: Fingerprint },
-  { id: 'module-marketplace', label: 'Marketplace engine', href: '/infrastructure#infrastructure-modules', group: 'Infrastructure', icon: Store },
-  { id: 'module-relocation', label: 'Relocation intelligence', href: '/infrastructure#infrastructure-modules', group: 'Infrastructure', icon: Sparkles },
-  { id: 'module-admin', label: 'Admin dashboards', href: '/infrastructure#infrastructure-modules', group: 'Infrastructure', icon: LayoutDashboard },
-  { id: 'module-analytics', label: 'Analytics layer', href: '/infrastructure#infrastructure-modules', group: 'Infrastructure', icon: BarChart3 },
 ];
 
 const platformEntries: Entry[] = platformList.map((p) => ({
@@ -192,7 +157,7 @@ function CommandPalette() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search platforms, modules, pages…" />
+      <CommandInput placeholder="Search platforms, pages…" />
       <CommandList>
         <CommandEmpty>No results.</CommandEmpty>
 
@@ -200,24 +165,14 @@ function CommandPalette() {
           {platformEntries.map((e) => {
             const Icon = e.icon;
             return (
-              <CommandItem key={e.id} value={`${e.label} ${e.description ?? ''}`} onSelect={() => runAction(e.href)}>
+              <CommandItem
+                key={e.id}
+                value={`${e.label} ${e.description ?? ''}`}
+                onSelect={() => runAction(e.href)}
+              >
                 <Icon size={16} className="mr-2 text-slate-500" strokeWidth={1.75} />
                 <span className="font-medium">{e.label}</span>
                 {e.description && <span className="ml-2 text-xs text-slate-500">{e.description}</span>}
-              </CommandItem>
-            );
-          })}
-        </CommandGroup>
-
-        <CommandSeparator />
-
-        <CommandGroup heading="Infrastructure Modules">
-          {infrastructureEntries.map((e) => {
-            const Icon = e.icon;
-            return (
-              <CommandItem key={e.id} value={e.label} onSelect={() => runAction(e.href)}>
-                <Icon size={16} className="mr-2 text-slate-500" strokeWidth={1.75} />
-                <span>{e.label}</span>
               </CommandItem>
             );
           })}
@@ -231,7 +186,11 @@ function CommandPalette() {
             .map((e) => {
               const Icon = e.icon;
               return (
-                <CommandItem key={e.id} value={`${e.label} ${e.description ?? ''}`} onSelect={() => runAction(e.href)}>
+                <CommandItem
+                  key={e.id}
+                  value={`${e.label} ${e.description ?? ''}`}
+                  onSelect={() => runAction(e.href)}
+                >
                   <Icon size={16} className="mr-2 text-slate-500" strokeWidth={1.75} />
                   <span>{e.label}</span>
                   {e.description && <span className="ml-2 text-xs text-slate-500">{e.description}</span>}
@@ -248,7 +207,11 @@ function CommandPalette() {
             .map((e) => {
               const Icon = e.icon;
               return (
-                <CommandItem key={e.id} value={`${e.label} ${e.description ?? ''}`} onSelect={() => runAction(e.href)}>
+                <CommandItem
+                  key={e.id}
+                  value={`${e.label} ${e.description ?? ''}`}
+                  onSelect={() => runAction(e.href)}
+                >
                   <Icon size={16} className="mr-2 text-slate-500" strokeWidth={1.75} />
                   <span>{e.label}</span>
                   {e.description && <span className="ml-2 text-xs text-slate-500">{e.description}</span>}

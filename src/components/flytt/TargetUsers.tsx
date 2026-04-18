@@ -27,7 +27,7 @@ const audiences: Audience[] = [
     description:
       'Deploy municipal dashboards, permit systems and transport oversight infrastructure — pilot, metro or national scale.',
     outcomes: ['Municipal coordination', 'Permit workflows', 'Regulator oversight'],
-    href: '/platforms/govstack',
+    href: '/platforms/civitas',
     accent: '#7C5CE6',
     tint: 'from-violet-50 to-white',
   },
@@ -60,7 +60,7 @@ const audiences: Audience[] = [
     description:
       'Launch branded logistics, service or workforce marketplaces without engineering backend systems from scratch.',
     outcomes: ['Branded marketplaces', 'Operator dashboards', 'Modular activation'],
-    href: '/platforms/marketstack',
+    href: '/platforms/flyttgo',
     accent: '#E67E1E',
     tint: 'from-orange-50 to-white',
   },
