@@ -33,17 +33,25 @@ const toXY = (angleDeg: number, radius: number) => {
   return { x: CENTER + radius * Math.cos(rad), y: CENTER + radius * Math.sin(rad) };
 };
 
+// 3-tone enterprise palette grouped by capability domain:
+//   Blue  — core infrastructure (mobility, identity)
+//   Teal  — public / human services (workforce, gov, education)
+//   Amber — financial & commerce (payments, finops, marketplace)
+const BLUE = '#60A5FA';
+const TEAL = '#5EEAD4';
+const AMBER = '#F5B547';
+
 // All 8 platforms sit on one ring at 45° spacing around the FlyttGoTech core.
 const STEP = 360 / 8;
 const nodes: OrbitNode[] = [
-  { slug: 'transify', name: 'Transify', subtitle: 'Mobility', icon: Route, angle: 0, radius: RING_RADIUS, accent: '#60A5FA' },
-  { slug: 'workverge', name: 'Workverge', subtitle: 'Workforce', icon: UserCheck, angle: STEP, radius: RING_RADIUS, accent: '#5EEAD4' },
-  { slug: 'civitas', name: 'Civitas', subtitle: 'Gov Services', icon: Landmark, angle: STEP * 2, radius: RING_RADIUS, accent: '#A78BFA' },
-  { slug: 'edupro', name: 'EduPro', subtitle: 'Education', icon: GraduationCap, angle: STEP * 3, radius: RING_RADIUS, accent: '#FBBF24' },
-  { slug: 'identra', name: 'Identra', subtitle: 'Identity', icon: Fingerprint, angle: STEP * 4, radius: RING_RADIUS, accent: '#F472B6' },
-  { slug: 'payvera', name: 'Payvera', subtitle: 'Payments', icon: CreditCard, angle: STEP * 5, radius: RING_RADIUS, accent: '#34D399' },
-  { slug: 'ledgera', name: 'Ledgera', subtitle: 'Financial Ops', icon: Calculator, angle: STEP * 6, radius: RING_RADIUS, accent: '#2DD4BF' },
-  { slug: 'flyttgo', name: 'FlyttGo', subtitle: 'Marketplace', icon: Truck, angle: STEP * 7, radius: RING_RADIUS, accent: '#FCD34D' },
+  { slug: 'transify', name: 'Transify', subtitle: 'Mobility', icon: Route, angle: 0, radius: RING_RADIUS, accent: BLUE },
+  { slug: 'workverge', name: 'Workverge', subtitle: 'Workforce', icon: UserCheck, angle: STEP, radius: RING_RADIUS, accent: TEAL },
+  { slug: 'civitas', name: 'Civitas', subtitle: 'Gov Services', icon: Landmark, angle: STEP * 2, radius: RING_RADIUS, accent: TEAL },
+  { slug: 'edupro', name: 'EduPro', subtitle: 'Education', icon: GraduationCap, angle: STEP * 3, radius: RING_RADIUS, accent: TEAL },
+  { slug: 'identra', name: 'Identra', subtitle: 'Identity', icon: Fingerprint, angle: STEP * 4, radius: RING_RADIUS, accent: BLUE },
+  { slug: 'payvera', name: 'Payvera', subtitle: 'Payments', icon: CreditCard, angle: STEP * 5, radius: RING_RADIUS, accent: AMBER },
+  { slug: 'ledgera', name: 'Ledgera', subtitle: 'Financial Ops', icon: Calculator, angle: STEP * 6, radius: RING_RADIUS, accent: AMBER },
+  { slug: 'flyttgo', name: 'FlyttGo', subtitle: 'Marketplace', icon: Truck, angle: STEP * 7, radius: RING_RADIUS, accent: AMBER },
 ];
 
 // Deterministic pseudo-random starfield so the component stays a pure server
@@ -79,7 +87,7 @@ const Pill: React.FC<{ node: OrbitNode }> = ({ node }) => {
       y={y - PILL_H / 2}
       width={PILL_W}
       height={PILL_H}
-      className="motion-safe:animate-orbit-counter [transform-box:fill-box] [transform-origin:center] overflow-visible"
+      className="motion-safe:animate-orbit-counter group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] [transform-box:fill-box] [transform-origin:center] overflow-visible"
     >
       <Link
         href={`/platforms/${node.slug}`}
@@ -112,9 +120,9 @@ const PlatformOrbitGraph: React.FC = () => {
     <div className="relative w-full max-w-[580px] mx-auto">
       {/* Desktop / tablet — premium orbit graph */}
       <div
-        className="hidden sm:block relative aspect-square"
+        className="group hidden sm:block relative aspect-square"
         role="img"
-        aria-label="FlyttGo Technologies Group platform ecosystem — FlyttGoTech infrastructure core connected to Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and FlyttGo"
+        aria-label="FlyttGo Technologies Group platform ecosystem — FlyttGoTech infrastructure core connected to Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and FlyttGo. Hover to pause."
       >
         <svg viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} className="w-full h-full overflow-visible" aria-hidden="true">
           <defs>
@@ -158,8 +166,9 @@ const PlatformOrbitGraph: React.FC = () => {
           {/* Faint orbit ring */}
           <circle cx={CENTER} cy={CENTER} r={RING_RADIUS} fill="none" stroke="rgba(158,208,249,0.12)" strokeDasharray="2 5" />
 
-          {/* Rotating layer — spokes, arcs, pills all rotate together */}
-          <g className="motion-safe:animate-orbit [transform-box:fill-box] [transform-origin:center]">
+          {/* Rotating layer — spokes, arcs, pills all rotate together.
+              Pauses on hover/focus so the user can read a pill. */}
+          <g className="motion-safe:animate-orbit group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] [transform-box:fill-box] [transform-origin:center]">
             {/* Spokes from core to each node */}
             {nodes.map((n) => {
               const { x, y } = toXY(n.angle, n.radius);
@@ -202,14 +211,40 @@ const PlatformOrbitGraph: React.FC = () => {
               );
             })}
 
+            {/* Data-flow pulses — each pulse travels from core outward along its
+                spoke. Pre-rotated to the spoke angle; CSS animates translateY
+                outward so the pulse tracks the line. Staggered start times
+                keep the ring feeling asynchronous and alive. */}
+            {nodes.map((n, i) => (
+              <g
+                key={`pulse-${n.slug}`}
+                transform={`rotate(${n.angle} ${CENTER} ${CENTER})`}
+              >
+                <circle
+                  cx={CENTER}
+                  cy={CENTER}
+                  r={2.5}
+                  fill={n.accent}
+                  className="motion-safe:animate-pulse-spoke group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
+                  style={{ animationDelay: `${i * 0.75}s` }}
+                />
+              </g>
+            ))}
+
             {/* Platform pills — positioned on orbit, counter-rotated to stay upright */}
             {nodes.map((n) => (
               <Pill key={n.slug} node={n} />
             ))}
           </g>
 
-          {/* Center core — static, visually dominant */}
-          <circle cx={CENTER} cy={CENTER} r={120} fill="url(#core-glow)" />
+          {/* Center core — visually dominant. Halo breathes slowly. */}
+          <circle
+            cx={CENTER}
+            cy={CENTER}
+            r={120}
+            fill="url(#core-glow)"
+            className="motion-safe:animate-core-breathe group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] [transform-box:fill-box] [transform-origin:center]"
+          />
           <circle
             cx={CENTER}
             cy={CENTER}
