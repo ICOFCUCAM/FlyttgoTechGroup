@@ -138,9 +138,9 @@ type Pin = {
 };
 
 const PINS: Pin[] = [
-  // North America — USA presence (newly explicit in this map)
-  { code: 'US-W', city: 'San Francisco', country: 'USA', lon: -122.4, lat: 37.78, tier: 'primary', note: 'Customer-cloud · West' },
-  { code: 'US-E', city: 'Northern Virginia', country: 'USA', lon: -77.4, lat: 39.0, tier: 'primary', note: 'Customer-cloud · East' },
+  // North America — USA SaaS-primary surfaces
+  { code: 'US-W', city: 'San Francisco', country: 'USA', lon: -122.4, lat: 37.78, tier: 'primary', note: 'SaaS · customer-cloud west' },
+  { code: 'US-E', city: 'Northern Virginia', country: 'USA', lon: -77.4, lat: 39.0, tier: 'primary', note: 'SaaS · customer-cloud east' },
   { code: 'CA-E', city: 'Toronto', country: 'Canada', lon: -79.4, lat: 43.7, tier: 'secondary', note: 'Edge presence' },
 
   // South America
@@ -157,6 +157,9 @@ const PINS: Pin[] = [
   { code: 'KE-NB', city: 'Nairobi', country: 'Kenya', lon: 36.82, lat: -1.29, tier: 'secondary', note: 'East Africa hub' },
   { code: 'ZA-JN', city: 'Johannesburg', country: 'South Africa', lon: 28.05, lat: -26.2, tier: 'sovereign', note: 'Sovereign · ZA' },
   { code: 'NG-LG', city: 'Lagos', country: 'Nigeria', lon: 3.38, lat: 6.52, tier: 'secondary', note: 'West Africa' },
+  { code: 'CM-YA', city: 'Yaoundé', country: 'Cameroon', lon: 11.52, lat: 3.85, tier: 'secondary', note: 'Central Africa rollout' },
+  { code: 'UG-KP', city: 'Kampala', country: 'Uganda', lon: 32.59, lat: 0.35, tier: 'secondary', note: 'East Africa rollout' },
+  { code: 'ET-AA', city: 'Addis Ababa', country: 'Ethiopia', lon: 38.74, lat: 9.03, tier: 'secondary', note: 'Horn of Africa rollout' },
 
   // MENA
   { code: 'AE-DX', city: 'Dubai', country: 'United Arab Emirates', lon: 55.27, lat: 25.2, tier: 'sovereign', note: 'Sovereign · GCC' },
@@ -192,6 +195,9 @@ const ARCS: Array<[string, string]> = [
   ['UK-LN', 'ZA-JN'],
   ['US-W', 'JP-TY'],
   ['US-E', 'BR-SE'],
+  ['NO-OS', 'ET-AA'],
+  ['KE-NB', 'UG-KP'],
+  ['NG-LG', 'CM-YA'],
 ];
 
 const PIN_INDEX = new Map(PINS.map((p) => [p.code, p]));

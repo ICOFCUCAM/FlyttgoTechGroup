@@ -126,9 +126,11 @@ export default function LiveOpsStrip() {
             />
             <span className="text-[#9ED0F9] font-semibold">OPS.LIVE</span>
           </span>
-          <span aria-hidden="true" className="flex-1 h-px bg-white/15 max-w-[200px]" />
-          <span id="live-ops-heading">Network telemetry</span>
-          <span aria-hidden="true" className="flex-1 h-px bg-white/15 max-w-[200px]" />
+          <span aria-hidden="true" className="flex-1 h-px bg-white/15 max-w-[120px]" />
+          <span id="live-ops-heading" className="normal-case tracking-tight text-white/80 text-[11px]">
+            FlyttGo infrastructure operational across EU · Africa · MENA deployment regions
+          </span>
+          <span aria-hidden="true" className="flex-1 h-px bg-white/15 max-w-[120px]" />
           <span className="hidden md:inline tracking-[0.16em] text-white/40">
             {generatedAt}
           </span>
