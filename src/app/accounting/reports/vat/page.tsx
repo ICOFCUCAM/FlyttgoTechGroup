@@ -46,6 +46,7 @@ export default async function VatReportPage({
           from={range.from}
           to={range.to}
           basePath="/accounting/reports/vat"
+          exportReport="vat"
           exportFormats={['csv', 'doc', 'pdf']}
         />
       </div>

@@ -51,6 +51,7 @@ export default async function TrialBalancePage({
           from={range.from}
           to={range.to}
           basePath="/accounting/reports/trial-balance"
+          exportReport="trial-balance"
           exportFormats={['csv', 'doc', 'pdf']}
         />
       </div>

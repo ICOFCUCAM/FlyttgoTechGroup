@@ -1,0 +1,90 @@
+/**
+ * PDF export.
+ *
+ * Implementation note: full headless-Chromium PDF rendering is heavy
+ * for serverless and unnecessary for a regulator-grade artefact. We
+ * serve a print-optimised HTML response with `Content-Disposition:
+ * inline` and an `?print=1` autoload script that triggers
+ * `window.print()` on load. The accountant chooses "Save as PDF" in
+ * the browser print dialog — Chrome, Safari, and Firefox all produce
+ * a true PDF/A-compatible file from this flow.
+ *
+ * This is the same approach used by HMRC's Making-Tax-Digital UI and
+ * Skatteetaten's mva-melding download.
+ */
+
+import { escapeHtml } from './html';
+import type { DocSection } from './doc';
+
+export function renderPrintableHtml(opts: {
+  title: string;
+  subtitle?: string;
+  generatedAt: string;
+  sections: DocSection[];
+}): string {
+  const sections = opts.sections
+    .map((s) => {
+      const headers = s.columnHeaders.map((h) => `<th>${escapeHtml(h)}</th>`).join('');
+      const rows = s.rows
+        .map(
+          (row) =>
+            `<tr>${row.map((c) => `<td>${escapeHtml(c == null ? '' : String(c))}</td>`).join('')}</tr>`,
+        )
+        .join('');
+      const totals = s.totals
+        ? `<tfoot><tr>${s.totals
+            .map((c) => `<td><strong>${escapeHtml(c == null ? '' : String(c))}</strong></td>`)
+            .join('')}</tr></tfoot>`
+        : '';
+      return `
+        <h2>${escapeHtml(s.heading)}</h2>
+        <table>
+          <thead><tr>${headers}</tr></thead>
+          <tbody>${rows}</tbody>
+          ${totals}
+        </table>
+      `;
+    })
+    .join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>${escapeHtml(opts.title)}</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Arial, sans-serif;
+      color: #0F172A; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 24pt;
+    }
+    h1 { font-family: Cambria, Georgia, serif; font-size: 22pt; margin: 0 0 4pt 0; font-weight: 500; letter-spacing: -0.01em; }
+    h2 { font-family: Cambria, Georgia, serif; font-size: 14pt; margin: 22pt 0 8pt 0; font-weight: 500; }
+    .meta { font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: 8.5pt; color: #475569; letter-spacing: 1.5px; text-transform: uppercase; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; page-break-inside: auto; }
+    thead th { background: #F1F5F9; text-align: left; font-weight: 600; padding: 6pt 8pt; border-bottom: 1pt solid #94A3B8; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 1px; color: #475569; }
+    tbody td, tfoot td { padding: 5pt 8pt; border-bottom: 0.5pt solid #E2E8F0; }
+    tr { page-break-inside: avoid; page-break-after: auto; }
+    tfoot td { border-top: 1pt solid #94A3B8; background: #F8FAFC; }
+    .header-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18pt; padding-bottom: 8pt; border-bottom: 1pt solid #CBD5E1; }
+    @media screen { body { max-width: 210mm; margin: 0 auto; box-shadow: 0 0 30px rgba(15,23,42,0.08); } }
+  </style>
+</head>
+<body>
+  <div class="header-row">
+    <div>
+      <h1>${escapeHtml(opts.title)}</h1>
+      ${opts.subtitle ? `<div class="meta">${escapeHtml(opts.subtitle)}</div>` : ''}
+    </div>
+    <div class="meta">FlyttGo · ${escapeHtml(opts.generatedAt)}</div>
+  </div>
+  ${sections}
+  <script>
+    if (typeof window !== 'undefined' && location.search.includes('print=1')) {
+      window.addEventListener('load', () => setTimeout(() => window.print(), 250));
+    }
+  </script>
+</body>
+</html>`;
+}

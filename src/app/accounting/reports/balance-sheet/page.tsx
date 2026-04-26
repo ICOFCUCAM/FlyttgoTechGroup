@@ -38,6 +38,7 @@ export default async function BalanceSheetPage({
           from={bs.as_of}
           to={bs.as_of}
           basePath="/accounting/reports/balance-sheet"
+          exportReport="balance-sheet"
           exportFormats={['csv', 'doc', 'pdf']}
         />
       </div>

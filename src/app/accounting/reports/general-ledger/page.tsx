@@ -46,6 +46,7 @@ export default async function GeneralLedgerPage({
           from={range.from}
           to={range.to}
           basePath="/accounting/reports/general-ledger"
+          exportReport="general-ledger"
           exportFormats={['csv', 'doc', 'pdf']}
         />
       </div>

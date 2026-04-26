@@ -45,6 +45,7 @@ export default async function IncomeStatementPage({
           from={range.from}
           to={range.to}
           basePath="/accounting/reports/income-statement"
+          exportReport="income-statement"
           exportFormats={['csv', 'doc', 'pdf']}
         />
       </div>
