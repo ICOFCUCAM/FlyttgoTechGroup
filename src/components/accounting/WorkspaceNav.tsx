@@ -21,6 +21,8 @@ const TABS: Tab[] = [
   { href: '/audit', code: 'AU.01', label: 'Audit workspace', visibleTo: ['super_admin', 'admin', 'auditor'] },
   { href: '/audit/log', code: 'AU.02', label: 'Audit log', visibleTo: ['super_admin', 'admin', 'auditor'] },
   { href: '/audit/reports', code: 'AU.03', label: 'Reports', visibleTo: ['super_admin', 'admin', 'auditor'] },
+  { href: '/audit/exports', code: 'AU.04', label: 'Export history', visibleTo: ['super_admin', 'admin', 'auditor'] },
+  { href: '/audit/exports/statutory', code: 'AU.05', label: 'Statutory exports', visibleTo: ['super_admin', 'admin', 'auditor'] },
 ];
 
 export default function WorkspaceNav({
