@@ -9,6 +9,9 @@ import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverv
 import HomeDeploymentStrip from '@/components/flytt/HomeDeploymentStrip';
 import HomeIndustriesStrip from '@/components/flytt/HomeIndustriesStrip';
 import HomeTechStrip from '@/components/flytt/HomeTechStrip';
+import HomeOrchestrationCore from '@/components/flytt/HomeOrchestrationCore';
+import HomeProcurementEntry from '@/components/flytt/HomeProcurementEntry';
+import ComplianceBand from '@/components/flytt/ComplianceBand';
 import HomeFAQ from '@/components/flytt/HomeFAQ';
 import FinalCTA from '@/components/flytt/FinalCTA';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -93,6 +96,9 @@ export default function HomePage() {
           <PlatformEcosystemOverview />
         </Reveal>
         <Reveal>
+          <HomeOrchestrationCore />
+        </Reveal>
+        <Reveal>
           <HomeDeploymentStrip />
         </Reveal>
         <Reveal>
@@ -100,6 +106,12 @@ export default function HomePage() {
         </Reveal>
         <Reveal>
           <HomeTechStrip />
+        </Reveal>
+        <Reveal>
+          <ComplianceBand />
+        </Reveal>
+        <Reveal>
+          <HomeProcurementEntry />
         </Reveal>
         <Reveal>
           <HomeFAQ />
