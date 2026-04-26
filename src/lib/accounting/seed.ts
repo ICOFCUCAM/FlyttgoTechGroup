@@ -63,6 +63,31 @@ export async function seedFramework({
     if (error) {
       return { ok: false, error: error.message };
     }
+
+    // Seed default vat_rates per tax code. We re-query after the upsert
+    // because the inserted ids are needed; ignoreDuplicates means existing
+    // rows aren't returned by the upsert call.
+    const { data: codeRows } = await supabase
+      .from('tax_codes')
+      .select('id, code')
+      .eq('organization_id', organizationId)
+      .eq('framework', framework);
+    const codeIndex = new Map((codeRows ?? []).map((r) => [r.code, r.id]));
+    const rateRows = taxCodes
+      .map((tc) => {
+        const id = codeIndex.get(tc.code);
+        if (!id) return null;
+        return {
+          tax_code_id: id,
+          rate_percent: tc.default_rate_percent,
+          effective_from: tc.effective_from,
+          reverse_charge: tc.reverse_charge ?? false,
+        };
+      })
+      .filter((r): r is NonNullable<typeof r> => r !== null);
+    if (rateRows.length > 0) {
+      await supabase.from('vat_rates').insert(rateRows);
+    }
   }
 
   return {
