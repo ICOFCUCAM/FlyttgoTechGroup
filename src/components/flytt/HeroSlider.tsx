@@ -4,6 +4,7 @@ import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import PlatformOrbitGraph from './PlatformOrbitGraph';
+import VisitorRegionAccent from './VisitorRegionAccent';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const HeroSlider: React.FC = () => {
@@ -57,6 +58,10 @@ const HeroSlider: React.FC = () => {
               />
               {t('hero.eyebrow')}
             </p>
+
+            <div className="mt-3">
+              <VisitorRegionAccent />
+            </div>
 
             <h1
               id="hero-heading"

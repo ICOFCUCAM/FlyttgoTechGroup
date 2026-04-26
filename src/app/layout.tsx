@@ -195,6 +195,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        {/* Phase next — Speculation Rules. Hover-prefetches the most
+            commonly visited next pages so the View Transitions in
+            globals.css land instantly. Browsers without support
+            silently ignore the script. */}
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prerender: [
+                {
+                  where: {
+                    href_matches:
+                      '/(platforms|industries|deployment|technology|company|contact|security|compliance)*',
+                  },
+                  eagerness: 'moderate',
+                },
+              ],
+            }),
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

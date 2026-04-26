@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import HeroSlider from '@/components/flytt/HeroSlider';
+import LiveOpsStrip from '@/components/flytt/LiveOpsStrip';
 import HomeSectionRail from '@/components/flytt/HomeSectionRail';
 import TrustIndicators from '@/components/flytt/TrustIndicators';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
@@ -83,6 +84,7 @@ export default function HomePage() {
         className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased"
       >
         <HeroSlider />
+        <LiveOpsStrip />
         <HomeSectionRail />
         <TrustIndicators />
         <Reveal>
