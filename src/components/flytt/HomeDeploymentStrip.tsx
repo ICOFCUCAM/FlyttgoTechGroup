@@ -6,7 +6,7 @@ import { ArrowUpRight, CloudCog, ServerCog, ShieldCheck } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import SectionIndex from '@/components/flytt/SectionIndex';
 import DeploymentTopology from '@/components/flytt/diagrams/DeploymentTopology';
-import RegionalRollout from '@/components/flytt/diagrams/RegionalRollout';
+import WorldDeploymentMap from '@/components/flytt/diagrams/WorldDeploymentMap';
 
 const modes = [
   {
@@ -149,18 +149,18 @@ const HomeDeploymentStrip: React.FC = () => {
           })}
         </ul>
 
-        {/* Regional rollout map */}
+        {/* World deployment map — replaces the earlier regional topology */}
         <div className="mt-10 p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm overflow-hidden">
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
-              <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">RR.00</span>
-              <span className="mx-2">·</span>Regional rollout topology
+              <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">WM.00</span>
+              <span className="mx-2">·</span>Global deployment map
             </div>
             <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-              EU · AF · MENA
+              NA · SA · EU · AF · MENA · APAC · OCE
             </span>
           </div>
-          <RegionalRollout className="overflow-x-auto" />
+          <WorldDeploymentMap className="overflow-x-auto" />
         </div>
 
         <p className="mt-8 text-sm text-slate-500 dark:text-slate-500 leading-relaxed max-w-3xl font-mono uppercase tracking-[0.14em]">

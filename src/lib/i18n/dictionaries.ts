@@ -21,6 +21,7 @@ const en: Dictionary = {
   'utility.language': 'Language',
 
   // Primary nav
+  'nav.home': 'Home',
   'nav.platforms': 'Platforms',
   'nav.industries': 'Industries',
   'nav.deployment': 'Deployment',

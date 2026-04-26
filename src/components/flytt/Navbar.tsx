@@ -71,6 +71,7 @@ type NavLink = {
 };
 
 const primaryLinks: NavLink[] = [
+  { label: 'Home', labelKey: 'nav.home', href: '/' },
   {
     label: 'Platforms',
     labelKey: 'nav.platforms',
