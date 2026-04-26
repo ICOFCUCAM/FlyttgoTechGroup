@@ -132,6 +132,63 @@ export default function ContactPage() {
                     ))}
                   </ol>
                 </div>
+
+                {/* RP.00 — Response metadata strip */}
+                <div className="p-6 rounded-2xl bg-[#0A1F3D] text-white border border-white/10">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55">
+                    <span className="text-[#9ED0F9] font-semibold">RP.00</span>
+                    <span className="mx-2 text-white/20">·</span>
+                    Response metadata
+                  </div>
+
+                  <dl className="mt-4 space-y-3">
+                    <div className="flex items-baseline justify-between gap-3 pb-3 border-b border-white/10">
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                        Expected response
+                      </dt>
+                      <dd className="font-mono text-[12px] text-white tracking-[0.04em] tabular-nums">
+                        ≤ 1 business day
+                      </dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-3 pb-3 border-b border-white/10">
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                        First touch
+                      </dt>
+                      <dd className="font-mono text-[12px] text-white tracking-[0.04em]">
+                        Solution architect
+                      </dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-3 pb-3 border-b border-white/10">
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                        Engineering contact
+                      </dt>
+                      <dd className="font-mono text-[12px] text-white tracking-[0.04em] truncate">
+                        <a
+                          href="mailto:platforms@flyttgo.tech"
+                          className="text-[#9ED0F9] hover:underline underline-offset-4"
+                        >
+                          platforms@flyttgo.tech
+                        </a>
+                      </dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-3 pb-3 border-b border-white/10">
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                        Headquarters
+                      </dt>
+                      <dd className="font-mono text-[12px] text-white tracking-[0.04em]">
+                        Stockholm · Nordic EU
+                      </dd>
+                    </div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                        Regional coordination
+                      </dt>
+                      <dd className="font-mono text-[12px] text-[#9ED0F9] tracking-[0.18em]">
+                        EU · AF · MENA
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
               </aside>
             </div>
           </div>
