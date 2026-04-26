@@ -55,6 +55,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: { ...languageAlternates, 'x-default': '/' },
+    types: {
+      'application/rss+xml': [
+        { url: '/rss.xml', title: 'FlyttGo Insights · RSS' },
+      ],
+    },
   },
   description:
     'FlyttGo Technologies Group builds modular AI-powered platform infrastructure — logistics marketplaces, education analytics, municipal dashboards, fleet intelligence and white-label digital platforms — deployable across Europe, Africa and the Middle East.',
