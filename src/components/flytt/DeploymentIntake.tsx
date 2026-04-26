@@ -2,8 +2,21 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import {
+  ArrowLeft,
+  ArrowRight,
+  Briefcase,
+  Building2,
+  CheckCircle2,
+  GraduationCap,
+  Landmark,
+  Loader2,
+  ShoppingBag,
+  Truck,
+  type LucideIcon,
+} from 'lucide-react';
+import {
+  INSTITUTION_TYPES,
   type InstitutionType,
   type DeploymentObjective,
   type DeploymentScale,
@@ -11,6 +24,61 @@ import {
   type DeploymentType,
 } from '@/lib/contact-schema';
 import TurnstileWidget from '@/components/flytt/TurnstileWidget';
+
+// ---------- step-01 options ----------------------------------------------
+
+type InstitutionOption = {
+  code: string;
+  value: InstitutionType;
+  icon: LucideIcon;
+  label: string;
+  sub: string;
+};
+
+const INSTITUTION_OPTIONS: InstitutionOption[] = [
+  {
+    code: 'IT.01',
+    value: 'Ministry',
+    icon: Landmark,
+    label: 'Ministry',
+    sub: 'National-scale digital service delivery',
+  },
+  {
+    code: 'IT.02',
+    value: 'Municipality',
+    icon: Building2,
+    label: 'Municipality',
+    sub: 'City / metro permits, services, transport',
+  },
+  {
+    code: 'IT.03',
+    value: 'University',
+    icon: GraduationCap,
+    label: 'University',
+    sub: 'Admissions, scholarships, institutional analytics',
+  },
+  {
+    code: 'IT.04',
+    value: 'Transport authority',
+    icon: Truck,
+    label: 'Transport authority',
+    sub: 'Fleet, dispatch, mobility regulation',
+  },
+  {
+    code: 'IT.05',
+    value: 'Enterprise operator',
+    icon: Briefcase,
+    label: 'Enterprise operator',
+    sub: 'Internal platforms on customer-cloud tenancy',
+  },
+  {
+    code: 'IT.06',
+    value: 'Marketplace operator',
+    icon: ShoppingBag,
+    label: 'Marketplace operator',
+    sub: 'Regulated multi-sided platforms',
+  },
+];
 
 // ---------- types --------------------------------------------------------
 
@@ -178,14 +246,30 @@ const DeploymentIntake: React.FC = () => {
     <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm overflow-hidden">
       <IntakeProgress step={step} />
 
-      <div className="p-6 sm:p-8 lg:p-10 min-h-[420px]">
-        {/* Step content slots in here in subsequent parts */}
-        <div className="text-sm text-slate-500 font-mono uppercase tracking-[0.18em]">
-          {STEP_META[step - 1].code} · {STEP_META[step - 1].label}
+      <div className="p-6 sm:p-8 lg:p-10 min-h-[460px]">
+        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">
+          <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+            {STEP_META[step - 1].code}
+          </span>
+          <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[160px]" />
+          <span>{STEP_META[step - 1].label}</span>
         </div>
-        <p className="mt-4 text-slate-600 dark:text-slate-400">
-          (Step renderer slot — populated in subsequent parts.)
-        </p>
+
+        <div className="mt-5">
+          {step === 1 && (
+            <Step01Institution
+              value={form.institution}
+              onChange={(v) =>
+                setForm((f) => ({ ...f, institution: v }))
+              }
+            />
+          )}
+          {step !== 1 && (
+            <p className="text-slate-600 dark:text-slate-400">
+              (Step {step} renderer — populated in subsequent parts.)
+            </p>
+          )}
+        </div>
 
         {errorMessage && status === 'error' && (
           <div
@@ -305,6 +389,89 @@ const IntakeProgress: React.FC<{ step: number }> = ({ step }) => {
         />
       </div>
     </div>
+  );
+};
+
+// ---------- step 01 ------------------------------------------------------
+
+const Step01Institution: React.FC<{
+  value: InstitutionType | undefined;
+  onChange: (v: InstitutionType) => void;
+}> = ({ value, onChange }) => {
+  return (
+    <fieldset>
+      <legend className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+        Which kind of institution is{' '}
+        <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+          deploying?
+        </em>
+      </legend>
+      <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-[1.65]">
+        Routes the intake to the appropriate FlyttGo deployment team — public-sector
+        engineering, transport authority architecture, enterprise integration, or
+        marketplace operations.
+      </p>
+
+      <ul
+        role="radiogroup"
+        aria-label="Institution type"
+        className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+      >
+        {INSTITUTION_OPTIONS.map((opt) => {
+          const Icon = opt.icon;
+          const selected = value === opt.value;
+          return (
+            <li key={opt.value}>
+              <button
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => onChange(opt.value)}
+                className={`group w-full text-left flex flex-col h-full p-4 rounded-xl border motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] ${
+                  selected
+                    ? 'bg-[#0A3A6B]/5 dark:bg-[#1E6FD9]/10 border-[#0A3A6B]/40 dark:border-[#1E6FD9]/50 shadow-sm'
+                    : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-start justify-between">
+                  <Icon
+                    size={18}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    className={
+                      selected
+                        ? 'text-[#0A3A6B] dark:text-[#9ED0F9]'
+                        : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-400 motion-safe:transition-colors'
+                    }
+                  />
+                  <span
+                    className={`font-mono text-[10px] tracking-[0.22em] font-semibold ${
+                      selected
+                        ? 'text-[#0A3A6B] dark:text-[#9ED0F9]'
+                        : 'text-slate-400'
+                    }`}
+                  >
+                    {opt.code}
+                  </span>
+                </div>
+                <span className="mt-3 text-[15px] font-semibold text-slate-900 dark:text-white tracking-tight">
+                  {opt.label}
+                </span>
+                <span className="mt-1 text-xs text-slate-500 dark:text-slate-500 leading-snug">
+                  {opt.sub}
+                </span>
+                {selected && (
+                  <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.18em] uppercase text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 size={11} aria-hidden="true" />
+                    Selected
+                  </span>
+                )}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </fieldset>
   );
 };
 
