@@ -28,10 +28,12 @@ const PlatformEcosystemOverview: React.FC = () => {
   const { t } = useI18n();
   return (
     <section
-      id="platforms"
+      id="pl-01"
       aria-labelledby="platform-overview-heading"
-      className="relative py-24 lg:py-28 bg-white dark:bg-slate-950"
+      className="relative py-24 lg:py-28 bg-white dark:bg-slate-950 scroll-mt-24"
     >
+      {/* Legacy anchor target — keeps existing /#platforms links working */}
+      <div id="platforms" aria-hidden="true" className="absolute -top-24" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <SectionIndex
           code="PL.01"

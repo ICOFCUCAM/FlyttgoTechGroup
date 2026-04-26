@@ -13,8 +13,9 @@ const HomeFAQ: React.FC = () => {
 
   return (
     <section
+      id="pr-05"
       aria-labelledby="home-faq-heading"
-      className="relative py-20 lg:py-24 bg-white dark:bg-slate-950"
+      className="relative py-20 lg:py-24 bg-white dark:bg-slate-950 scroll-mt-24"
     >
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <SectionIndex

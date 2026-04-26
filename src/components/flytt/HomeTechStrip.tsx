@@ -11,8 +11,9 @@ const HomeTechStrip: React.FC = () => {
   const { t } = useI18n();
   return (
     <section
+      id="tx-04"
       aria-labelledby="home-tech-heading"
-      className="relative py-24 lg:py-28 bg-gradient-to-b from-white to-[#F7FAFD] dark:from-slate-950 dark:to-slate-900"
+      className="relative py-24 lg:py-28 bg-gradient-to-b from-white to-[#F7FAFD] dark:from-slate-950 dark:to-slate-900 scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <SectionIndex

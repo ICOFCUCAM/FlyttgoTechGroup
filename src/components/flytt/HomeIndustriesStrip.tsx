@@ -70,8 +70,9 @@ const HomeIndustriesStrip: React.FC = () => {
   const { t } = useI18n();
   return (
     <section
+      id="in-03"
       aria-labelledby="home-industries-heading"
-      className="relative py-24 lg:py-28 bg-white dark:bg-slate-950"
+      className="relative py-24 lg:py-28 bg-white dark:bg-slate-950 scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <SectionIndex

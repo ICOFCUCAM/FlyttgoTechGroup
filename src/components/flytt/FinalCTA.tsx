@@ -15,8 +15,9 @@ const FinalCTA: React.FC = () => {
   const { t } = useI18n();
   return (
     <section
+      id="ct-06"
       aria-labelledby="final-cta-heading"
-      className="relative py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-white to-[#F5F8FC] dark:from-slate-950 dark:to-slate-900"
+      className="relative py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-white to-[#F5F8FC] dark:from-slate-950 dark:to-slate-900 scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-br from-[#0A1F3D] via-[#0A3A6B] to-[#1E6FD9] text-white shadow-2xl shadow-slate-900/20">

@@ -45,8 +45,9 @@ const HomeDeploymentStrip: React.FC = () => {
   const { t } = useI18n();
   return (
     <section
+      id="dp-02"
       aria-labelledby="home-deployment-heading"
-      className="relative py-24 lg:py-28 bg-gradient-to-b from-[#F7FAFD] to-white dark:from-slate-900 dark:to-slate-950"
+      className="relative py-24 lg:py-28 bg-gradient-to-b from-[#F7FAFD] to-white dark:from-slate-900 dark:to-slate-950 scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <SectionIndex
