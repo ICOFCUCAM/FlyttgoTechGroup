@@ -39,6 +39,7 @@ export default function WorkspaceNav({
   const visibleTabs = TABS.filter((t) => {
     if (active === 'accounting') return t.href.startsWith('/accounting') && t.visibleTo.includes(role);
     if (active === 'audit') return t.href.startsWith('/audit') && t.visibleTo.includes(role);
+    // admin shell — both workspaces are visible
     return t.visibleTo.includes(role);
   });
 
