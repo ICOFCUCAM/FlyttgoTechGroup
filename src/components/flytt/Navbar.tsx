@@ -33,6 +33,10 @@ import {
   Newspaper,
   Users,
   Compass,
+  Globe2,
+  Network,
+  FileCheck2,
+  Workflow,
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
@@ -80,21 +84,22 @@ const primaryLinks: NavLink[] = [
     dropdown: {
       columns: [
         {
-          heading: 'Infrastructure Platforms',
+          heading: 'Platform Ecosystem',
           items: [
+            { label: 'Ecosystem overview', description: 'How the eight modules orchestrate together', href: '/platforms', icon: Workflow },
             { label: 'Transify', description: 'Mobility infrastructure platform', href: '/platforms/transify', icon: Route },
             { label: 'Workverge', description: 'Workforce coordination infrastructure', href: '/platforms/workverge', icon: UserCheck },
             { label: 'Civitas', description: 'Digital government services platform', href: '/platforms/civitas', icon: Landmark },
             { label: 'EduPro', description: 'Education intelligence infrastructure', href: '/platforms/edupro', icon: GraduationCap },
-            { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
-            { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
-            { label: 'Ledgera', description: 'Financial operations & bookkeeping infrastructure', href: '/platforms/ledgera', icon: Calculator },
           ],
         },
         {
-          heading: 'Marketplace Platform',
+          heading: 'Identity · Payments · Finance · Marketplace',
           items: [
-            { label: 'FlyttGo', description: 'Smart moving & transport marketplace — runs on Transify', href: '/platforms/flyttgo', icon: Truck },
+            { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
+            { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
+            { label: 'Ledgera', description: 'Financial operations & bookkeeping infrastructure', href: '/platforms/ledgera', icon: Calculator },
+            { label: 'FlyttGo Marketplace', description: 'Smart moving & transport — runs on Transify', href: '/platforms/flyttgo', icon: Truck },
           ],
         },
       ],
@@ -148,17 +153,26 @@ const primaryLinks: NavLink[] = [
     dropdown: {
       columns: [
         {
-          heading: 'Deployment modes',
+          heading: 'Deployment Models',
           items: [
             { label: 'FlyttGo-managed', description: 'Fully managed SaaS, region-aware', href: '/deployment/managed', icon: CloudCog },
             { label: 'Customer cloud', description: 'Runs inside your AWS, Azure or GCP tenancy', href: '/deployment/customer-cloud', icon: ServerCog },
             { label: 'Sovereign datacenter', description: 'Self-hosted for public-sector procurement', href: '/deployment/sovereign', icon: ShieldCheck },
           ],
         },
+        {
+          heading: 'Architecture & Coverage',
+          items: [
+            { label: 'Infrastructure Architecture', description: 'Multi-tenant SaaS, API-first, multi-region', href: '/infrastructure-architecture', icon: Network },
+            { label: 'Sovereign Deployment', description: 'National hosting + data-residency posture', href: '/sovereign', icon: ShieldCheck },
+            { label: 'Global Coverage', description: 'Nordic EU · Africa · MENA rollout footprint', href: '/global-coverage', icon: Globe2 },
+            { label: 'Procurement Compatibility', description: 'Pilot · city · regional · national · white-label', href: '/procurement-compatibility', icon: FileCheck2 },
+          ],
+        },
       ],
       feature: {
         title: 'Deployment architecture',
-        description: 'Three modes to match any procurement or sovereignty posture.',
+        description: 'Three modes plus a full procurement compatibility surface — match any sovereignty posture.',
         href: '/deployment',
         cta: 'Compare all modes',
       },
