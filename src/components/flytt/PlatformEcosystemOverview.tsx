@@ -6,6 +6,7 @@ import { ArrowUpRight, Info, Link2 } from 'lucide-react';
 import { platformList } from '@/data/platforms';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import SectionIndex from '@/components/flytt/SectionIndex';
+import OrchestrationFlow from '@/components/flytt/diagrams/OrchestrationFlow';
 
 const LEDGERA_TOOLTIP =
   'Ledgera integrates with Payvera for payment orchestration and supports compliance reporting across Transify, Workverge, Civitas and EduPro environments.';
@@ -147,6 +148,20 @@ const PlatformEcosystemOverview: React.FC = () => {
             );
           })}
         </ul>
+
+        {/* Orchestration flow — left-to-right module pipeline */}
+        <div className="mt-10 p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between gap-4 mb-3">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+              <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">OF.00</span>
+              <span className="mx-2">·</span>Module orchestration flow
+            </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400 hidden sm:inline">
+              Identity → Payments → Mobility → Workforce → Finance
+            </span>
+          </div>
+          <OrchestrationFlow className="overflow-x-auto" />
+        </div>
 
         {/* Ecosystem description — mirrors the platform hierarchy including Ledgera */}
         <div className="mt-10 grid lg:grid-cols-12 gap-6 items-start">
