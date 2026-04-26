@@ -25,6 +25,7 @@ import {
   INSTITUTION_TYPES,
   DEPLOYMENT_OBJECTIVES,
   DEPLOYMENT_SCALES,
+  DEPLOYMENT_TIMELINES,
   type InstitutionType,
   type DeploymentObjective,
   type DeploymentScale,
@@ -115,6 +116,21 @@ const SCALE_OPTIONS: ScaleOption[] = [
   { code: 'DS.03', value: 'Regional rollout', footprint: 'Multi-tenant · 1–3 regions' },
   { code: 'DS.04', value: 'National rollout', footprint: 'Federated · sovereign-ready' },
   { code: 'DS.05', value: 'Cross-border rollout', footprint: 'Multi-jurisdiction · multi-region' },
+];
+
+// ---------- step-04 options ---------------------------------------------
+
+type TimelineOption = {
+  code: string;
+  value: DeploymentTimeline;
+  fit: string;
+};
+
+const TIMELINE_OPTIONS: TimelineOption[] = [
+  { code: 'TM.01', value: '0–3 months', fit: 'Managed pilot · single tenant' },
+  { code: 'TM.02', value: '3–6 months', fit: 'City rollout · 1–2 modules' },
+  { code: 'TM.03', value: '6–12 months', fit: 'Regional rollout · multi-tenant' },
+  { code: 'TM.04', value: '12+ months', fit: 'National / cross-border · sovereign' },
 ];
 
 const INSTITUTION_OPTIONS: InstitutionOption[] = [
@@ -356,7 +372,13 @@ const DeploymentIntake: React.FC = () => {
               onChange={(v) => setForm((f) => ({ ...f, scale: v }))}
             />
           )}
-          {step > 3 && (
+          {step === 4 && (
+            <Step04Timeline
+              value={form.timeline}
+              onChange={(v) => setForm((f) => ({ ...f, timeline: v }))}
+            />
+          )}
+          {step > 4 && (
             <p className="text-slate-600 dark:text-slate-400">
               (Step {step} renderer — populated in subsequent parts.)
             </p>
@@ -799,6 +821,85 @@ const Step03Scale: React.FC<{
           })}
         </ul>
       </div>
+    </fieldset>
+  );
+};
+
+// ---------- step 04 ------------------------------------------------------
+
+const Step04Timeline: React.FC<{
+  value: DeploymentTimeline | undefined;
+  onChange: (v: DeploymentTimeline) => void;
+}> = ({ value, onChange }) => {
+  return (
+    <fieldset>
+      <legend className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+        On what{' '}
+        <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+          timeline?
+        </em>
+      </legend>
+      <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-[1.65]">
+        Sets the deployment window the FlyttGo team plans against. Each window
+        carries an indicative deployment-fit note — most rollouts settle into
+        the 6–12 month band once procurement and integration are scoped.
+      </p>
+
+      <ul
+        role="radiogroup"
+        aria-label="Deployment timeline"
+        className="mt-7 grid grid-cols-2 lg:grid-cols-4 gap-3"
+      >
+        {TIMELINE_OPTIONS.map((opt) => {
+          const selected = value === opt.value;
+          return (
+            <li key={opt.value}>
+              <button
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => onChange(opt.value)}
+                className={`group w-full text-left flex flex-col h-full p-5 rounded-xl border motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] ${
+                  selected
+                    ? 'bg-[#0A3A6B]/5 dark:bg-[#1E6FD9]/10 border-[#0A3A6B]/40 dark:border-[#1E6FD9]/50 shadow-sm'
+                    : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span
+                    className={`font-mono text-[10px] tracking-[0.22em] font-semibold ${
+                      selected
+                        ? 'text-[#0A3A6B] dark:text-[#9ED0F9]'
+                        : 'text-slate-400'
+                    }`}
+                  >
+                    {opt.code}
+                  </span>
+                  {selected && (
+                    <CheckCircle2
+                      size={14}
+                      className="text-emerald-600 dark:text-emerald-400"
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+                <span
+                  className={`mt-3 font-serif text-2xl font-medium tracking-tight tabular-nums ${
+                    selected
+                      ? 'text-slate-900 dark:text-white'
+                      : 'text-slate-700 dark:text-slate-300'
+                  }`}
+                >
+                  {opt.value}
+                </span>
+                <span className="mt-2 text-[11px] text-slate-500 dark:text-slate-500 leading-snug font-mono uppercase tracking-[0.14em]">
+                  {opt.fit}
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
     </fieldset>
   );
 };
