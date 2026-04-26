@@ -14,6 +14,7 @@ import {
   Twitter,
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import CarbonFooterPill from '@/components/flytt/CarbonFooterPill';
 
 type FooterGroup = {
   headingKey: string;
@@ -423,10 +424,13 @@ const SiteFooter: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-          <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} FlyttGo Technologies Group AB · Designed
-            in Oslo
-          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p className="text-xs text-slate-500">
+              © {new Date().getFullYear()} FlyttGo Technologies Group AB ·
+              Designed in Oslo
+            </p>
+            <CarbonFooterPill />
+          </div>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {legalLinks.map((l) => (
               <li key={l.key}>
