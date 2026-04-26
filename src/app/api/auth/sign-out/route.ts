@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { logAuthEvent } from '@/lib/auth/audit-events';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -10,6 +11,9 @@ export async function POST() {
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   const cookieStore = cookies();
+  let userId: string | null = null;
+  let organizationId: string | null = null;
+
   if (url && anonKey) {
     const supabase = createServerClient(url, anonKey, {
       cookies: {
@@ -24,6 +28,16 @@ export async function POST() {
         },
       },
     });
+    const { data } = await supabase.auth.getUser();
+    if (data.user) {
+      userId = data.user.id;
+      const { data: roleRow } = await supabase
+        .from('users_roles')
+        .select('organization_id')
+        .eq('user_id', userId)
+        .maybeSingle();
+      organizationId = roleRow?.organization_id ?? null;
+    }
     await supabase.auth.signOut();
   }
 
@@ -32,6 +46,12 @@ export async function POST() {
     value: '',
     path: '/',
     maxAge: 0,
+  });
+
+  await logAuthEvent({
+    event: 'sign_out',
+    organizationId,
+    userId,
   });
 
   return NextResponse.json({ ok: true }, { status: 200 });

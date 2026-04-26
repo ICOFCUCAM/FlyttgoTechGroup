@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { z } from 'zod';
 import { defaultLandingPath, isPlatformRole } from '@/lib/auth/roles';
+import { logAuthEvent } from '@/lib/auth/audit-events';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -54,6 +55,12 @@ export async function POST(request: Request) {
     password: parsed.data.password,
   });
   if (error || !data.user) {
+    await logAuthEvent({
+      event: 'sign_in_failed',
+      organizationId: null,
+      userId: null,
+      details: { email: parsed.data.email },
+    });
     return NextResponse.json(
       { error: 'Invalid credentials.' },
       { status: 401 },
@@ -62,7 +69,7 @@ export async function POST(request: Request) {
 
   const { data: roleRow } = await supabase
     .from('users_roles')
-    .select('role')
+    .select('role, organization_id')
     .eq('user_id', data.user.id)
     .single();
 
@@ -76,6 +83,13 @@ export async function POST(request: Request) {
     httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 60 * 60 * 12,
+  });
+
+  await logAuthEvent({
+    event: 'sign_in_succeeded',
+    organizationId: roleRow?.organization_id ?? null,
+    userId: data.user.id,
+    details: { role },
   });
 
   return NextResponse.json(

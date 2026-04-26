@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { requireRole, getSupabaseAuthClient } from '@/lib/auth/server';
 import SectionHeader from '@/components/accounting/SectionHeader';
 
@@ -77,9 +78,11 @@ export default async function AuditLogPage({
           </thead>
           <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60">
             {(rows ?? []).map((r) => (
-              <tr key={r.id}>
+              <tr key={r.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/40">
                 <td className="px-4 py-2 font-mono text-[12px] text-slate-700 dark:text-slate-300">
-                  {r.occurred_at?.replace('T', ' ').slice(0, 19)}
+                  <Link href={`/audit/log/${r.id}`} className="hover:underline underline-offset-4">
+                    {r.occurred_at?.replace('T', ' ').slice(0, 19)}
+                  </Link>
                 </td>
                 <td className="px-4 py-2 font-mono text-slate-900 dark:text-white">{r.table_name}</td>
                 <td className={`px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] ${ACTION_ACCENT[r.action]}`}>
