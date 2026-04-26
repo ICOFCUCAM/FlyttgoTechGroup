@@ -513,8 +513,11 @@ create policy currencies_read on public.currencies
 do $$
 declare
   t text;
+  -- vat_rates is intentionally absent here — it has no organization_id
+  -- column (scoped through tax_codes.organization_id via tax_code_id).
+  -- Its policies are written separately below as an EXISTS join.
   org_scoped text[] := array[
-    'accounts', 'tax_codes', 'vat_rates', 'exchange_rates',
+    'accounts', 'tax_codes', 'exchange_rates',
     'journal_entries', 'journal_lines', 'attachments',
     'auditor_notes', 'org_settings'
   ];
@@ -531,7 +534,7 @@ begin
 
   -- Mutating policies: only accountants and above may write. Auditors
   -- and finance_viewers stay read-only at the row level.
-  foreach t in array array['accounts', 'tax_codes', 'vat_rates',
+  foreach t in array array['accounts', 'tax_codes',
                             'exchange_rates', 'attachments', 'org_settings'] loop
     execute format('drop policy if exists %I_write on public.%I;', t, t);
     execute format(
@@ -567,6 +570,39 @@ begin
     );
   end loop;
 end $$;
+
+-- vat_rates policies — scoped through the tax_codes parent because
+-- vat_rates carries no organization_id column.
+drop policy if exists vat_rates_select on public.vat_rates;
+create policy vat_rates_select on public.vat_rates
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.tax_codes tc
+       where tc.id = vat_rates.tax_code_id
+         and tc.organization_id = public.jwt_org_id()
+    )
+  );
+
+drop policy if exists vat_rates_write on public.vat_rates;
+create policy vat_rates_write on public.vat_rates
+  for all to authenticated
+  using (
+    exists (
+      select 1 from public.tax_codes tc
+       where tc.id = vat_rates.tax_code_id
+         and tc.organization_id = public.jwt_org_id()
+         and public.jwt_role() in ('super_admin', 'admin', 'accountant')
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.tax_codes tc
+       where tc.id = vat_rates.tax_code_id
+         and tc.organization_id = public.jwt_org_id()
+         and public.jwt_role() in ('super_admin', 'admin', 'accountant')
+    )
+  );
 
 -- Auditor notes — auditors and accountants can both create them, but
 -- they're scoped to the caller's org and immutable after insert.
