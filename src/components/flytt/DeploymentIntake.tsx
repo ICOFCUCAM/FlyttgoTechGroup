@@ -7,16 +7,23 @@ import {
   ArrowRight,
   Briefcase,
   Building2,
+  Calculator,
   CheckCircle2,
+  CreditCard,
+  Fingerprint,
   GraduationCap,
   Landmark,
+  Layers,
   Loader2,
+  Route,
   ShoppingBag,
   Truck,
+  UserCheck,
   type LucideIcon,
 } from 'lucide-react';
 import {
   INSTITUTION_TYPES,
+  DEPLOYMENT_OBJECTIVES,
   type InstitutionType,
   type DeploymentObjective,
   type DeploymentScale,
@@ -33,6 +40,64 @@ type InstitutionOption = {
   icon: LucideIcon;
   label: string;
   sub: string;
+};
+
+// ---------- step-02 options + platform routing --------------------------
+
+type ObjectiveOption = {
+  code: string;
+  value: DeploymentObjective;
+  sub: string;
+};
+
+const OBJECTIVE_OPTIONS: ObjectiveOption[] = [
+  { code: 'OB.01', value: 'Mobility coordination', sub: 'Dispatch · routing · telematics' },
+  { code: 'OB.02', value: 'Payments infrastructure', sub: 'PSP rails · payouts · reconciliation' },
+  { code: 'OB.03', value: 'Government services', sub: 'Permits · citizen dashboards · audit' },
+  { code: 'OB.04', value: 'Education platforms', sub: 'Admissions · scholarships · analytics' },
+  { code: 'OB.05', value: 'Workforce coordination', sub: 'Onboarding · certification · shifts' },
+  { code: 'OB.06', value: 'Identity infrastructure', sub: 'OIDC · SAML · KYC · national eID' },
+  { code: 'OB.07', value: 'Multi-platform rollout', sub: 'Federated · cross-domain · sovereign' },
+];
+
+type PlatformChip = {
+  slug: string;
+  name: string;
+  icon: LucideIcon;
+  accent: string;
+};
+
+const ALL_PLATFORMS: PlatformChip[] = [
+  { slug: 'transify', name: 'Transify', icon: Route, accent: '#60A5FA' },
+  { slug: 'workverge', name: 'Workverge', icon: UserCheck, accent: '#5EEAD4' },
+  { slug: 'civitas', name: 'Civitas', icon: Landmark, accent: '#A78BFA' },
+  { slug: 'edupro', name: 'EduPro', icon: GraduationCap, accent: '#FBBF24' },
+  { slug: 'identra', name: 'Identra', icon: Fingerprint, accent: '#F472B6' },
+  { slug: 'payvera', name: 'Payvera', icon: CreditCard, accent: '#34D399' },
+  { slug: 'ledgera', name: 'Ledgera', icon: Calculator, accent: '#2DD4BF' },
+  { slug: 'flyttgo', name: 'FlyttGo', icon: Truck, accent: '#FCD34D' },
+];
+
+// Platform routing per objective — drives the dynamic preview rail.
+// Order matters: highlighted modules are listed in deployment-priority
+// order (the most foundational module first).
+const OBJECTIVE_TO_MODULES: Record<DeploymentObjective, string[]> = {
+  'Mobility coordination': ['transify', 'workverge', 'identra'],
+  'Payments infrastructure': ['payvera', 'ledgera', 'identra'],
+  'Government services': ['civitas', 'identra', 'payvera'],
+  'Education platforms': ['edupro', 'identra', 'payvera'],
+  'Workforce coordination': ['workverge', 'identra'],
+  'Identity infrastructure': ['identra', 'payvera'],
+  'Multi-platform rollout': [
+    'transify',
+    'workverge',
+    'civitas',
+    'edupro',
+    'identra',
+    'payvera',
+    'ledgera',
+    'flyttgo',
+  ],
 };
 
 const INSTITUTION_OPTIONS: InstitutionOption[] = [
@@ -259,12 +324,16 @@ const DeploymentIntake: React.FC = () => {
           {step === 1 && (
             <Step01Institution
               value={form.institution}
-              onChange={(v) =>
-                setForm((f) => ({ ...f, institution: v }))
-              }
+              onChange={(v) => setForm((f) => ({ ...f, institution: v }))}
             />
           )}
-          {step !== 1 && (
+          {step === 2 && (
+            <Step02Objective
+              value={form.objective}
+              onChange={(v) => setForm((f) => ({ ...f, objective: v }))}
+            />
+          )}
+          {step > 2 && (
             <p className="text-slate-600 dark:text-slate-400">
               (Step {step} renderer — populated in subsequent parts.)
             </p>
@@ -471,6 +540,133 @@ const Step01Institution: React.FC<{
           );
         })}
       </ul>
+    </fieldset>
+  );
+};
+
+// ---------- step 02 ------------------------------------------------------
+
+const Step02Objective: React.FC<{
+  value: DeploymentObjective | undefined;
+  onChange: (v: DeploymentObjective) => void;
+}> = ({ value, onChange }) => {
+  const recommended = value
+    ? new Set(OBJECTIVE_TO_MODULES[value])
+    : new Set<string>();
+
+  return (
+    <fieldset>
+      <legend className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+        What does the deployment{' '}
+        <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+          need to do?
+        </em>
+      </legend>
+      <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-[1.65]">
+        Selects the deployment objective and previews the FlyttGo modules
+        most likely to be activated for it.
+      </p>
+
+      <ul
+        role="radiogroup"
+        aria-label="Deployment objective"
+        className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3"
+      >
+        {OBJECTIVE_OPTIONS.map((opt) => {
+          const selected = value === opt.value;
+          return (
+            <li key={opt.value}>
+              <button
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => onChange(opt.value)}
+                className={`group w-full text-left flex flex-col h-full p-4 rounded-xl border motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] ${
+                  selected
+                    ? 'bg-[#0A3A6B]/5 dark:bg-[#1E6FD9]/10 border-[#0A3A6B]/40 dark:border-[#1E6FD9]/50 shadow-sm'
+                    : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-[15px] font-semibold text-slate-900 dark:text-white tracking-tight">
+                    {opt.value}
+                  </span>
+                  <span
+                    className={`font-mono text-[10px] tracking-[0.22em] font-semibold flex-shrink-0 ${
+                      selected
+                        ? 'text-[#0A3A6B] dark:text-[#9ED0F9]'
+                        : 'text-slate-400'
+                    }`}
+                  >
+                    {opt.code}
+                  </span>
+                </div>
+                <span className="mt-1 text-xs text-slate-500 dark:text-slate-500 leading-snug">
+                  {opt.sub}
+                </span>
+                {selected && (
+                  <span className="mt-3 inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.18em] uppercase text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 size={11} aria-hidden="true" />
+                    Routed
+                  </span>
+                )}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      {/* Platform routing preview — dynamically highlights the modules
+          most likely to be activated for the chosen objective. */}
+      <div
+        className="mt-7 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60"
+        aria-live="polite"
+      >
+        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+          <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+            PR.00
+          </span>
+          <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[140px]" />
+          <span>
+            {value ? 'Recommended platform modules' : 'Pick an objective to preview module routing'}
+          </span>
+        </div>
+        <ul className="mt-4 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+          {ALL_PLATFORMS.map((p) => {
+            const Icon = p.icon;
+            const active = recommended.has(p.slug);
+            return (
+              <li key={p.slug}>
+                <div
+                  className={`flex items-center gap-2 px-2.5 py-2 rounded-lg border motion-safe:transition-all ${
+                    active
+                      ? 'bg-white dark:bg-slate-900 border-slate-300/80 dark:border-slate-700 shadow-sm'
+                      : 'bg-transparent border-slate-200/60 dark:border-slate-800/50 opacity-40'
+                  }`}
+                  aria-current={active ? 'true' : undefined}
+                >
+                  <Icon
+                    size={13}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                    style={{ color: active ? p.accent : undefined }}
+                    className={active ? '' : 'text-slate-400'}
+                  />
+                  <span
+                    className={`text-xs font-semibold tracking-tight truncate ${
+                      active
+                        ? 'text-slate-900 dark:text-white'
+                        : 'text-slate-400'
+                    }`}
+                  >
+                    {p.name}
+                  </span>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </fieldset>
   );
 };
