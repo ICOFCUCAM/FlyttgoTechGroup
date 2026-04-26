@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/server';
 import { defaultLandingPath } from '@/lib/auth/roles';
 import SignInForm from './SignInForm';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export const metadata: Metadata = {
   title: 'Sign in — FlyttGo accounting',
@@ -47,6 +48,10 @@ export default async function SignInPage({
 
         <div className="mt-8">
           <SignInForm next={searchParams?.next} />
+        </div>
+
+        <div className="mt-6">
+          <LanguageSwitcher />
         </div>
 
         <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 leading-relaxed">
