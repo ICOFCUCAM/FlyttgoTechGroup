@@ -156,10 +156,22 @@ export async function POST(request: Request) {
     const { from, to } = getNotificationAddresses();
     const resend = getResendClient();
 
-    const subject = `New deployment lead · ${input.deployment_type ?? 'General inquiry'} · ${input.name}`;
+    // Detect a multi-step deployment intake submission. When at least one
+    // structured intake field is present we shape the subject + body
+    // around the institution + objective + scale signal so the
+    // architect on triage rotation can route without opening the body.
+    const isStructuredIntake = Boolean(
+      input.institution || input.objective || input.scale || input.timeline,
+    );
+
+    const subject = isStructuredIntake
+      ? `Deployment intake · ${input.institution ?? 'Institution TBD'} · ${input.objective ?? 'Objective TBD'} · ${input.scale ?? 'Scale TBD'} — ${input.name}`
+      : `New deployment lead · ${input.deployment_type ?? 'General inquiry'} · ${input.name}`;
 
     const plain = [
-      `New deployment lead submitted via flyttgo.tech`,
+      isStructuredIntake
+        ? `New structured deployment intake submitted via flyttgo.tech/contact`
+        : `New deployment lead submitted via flyttgo.tech`,
       ``,
       `Name:             ${input.name}`,
       `Email:            ${input.email}`,
@@ -167,26 +179,52 @@ export async function POST(request: Request) {
       `Country:          ${input.country ?? '—'}`,
       `Deployment type:  ${input.deployment_type ?? '—'}`,
       `Source:           ${source ?? '—'}`,
+      ...(isStructuredIntake
+        ? [
+            ``,
+            `— Intake (DP.01) ——————————————`,
+            `Institution:      ${input.institution ?? '—'}`,
+            `Objective:        ${input.objective ?? '—'}`,
+            `Scale:            ${input.scale ?? '—'}`,
+            `Timeline:         ${input.timeline ?? '—'}`,
+          ]
+        : []),
       ``,
       `Message:`,
       input.message ?? '—',
     ].join('\n');
 
+    const intakeRows: Array<[string, string]> = isStructuredIntake
+      ? [
+          ['Institution', input.institution ?? '—'],
+          ['Objective', input.objective ?? '—'],
+          ['Scale', input.scale ?? '—'],
+          ['Timeline', input.timeline ?? '—'],
+        ]
+      : [];
+
+    const headerLabel = isStructuredIntake
+      ? 'FlyttGo Deployment Intake · DP.01'
+      : 'FlyttGo Deployment Lead';
+    const headerTitle = isStructuredIntake
+      ? `${input.institution ?? 'Institution'} — ${input.objective ?? 'Objective'}`
+      : (input.deployment_type ?? 'General inquiry');
+
     const html = `
       <div style="font-family:Inter,system-ui,sans-serif;max-width:600px;margin:0 auto;color:#0F172A;">
         <div style="background:linear-gradient(135deg,#0A3A6B,#1E6FD9);color:#fff;padding:24px 28px;border-radius:12px 12px 0 0;">
-          <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:0.75;">FlyttGo Deployment Lead</div>
-          <div style="font-size:20px;font-weight:600;margin-top:4px;">${escapeHtml(input.deployment_type ?? 'General inquiry')}</div>
+          <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:0.75;">${escapeHtml(headerLabel)}</div>
+          <div style="font-size:20px;font-weight:600;margin-top:4px;">${escapeHtml(headerTitle)}</div>
         </div>
         <div style="background:#fff;border:1px solid #E2E8F0;border-top:0;padding:24px 28px;border-radius:0 0 12px 12px;">
           <table style="width:100%;border-collapse:collapse;font-size:14px;">
             <tbody>
               ${[
-                ['Name', input.name],
+                ['Name', escapeHtml(input.name)],
                 ['Email', `<a href="mailto:${escapeHtml(input.email)}" style="color:#1E6FD9;text-decoration:none;">${escapeHtml(input.email)}</a>`],
-                ['Company', input.company ?? '—'],
-                ['Country', input.country ?? '—'],
-                ['Source', source ?? '—'],
+                ['Company', escapeHtml(input.company ?? '—')],
+                ['Country', escapeHtml(input.country ?? '—')],
+                ['Source', escapeHtml(source ?? '—')],
               ]
                 .map(
                   ([label, value]) =>
@@ -198,6 +236,26 @@ export async function POST(request: Request) {
                 .join('')}
             </tbody>
           </table>
+          ${
+            intakeRows.length > 0
+              ? `<div style="margin-top:20px;padding-top:20px;border-top:1px solid #E2E8F0;">
+                   <div style="font-size:11px;color:#0A3A6B;text-transform:uppercase;letter-spacing:2px;font-weight:600;font-family:ui-monospace,JetBrains Mono,monospace;">DP.01 · Structured intake</div>
+                   <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:8px;">
+                     <tbody>
+                       ${intakeRows
+                         .map(
+                           ([label, value]) =>
+                             `<tr>
+                                <td style="padding:8px 0;color:#64748B;width:140px;">${escapeHtml(label)}</td>
+                                <td style="padding:8px 0;color:#0F172A;font-weight:500;">${escapeHtml(value)}</td>
+                              </tr>`,
+                         )
+                         .join('')}
+                     </tbody>
+                   </table>
+                 </div>`
+              : ''
+          }
           <div style="margin-top:20px;padding-top:20px;border-top:1px solid #E2E8F0;">
             <div style="font-size:12px;color:#64748B;text-transform:uppercase;letter-spacing:1px;font-weight:600;">Message</div>
             <div style="margin-top:8px;font-size:14px;white-space:pre-wrap;">${escapeHtml(input.message ?? '—')}</div>
