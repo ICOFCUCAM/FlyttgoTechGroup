@@ -4,6 +4,7 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { z } from 'zod';
 import { defaultLandingPath, isPlatformRole } from '@/lib/auth/roles';
 import { logAuthEvent } from '@/lib/auth/audit-events';
+import { clientIp, rateLimit } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -20,6 +21,31 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: 'Authentication is not configured on this environment.' },
       { status: 503 },
+    );
+  }
+
+  // Rate-limit by IP — 8 attempts per 5 minutes is enough for a
+  // typo-prone human, low enough to deter password-stuffing.
+  const ip = clientIp(request.headers);
+  const rl = rateLimit(`signin:${ip}`, 8, 5 * 60 * 1000);
+  if (!rl.ok) {
+    const retryAfter = Math.max(1, Math.ceil((rl.resetAt - Date.now()) / 1000));
+    await logAuthEvent({
+      event: 'sign_in_failed',
+      organizationId: null,
+      userId: null,
+      details: { reason: 'rate_limited', ip },
+    });
+    return NextResponse.json(
+      { error: 'Too many sign-in attempts. Please wait a few minutes.' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(retryAfter),
+          'X-RateLimit-Limit': '8',
+          'X-RateLimit-Remaining': '0',
+        },
+      },
     );
   }
 
