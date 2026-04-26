@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
-import { CloudCog, ServerCog, ShieldCheck } from 'lucide-react';
+import {
+  CloudCog,
+  ServerCog,
+  ShieldCheck,
+  FileCheck2,
+  ScrollText,
+  Scale,
+  Globe2,
+} from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import DeploymentIntake from '@/components/flytt/DeploymentIntake';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -390,6 +398,184 @@ export default function ContactPage() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        {/* PC.00 — Procurement compatibility */}
+        <section
+          aria-labelledby="procurement-heading"
+          className="relative py-16 lg:py-20 border-t border-slate-200/60 dark:border-slate-800/60 bg-white dark:bg-slate-950"
+        >
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
+              <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+                PC.00
+              </span>
+              <span
+                aria-hidden="true"
+                className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]"
+              />
+              <span>Procurement compatibility</span>
+            </div>
+
+            <div className="mt-6 grid lg:grid-cols-12 gap-8 items-end">
+              <h2
+                id="procurement-heading"
+                className="lg:col-span-7 font-serif text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.1]"
+              >
+                Compatible with how public-sector{' '}
+                <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                  procurement actually works.
+                </em>
+              </h2>
+              <p className="lg:col-span-5 text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
+                FlyttGo platforms are deployable through the procurement
+                frameworks ministries, municipalities and transport authorities
+                already operate inside — no bespoke contracting required to
+                evaluate or pilot.
+              </p>
+            </div>
+
+            {/* PC.01–04 — Procurement framework matrix */}
+            <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  code: 'PC.01',
+                  icon: FileCheck2,
+                  title: 'Dynamic Purchasing Systems',
+                  scope: 'EU · UK · Nordic',
+                  body: 'Available through DPS catalogues for digital, cloud, and platform infrastructure procurement.',
+                  accent: '#1E6FD9',
+                },
+                {
+                  code: 'PC.02',
+                  icon: ScrollText,
+                  title: 'G-Cloud-style frameworks',
+                  scope: 'UK · Commonwealth',
+                  body: 'Compatible with G-Cloud and equivalent national catalogue frameworks for SaaS and managed services.',
+                  accent: '#0FB5A6',
+                },
+                {
+                  code: 'PC.03',
+                  icon: Scale,
+                  title: 'OJEU / Find-a-Tender',
+                  scope: 'EU · EEA · UK',
+                  body: 'Responds to public restricted, open and competitive dialogue procedures published under OJEU and FTS.',
+                  accent: '#7C5CE6',
+                },
+                {
+                  code: 'PC.04',
+                  icon: Globe2,
+                  title: 'National framework agreements',
+                  scope: 'AF · MENA · regional',
+                  body: 'Delivered through national framework agreements and ministry-level master service agreements where DPS does not apply.',
+                  accent: '#F5B547',
+                },
+              ].map((p) => {
+                const Icon = p.icon;
+                return (
+                  <li
+                    key={p.code}
+                    className="flex flex-col p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 motion-safe:transition-colors"
+                  >
+                    <div className="flex items-start justify-between">
+                      <span
+                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{
+                          backgroundColor: `${p.accent}14`,
+                          color: p.accent,
+                        }}
+                        aria-hidden="true"
+                      >
+                        <Icon size={18} strokeWidth={1.75} />
+                      </span>
+                      <span
+                        className="font-mono text-[10px] tracking-[0.22em] font-semibold"
+                        style={{ color: p.accent }}
+                      >
+                        {p.code}
+                      </span>
+                    </div>
+                    <h3 className="mt-4 text-sm font-semibold tracking-tight text-slate-900 dark:text-white leading-snug">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-[13px] text-slate-600 dark:text-slate-400 leading-[1.6] flex-1">
+                      {p.body}
+                    </p>
+                    <div className="mt-4 pt-3 border-t border-slate-200/70 dark:border-slate-800/60 font-mono text-[10px] tracking-[0.16em] uppercase">
+                      <span className="text-slate-400">Scope</span>
+                      <span className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+                      <span style={{ color: p.accent }}>{p.scope}</span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <p className="mt-8 max-w-3xl font-mono text-[11px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-500 leading-relaxed">
+              Procurement and contracting routes are confirmed during EP.03
+              environment selection — pre-intake fit confirmation does not
+              require a procurement decision.
+            </p>
+          </div>
+        </section>
+
+        {/* DP.01 — Closing intake confirmation strip */}
+        <section
+          aria-labelledby="dp01-confirmation-heading"
+          className="relative py-12 lg:py-16 bg-[#0A1F3D] text-white border-y border-white/10"
+        >
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-white/55">
+              <span className="text-[#9ED0F9] font-semibold">DP.01</span>
+              <span
+                aria-hidden="true"
+                className="flex-1 h-px bg-white/15 max-w-[200px]"
+              />
+              <span>Intake confirmation</span>
+            </div>
+
+            <div className="mt-6 grid lg:grid-cols-12 gap-6 items-end">
+              <h2
+                id="dp01-confirmation-heading"
+                className="lg:col-span-8 font-serif text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight leading-[1.1]"
+              >
+                Submissions route to a solution architect{' '}
+                <em className="not-italic font-serif italic font-normal text-[#9ED0F9]">
+                  — never to a sales queue.
+                </em>
+              </h2>
+              <p className="lg:col-span-4 text-sm text-white/65 leading-[1.65]">
+                One business day to first-architect contact. Engineering escalations
+                go directly to{' '}
+                <a
+                  href="mailto:platforms@flyttgo.tech"
+                  className="text-[#9ED0F9] hover:underline underline-offset-4"
+                >
+                  platforms@flyttgo.tech
+                </a>
+                .
+              </p>
+            </div>
+
+            <dl className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-[10px] uppercase tracking-[0.18em]">
+              {[
+                { dt: 'Intake gate', dd: 'DP.01 · 5-step structured capture' },
+                { dt: 'Routing', dd: 'Domain + region triage' },
+                { dt: 'First touch', dd: 'Solution architect · ≤ 1 day' },
+                { dt: 'Coordination', dd: 'EU · AF · MENA' },
+              ].map((c) => (
+                <div
+                  key={c.dt}
+                  className="p-4 rounded-xl bg-white/5 border border-white/10"
+                >
+                  <dt className="text-white/55">{c.dt}</dt>
+                  <dd className="mt-1 text-[12px] text-white tracking-[0.04em] normal-case">
+                    {c.dd}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
       </main>
