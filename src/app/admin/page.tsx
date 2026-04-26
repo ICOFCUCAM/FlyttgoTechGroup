@@ -1,8 +1,20 @@
 import Link from 'next/link';
 import { requireRole, getSupabaseAuthClient } from '@/lib/auth/server';
 import SectionHeader from '@/components/accounting/SectionHeader';
+import CreateUserForm from './CreateUserForm';
+import { type PlatformRole } from '@/lib/auth/roles';
 
 export const dynamic = 'force-dynamic';
+
+function rolesGrantableBy(actor: PlatformRole): PlatformRole[] {
+  if (actor === 'super_admin') {
+    return ['super_admin', 'admin', 'accountant', 'auditor', 'finance_viewer'];
+  }
+  if (actor === 'admin') {
+    return ['accountant', 'auditor', 'finance_viewer'];
+  }
+  return [];
+}
 
 export default async function AdminHomePage() {
   const session = await requireRole('admin');
@@ -13,6 +25,8 @@ export default async function AdminHomePage() {
     .select('user_id, role, created_at')
     .eq('organization_id', session.organizationId)
     .order('created_at', { ascending: false });
+
+  const grantable = rolesGrantableBy(session.role);
 
   return (
     <div>
@@ -50,6 +64,12 @@ export default async function AdminHomePage() {
           </p>
         </Link>
       </div>
+
+      {grantable.length > 0 && (
+        <div className="mt-10">
+          <CreateUserForm grantableRoles={grantable} />
+        </div>
+      )}
 
       <div className="mt-10 rounded-2xl border border-slate-200/80 dark:border-slate-800/60 overflow-hidden">
         <div className="px-4 py-3 bg-slate-50 dark:bg-slate-900/60 font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
@@ -89,8 +109,9 @@ export default async function AdminHomePage() {
       </div>
 
       <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">
-        Member management UI lands when SCIM provisioning is wired up; current
-        provisioning is via Supabase Auth dashboard + users_roles seed.
+        Created users sign in immediately at /sign-in with the password set
+        in AD.04 above. Audit log captures both the auth.admin.createUser
+        call and the users_roles insert.
       </p>
     </div>
   );
