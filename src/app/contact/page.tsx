@@ -81,7 +81,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Wizard — sidebar panels (Parts 9–11) slot in next */}
+        {/* Wizard + sidebar panels */}
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-12 gap-8">
