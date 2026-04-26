@@ -24,6 +24,7 @@ import {
 import {
   INSTITUTION_TYPES,
   DEPLOYMENT_OBJECTIVES,
+  DEPLOYMENT_SCALES,
   type InstitutionType,
   type DeploymentObjective,
   type DeploymentScale,
@@ -99,6 +100,22 @@ const OBJECTIVE_TO_MODULES: Record<DeploymentObjective, string[]> = {
     'flyttgo',
   ],
 };
+
+// ---------- step-03 options ---------------------------------------------
+
+type ScaleOption = {
+  code: string;
+  value: DeploymentScale;
+  footprint: string;
+};
+
+const SCALE_OPTIONS: ScaleOption[] = [
+  { code: 'DS.01', value: 'Pilot', footprint: '1 tenant · 1 region · 1 module' },
+  { code: 'DS.02', value: 'City rollout', footprint: '1 metro · 1–2 modules' },
+  { code: 'DS.03', value: 'Regional rollout', footprint: 'Multi-tenant · 1–3 regions' },
+  { code: 'DS.04', value: 'National rollout', footprint: 'Federated · sovereign-ready' },
+  { code: 'DS.05', value: 'Cross-border rollout', footprint: 'Multi-jurisdiction · multi-region' },
+];
 
 const INSTITUTION_OPTIONS: InstitutionOption[] = [
   {
@@ -333,7 +350,13 @@ const DeploymentIntake: React.FC = () => {
               onChange={(v) => setForm((f) => ({ ...f, objective: v }))}
             />
           )}
-          {step > 2 && (
+          {step === 3 && (
+            <Step03Scale
+              value={form.scale}
+              onChange={(v) => setForm((f) => ({ ...f, scale: v }))}
+            />
+          )}
+          {step > 3 && (
             <p className="text-slate-600 dark:text-slate-400">
               (Step {step} renderer — populated in subsequent parts.)
             </p>
@@ -662,6 +685,115 @@ const Step02Objective: React.FC<{
                     {p.name}
                   </span>
                 </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </fieldset>
+  );
+};
+
+// ---------- step 03 ------------------------------------------------------
+
+const Step03Scale: React.FC<{
+  value: DeploymentScale | undefined;
+  onChange: (v: DeploymentScale) => void;
+}> = ({ value, onChange }) => {
+  const selectedIndex = value
+    ? SCALE_OPTIONS.findIndex((o) => o.value === value)
+    : -1;
+  // Fill ratio for the connecting rail — climbs to the selected rung's
+  // centre. -1 (no selection) collapses the rail to 0%.
+  const fillRatio =
+    selectedIndex < 0
+      ? 0
+      : (selectedIndex + 0.5) / SCALE_OPTIONS.length;
+
+  return (
+    <fieldset>
+      <legend className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+        At what{' '}
+        <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+          scale?
+        </em>
+      </legend>
+      <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-[1.65]">
+        Sets the deployment footprint. Each scale tier maps to a different
+        engagement model — pilots run faster on managed SaaS, national and
+        cross-border rollouts trigger sovereign + federated planning.
+      </p>
+
+      {/* Graded ladder — connecting rail climbs to the selected rung */}
+      <div className="mt-7 relative">
+        <div
+          aria-hidden="true"
+          className="absolute left-0 right-0 top-[20px] h-px bg-slate-200/80 dark:bg-slate-800/60"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute left-0 top-[20px] h-px bg-gradient-to-r from-[#0A3A6B] via-[#1E6FD9] to-[#0FB5A6] motion-safe:transition-all motion-safe:duration-500"
+          style={{ width: `${fillRatio * 100}%` }}
+        />
+
+        <ul
+          role="radiogroup"
+          aria-label="Deployment scale"
+          className="relative grid grid-cols-1 sm:grid-cols-5 gap-3"
+        >
+          {SCALE_OPTIONS.map((opt, idx) => {
+            const selected = value === opt.value;
+            const passed = selectedIndex >= 0 && idx <= selectedIndex;
+            return (
+              <li key={opt.value}>
+                <button
+                  type="button"
+                  role="radio"
+                  aria-checked={selected}
+                  onClick={() => onChange(opt.value)}
+                  className="group w-full flex flex-col items-center text-center focus-visible:outline-none rounded-md"
+                >
+                  {/* Rung dot */}
+                  <span
+                    aria-hidden="true"
+                    className={`relative w-10 h-10 rounded-full flex items-center justify-center motion-safe:transition-all ${
+                      selected
+                        ? 'bg-gradient-to-br from-[#0A3A6B] to-[#1E6FD9] text-white shadow-[0_0_0_4px_rgba(30,111,217,0.18)]'
+                        : passed
+                          ? 'bg-[#0A3A6B]/10 dark:bg-[#1E6FD9]/15 text-[#0A3A6B] dark:text-[#9ED0F9] border border-[#0A3A6B]/30 dark:border-[#1E6FD9]/30'
+                          : 'bg-white dark:bg-slate-900 text-slate-400 border border-slate-200/80 dark:border-slate-800/60 group-hover:border-slate-300 group-hover:text-slate-600 dark:group-hover:text-slate-400'
+                    }`}
+                  >
+                    {selected ? (
+                      <CheckCircle2 size={16} aria-hidden="true" />
+                    ) : (
+                      <span className="font-mono text-[11px] font-semibold">
+                        0{idx + 1}
+                      </span>
+                    )}
+                  </span>
+                  <span
+                    className={`mt-3 font-mono text-[10px] tracking-[0.22em] font-semibold ${
+                      selected
+                        ? 'text-[#0A3A6B] dark:text-[#9ED0F9]'
+                        : 'text-slate-400'
+                    }`}
+                  >
+                    {opt.code}
+                  </span>
+                  <span
+                    className={`mt-1 text-[13px] font-semibold tracking-tight ${
+                      selected
+                        ? 'text-slate-900 dark:text-white'
+                        : 'text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white motion-safe:transition-colors'
+                    }`}
+                  >
+                    {opt.value}
+                  </span>
+                  <span className="mt-1 text-[11px] text-slate-500 dark:text-slate-500 leading-snug max-w-[180px]">
+                    {opt.footprint}
+                  </span>
+                </button>
               </li>
             );
           })}
