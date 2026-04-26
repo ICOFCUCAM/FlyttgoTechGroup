@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 import Link from '@/components/flytt/LocaleLink';
-import { ArrowUpRight, Sparkles, X, Zap } from 'lucide-react';
+import { ArrowUpRight, Mic, MicOff, Sparkles, X, Zap } from 'lucide-react';
 import { KNOWLEDGE_BASE, scoreKb, type KbEntry } from '@/lib/ai/knowledge-base';
 
 /**
@@ -84,6 +84,7 @@ export function AskFlyttGoProvider({ children }: { children: React.ReactNode }) 
 function AskFlyttGoPanel({ onClose }: { onClose: () => void }) {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const voice = useVoiceInput((spoken) => setQuery(spoken));
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -143,15 +144,45 @@ function AskFlyttGoPanel({ onClose }: { onClose: () => void }) {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ask about platforms, deployment modes, compliance, or pricing…"
-              className="w-full pl-3 pr-20 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-[15px] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#1E6FD9]/40 focus:border-[#1E6FD9]"
+              placeholder={
+                voice.listening
+                  ? 'Listening — speak now…'
+                  : 'Ask about platforms, deployment modes, compliance, or pricing…'
+              }
+              className="w-full pl-3 pr-28 py-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-[15px] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#1E6FD9]/40 focus:border-[#1E6FD9]"
               autoComplete="off"
               spellCheck={false}
             />
-            <kbd className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded px-1.5 py-0.5">
-              ⌘J
-            </kbd>
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+              {voice.supported && (
+                <button
+                  type="button"
+                  onClick={voice.toggle}
+                  aria-label={voice.listening ? 'Stop voice input' : 'Start voice input'}
+                  aria-pressed={voice.listening}
+                  className={`p-1.5 rounded-md motion-safe:transition-colors ${
+                    voice.listening
+                      ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 motion-safe:animate-pulse'
+                      : 'text-slate-500 hover:text-[#0A3A6B] hover:bg-slate-100 dark:hover:bg-slate-800/60 dark:hover:text-[#9ED0F9]'
+                  }`}
+                >
+                  {voice.listening ? (
+                    <MicOff size={14} aria-hidden="true" />
+                  ) : (
+                    <Mic size={14} aria-hidden="true" />
+                  )}
+                </button>
+              )}
+              <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 rounded px-1.5 py-0.5">
+                ⌘J
+              </kbd>
+            </div>
           </div>
+          {voice.error && (
+            <p className="mt-2 text-[12px] text-rose-600 dark:text-rose-400 font-mono">
+              {voice.error}
+            </p>
+          )}
         </div>
 
         {/* Body — results or suggestions */}
@@ -255,6 +286,110 @@ function ResultsList({
       ))}
     </ul>
   );
+}
+
+/**
+ * Web Speech API voice-input hook.
+ *
+ * Lazily checks for SpeechRecognition support (Chromium has it as
+ * `webkitSpeechRecognition`; Safari ships it as `SpeechRecognition`;
+ * Firefox doesn't ship it yet). When unsupported the hook returns
+ * `supported: false` and the mic button hides cleanly.
+ *
+ * Each toggle starts a fresh recognition session in the visitor's
+ * Accept-Language locale (interim results streamed to onTranscript so
+ * the input updates as they speak). Errors land in `error`.
+ */
+type VoiceState = {
+  supported: boolean;
+  listening: boolean;
+  error: string | null;
+  toggle: () => void;
+};
+
+type SpeechRecognitionEventLike = {
+  results: ArrayLike<{ 0: { transcript: string }; isFinal: boolean }>;
+};
+type SpeechRecognitionInstance = {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  onresult: ((e: SpeechRecognitionEventLike) => void) | null;
+  onerror: ((e: { error?: string }) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+};
+
+function useVoiceInput(onTranscript: (text: string) => void): VoiceState {
+  const [supported, setSupported] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const recRef = useRef<SpeechRecognitionInstance | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const w = window as unknown as {
+      SpeechRecognition?: new () => SpeechRecognitionInstance;
+      webkitSpeechRecognition?: new () => SpeechRecognitionInstance;
+    };
+    const Ctor = w.SpeechRecognition ?? w.webkitSpeechRecognition;
+    setSupported(Boolean(Ctor));
+  }, []);
+
+  const toggle = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    if (recRef.current && listening) {
+      recRef.current.stop();
+      return;
+    }
+    setError(null);
+    const w = window as unknown as {
+      SpeechRecognition?: new () => SpeechRecognitionInstance;
+      webkitSpeechRecognition?: new () => SpeechRecognitionInstance;
+    };
+    const Ctor = w.SpeechRecognition ?? w.webkitSpeechRecognition;
+    if (!Ctor) {
+      setError('Voice input is not available in this browser.');
+      return;
+    }
+    const rec = new Ctor();
+    rec.lang = (navigator.language || 'en-GB').toLowerCase().startsWith('no')
+      ? 'nb-NO'
+      : navigator.language || 'en-GB';
+    rec.interimResults = true;
+    rec.continuous = false;
+    rec.onresult = (e) => {
+      let text = '';
+      for (let i = 0; i < e.results.length; i++) {
+        text += e.results[i][0].transcript;
+      }
+      onTranscript(text.trim());
+    };
+    rec.onerror = (e) => {
+      const msg = e?.error || 'Voice input failed.';
+      setError(
+        msg === 'not-allowed'
+          ? 'Microphone permission denied.'
+          : msg === 'no-speech'
+            ? 'No speech detected — try again.'
+            : `Voice input error: ${msg}`,
+      );
+      setListening(false);
+    };
+    rec.onend = () => {
+      setListening(false);
+    };
+    try {
+      rec.start();
+      recRef.current = rec;
+      setListening(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not start voice input.');
+    }
+  }, [listening, onTranscript]);
+
+  return { supported, listening, error, toggle };
 }
 
 /**
