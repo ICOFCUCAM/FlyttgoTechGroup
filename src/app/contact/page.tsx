@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { CloudCog, ServerCog, ShieldCheck } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import DeploymentIntake from '@/components/flytt/DeploymentIntake';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -188,6 +189,94 @@ export default function ContactPage() {
                       </dd>
                     </div>
                   </dl>
+                </div>
+
+                {/* DM.00 — Sovereign deployment compatibility */}
+                <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">
+                    <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+                      DM.00
+                    </span>
+                    <span className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+                    Deployment compatibility
+                  </div>
+                  <h2 className="mt-3 font-serif text-lg font-medium tracking-tight text-slate-900 dark:text-white leading-snug">
+                    Sovereignty-aware — managed, customer cloud, or national datacenter.
+                  </h2>
+                  <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-[1.65]">
+                    FlyttGo platforms run across three deployment surfaces, each
+                    aligned to a distinct procurement and sovereignty model.
+                    Environment is selected during architecture review — not at
+                    intake — so the route below is descriptive, not prescriptive.
+                  </p>
+
+                  {/* DM.01–03 — Deployment environment manifest */}
+                  <ul className="mt-5 space-y-3">
+                    {[
+                      {
+                        code: 'DM.01',
+                        icon: CloudCog,
+                        title: 'FlyttGo-managed',
+                        sub: 'Region-aware managed SaaS · EU primary',
+                        accent: '#1E6FD9',
+                      },
+                      {
+                        code: 'DM.02',
+                        icon: ServerCog,
+                        title: 'Customer-controlled cloud',
+                        sub: 'AWS · Azure · GCP tenancy · customer SOC',
+                        accent: '#0FB5A6',
+                      },
+                      {
+                        code: 'DM.03',
+                        icon: ShieldCheck,
+                        title: 'Sovereign datacenter',
+                        sub: 'Certified national infrastructure · in-jurisdiction',
+                        accent: '#7C5CE6',
+                      },
+                    ].map((d) => {
+                      const Icon = d.icon;
+                      return (
+                        <li
+                          key={d.code}
+                          className="flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800/60"
+                        >
+                          <span
+                            className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                            style={{
+                              backgroundColor: `${d.accent}14`,
+                              color: d.accent,
+                            }}
+                            aria-hidden="true"
+                          >
+                            <Icon size={16} strokeWidth={1.75} />
+                          </span>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-2 font-mono text-[10px] tracking-[0.18em] uppercase">
+                              <span
+                                className="font-semibold"
+                                style={{ color: d.accent }}
+                              >
+                                {d.code}
+                              </span>
+                            </div>
+                            <div className="mt-0.5 text-[13px] font-medium tracking-tight text-slate-800 dark:text-slate-200">
+                              {d.title}
+                            </div>
+                            <div className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-500 leading-snug">
+                              {d.sub}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  {/* Procurement compatibility note */}
+                  <p className="mt-5 pt-4 border-t border-slate-200/70 dark:border-slate-800/60 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-500 dark:text-slate-500 leading-relaxed">
+                    Compatible with public-sector procurement frameworks —
+                    DPS · G-Cloud · OJEU · national framework agreements.
+                  </p>
                 </div>
               </aside>
             </div>
