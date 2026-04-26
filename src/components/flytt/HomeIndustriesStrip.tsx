@@ -10,14 +10,60 @@ import {
   Truck,
   Briefcase,
   Landmark,
+  type LucideIcon,
 } from 'lucide-react';
+import SectionIndex from '@/components/flytt/SectionIndex';
 
-const items = [
-  { icon: Landmark, label: 'Governments & ministries', href: '/industries/government' },
-  { icon: Building2, label: 'Municipalities', href: '/industries/government' },
-  { icon: GraduationCap, label: 'Universities & education', href: '/industries/education' },
-  { icon: Truck, label: 'Transport operators', href: '/industries/transport' },
-  { icon: Briefcase, label: 'Enterprise workforce programmes', href: '/industries/enterprise' },
+type Sector = {
+  code: string;
+  icon: LucideIcon;
+  label: string;
+  scale: string;
+  modules: string;
+  href: string;
+};
+
+const sectors: Sector[] = [
+  {
+    code: 'IN.01',
+    icon: Landmark,
+    label: 'Governments & ministries',
+    scale: 'National',
+    modules: 'Civitas · Identra · Payvera',
+    href: '/industries/government',
+  },
+  {
+    code: 'IN.02',
+    icon: Building2,
+    label: 'Municipalities',
+    scale: 'Metro',
+    modules: 'Civitas · Payvera',
+    href: '/industries/government',
+  },
+  {
+    code: 'IN.03',
+    icon: GraduationCap,
+    label: 'Universities & education',
+    scale: 'Multi-institution',
+    modules: 'EduPro · Identra · Payvera',
+    href: '/industries/education',
+  },
+  {
+    code: 'IN.04',
+    icon: Truck,
+    label: 'Transport operators',
+    scale: 'Regional',
+    modules: 'Transify · Workverge',
+    href: '/industries/transport',
+  },
+  {
+    code: 'IN.05',
+    icon: Briefcase,
+    label: 'Enterprise workforce',
+    scale: 'BU-wide',
+    modules: 'Workverge · Payvera · Ledgera',
+    href: '/industries/enterprise',
+  },
 ];
 
 const HomeIndustriesStrip: React.FC = () => {
@@ -25,25 +71,35 @@ const HomeIndustriesStrip: React.FC = () => {
   return (
     <section
       aria-labelledby="home-industries-heading"
-      className="relative py-20 lg:py-24 bg-white dark:bg-slate-950"
+      className="relative py-24 lg:py-28 bg-white dark:bg-slate-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 items-end">
+        <SectionIndex
+          code="IN.03"
+          title="Institutional Deployment Sectors"
+          meta="5 sector profiles · platform-mapped · scale-graded"
+          className="max-w-2xl"
+        />
+
+        <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-[0.18em]">
-              {t('home.industries.eyebrow')}
-            </p>
             <h2
               id="home-industries-heading"
-              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
+              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              {t('home.industries.title')}
+              {t('home.industries.title.part1') || 'Built for the institutions that '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                actually run cities and regions.
+              </em>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
               {t('home.industries.description')}{' '}
-              <Link href="/industries" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">
+              <Link
+                href="/industries"
+                className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4"
+              >
                 {t('home.industries.cta')}
               </Link>
               .
@@ -51,18 +107,51 @@ const HomeIndustriesStrip: React.FC = () => {
           </div>
         </div>
 
-        <ul className="mt-10 flex flex-wrap gap-3">
-          {items.map((it) => {
-            const Icon = it.icon;
+        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          {sectors.map((s) => {
+            const Icon = s.icon;
             return (
-              <li key={it.label}>
+              <li key={s.code}>
                 <Link
-                  href={it.href}
-                  className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900 motion-safe:transition-colors text-sm font-medium text-slate-700 dark:text-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+                  href={s.href}
+                  className="group flex flex-col h-full p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900/80 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
                 >
-                  <Icon size={14} className="text-[#0A3A6B] dark:text-[#9ED0F9]" strokeWidth={1.75} aria-hidden="true" />
-                  {it.label}
-                  <ArrowUpRight size={12} className="text-slate-400 group-hover:text-slate-700 dark:group-hover:text-white motion-safe:transition-colors" aria-hidden="true" />
+                  <div className="flex items-start justify-between">
+                    <Icon
+                      size={16}
+                      className="text-[#0A3A6B] dark:text-[#9ED0F9]"
+                      strokeWidth={1.75}
+                      aria-hidden="true"
+                    />
+                    <span className="font-mono text-[10px] tracking-[0.22em] font-semibold text-slate-400">
+                      {s.code}
+                    </span>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between gap-2">
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
+                      {s.label}
+                    </span>
+                    <ArrowUpRight
+                      size={12}
+                      className="text-slate-300 group-hover:text-slate-700 dark:group-hover:text-white motion-safe:transition-colors flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <dl className="mt-auto pt-3 border-t border-slate-200/70 dark:border-slate-800/60 space-y-1 font-mono text-[9px] tracking-[0.18em] uppercase">
+                    <div className="flex items-center justify-between">
+                      <dt className="text-slate-400">Scale</dt>
+                      <dd className="text-slate-700 dark:text-slate-300">{s.scale}</dd>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <dt className="text-slate-400 flex-shrink-0">Modules</dt>
+                      <dd
+                        className="text-[#0A3A6B] dark:text-[#9ED0F9] truncate"
+                        title={s.modules}
+                      >
+                        {s.modules}
+                      </dd>
+                    </div>
+                  </dl>
                 </Link>
               </li>
             );

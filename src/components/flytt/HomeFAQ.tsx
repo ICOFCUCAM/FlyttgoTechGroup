@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import SectionIndex from '@/components/flytt/SectionIndex';
 
 type QA = {
   q: string;
@@ -93,16 +94,22 @@ const HomeFAQ: React.FC = () => {
       className="relative py-20 lg:py-24 bg-white dark:bg-slate-950"
     >
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 items-end">
+        <SectionIndex
+          code="PR.05"
+          title="Deployment Procurement Guide"
+          meta="6 questions · timeline · compliance · multi-tenancy · sovereignty"
+          className="max-w-2xl"
+        />
+        <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A3A6B]/5 rounded-full text-[11px] font-semibold text-[#0A3A6B] uppercase tracking-[0.18em]">
-              {t('home.faq.eyebrow')}
-            </p>
             <h2
               id="home-faq-heading"
-              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
+              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              {t('home.faq.title')}
+              Common questions from{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                deployment partners.
+              </em>
             </h2>
           </div>
           <div className="lg:col-span-5">

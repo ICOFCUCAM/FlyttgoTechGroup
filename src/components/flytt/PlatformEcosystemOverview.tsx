@@ -5,9 +5,24 @@ import Link from '@/components/flytt/LocaleLink';
 import { ArrowUpRight, Info, Link2 } from 'lucide-react';
 import { platformList } from '@/data/platforms';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import SectionIndex from '@/components/flytt/SectionIndex';
 
 const LEDGERA_TOOLTIP =
   'Ledgera integrates with Payvera for payment orchestration and supports compliance reporting across Transify, Workverge, Civitas and EduPro environments.';
+
+// Per-platform deployment readiness signal — drives the platform card
+// metadata rail. Mapped here rather than in src/data/platforms.ts so
+// it stays orthogonal to product copy.
+const READINESS: Record<string, { stage: string; sectors: string }> = {
+  transify: { stage: 'GA', sectors: 'Transport · Enterprise · Marketplaces' },
+  workverge: { stage: 'GA', sectors: 'Workforce · Public · Enterprise' },
+  civitas: { stage: 'GA', sectors: 'Government · Municipal' },
+  edupro: { stage: 'GA', sectors: 'Education · Ministries' },
+  identra: { stage: 'GA', sectors: 'Identity · Cross-platform' },
+  payvera: { stage: 'GA', sectors: 'Payments · Cross-platform' },
+  ledgera: { stage: 'GA', sectors: 'Finance · Cross-platform' },
+  flyttgo: { stage: 'GA', sectors: 'Marketplace · Mobility' },
+};
 
 const PlatformEcosystemOverview: React.FC = () => {
   const { t } = useI18n();
@@ -18,22 +33,27 @@ const PlatformEcosystemOverview: React.FC = () => {
       className="relative py-24 lg:py-28 bg-white dark:bg-slate-950"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 items-end motion-safe:animate-fade-up">
+        <SectionIndex
+          code="PL.01"
+          title="Platform Ecosystem Architecture"
+          meta="8 platforms · 7 infrastructure modules + 1 marketplace"
+          className="max-w-2xl motion-safe:animate-fade-up"
+        />
+
+        <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end motion-safe:animate-fade-up">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-[0.18em]">
-              <span className="w-1 h-1 rounded-full bg-[#1E6FD9]" aria-hidden="true" />
-              {t('home.platform.eyebrow')}
-            </p>
             <h2
               id="platform-overview-heading"
-              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
+              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
               {t('home.platform.title.part1')}{' '}
-              <span className="text-[#0A3A6B]">{t('home.platform.title.part2')}</span>
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                {t('home.platform.title.part2')}
+              </em>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
               {t('home.platform.description')}{' '}
               <Link href="/platforms" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">
                 {t('home.platform.cta')}
@@ -44,26 +64,39 @@ const PlatformEcosystemOverview: React.FC = () => {
         </div>
 
         <ul className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {platformList.map((p) => {
+          {platformList.map((p, i) => {
             const Icon = p.icon;
             const isMarketplace = p.category === 'marketplace';
             const isLedgera = p.slug === 'ledgera';
+            const readiness = READINESS[p.slug];
+            const code = `PL.${String(i + 1).padStart(2, '0')}`;
             return (
               <li key={p.slug}>
                 <Link
                   href={`/platforms/${p.slug}`}
                   title={isLedgera ? LEDGERA_TOOLTIP : undefined}
-                  className="group relative flex items-start gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] h-full"
+                  className="group relative flex flex-col gap-3 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] h-full"
                 >
-                  <span
-                    className="mt-0.5 w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: `${p.color}14`, color: p.color }}
-                    aria-hidden="true"
-                  >
-                    <Icon size={18} strokeWidth={1.75} />
-                  </span>
-                  <span className="flex flex-col min-w-0 flex-1">
-                    <span className="flex items-center justify-between gap-2">
+                  {/* Top row — icon + module code */}
+                  <div className="flex items-start justify-between">
+                    <span
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: `${p.color}14`, color: p.color }}
+                      aria-hidden="true"
+                    >
+                      <Icon size={18} strokeWidth={1.75} />
+                    </span>
+                    <span
+                      className="font-mono text-[10px] tracking-[0.22em] font-semibold"
+                      style={{ color: p.color }}
+                    >
+                      {code}
+                    </span>
+                  </div>
+
+                  {/* Identity block */}
+                  <div className="flex flex-col flex-1">
+                    <div className="flex items-center justify-between gap-2">
                       <span className="text-base font-semibold tracking-tight text-slate-900 dark:text-white">
                         {p.name}
                       </span>
@@ -72,23 +105,41 @@ const PlatformEcosystemOverview: React.FC = () => {
                         className="text-slate-300 group-hover:text-slate-700 dark:group-hover:text-white motion-safe:transition-all flex-shrink-0"
                         aria-hidden="true"
                       />
-                    </span>
+                    </div>
                     <span className="mt-0.5 text-xs text-slate-500 dark:text-slate-500 leading-snug">
                       {p.subtitle}
                     </span>
-                    {isMarketplace && (
-                      <span className="mt-2 inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.14em] text-slate-500 font-semibold">
-                        <Link2 size={10} aria-hidden="true" />
-                        Runs on Transify
-                      </span>
-                    )}
-                    {isLedgera && (
-                      <span className="mt-2 inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.14em] text-slate-500 font-semibold">
-                        <Link2 size={10} aria-hidden="true" />
-                        Integrates with Payvera
-                      </span>
-                    )}
-                  </span>
+                  </div>
+
+                  {/* Integration connectors */}
+                  {(isMarketplace || isLedgera) && (
+                    <div className="text-[10px] uppercase tracking-[0.14em] text-slate-500 font-semibold inline-flex items-center gap-1 font-mono">
+                      <Link2 size={10} aria-hidden="true" />
+                      {isMarketplace ? 'Runs on Transify' : 'Integrates with Payvera'}
+                    </div>
+                  )}
+
+                  {/* Readiness rail — mono metadata at bottom */}
+                  {readiness && (
+                    <dl className="mt-auto pt-3 border-t border-slate-200/70 dark:border-slate-800/60 grid grid-cols-2 gap-1.5 font-mono text-[9px] tracking-[0.18em] uppercase">
+                      <div>
+                        <dt className="text-slate-400">Status</dt>
+                        <dd className="mt-0.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+                          {readiness.stage}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="text-slate-400">Sector</dt>
+                        <dd
+                          className="mt-0.5 truncate"
+                          style={{ color: p.color }}
+                          title={readiness.sectors}
+                        >
+                          {readiness.sectors.split(' · ')[0]}
+                        </dd>
+                      </div>
+                    </dl>
+                  )}
                 </Link>
               </li>
             );

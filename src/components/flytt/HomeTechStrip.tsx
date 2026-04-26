@@ -3,53 +3,44 @@
 import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import { useI18n } from '@/lib/i18n/I18nProvider';
-import {
-  ArrowUpRight,
-  Code2,
-  Cpu,
-  Database,
-  Globe,
-  Zap,
-  Container,
-  Cloud,
-  Lock,
-} from 'lucide-react';
-
-const stack = [
-  { name: 'Next.js', icon: Code2 },
-  { name: 'NestJS', icon: Cpu },
-  { name: 'PostgreSQL', icon: Database },
-  { name: 'PostGIS', icon: Globe },
-  { name: 'Redis', icon: Zap },
-  { name: 'Docker', icon: Container },
-  { name: 'Kubernetes', icon: Cloud },
-  { name: 'OAuth / RBAC', icon: Lock },
-];
+import { ArrowUpRight } from 'lucide-react';
+import SectionIndex from '@/components/flytt/SectionIndex';
+import LayeredStack from '@/components/flytt/diagrams/LayeredStack';
 
 const HomeTechStrip: React.FC = () => {
   const { t } = useI18n();
   return (
     <section
       aria-labelledby="home-tech-heading"
-      className="relative py-20 lg:py-24 bg-gradient-to-b from-white to-[#F7FAFD] dark:from-slate-950 dark:to-slate-900"
+      className="relative py-24 lg:py-28 bg-gradient-to-b from-white to-[#F7FAFD] dark:from-slate-950 dark:to-slate-900"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 items-end">
+        <SectionIndex
+          code="TX.04"
+          title="Infrastructure Stack Architecture"
+          meta="6 layers · service delivery → cloud-native runtime"
+          className="max-w-2xl"
+        />
+
+        <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A3A6B]/5 rounded-full text-[11px] font-semibold text-[#0A3A6B] uppercase tracking-[0.18em]">
-              {t('home.tech.eyebrow')}
-            </p>
             <h2
               id="home-tech-heading"
-              className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.08]"
+              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              {t('home.tech.title')}
+              {t('home.tech.title.part1') || 'A six-layer stack '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                engineered to be deployed.
+              </em>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
               {t('home.tech.description')}{' '}
-              <Link href="/technology" className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4">
+              <Link
+                href="/technology"
+                className="font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4"
+              >
                 {t('home.tech.cta')}
               </Link>
               .
@@ -57,27 +48,15 @@ const HomeTechStrip: React.FC = () => {
           </div>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-          {stack.map((s) => {
-            const Icon = s.icon;
-            return (
-              <li
-                key={s.name}
-                className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60"
-              >
-                <Icon size={14} className="text-[#0A3A6B] dark:text-[#9ED0F9] flex-shrink-0" strokeWidth={1.75} aria-hidden="true" />
-                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 tracking-tight truncate">
-                  {s.name}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
+        {/* Layered stack diagram replaces the previous flat badge grid */}
+        <div className="mt-10 p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm overflow-hidden">
+          <LayeredStack className="overflow-x-auto" />
+        </div>
 
-        <div className="mt-8 flex justify-start">
+        <div className="mt-6 flex justify-start">
           <Link
             href="/technology"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:gap-3 motion-safe:transition-all"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white hover:gap-3 motion-safe:transition-all"
           >
             See full architecture
             <ArrowUpRight size={14} aria-hidden="true" />
