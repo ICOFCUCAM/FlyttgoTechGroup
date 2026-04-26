@@ -97,9 +97,20 @@ export function isFrameworkCode(value: unknown): value is FrameworkCode {
 }
 
 /**
- * Apply a framework's number format. We intentionally avoid a third-party
- * intl library here — every format we emit is deterministic and audit-
- * inspectable.
+ * Apply a framework's number format.
+ *
+ * Output is deterministic and audit-inspectable — no locale-dependent
+ * non-breaking spaces, no narrow no-break separators that hide in copy
+ * out of the workspace into Excel or a Word doc. Each jurisdiction
+ * emits exactly:
+ *   NO    1 250 000,00 NOK   (regular spaces · comma decimal)
+ *   UK    1,250,000.00 GBP   (comma thousands · dot decimal)
+ *   US    1,250,000.00 USD
+ *   IFRS  1 250 000,00 EUR   (matches NO grouping convention)
+ *
+ * Negative amounts use a leading minus sign rather than parentheses
+ * so CSV cells round-trip into Excel without being parsed as accounting
+ * notation.
  */
 export function formatAmount(
   amount: number,
@@ -108,16 +119,20 @@ export function formatAmount(
 ): string {
   const cfg = FRAMEWORKS[framework];
   const currency = options.currency ?? cfg.baseCurrency;
-  try {
-    return new Intl.NumberFormat(cfg.locale, {
-      style: 'currency',
-      currency,
-      currencyDisplay: 'code',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(amount);
-  } catch {
-    return `${amount.toFixed(2)} ${currency}`;
+  const sign = amount < 0 ? '-' : '';
+  const abs = Math.abs(amount);
+  const fixed = abs.toFixed(2);
+  const [intPart, decPart] = fixed.split('.');
+  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, '');
+
+  switch (cfg.numberFormat) {
+    case 'comma-dot':
+      return `${sign}${grouped.replace(//g, ',')}.${decPart} ${currency}`;
+    case 'dot-comma':
+      return `${sign}${grouped.replace(//g, '.')},${decPart} ${currency}`;
+    case 'space-comma':
+    default:
+      return `${sign}${grouped.replace(//g, ' ')},${decPart} ${currency}`;
   }
 }
 
