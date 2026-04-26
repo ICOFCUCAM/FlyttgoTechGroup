@@ -9,6 +9,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
 import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
 import ScrollToTop from '@/components/flytt/ScrollToTop';
+import ReadingProgress from '@/components/flytt/ReadingProgress';
 import { I18nProvider } from '@/lib/i18n/I18nProvider';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
@@ -35,6 +36,7 @@ export function Providers({
           <I18nProvider initialLocale={initialLocale}>
             <AppProvider>
               <CommandPaletteProvider>
+                <ReadingProgress />
                 {children}
                 <ScrollToTop />
                 <Toaster />

@@ -89,16 +89,18 @@ const enterpriseLinks = [
 ];
 
 const certifications = [
-  'SOC 2 Type II',
-  'ISO 27001',
-  'GDPR-ready',
-  'WCAG 2.1 AA',
+  { code: 'SC.01', label: 'SOC 2 Type II', frame: 'Annual audit · NDA' },
+  { code: 'IS.02', label: 'ISO 27001', frame: 'ISMS · Annex A' },
+  { code: 'GD.03', label: 'GDPR-ready', frame: 'DPA · in-region' },
+  { code: 'AC.04', label: 'WCAG 2.1 AA', frame: 'Accessibility' },
+  { code: 'PS.05', label: 'PSD2 (Payvera)', frame: 'EU payments · SCA' },
+  { code: 'EI.06', label: 'eIDAS (Identra)', frame: 'EU trust services' },
 ];
 
 const regions = [
-  { code: 'EU', name: 'Europe' },
-  { code: 'AF', name: 'Africa' },
-  { code: 'MENA', name: 'Middle East' },
+  { code: 'EU', name: 'Europe', manifest: 'NO · SE · DK · FI · DE · FR · NL · UK' },
+  { code: 'AF', name: 'Africa', manifest: 'ZA · KE · NG · EG · MA · TZ' },
+  { code: 'MENA', name: 'Middle East', manifest: 'SA · AE · QA · KW · OM · BH' },
 ];
 
 const socials = [
@@ -134,6 +136,13 @@ const SiteFooter: React.FC = () => {
       </h2>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+        {/* Engineering section index — footer is treated as a navigable surface */}
+        <div className="mb-12 flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-white/55">
+          <span className="text-[#9ED0F9] font-semibold">FT.07</span>
+          <span aria-hidden="true" className="flex-1 h-px bg-white/10 max-w-[200px]" />
+          <span>Infrastructure Navigation Surface</span>
+        </div>
+
         {/* Primary — brand block + 4 navigation columns */}
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
           <div className="lg:col-span-4">
@@ -261,7 +270,9 @@ const SiteFooter: React.FC = () => {
         {/* Enterprise row */}
         <div className="mt-14 pt-8 border-t border-white/5">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400">
+              <span className="text-[#9ED0F9] font-semibold">EP.00</span>
+              <span className="mx-2 text-white/20">·</span>
               {t('footer.enterprise')}
             </span>
             {enterpriseLinks.map((l) => (
@@ -295,35 +306,54 @@ const SiteFooter: React.FC = () => {
               </span>
               {t('footer.status')}
             </Link>
-            <div className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            <div className="mt-5 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
+              <span className="text-[#9ED0F9] font-semibold">CR.00</span>
+              <span className="mx-2 text-white/20">·</span>
               {t('footer.certifications')}
             </div>
-            <ul className="mt-4 flex flex-wrap gap-2">
+            <ul className="mt-3 grid grid-cols-2 gap-1.5">
               {certifications.map((c) => (
                 <li
-                  key={c}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/[0.04] border border-white/10 text-xs font-medium text-slate-200"
+                  key={c.code}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-md bg-white/[0.03] border border-white/10 hover:border-white/20 motion-safe:transition-colors"
                 >
-                  <ShieldCheck size={12} className="text-[#0FB5A6]" aria-hidden="true" />
-                  {c}
+                  <ShieldCheck size={11} className="text-[#0FB5A6] flex-shrink-0" aria-hidden="true" />
+                  <span className="font-mono text-[10px] tracking-[0.18em] text-[#9ED0F9] font-semibold flex-shrink-0">
+                    {c.code}
+                  </span>
+                  <span className="flex flex-col leading-tight min-w-0">
+                    <span className="text-[12px] font-medium text-slate-200 truncate">
+                      {c.label}
+                    </span>
+                    <span className="text-[10px] text-slate-500 truncate font-mono tracking-wide">
+                      {c.frame}
+                    </span>
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="md:text-right">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+          <div>
+            <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400 md:text-right">
+              <span className="text-[#9ED0F9] font-semibold">RG.00</span>
+              <span className="mx-2 text-white/20">·</span>
               {t('footer.regions')}
             </div>
-            <ul className="mt-4 flex flex-wrap md:justify-end gap-2">
+            <ul className="mt-3 space-y-1.5">
               {regions.map((r) => (
                 <li
                   key={r.code}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] border border-white/10 rounded-md text-xs font-medium text-slate-200"
+                  className="flex items-center gap-3 px-3 py-2 bg-white/[0.03] border border-white/10 rounded-md"
                 >
-                  <span className="font-mono text-[10px] text-slate-500 tracking-[0.14em]">
+                  <span className="font-mono text-[11px] text-[#9ED0F9] tracking-[0.2em] font-semibold w-12 flex-shrink-0">
                     {r.code}
                   </span>
-                  {r.name}
+                  <span className="flex flex-col leading-tight min-w-0 flex-1">
+                    <span className="text-[12px] font-medium text-slate-200">{r.name}</span>
+                    <span className="font-mono text-[10px] text-slate-500 truncate tracking-[0.14em]">
+                      {r.manifest}
+                    </span>
+                  </span>
                 </li>
               ))}
             </ul>
