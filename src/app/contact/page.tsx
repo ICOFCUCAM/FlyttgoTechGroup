@@ -7,10 +7,16 @@ import {
   ScrollText,
   Scale,
   Globe2,
+  ArrowUpRight,
+  Network,
+  Layers,
+  Cpu,
+  Landmark,
 } from 'lucide-react';
 import Navbar from '@/components/flytt/Navbar';
 import DeploymentIntake from '@/components/flytt/DeploymentIntake';
 import SiteFooter from '@/components/flytt/SiteFooter';
+import LocaleLink from '@/components/flytt/LocaleLink';
 
 export const metadata: Metadata = {
   title: 'Deployment Intake — FlyttGo Technologies Group',
@@ -576,6 +582,114 @@ export default function ContactPage() {
                 </div>
               ))}
             </dl>
+          </div>
+        </section>
+
+        {/* IL.00 — Internal linking strip */}
+        <section
+          aria-labelledby="internal-links-heading"
+          className="relative py-16 lg:py-20 bg-white dark:bg-slate-950 border-b border-slate-200/60 dark:border-slate-800/60"
+        >
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
+              <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+                IL.00
+              </span>
+              <span
+                aria-hidden="true"
+                className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]"
+              />
+              <span>Adjacent infrastructure</span>
+            </div>
+
+            <h2
+              id="internal-links-heading"
+              className="mt-6 max-w-3xl font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.1]"
+            >
+              Continue reading{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                before you submit.
+              </em>
+            </h2>
+
+            <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  code: 'IL.01',
+                  icon: Layers,
+                  title: 'Platform ecosystem',
+                  sub: '8 platforms · 7 modules + marketplace',
+                  href: '/platforms',
+                  accent: '#1E6FD9',
+                },
+                {
+                  code: 'IL.02',
+                  icon: Network,
+                  title: 'Deployment architecture',
+                  sub: 'Topology · regional rollout · DM modes',
+                  href: '/deployment',
+                  accent: '#0FB5A6',
+                },
+                {
+                  code: 'IL.03',
+                  icon: Cpu,
+                  title: 'Technology stack',
+                  sub: 'Runtime · data · identity · observability',
+                  href: '/technology',
+                  accent: '#7C5CE6',
+                },
+                {
+                  code: 'IL.04',
+                  icon: Landmark,
+                  title: 'Sovereign deployment',
+                  sub: 'In-jurisdiction · national HSM · air-gap',
+                  href: '/deployment/sovereign',
+                  accent: '#F5B547',
+                },
+              ].map((l) => {
+                const Icon = l.icon;
+                return (
+                  <li key={l.code}>
+                    <LocaleLink
+                      href={l.href}
+                      className="group flex flex-col h-full p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+                    >
+                      <div className="flex items-start justify-between">
+                        <span
+                          className="w-10 h-10 rounded-xl flex items-center justify-center"
+                          style={{
+                            backgroundColor: `${l.accent}14`,
+                            color: l.accent,
+                          }}
+                          aria-hidden="true"
+                        >
+                          <Icon size={18} strokeWidth={1.75} />
+                        </span>
+                        <span
+                          className="font-mono text-[10px] tracking-[0.22em] font-semibold"
+                          style={{ color: l.accent }}
+                        >
+                          {l.code}
+                        </span>
+                      </div>
+                      <div className="mt-4 flex items-center justify-between gap-2">
+                        <span className="text-base font-semibold tracking-tight text-slate-900 dark:text-white">
+                          {l.title}
+                        </span>
+                        <ArrowUpRight
+                          size={14}
+                          className="text-slate-300 group-hover:text-slate-700 dark:group-hover:text-white motion-safe:transition-all flex-shrink-0"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <span className="mt-1 text-[12px] text-slate-500 dark:text-slate-500 leading-snug">
+                        {l.sub}
+                      </span>
+                    </LocaleLink>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
       </main>
