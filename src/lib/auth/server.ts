@@ -92,17 +92,36 @@ export const getSession = cache(async (): Promise<AuthenticatedSession | null> =
 
 /**
  * Server-side guard. Use at the top of Server Components or Server
- * Actions that should only be reachable by an authorized role. On
- * mismatch the user is sent to /sign-in or to the role-appropriate
- * landing page so the deep link doesn't leak the route hierarchy.
+ * Actions that should only be reachable by an authorized role.
+ *
+ * Sessions are normally established by the inline sign-in form
+ * embedded in each role-specific URL's layout (/admin, /accounting,
+ * /audit). When this guard is reached without a session we redirect
+ * the user to the URL that matches the required role — which renders
+ * its own inline form. Mismatched roles are bounced to their natural
+ * landing path so deep links don't leak the route hierarchy.
  */
 export async function requireRole(required: PlatformRole): Promise<AuthenticatedSession> {
   const session = await getSession();
   if (!session) {
-    redirect('/sign-in');
+    redirect(landingPathForRequiredRole(required));
   }
   if (!hasAtLeastRole(session.role, required)) {
     redirect(defaultLandingPath(session.role));
   }
   return session;
+}
+
+function landingPathForRequiredRole(required: PlatformRole): string {
+  switch (required) {
+    case 'super_admin':
+    case 'admin':
+      return '/admin';
+    case 'accountant':
+      return '/accounting';
+    case 'auditor':
+    case 'finance_viewer':
+    default:
+      return '/audit';
+  }
 }

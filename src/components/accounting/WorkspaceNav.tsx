@@ -50,7 +50,8 @@ export default function WorkspaceNav({
   function signOut() {
     startSignOut(async () => {
       await fetch('/api/auth/sign-out', { method: 'POST' });
-      router.replace('/sign-in');
+      // Reload the current URL — the layout will see no session and
+      // re-render the inline sign-in form for this workspace.
       router.refresh();
     });
   }

@@ -1,5 +1,4 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import {
   isSupportedLocale as isSupported,
   pickAcceptLanguage,
@@ -30,7 +29,6 @@ const SKIP = [
 
 const NO_CACHE = [
   /^\/contact(\/|$|\?)/,
-  /^\/sign-in(\/|$|\?)/,
   /^\/accounting(\/|$|\?)/,
   /^\/audit(\/|$|\?)/,
   /^\/admin(\/|$|\?)/,
@@ -64,45 +62,21 @@ function readRoleHint(req: NextRequest): PlatformRole | null {
   return isPlatformRole(value) ? value : null;
 }
 
-async function hasSupabaseSession(req: NextRequest, res: NextResponse): Promise<boolean> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) return false;
-
-  const client = createServerClient(url, anonKey, {
-    cookies: {
-      get(name: string) {
-        return req.cookies.get(name)?.value;
-      },
-      set(name: string, value: string, options: CookieOptions) {
-        res.cookies.set({ name, value, ...options });
-      },
-      remove(name: string, options: CookieOptions) {
-        res.cookies.set({ name, value: '', ...options });
-      },
-    },
-  });
-  const { data } = await client.auth.getUser();
-  return Boolean(data.user);
-}
-
 export async function middleware(req: NextRequest) {
-  const { pathname, search } = req.nextUrl;
+  const { pathname } = req.nextUrl;
 
   if (SKIP.some((re) => re.test(pathname))) {
     return NextResponse.next();
   }
 
   // -- Protected prefixes: /accounting, /audit, /admin --------------------
+  // The /sign-in page no longer exists. Each role-specific URL renders
+  // its own inline sign-in form via the layout when there is no
+  // session. We still steer authenticated mismatches to their own
+  // workspace here so the deep link doesn't leak the route hierarchy.
   if (isProtectedPath(pathname)) {
     const baseRes = NextResponse.next();
-    const authed = await hasSupabaseSession(req, baseRes);
-    if (!authed) {
-      const signIn = req.nextUrl.clone();
-      signIn.pathname = '/sign-in';
-      signIn.searchParams.set('next', pathname + search);
-      return NextResponse.redirect(signIn);
-    }
+    baseRes.headers.set('Cache-Control', 'private, no-store');
 
     const role = readRoleHint(req);
     const required = requiredRoleForPath(pathname);
@@ -112,8 +86,6 @@ export async function middleware(req: NextRequest) {
       correct.search = '';
       return NextResponse.redirect(correct);
     }
-
-    baseRes.headers.set('Cache-Control', 'private, no-store');
     return baseRes;
   }
 

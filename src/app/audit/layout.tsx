@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { requireRole } from '@/lib/auth/server';
+import { getSession } from '@/lib/auth/server';
+import { hasAtLeastRole, defaultLandingPath } from '@/lib/auth/roles';
 import WorkspaceNav from '@/components/accounting/WorkspaceNav';
+import InlineSignIn from '@/components/auth/InlineSignIn';
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -10,10 +12,25 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function AuditLayout({ children }: { children: React.ReactNode }) {
-  const session = await requireRole('auditor');
-  if (!session.organizationId) {
-    redirect('/sign-in');
+  const session = await getSession();
+
+  if (!session) {
+    return (
+      <InlineSignIn
+        workspaceLabel="the audit workspace"
+        code="AU.00"
+        requiredRole="auditor"
+      />
+    );
   }
+
+  if (!hasAtLeastRole(session.role, 'auditor')) {
+    redirect(defaultLandingPath(session.role));
+  }
+  if (!session.organizationId) {
+    redirect('/');
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
       <WorkspaceNav role={session.role} email={session.email} active="audit" />
