@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
 import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
+import { AskFlyttGoProvider } from '@/components/flytt/AskFlyttGo';
 import ScrollToTop from '@/components/flytt/ScrollToTop';
 import ReadingProgress from '@/components/flytt/ReadingProgress';
 import { I18nProvider } from '@/lib/i18n/I18nProvider';
@@ -36,11 +37,13 @@ export function Providers({
           <I18nProvider initialLocale={initialLocale}>
             <AppProvider>
               <CommandPaletteProvider>
-                <ReadingProgress />
-                {children}
-                <ScrollToTop />
-                <Toaster />
-                <Sonner />
+                <AskFlyttGoProvider>
+                  <ReadingProgress />
+                  {children}
+                  <ScrollToTop />
+                  <Toaster />
+                  <Sonner />
+                </AskFlyttGoProvider>
               </CommandPaletteProvider>
             </AppProvider>
           </I18nProvider>

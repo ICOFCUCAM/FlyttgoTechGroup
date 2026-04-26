@@ -36,6 +36,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
+import { AskFlyttGoTrigger } from '@/components/flytt/AskFlyttGo';
 import { ThemeToggle } from '@/components/flytt/ThemeToggle';
 import TopUtilityBar from '@/components/flytt/TopUtilityBar';
 import { useI18n } from '@/lib/i18n/I18nProvider';
@@ -515,6 +516,7 @@ const Navbar: React.FC = () => {
               ⌘K
             </kbd>
           </button>
+          <AskFlyttGoTrigger />
           <ThemeToggle compact />
           <Link
             href="/contact"
