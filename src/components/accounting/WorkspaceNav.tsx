@@ -17,6 +17,8 @@ const TABS: Tab[] = [
   { href: '/accounting/accounts', code: 'AC.02', label: 'Chart', visibleTo: ['super_admin', 'admin', 'accountant'] },
   { href: '/accounting/vat', code: 'AC.03', label: 'VAT center', visibleTo: ['super_admin', 'admin', 'accountant'] },
   { href: '/accounting/reports', code: 'AC.04', label: 'Reports', visibleTo: ['super_admin', 'admin', 'accountant'] },
+  { href: '/accounting/exports', code: 'AC.07', label: 'Statutory exports', visibleTo: ['super_admin', 'admin', 'accountant'] },
+  { href: '/accounting/profile', code: 'AC.08', label: 'Profile', visibleTo: ['super_admin', 'admin', 'accountant'] },
   { href: '/accounting/settings', code: 'AC.05', label: 'Settings', visibleTo: ['super_admin', 'admin', 'accountant'] },
   { href: '/audit', code: 'AU.01', label: 'Audit workspace', visibleTo: ['super_admin', 'admin', 'auditor'] },
   { href: '/audit/log', code: 'AU.02', label: 'Audit log', visibleTo: ['super_admin', 'admin', 'auditor'] },
