@@ -378,10 +378,11 @@ const DeploymentIntake: React.FC = () => {
               onChange={(v) => setForm((f) => ({ ...f, timeline: v }))}
             />
           )}
-          {step > 4 && (
-            <p className="text-slate-600 dark:text-slate-400">
-              (Step {step} renderer — populated in subsequent parts.)
-            </p>
+          {step === 5 && (
+            <Step05Contact
+              form={form}
+              onChange={(patch) => setForm((f) => ({ ...f, ...patch }))}
+            />
           )}
         </div>
 
@@ -903,6 +904,176 @@ const Step04Timeline: React.FC<{
     </fieldset>
   );
 };
+
+// ---------- step 05 ------------------------------------------------------
+
+const Step05Contact: React.FC<{
+  form: IntakeState;
+  onChange: (patch: Partial<IntakeState>) => void;
+}> = ({ form, onChange }) => {
+  return (
+    <div>
+      <div>
+        <h3 className="font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+          Who should our deployment team{' '}
+          <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+            reply to?
+          </em>
+        </h3>
+        <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 max-w-xl leading-[1.65]">
+          A solution architect routes the intake within one business day. We
+          do not add work emails to marketing lists.
+        </p>
+      </div>
+
+      {/* Intake recap — last-look summary of steps 1–4 */}
+      <div className="mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60">
+        <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-400 mb-3">
+          <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">SM.00</span>
+          <span className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+          Intake summary
+        </div>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-[11px] tracking-[0.06em]">
+          {[
+            ['Institution', form.institution ?? '—'],
+            ['Objective', form.objective ?? '—'],
+            ['Scale', form.scale ?? '—'],
+            ['Timeline', form.timeline ?? '—'],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              className="px-3 py-2 rounded-md bg-white dark:bg-slate-900 border border-slate-200/70 dark:border-slate-800/60"
+            >
+              <dt className="text-[9px] uppercase tracking-[0.22em] text-slate-400">
+                {label}
+              </dt>
+              <dd className="mt-1 text-[12px] text-slate-800 dark:text-slate-200 truncate">
+                {value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      {/* Hidden honeypot — bots fill it; humans never see it. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: '-10000px',
+          width: 1,
+          height: 1,
+          overflow: 'hidden',
+        }}
+      >
+        <label htmlFor="intake-website">Website (leave blank)</label>
+        <input
+          id="intake-website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={(e) => onChange({ website: e.target.value })}
+        />
+      </div>
+
+      {/* Real fields */}
+      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Field
+          id="intake-name"
+          label="Full name"
+          required
+          autoComplete="name"
+          value={form.name}
+          onChange={(v) => onChange({ name: v })}
+        />
+        <Field
+          id="intake-organization"
+          label="Organization"
+          autoComplete="organization"
+          value={form.organization}
+          onChange={(v) => onChange({ organization: v })}
+        />
+        <Field
+          id="intake-email"
+          label="Work email"
+          required
+          type="email"
+          autoComplete="email"
+          value={form.email}
+          onChange={(v) => onChange({ email: v })}
+        />
+        <Field
+          id="intake-country"
+          label="Country"
+          autoComplete="country-name"
+          value={form.country}
+          onChange={(v) => onChange({ country: v })}
+        />
+      </div>
+
+      <div className="mt-4">
+        <label
+          htmlFor="intake-message"
+          className="block font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2"
+        >
+          Notes for the deployment team{' '}
+          <span className="text-slate-400 font-mono normal-case">(optional)</span>
+        </label>
+        <textarea
+          id="intake-message"
+          value={form.message}
+          onChange={(e) => onChange({ message: e.target.value })}
+          rows={3}
+          maxLength={2000}
+          className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm font-sans text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1E6FD9] focus:ring-2 focus:ring-[#1E6FD9]/20 motion-safe:transition-colors resize-none"
+          placeholder="Programme context, regions, integration constraints, procurement framework — anything that helps the architect scope the call."
+        />
+      </div>
+
+      {TURNSTILE_CONFIGURED && (
+        <div className="mt-5">
+          <TurnstileWidget
+            onVerify={(token) => onChange({ turnstile_token: token })}
+            onExpire={() => onChange({ turnstile_token: '' })}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ---------- field helper ------------------------------------------------
+
+const Field: React.FC<{
+  id: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+  type?: string;
+  autoComplete?: string;
+}> = ({ id, label, value, onChange, required, type = 'text', autoComplete }) => (
+  <div>
+    <label
+      htmlFor={id}
+      className="block font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-2"
+    >
+      {label}
+      {required && (
+        <span className="ml-1 text-[#0A3A6B] dark:text-[#9ED0F9] normal-case">*</span>
+      )}
+    </label>
+    <input
+      id={id}
+      type={type}
+      required={required}
+      autoComplete={autoComplete}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full px-3.5 py-2.5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-lg text-sm font-sans text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1E6FD9] focus:ring-2 focus:ring-[#1E6FD9]/20 motion-safe:transition-colors"
+    />
+  </div>
+);
 
 // ---------- success state ------------------------------------------------
 
