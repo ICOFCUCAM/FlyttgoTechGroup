@@ -160,3 +160,113 @@
 .markdown-preview ol {
   @apply my-4 ml-6;
 }
+
+/* =====================================================================
+ * @media print — regulator-ready printing for the accounting workspace.
+ * Every /accounting and /audit page inherits this. The .print:hidden
+ * Tailwind utility hides nav/forms/buttons; this block adds the
+ * statutory polish needed for paper or PDF-via-browser output.
+ * ================================================================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0F172A !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide chrome — workspace nav, sticky bars, buttons, form inputs. */
+  header, nav, .print\:hidden,
+  button:not(.print\:visible),
+  input, select, textarea {
+    display: none !important;
+  }
+
+  main, .max-w-7xl {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Tables — keep rows together, repeat headers across pages. */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    font-size: 10pt !important;
+    page-break-inside: auto;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tfoot {
+    display: table-footer-group;
+  }
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto;
+  }
+  th, td {
+    padding: 4pt 6pt !important;
+    border-bottom: 0.5pt solid #94A3B8 !important;
+  }
+  thead th {
+    background: #F1F5F9 !important;
+    color: #475569 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 8pt;
+    border-bottom: 1pt solid #475569 !important;
+  }
+  tfoot td {
+    border-top: 1pt solid #475569 !important;
+    background: #F8FAFC !important;
+    font-weight: 600;
+  }
+
+  /* Section headers + serif headlines stay legible at print sizes. */
+  h1 { font-size: 18pt !important; }
+  h2 { font-size: 13pt !important; }
+  h3 { font-size: 11pt !important; }
+
+  /* Force light surfaces — dark mode → white paper. */
+  .bg-slate-950, .bg-slate-900, .bg-slate-800,
+  .dark\:bg-slate-950, .dark\:bg-slate-900, .dark\:bg-slate-900\/60 {
+    background: #ffffff !important;
+  }
+  .text-white, .dark\:text-white,
+  .text-slate-100, .dark\:text-slate-100,
+  .text-slate-200, .dark\:text-slate-200,
+  .text-slate-300, .dark\:text-slate-300 {
+    color: #0F172A !important;
+  }
+  .text-slate-400, .text-slate-500 {
+    color: #475569 !important;
+  }
+
+  /* Borders — print as hairlines */
+  [class*="border"] {
+    border-color: #94A3B8 !important;
+  }
+
+  /* Strip shadows + rounded radii that look noisy on paper */
+  * {
+    box-shadow: none !important;
+  }
+  .rounded-2xl, .rounded-xl, .rounded-lg, .rounded-md {
+    border-radius: 0 !important;
+  }
+
+  a[href]::after {
+    content: '';
+  }
+
+  /* Page-break helpers */
+  .page-break-before { page-break-before: always; }
+  .page-break-after  { page-break-after: always; }
+  .break-inside-avoid { break-inside: avoid; page-break-inside: avoid; }
+}
