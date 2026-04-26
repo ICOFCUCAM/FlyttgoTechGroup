@@ -43,7 +43,14 @@ const HeroSlider: React.FC = () => {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left — headline, subheadline, CTAs */}
           <div className="lg:col-span-7 xl:col-span-6">
-            <p className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em]">
+            {/* Engineering section index — sets institutional-platform tone */}
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] text-white/55">
+              <span className="text-[#9ED0F9] font-semibold">PL.00</span>
+              <span aria-hidden="true" className="flex-1 h-px bg-white/10 max-w-[160px]" />
+              <span className="uppercase">Platform Infrastructure</span>
+            </div>
+
+            <p className="mt-6 inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em]">
               <span
                 className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse"
                 aria-hidden="true"
@@ -53,15 +60,56 @@ const HeroSlider: React.FC = () => {
 
             <h1
               id="hero-heading"
-              className="mt-6 text-[32px] sm:text-[38px] md:text-[44px] lg:text-[48px] xl:text-[54px] leading-[1.08] font-semibold tracking-tight text-white"
+              className="mt-6 font-serif text-[34px] sm:text-[40px] md:text-[46px] lg:text-[50px] xl:text-[58px] leading-[1.05] font-medium tracking-tight text-white"
             >
               {t('hero.title.part1')}{' '}
-              <span className="text-[#9ED0F9]">{t('hero.title.part2')}</span>
+              <em className="not-italic font-serif italic text-[#9ED0F9] font-normal">
+                {t('hero.title.part2')}
+              </em>
             </h1>
 
-            <p className="mt-5 text-base md:text-lg text-white/80 leading-relaxed max-w-2xl font-normal">
+            <p className="mt-6 text-base md:text-lg text-white/75 leading-[1.65] max-w-2xl font-normal">
               {t('hero.subtitle')}
             </p>
+
+            {/* Capability metadata rail — monospace, infrastructure-grade signaling */}
+            <ul
+              className="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 max-w-2xl font-mono text-[10px] tracking-[0.16em] uppercase text-white/55"
+              aria-label="Platform capability metadata"
+            >
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-emerald-300" aria-hidden="true" />
+                EU deployment
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-emerald-300" aria-hidden="true" />
+                AF scale-ready
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-emerald-300" aria-hidden="true" />
+                MENA interop
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-emerald-300" aria-hidden="true" />
+                Sovereign-ready
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-[#9ED0F9]" aria-hidden="true" />
+                Modular rollout
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-[#9ED0F9]" aria-hidden="true" />
+                Multi-platform orchestration
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-[#9ED0F9]" aria-hidden="true" />
+                Regional federation
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-[#9ED0F9]" aria-hidden="true" />
+                SOC 2 · ISO 27001
+              </li>
+            </ul>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link

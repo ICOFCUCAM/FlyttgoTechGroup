@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono, IBM_Plex_Serif } from 'next/font/google';
 import { Providers } from './providers';
 import Analytics from '@/components/flytt/Analytics';
 import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
@@ -13,6 +13,17 @@ const inter = Inter({
   // while body text stays optically balanced.
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
+});
+
+// Editorial serif — used for display headlines + italic emphasis tokens.
+// Targets institutional infrastructure authority (Palantir / Stripe /
+// OpenAI use serif emphasis to signal engineering depth, not marketing).
+const ibmPlexSerif = IBM_Plex_Serif({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
   display: 'swap',
 });
 
@@ -174,7 +185,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang={locale.toLowerCase()}
       dir={meta.rtl ? 'rtl' : 'ltr'}
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${ibmPlexSerif.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>
