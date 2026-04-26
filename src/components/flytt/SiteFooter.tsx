@@ -422,8 +422,40 @@ const SiteFooter: React.FC = () => {
           </div>
         </div>
 
+        {/* RG.FT — Regional infrastructure rail */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 mb-4">
+            <span className="text-[#9ED0F9] font-semibold">RG.FT</span>
+            <span className="mx-2 text-white/20">·</span>
+            Regional infrastructure
+          </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { code: 'NO-OS', label: 'Oslo headquarters', sub: 'Nordic EU primary · sovereign-grade hosting' },
+              { code: 'EU',    label: 'EU infrastructure availability', sub: 'Frankfurt · London · Amsterdam' },
+              { code: 'AF',    label: 'Africa rollout presence', sub: 'Lagos · Yaoundé · Nairobi · Kampala · Addis · Johannesburg' },
+              { code: 'MENA',  label: 'MENA deployment readiness', sub: 'Dubai · Riyadh · Cairo · sovereign environments' },
+            ].map((r) => (
+              <li
+                key={r.code}
+                className="p-3 rounded-xl bg-white/5 border border-white/10"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#9ED0F9] font-semibold">
+                  {r.code}
+                </div>
+                <div className="mt-1 text-[13px] font-medium tracking-tight text-white/90">
+                  {r.label}
+                </div>
+                <div className="mt-0.5 text-[11px] text-white/55 leading-snug">
+                  {r.sub}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-10 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <p className="text-xs text-slate-500">
               © {new Date().getFullYear()} FlyttGo Technologies Group AB ·
