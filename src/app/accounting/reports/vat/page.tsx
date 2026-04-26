@@ -1,5 +1,6 @@
 import { requireRole, getSupabaseAuthClient } from '@/lib/auth/server';
 import SectionHeader from '@/components/accounting/SectionHeader';
+import StatutoryReportPrintMeta from '@/components/accounting/StatutoryReportPrintMeta';
 import PeriodPicker from '@/components/accounting/PeriodPicker';
 import { buildVatReport } from '@/lib/accounting/reports';
 import { isFrameworkCode, formatAmount } from '@/lib/accounting/frameworks';
@@ -33,7 +34,14 @@ export default async function VatReportPage({
   const { rows, totals } = await buildVatReport(supabase, session.organizationId!, range);
 
   return (
-    <div>
+    <div className="statutory-report-print">
+      {/* Phase 31 — regulator-ready printed header + footer */}
+      <StatutoryReportPrintMeta
+        organizationId={session.organizationId!}
+        reportTitle="VAT report"
+        periodLabel={range.from + ' → ' + range.to}
+      />
+
       <SectionHeader
         code="AC.04.05"
         eyebrow="VAT report"

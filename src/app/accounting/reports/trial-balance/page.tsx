@@ -1,5 +1,6 @@
 import { requireRole, getSupabaseAuthClient } from '@/lib/auth/server';
 import SectionHeader from '@/components/accounting/SectionHeader';
+import StatutoryReportPrintMeta from '@/components/accounting/StatutoryReportPrintMeta';
 import PeriodPicker from '@/components/accounting/PeriodPicker';
 import { buildTrialBalance } from '@/lib/accounting/reports';
 import { isFrameworkCode, formatAmount } from '@/lib/accounting/frameworks';
@@ -38,7 +39,14 @@ export default async function TrialBalancePage({
   const { rows, totals } = await buildTrialBalance(supabase, session.organizationId!, range);
 
   return (
-    <div>
+    <div className="statutory-report-print">
+      {/* Phase 31 — regulator-ready printed header + footer */}
+      <StatutoryReportPrintMeta
+        organizationId={session.organizationId!}
+        reportTitle="Trial balance"
+        periodLabel={range.from + ' → ' + range.to}
+      />
+
       <SectionHeader
         code="AC.04.01"
         eyebrow="Trial balance"

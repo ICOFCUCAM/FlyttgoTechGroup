@@ -1,5 +1,6 @@
 import { requireRole, getSupabaseAuthClient } from '@/lib/auth/server';
 import SectionHeader from '@/components/accounting/SectionHeader';
+import StatutoryReportPrintMeta from '@/components/accounting/StatutoryReportPrintMeta';
 import PeriodPicker from '@/components/accounting/PeriodPicker';
 import { buildBalanceSheet } from '@/lib/accounting/reports';
 import { isFrameworkCode, formatAmount } from '@/lib/accounting/frameworks';
@@ -26,7 +27,14 @@ export default async function BalanceSheetPage({
   const bs = await buildBalanceSheet(supabase, session.organizationId!, asOf);
 
   return (
-    <div>
+    <div className="statutory-report-print">
+      {/* Phase 31 — regulator-ready printed header + footer */}
+      <StatutoryReportPrintMeta
+        organizationId={session.organizationId!}
+        reportTitle="Balance sheet"
+        periodLabel={asOf}
+      />
+
       <SectionHeader
         code="AC.04.04"
         eyebrow="Balance sheet"

@@ -1,5 +1,6 @@
 import { requireRole, getSupabaseAuthClient } from '@/lib/auth/server';
 import SectionHeader from '@/components/accounting/SectionHeader';
+import StatutoryReportPrintMeta from '@/components/accounting/StatutoryReportPrintMeta';
 import PeriodPicker from '@/components/accounting/PeriodPicker';
 import { buildGeneralLedger } from '@/lib/accounting/reports';
 import { isFrameworkCode, formatAmount, formatDate } from '@/lib/accounting/frameworks';
@@ -33,7 +34,14 @@ export default async function GeneralLedgerPage({
   const rows = await buildGeneralLedger(supabase, session.organizationId!, range);
 
   return (
-    <div>
+    <div className="statutory-report-print">
+      {/* Phase 31 — regulator-ready printed header + footer */}
+      <StatutoryReportPrintMeta
+        organizationId={session.organizationId!}
+        reportTitle="General ledger"
+        periodLabel={range.from + ' → ' + range.to}
+      />
+
       <SectionHeader
         code="AC.04.02"
         eyebrow="General ledger"
