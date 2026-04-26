@@ -11,7 +11,7 @@ export default async function GeneralLedgerPage({
 }: {
   searchParams: { from?: string; to?: string };
 }) {
-  const session = await requireRole('accountant');
+  const session = await requireRole('auditor');
   const supabase = getSupabaseAuthClient();
   const { data: settings } = await supabase
     .from('org_settings')

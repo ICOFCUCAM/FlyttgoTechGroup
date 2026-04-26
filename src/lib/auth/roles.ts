@@ -68,6 +68,15 @@ export function defaultLandingPath(role: PlatformRole): string {
 export const PROTECTED_PREFIXES = ['/accounting', '/audit', '/admin'] as const;
 
 export function requiredRoleForPath(pathname: string): PlatformRole | null {
+  // Accounting reports are read-only views — auditors and finance_viewers
+  // need access to inspect the same statutory artefacts the accountant
+  // produces. The mutating accounting routes still require accountant+.
+  if (
+    pathname === '/accounting/reports' ||
+    pathname.startsWith('/accounting/reports/')
+  ) {
+    return 'auditor';
+  }
   if (pathname === '/accounting' || pathname.startsWith('/accounting/')) {
     return 'accountant';
   }

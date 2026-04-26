@@ -38,7 +38,7 @@ const REPORTS = [
 ];
 
 export default async function ReportsIndexPage() {
-  await requireRole('accountant');
+  await requireRole('auditor');
   return (
     <div>
       <SectionHeader
