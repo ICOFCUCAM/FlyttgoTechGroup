@@ -109,6 +109,11 @@ export async function buildSaftXml(
   const entries = (entriesRaw ?? []) as unknown as EntryRow[];
 
   // ---- 4) Header ----------------------------------------------------
+  // The SoftwareCompanyName / SoftwareID / SoftwareVersion elements
+  // here are the SAF-T-native location for the regulator-compatibility
+  // metadata (Phase 34 footer equivalent). No separate footer block
+  // is added to the XML — the OECD schema doesn't recognize one and
+  // any non-schema element risks rejection at upload time.
   const now = new Date();
   const headerNode = group('Header', [
     el('AuditFileVersion', '1.30'),

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { getSession, getSupabaseAuthClient } from '@/lib/auth/server';
 import { buildGaapBundle } from '@/lib/accounting/exports/gaap-bundle';
 import { recordExport, type ExportType } from '@/lib/accounting/exports/history';
+import { footerForCsv, type FooterMeta } from '@/lib/accounting/exports/footer';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -69,9 +70,19 @@ export async function GET(request: Request) {
     },
   });
 
+  const footer: FooterMeta = {
+    jurisdiction: 'US',
+    currency: 'USD',
+    generatedAt: new Date().toISOString(),
+    generatedBy: session.email,
+    organizationName: org?.name ?? undefined,
+    registrationNumber: org?.registration_number ?? null,
+    vatNumber: org?.vat_number ?? null,
+  };
+
   const file = parsed.data.file;
   if (file !== 'all') {
-    const csv = bundle.get(`${file}.csv`) ?? '';
+    const csv = (bundle.get(`${file}.csv`) ?? '') + footerForCsv(footer);
     await recordExport({
       organizationId: session.organizationId,
       userId: session.userId,
@@ -96,7 +107,7 @@ export async function GET(request: Request) {
   // the separator string.
   const combined = Array.from(bundle.entries())
     .map(([name, body]) => `\r\n# ===== ${name} =====\r\n${body}`)
-    .join('\r\n');
+    .join('\r\n') + footerForCsv(footer);
 
   await recordExport({
     organizationId: session.organizationId,

@@ -12,6 +12,7 @@ import { isFrameworkCode, formatAmount, formatDate } from '@/lib/accounting/fram
 import { toCsv } from '@/lib/accounting/exports/csv';
 import { renderWordDoc, type DocSection } from '@/lib/accounting/exports/doc';
 import { renderPrintableHtml } from '@/lib/accounting/exports/pdf';
+import { footerForCsv, type FooterMeta } from '@/lib/accounting/exports/footer';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -185,8 +186,26 @@ export async function GET(request: Request) {
   const generatedAt = new Date().toISOString();
   const fileBase = `flyttgo-${report}-${range.from}-${range.to}`;
 
+  const { data: orgRow } = await supabase
+    .from('organizations')
+    .select('name, registration_number, vat_number')
+    .eq('id', session.organizationId)
+    .maybeSingle();
+
+  const footer: FooterMeta = {
+    jurisdiction: framework,
+    currency: settings?.default_country
+      ? (orgRow?.name ? '' : '') + (framework === 'NO' ? 'NOK' : framework === 'UK' ? 'GBP' : framework === 'US' ? 'USD' : 'EUR')
+      : 'EUR',
+    generatedAt,
+    generatedBy: session.email,
+    organizationName: orgRow?.name ?? undefined,
+    registrationNumber: orgRow?.registration_number ?? null,
+    vatNumber: orgRow?.vat_number ?? null,
+  };
+
   if (format === 'csv') {
-    const body = toCsv(csvHeaders, csvRows);
+    const body = toCsv(csvHeaders, csvRows) + footerForCsv(footer);
     return new NextResponse(body, {
       status: 200,
       headers: {
@@ -198,7 +217,7 @@ export async function GET(request: Request) {
   }
 
   if (format === 'doc') {
-    const body = renderWordDoc({ title, subtitle, generatedAt, sections });
+    const body = renderWordDoc({ title, subtitle, generatedAt, sections, footer });
     return new NextResponse(body, {
       status: 200,
       headers: {
@@ -210,7 +229,7 @@ export async function GET(request: Request) {
   }
 
   // PDF — print-optimised HTML with inline disposition + auto-print.
-  const body = renderPrintableHtml({ title, subtitle, generatedAt, sections });
+  const body = renderPrintableHtml({ title, subtitle, generatedAt, sections, footer });
   return new NextResponse(body, {
     status: 200,
     headers: {

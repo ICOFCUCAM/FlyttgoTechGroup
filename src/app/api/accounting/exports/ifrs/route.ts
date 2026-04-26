@@ -8,6 +8,7 @@ import {
 } from '@/lib/accounting/reports';
 import { toCsv } from '@/lib/accounting/exports/csv';
 import { recordExport } from '@/lib/accounting/exports/history';
+import { footerForCsv, type FooterMeta } from '@/lib/accounting/exports/footer';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -124,9 +125,19 @@ export async function GET(request: Request) {
     ),
   );
 
+  const footer: FooterMeta = {
+    jurisdiction: 'IFRS',
+    currency: org?.base_currency ?? 'EUR',
+    generatedAt: new Date().toISOString(),
+    generatedBy: session.email,
+    organizationName: org?.name ?? undefined,
+    registrationNumber: org?.registration_number ?? null,
+    vatNumber: null,
+  };
+
   const combined = segments
     .map((s, i) => `\r\n# ===== ${['trial_balance', 'income_statement', 'balance_sheet'][i]}.csv =====\r\n${s}`)
-    .join('\r\n');
+    .join('\r\n') + footerForCsv(footer);
 
   await recordExport({
     organizationId: session.organizationId,

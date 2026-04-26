@@ -7,6 +7,7 @@
  */
 
 import { escapeHtml } from './html';
+import { footerForHtml, type FooterMeta } from './footer';
 
 export type DocSection = {
   heading: string;
@@ -20,6 +21,8 @@ export function renderWordDoc(opts: {
   subtitle?: string;
   generatedAt: string;
   sections: DocSection[];
+  /** Phase 34 — appends the regulator-compatibility footer metadata. */
+  footer?: FooterMeta;
 }): string {
   const sections = opts.sections
     .map((s) => {
@@ -78,6 +81,7 @@ export function renderWordDoc(opts: {
   ${opts.subtitle ? `<div class="meta">${escapeHtml(opts.subtitle)}</div>` : ''}
   <div class="meta">Generated ${escapeHtml(opts.generatedAt)} · FlyttGo accounting</div>
   ${sections}
+  ${opts.footer ? footerForHtml(opts.footer) : ''}
 </body>
 </html>`;
 }

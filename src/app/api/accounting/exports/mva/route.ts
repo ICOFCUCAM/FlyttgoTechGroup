@@ -5,6 +5,7 @@ import { buildMvaSummary } from '@/lib/accounting/exports/mva';
 import { toCsv } from '@/lib/accounting/exports/csv';
 import { renderPrintableHtml } from '@/lib/accounting/exports/pdf';
 import { recordExport } from '@/lib/accounting/exports/history';
+import { footerForCsv, type FooterMeta } from '@/lib/accounting/exports/footer';
 import { formatAmount } from '@/lib/accounting/frameworks';
 
 export const runtime = 'nodejs';
@@ -54,6 +55,15 @@ export async function GET(request: Request) {
   });
 
   const fileBase = `mva_${parsed.data.from}_${parsed.data.to}`;
+  const footer: FooterMeta = {
+    jurisdiction: 'NO',
+    currency: org?.base_currency ?? 'NOK',
+    generatedAt: new Date().toISOString(),
+    generatedBy: session.email,
+    organizationName: org?.name ?? undefined,
+    registrationNumber: org?.registration_number ?? null,
+    vatNumber: org?.vat_number ?? null,
+  };
 
   if (parsed.data.format === 'csv') {
     const headers = ['Category', 'Label', 'Rate %', 'Net amount', 'VAT amount'];
@@ -68,7 +78,7 @@ export async function GET(request: Request) {
     rows.push(['totals', 'Input VAT', '', '', summary.totals.input_vat]);
     rows.push(['totals', 'Payable to state', '', '', summary.totals.payable]);
     rows.push(['totals', 'Receivable from state', '', '', summary.totals.receivable]);
-    const csv = toCsv(headers, rows);
+    const csv = toCsv(headers, rows) + footerForCsv(footer);
 
     await recordExport({
       organizationId: session.organizationId,
@@ -95,6 +105,7 @@ export async function GET(request: Request) {
     title: 'MVA-melding — Norwegian VAT summary',
     subtitle: `Period ${parsed.data.from} → ${parsed.data.to} · ${org?.name ?? '—'} · Org. nr ${org?.registration_number ?? '—'}`,
     generatedAt: new Date().toISOString(),
+    footer,
     sections: [
       {
         heading: 'Per-category breakdown',

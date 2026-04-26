@@ -5,6 +5,7 @@ import { buildVatReturn } from '@/lib/accounting/exports/vat-100';
 import { toCsv } from '@/lib/accounting/exports/csv';
 import { renderPrintableHtml } from '@/lib/accounting/exports/pdf';
 import { recordExport } from '@/lib/accounting/exports/history';
+import { footerForCsv, type FooterMeta } from '@/lib/accounting/exports/footer';
 import { formatAmount } from '@/lib/accounting/frameworks';
 
 export const runtime = 'nodejs';
@@ -66,6 +67,15 @@ export async function GET(request: Request) {
   });
 
   const fileBase = `vat_return_${parsed.data.from}_${parsed.data.to}`;
+  const footer: FooterMeta = {
+    jurisdiction: 'UK',
+    currency: 'GBP',
+    generatedAt: new Date().toISOString(),
+    generatedBy: session.email,
+    organizationName: org?.name ?? undefined,
+    registrationNumber: org?.registration_number ?? null,
+    vatNumber: org?.vat_number ?? null,
+  };
 
   if (parsed.data.format === 'json') {
     await recordExport({
@@ -90,7 +100,7 @@ export async function GET(request: Request) {
       label,
       ret[key],
     ]);
-    const csv = toCsv(headers, rows);
+    const csv = toCsv(headers, rows) + footerForCsv(footer);
     await recordExport({
       organizationId: session.organizationId,
       userId: session.userId,
@@ -115,6 +125,7 @@ export async function GET(request: Request) {
     title: 'VAT-100 return — HMRC Making Tax Digital',
     subtitle: `Period ${parsed.data.from} → ${parsed.data.to} · ${org?.name ?? '—'} · VRN ${org?.vat_number ?? '—'}`,
     generatedAt: new Date().toISOString(),
+    footer,
     sections: [
       {
         heading: 'Nine-box VAT return',

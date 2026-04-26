@@ -76,7 +76,7 @@ describe('resolveExchangeRate', () => {
       onDate: '2026-01-01',
     });
     expect(r.ok).toBe(false);
-    if (!r.ok) {
+    if (r.ok === false) {
       expect(r.error).toContain('EUR');
       expect(r.error).toContain('NOK');
     }
