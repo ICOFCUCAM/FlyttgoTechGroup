@@ -282,6 +282,116 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        {/* EP.00 — Deployment engagement pathway */}
+        <section
+          aria-labelledby="engagement-pathway-heading"
+          className="relative py-16 lg:py-20 border-t border-slate-200/60 dark:border-slate-800/60 bg-gradient-to-b from-white to-[#F7FAFD] dark:from-slate-950 dark:to-slate-900"
+        >
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
+              <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+                EP.00
+              </span>
+              <span
+                aria-hidden="true"
+                className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]"
+              />
+              <span>Deployment engagement pathway</span>
+            </div>
+
+            <div className="mt-6 grid lg:grid-cols-12 gap-8 items-end">
+              <h2
+                id="engagement-pathway-heading"
+                className="lg:col-span-7 font-serif text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.1]"
+              >
+                How deployment engagement{' '}
+                <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                  actually unfolds.
+                </em>
+              </h2>
+              <p className="lg:col-span-5 text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
+                The intake above triggers a five-stage engagement track. Each
+                stage is owned by a named architect, scoped to a fixed cadence,
+                and gated on a written deliverable — not on a sales cycle.
+              </p>
+            </div>
+
+            {/* EP.01–05 — Engagement ladder */}
+            <ol className="mt-10 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {[
+                {
+                  code: 'EP.01',
+                  title: 'Initial scoping',
+                  cadence: 'Week 1',
+                  deliverable: 'Fit memo',
+                  body: 'Solution architect reviews intake, validates fit, and confirms whether deployment is feasible against your timeline and sovereignty constraints.',
+                },
+                {
+                  code: 'EP.02',
+                  title: 'Architecture alignment',
+                  cadence: 'Weeks 2–3',
+                  deliverable: 'Reference architecture',
+                  body: 'Module selection (Identra · Payvera · Transify · Workverge · Civitas · EduPro · Ledgera) mapped against your data, identity, and integration topology.',
+                },
+                {
+                  code: 'EP.03',
+                  title: 'Environment selection',
+                  cadence: 'Weeks 3–4',
+                  deliverable: 'DM.0X commitment',
+                  body: 'FlyttGo-managed, customer cloud, or sovereign datacenter — selected against procurement framework, residency policy, and operational ownership model.',
+                },
+                {
+                  code: 'EP.04',
+                  title: 'Pilot rollout planning',
+                  cadence: 'Weeks 4–8',
+                  deliverable: 'Pilot SOW',
+                  body: 'Bounded pilot scope — single city, single agency, or single operator. Success metrics, cutover plan, and operational runbook signed before any code ships.',
+                },
+                {
+                  code: 'EP.05',
+                  title: 'National scaling roadmap',
+                  cadence: 'Quarter 2+',
+                  deliverable: 'Regional rollout plan',
+                  body: 'Pilot graduates into staged regional or cross-border rollout — onboarding cadence, regulatory checkpoints, and Ledgera-backed financial reporting alignment.',
+                },
+              ].map((s, i, arr) => (
+                <li
+                  key={s.code}
+                  className="relative flex flex-col p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 motion-safe:transition-colors"
+                >
+                  <div className="flex items-center justify-between gap-2 font-mono text-[10px] tracking-[0.22em] uppercase">
+                    <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">
+                      {s.code}
+                    </span>
+                    <span className="text-slate-400 normal-case tracking-tight">
+                      {s.cadence}
+                    </span>
+                  </div>
+                  <h3 className="mt-3 text-base font-semibold tracking-tight text-slate-900 dark:text-white">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-[1.6] flex-1">
+                    {s.body}
+                  </p>
+                  <div className="mt-4 pt-3 border-t border-slate-200/70 dark:border-slate-800/60 font-mono text-[10px] tracking-[0.16em] uppercase">
+                    <span className="text-slate-400">Deliverable</span>
+                    <span className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+                    <span className="text-slate-700 dark:text-slate-300 normal-case tracking-tight">
+                      {s.deliverable}
+                    </span>
+                  </div>
+                  {i < arr.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="hidden lg:block absolute top-1/2 -right-2 w-4 h-px bg-slate-300 dark:bg-slate-700"
+                    />
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </>
