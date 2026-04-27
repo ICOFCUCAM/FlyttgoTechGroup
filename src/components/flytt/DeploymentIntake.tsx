@@ -350,7 +350,7 @@ const DeploymentIntake: React.FC = () => {
   // ---- render ------------------------------------------------------------
 
   if (status === 'success') {
-    return <IntakeSuccess />;
+    return <IntakeSuccess isGovernment={isGovernmentIntent} />;
   }
 
   return (
@@ -1105,7 +1105,9 @@ const Field: React.FC<{
 
 // ---------- success state ------------------------------------------------
 
-const IntakeSuccess: React.FC = () => (
+const IntakeSuccess: React.FC<{ isGovernment?: boolean }> = ({
+  isGovernment = false,
+}) => (
   <div
     role="status"
     aria-live="polite"
@@ -1115,14 +1117,17 @@ const IntakeSuccess: React.FC = () => (
       <CheckCircle2 size={28} className="text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
     </div>
     <h3 className="mt-5 font-serif text-2xl md:text-3xl font-medium tracking-tight text-slate-900 dark:text-white">
-      Intake received.
+      {isGovernment ? 'Engagement intake received.' : 'Intake received.'}
     </h3>
     <p className="mt-3 text-slate-600 dark:text-slate-400 max-w-md mx-auto leading-[1.65]">
-      A FlyttGo deployment solution architect will respond within one business day with
-      a scoping outline matched to your institution and timeline.
+      {isGovernment
+        ? 'The FlyttGo public-sector engagement desk will respond within one business day to schedule the capability deep-dive (EG.01) and circulate the relevant materials under standard public-sector information-handling rules.'
+        : 'A FlyttGo deployment solution architect will respond within one business day with a scoping outline matched to your institution and timeline.'}
     </p>
     <p className="mt-6 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
-      DP.01 · Intake routed · Reference logged
+      {isGovernment
+        ? 'GV.00 · Public-sector intake routed · Audit log reference logged'
+        : 'DP.01 · Intake routed · Reference logged'}
     </p>
   </div>
 );

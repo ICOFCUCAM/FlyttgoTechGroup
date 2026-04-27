@@ -139,11 +139,11 @@ export default function SovereignPage() {
                 <p className="mt-1 text-sm text-slate-500 leading-snug">DPS · G-Cloud · OJEU · national framework agreements.</p>
                 <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-[#0A3A6B] dark:text-[#9ED0F9]">Contracting routes <ArrowUpRight size={11} /></span>
               </Link>
-              <Link href="/contact" className="block p-6 rounded-2xl bg-[#0A1F3D] text-white border border-white/10 hover:border-white/20 motion-safe:transition-all">
-                <ShieldCheck size={20} className="text-[#9ED0F9]" aria-hidden="true" />
-                <h3 className="mt-3 text-base font-semibold tracking-tight">Talk to deployment engineering</h3>
-                <p className="mt-1 text-sm text-white/70 leading-snug">Architecture review within one business day.</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-[#9ED0F9]">Open intake <ArrowUpRight size={11} /></span>
+              <Link href="/government" className="block p-6 rounded-2xl bg-[#0A1F3D] text-white border border-white/10 hover:border-white/20 motion-safe:transition-all">
+                <ShieldCheck size={20} className="text-[#D6B575]" aria-hidden="true" />
+                <h3 className="mt-3 text-base font-semibold tracking-tight">Government &amp; public-sector surface</h3>
+                <p className="mt-1 text-sm text-white/70 leading-snug">Capability brief · sovereignty framework · pilot proposal.</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-[#D6B575]">Open GV.00 <ArrowUpRight size={11} /></span>
               </Link>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from '@/components/flytt/LocaleLink';
-import { ArrowLeft, Printer, Lock } from 'lucide-react';
+import { ArrowLeft, Lock } from 'lucide-react';
+import PrintButton from '@/components/flytt/PrintButton';
 
 /**
  * GCB.00 — Government Capability Brief, print-ready HTML surface.
@@ -51,17 +52,8 @@ export default function CapabilityBriefPage({ searchParams }: PageProps) {
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
               GCB.00 · v{version} · issued {issueDate}
             </span>
-            <button
-              type="button"
-              onClick={() => {
-                if (typeof window !== 'undefined') window.print();
-              }}
-              suppressHydrationWarning
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#0A3A6B] text-white text-xs font-semibold hover:bg-[#0A3A6B]/90 motion-safe:transition-colors print:hidden"
-            >
-              <Printer size={12} strokeWidth={2} aria-hidden="true" />
-              Print to PDF
-            </button>
+            <PrintButton />
+
           </div>
         </div>
       </div>
