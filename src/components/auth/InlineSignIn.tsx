@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import type { PlatformRole } from '@/lib/auth/roles';
+import BrandLogo from '@/components/flytt/BrandLogo';
 
 type Props = {
   /** Human-readable workspace label shown above the form. */
@@ -78,6 +79,9 @@ export default function InlineSignIn({ workspaceLabel, code, requiredRole }: Pro
   return (
     <main className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
+        <div className="mb-6">
+          <BrandLogo variant="mark-secondary" height={36} />
+        </div>
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
           <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">{code}</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60" />

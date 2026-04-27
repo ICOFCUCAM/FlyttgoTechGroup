@@ -1,4 +1,5 @@
 import React from 'react';
+import BrandLogo from '@/components/flytt/BrandLogo';
 
 /**
  * Site-wide establishment rail (ER.00). A thin near-black band that
@@ -21,6 +22,7 @@ const EstablishmentRail: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 h-7 flex items-center justify-between gap-4 font-mono text-[10px] tracking-[0.22em] uppercase">
         <div className="flex items-center gap-3 min-w-0">
+          <BrandLogo variant="mark" height={14} decorative />
           <span className="text-[#D6B575] font-semibold flex-shrink-0">
             FlyttGo Technologies Group AB
           </span>

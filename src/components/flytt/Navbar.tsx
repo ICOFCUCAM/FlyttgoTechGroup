@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Link from '@/components/flytt/LocaleLink';
+import BrandLogo from '@/components/flytt/BrandLogo';
 import { usePathname } from 'next/navigation';
 import {
   Menu,
@@ -362,23 +363,9 @@ const Navbar: React.FC = () => {
         <Link
           href="/"
           aria-label="FlyttGo Technologies — home"
-          className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md"
+          className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md"
         >
-          <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#0A3A6B] to-[#1E6FD9] flex items-center justify-center" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M4 12L10 6L14 10L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M4 18L10 12L14 16L20 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
-            </svg>
-          </div>
-          <span className="flex flex-col leading-none">
-            <span className="text-[15px] tracking-tight text-slate-900 dark:text-white">
-              <span className="font-semibold">FlyttGo</span>
-              <span className="hidden sm:inline font-medium text-slate-500"> Technologies</span>
-            </span>
-            <span className="hidden sm:block mt-1 text-[10px] uppercase tracking-[0.18em] text-slate-400 font-medium">
-              Platform Infrastructure
-            </span>
-          </span>
+          <BrandLogo variant="lockup" height={32} priority />
         </Link>
 
         <nav
