@@ -40,8 +40,16 @@ export default function IndustriesPage() {
         className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased"
       >
         <PageHero
-          eyebrow="Industries"
-          title={<>One platform layer. Every sector deployment.</>}
+          code="IN.00"
+          eyebrow="Industries Served"
+          title={
+            <>
+              One platform layer.{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                Every sector deployment.
+              </em>
+            </>
+          }
           description="Ministries, universities, transport authorities, enterprise fleets, marketplace operators and freight networks deploy FlyttGo platforms as modules — with the configuration, compliance posture and deployment pattern that each sector actually needs."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Industries' }]}
         />

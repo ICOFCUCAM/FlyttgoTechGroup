@@ -69,6 +69,7 @@ export default function SecurityPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
+          code="SC.00"
           eyebrow={<T k="legal.security.eyebrow" />}
           title={<T k="legal.security.title" />}
           description="FlyttGo platforms are built for regulated enterprise and public-sector workloads — tenant-isolated, continuously monitored and independently audited. This page summarizes our program; full documentation is shared under NDA."
