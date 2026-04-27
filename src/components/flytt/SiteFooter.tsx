@@ -19,63 +19,77 @@ import CarbonFooterPill from '@/components/flytt/CarbonFooterPill';
 type FooterGroup = {
   headingKey: string;
   headingFallback: string;
+  /** Optional section-index code (mono uppercase) shown alongside the heading. */
+  code?: string;
   links: { label: string; href: string }[];
 };
 
+// Footer rails — restructured per the Section A · Phase 5 brief into the
+// five named architecture rails. Visually rendered as four columns
+// (Enterprise nav · Deployment readiness · Compliance readiness · Support
+// channels). Legal surfaces live in the bottom utility row; the regional
+// infrastructure rail (RG.FT) sits between the columns and the bottom bar.
 const groups: FooterGroup[] = [
   {
-    headingKey: 'footer.group.platforms',
-    headingFallback: 'Platforms',
+    headingKey: 'footer.group.enterprise',
+    headingFallback: 'Enterprise navigation',
+    code: 'EN.RL',
     links: [
-      { label: 'Transify — Mobility', href: '/platforms/transify' },
-      { label: 'Workverge — Workforce', href: '/platforms/workverge' },
-      { label: 'Civitas — Government', href: '/platforms/civitas' },
-      { label: 'EduPro — Education', href: '/platforms/edupro' },
-      { label: 'Identra — Identity', href: '/platforms/identra' },
-      { label: 'Payvera — Payments', href: '/platforms/payvera' },
-      { label: 'Ledgera — Financial Ops', href: '/platforms/ledgera' },
-      { label: 'FlyttGo — Marketplace', href: '/platforms/flyttgo' },
-      { label: 'All platforms', href: '/platforms' },
+      { label: 'Platform ecosystem', href: '/platforms' },
+      { label: 'Transify · Mobility', href: '/platforms/transify' },
+      { label: 'Workverge · Workforce', href: '/platforms/workverge' },
+      { label: 'Civitas · Government', href: '/platforms/civitas' },
+      { label: 'EduPro · Education', href: '/platforms/edupro' },
+      { label: 'Identra · Identity', href: '/platforms/identra' },
+      { label: 'Payvera · Payments', href: '/platforms/payvera' },
+      { label: 'Ledgera · Financial Ops', href: '/platforms/ledgera' },
+      { label: 'FlyttGo · Marketplace', href: '/platforms/flyttgo' },
+      { label: 'Industries surface', href: '/industries' },
     ],
   },
   {
-    headingKey: 'footer.group.industries',
-    headingFallback: 'Industries',
+    headingKey: 'footer.group.deployment',
+    headingFallback: 'Deployment readiness',
+    code: 'DR.RL',
     links: [
-      { label: 'Government & municipal', href: '/industries/government' },
-      { label: 'Education & ministries', href: '/industries/education' },
-      { label: 'Transport & logistics', href: '/industries/transport' },
-      { label: 'Enterprise operations', href: '/industries/enterprise' },
-      { label: 'Marketplace operators', href: '/industries/marketplaces' },
-      { label: 'Freight & logistics networks', href: '/industries/logistics' },
-      { label: 'All industries', href: '/industries' },
-    ],
-  },
-  {
-    headingKey: 'footer.group.company',
-    headingFallback: 'Company',
-    links: [
-      { label: 'About FlyttGo Tech Group', href: '/company' },
-      { label: 'Leadership', href: '/company/leadership' },
-      { label: 'Careers', href: '/company/careers' },
-      { label: 'Press & media', href: '/company/press' },
-      { label: 'Partnership inquiries', href: '/contact?intent=partnership' },
-      { label: 'Contact', href: '/contact' },
-    ],
-  },
-  {
-    headingKey: 'footer.group.resources',
-    headingFallback: 'Resources',
-    links: [
-      { label: 'Technology architecture', href: '/technology' },
-      { label: 'Developer portal', href: '/developers' },
-      { label: 'API reference', href: '/developers' },
-      { label: 'Solution briefs', href: '/solutions' },
-      { label: 'Insights', href: '/insights' },
+      { label: 'Deployment architecture', href: '/deployment' },
+      { label: 'Managed SaaS · DM.01', href: '/deployment/managed' },
+      { label: 'Customer cloud · DM.02', href: '/deployment/customer-cloud' },
+      { label: 'Sovereign datacenter · DM.03', href: '/deployment/sovereign' },
+      { label: 'Sovereign deployment · SV.00', href: '/sovereign' },
+      { label: 'Global coverage · GC.00', href: '/global-coverage' },
+      { label: 'Procurement compatibility · PC.00', href: '/procurement-compatibility' },
+      { label: 'Infrastructure architecture · IA.00', href: '/infrastructure-architecture' },
       { label: 'White-label program', href: '/white-label' },
-      { label: 'Managed deployment', href: '/deployment/managed' },
-      { label: 'Customer cloud', href: '/deployment/customer-cloud' },
-      { label: 'Sovereign datacenter', href: '/deployment/sovereign' },
+    ],
+  },
+  {
+    headingKey: 'footer.group.compliance',
+    headingFallback: 'Compliance readiness',
+    code: 'CR.RL',
+    links: [
+      { label: 'Security architecture', href: '/security' },
+      { label: 'Trust signals · TS.00', href: '/security#trust-signals-heading' },
+      { label: 'Alignment registry · CR.00', href: '/security' },
+      { label: 'Compliance overview', href: '/compliance' },
+      { label: 'Sustainability · CO2.00', href: '/sustainability' },
+      { label: 'Platform status', href: '/status' },
+    ],
+  },
+  {
+    headingKey: 'footer.group.support',
+    headingFallback: 'Support channels',
+    code: 'SP.RL',
+    links: [
+      { label: 'Deployment intake · DP.01', href: '/contact' },
+      { label: 'Partnership inquiries', href: '/contact?intent=partnership' },
+      { label: 'Procurement & RFPs', href: '/contact?intent=procurement' },
+      { label: 'Developer portal', href: '/developers' },
+      { label: 'Live API playground · API.PG', href: '/developers/playground' },
+      { label: 'MCP discovery manifest', href: '/.well-known/mcp.json' },
+      { label: 'Insights', href: '/insights' },
+      { label: 'Solution briefs', href: '/solutions' },
+      { label: 'Try Ledgera sandbox', href: '/try/ledgera' },
     ],
   },
 ];
@@ -247,10 +261,17 @@ const SiteFooter: React.FC = () => {
               const heading = t(g.headingKey) || g.headingFallback;
               return (
                 <div key={g.headingKey}>
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
-                    {heading}
+                  <div className="flex items-center gap-2 mb-4">
+                    {g.code && (
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9ED0F9] font-semibold">
+                        {g.code}
+                      </span>
+                    )}
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+                      {heading}
+                    </span>
                   </div>
-                  <ul className="mt-4 space-y-3">
+                  <ul className="space-y-3">
                     {g.links.map((l) => (
                       <li key={`${g.headingKey}-${l.label}`}>
                         <Link
