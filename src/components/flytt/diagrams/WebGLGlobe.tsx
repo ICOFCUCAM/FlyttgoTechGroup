@@ -29,8 +29,15 @@ const REGIONS: Region[] = [
   { code: 'NO-OS', city: 'Oslo',     lon: 10.75, lat: 59.91, tier: 'primary' },
   { code: 'UK-LN', city: 'London',   lon: -0.13, lat: 51.51, tier: 'primary' },
   { code: 'DE-FR', city: 'Frankfurt', lon: 8.68, lat: 50.11, tier: 'primary' },
+  // North America — explicit SaaS/IaaS plane
   { code: 'US-W',  city: 'San Francisco', lon: -122.4, lat: 37.78, tier: 'primary' },
+  { code: 'US-NW', city: 'Seattle',   lon: -122.33, lat: 47.6, tier: 'primary' },
+  { code: 'US-MW', city: 'Chicago',   lon: -87.65, lat: 41.88, tier: 'secondary' },
+  { code: 'US-NE', city: 'Boston',    lon: -71.06, lat: 42.36, tier: 'primary' },
   { code: 'US-E',  city: 'Northern Virginia', lon: -77.4, lat: 39.0, tier: 'primary' },
+  { code: 'US-S',  city: 'Atlanta',   lon: -84.39, lat: 33.75, tier: 'secondary' },
+  { code: 'US-SC', city: 'Dallas',    lon: -96.8, lat: 32.78, tier: 'secondary' },
+  { code: 'US-SE', city: 'Miami',     lon: -80.19, lat: 25.76, tier: 'secondary' },
   { code: 'BR-SE', city: 'São Paulo', lon: -46.6, lat: -23.55, tier: 'secondary' },
   { code: 'NG-LG', city: 'Lagos',    lon: 3.38, lat: 6.52, tier: 'secondary' },
   { code: 'CM-YA', city: 'Yaoundé',  lon: 11.52, lat: 3.85, tier: 'secondary' },
@@ -52,6 +59,89 @@ const TIER_COLOR: Record<Region['tier'], number> = {
   secondary: 0x0fb5a6,
   sovereign: 0x7c5ce6,
 };
+
+// LAND dot constellation — renders the same approximate continent
+// shapes the 2D WorldDeploymentMap uses, projected onto the sphere
+// surface. Each tuple is [lon, lat]. Read as recognisable Africa /
+// Americas / Asia / Oceania at a glance instead of an abstract
+// shader-noised sphere.
+const LAND_DOTS: Array<[number, number]> = [
+  // North America
+  [-160, 65], [-150, 65], [-140, 65], [-130, 65], [-120, 65],
+  [-160, 60], [-150, 60], [-140, 60], [-130, 60], [-120, 60], [-110, 60], [-100, 60], [-90, 60], [-80, 60], [-70, 60],
+  [-155, 55], [-140, 55], [-125, 55], [-115, 55], [-105, 55], [-95, 55], [-85, 55], [-75, 55], [-65, 55], [-58, 55],
+  [-128, 50], [-118, 50], [-108, 50], [-98, 50], [-88, 50], [-78, 50], [-68, 50], [-60, 50],
+  [-125, 45], [-115, 45], [-105, 45], [-95, 45], [-85, 45], [-75, 45], [-67, 45],
+  [-122, 40], [-112, 40], [-102, 40], [-92, 40], [-82, 40], [-74, 40],
+  [-120, 35], [-108, 35], [-98, 35], [-88, 35], [-78, 35], [-72, 35],
+  [-115, 30], [-105, 30], [-95, 30], [-85, 30], [-78, 30],
+  [-110, 25], [-100, 25], [-90, 25], [-82, 25],
+  [-105, 20], [-95, 20], [-88, 20],
+  [-100, 15], [-88, 15], [-82, 15],
+  [-92, 10], [-85, 10], [-78, 10],
+  // South America
+  [-78, 5], [-72, 5], [-65, 5], [-58, 5], [-52, 5],
+  [-78, 0], [-72, 0], [-65, 0], [-58, 0], [-50, 0],
+  [-78, -5], [-72, -5], [-65, -5], [-58, -5], [-50, -5], [-42, -5],
+  [-75, -10], [-68, -10], [-60, -10], [-52, -10], [-45, -10], [-38, -10],
+  [-72, -15], [-65, -15], [-58, -15], [-50, -15], [-42, -15],
+  [-70, -20], [-62, -20], [-55, -20], [-48, -20], [-42, -20],
+  [-70, -25], [-62, -25], [-55, -25], [-48, -25],
+  [-72, -30], [-65, -30], [-58, -30],
+  [-72, -35], [-65, -35], [-58, -35],
+  [-72, -40], [-65, -40],
+  [-70, -45], [-65, -45],
+  // Europe
+  [-10, 60], [0, 60], [10, 60], [20, 60], [30, 60], [40, 60], [55, 60],
+  [-8, 55], [2, 55], [12, 55], [22, 55], [32, 55], [42, 55],
+  [-8, 50], [2, 50], [12, 50], [22, 50], [32, 50], [42, 50],
+  [-8, 45], [0, 45], [10, 45], [20, 45], [30, 45], [40, 45],
+  [-5, 40], [5, 40], [15, 40], [25, 40], [35, 40], [42, 40],
+  [-20, 65], [10, 70], [22, 68], [25, 70],
+  // Africa
+  [-15, 30], [-5, 30], [5, 30], [15, 30], [25, 30], [33, 30],
+  [-15, 25], [-5, 25], [5, 25], [15, 25], [25, 25], [33, 25],
+  [-15, 20], [-5, 20], [5, 20], [15, 20], [25, 20], [33, 20],
+  [-15, 15], [-5, 15], [5, 15], [15, 15], [25, 15], [35, 15], [42, 15],
+  [-12, 10], [-5, 10], [5, 10], [15, 10], [25, 10], [35, 10], [42, 10],
+  [-8, 5], [0, 5], [10, 5], [20, 5], [30, 5], [38, 5],
+  [10, 0], [20, 0], [28, 0], [35, 0], [42, 0],
+  [12, -5], [22, -5], [30, -5], [38, -5],
+  [15, -10], [22, -10], [30, -10], [38, -10],
+  [15, -15], [22, -15], [30, -15], [38, -15],
+  [18, -20], [25, -20], [32, -20],
+  [20, -25], [27, -25], [32, -25],
+  [22, -30], [28, -30],
+  // MENA / Arabian peninsula
+  [38, 30], [45, 30], [50, 30], [55, 30],
+  [40, 25], [48, 25], [55, 25],
+  [42, 20], [50, 20], [55, 20],
+  [45, 15], [52, 15],
+  // Asia
+  [60, 65], [75, 65], [90, 65], [110, 65], [130, 65], [150, 65], [165, 65],
+  [60, 60], [75, 60], [90, 60], [105, 60], [120, 60], [135, 60], [155, 60],
+  [55, 55], [70, 55], [85, 55], [100, 55], [115, 55], [130, 55], [145, 55],
+  [55, 50], [70, 50], [85, 50], [100, 50], [115, 50], [130, 50], [142, 50],
+  [55, 45], [70, 45], [85, 45], [100, 45], [115, 45], [128, 45], [140, 45],
+  [60, 40], [70, 40], [80, 40], [95, 40], [110, 40], [125, 40], [138, 40],
+  [60, 35], [72, 35], [85, 35], [100, 35], [115, 35], [128, 35],
+  [62, 30], [75, 30], [88, 30], [100, 30], [115, 30],
+  [70, 25], [82, 25], [92, 25], [105, 25],
+  [72, 20], [82, 20], [95, 20], [105, 20],
+  [78, 15], [92, 15], [102, 15], [110, 15], [122, 15],
+  [80, 10], [98, 10], [108, 10], [118, 10],
+  [102, 5], [110, 5], [120, 5],
+  [100, 0], [110, 0], [120, 0],
+  // Indonesia / Philippines
+  [105, -5], [115, -5], [122, -5], [130, -5],
+  [115, -10], [122, -10], [130, -10], [138, -10],
+  // Australia / Oceania
+  [115, -20], [125, -20], [135, -20], [145, -20], [152, -20],
+  [115, -25], [125, -25], [135, -25], [145, -25],
+  [115, -30], [125, -30], [135, -30], [145, -30],
+  [120, -35], [130, -35], [140, -35], [148, -35],
+  [145, -40],
+];
 
 const ARCS: Array<[string, string]> = [
   ['NO-OS', 'US-E'],
@@ -102,7 +192,11 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Procedural surface — fragment-shader stylised continents.
+    // Ocean shader — deep navy with a soft Fresnel + faint lat/lon grid.
+    // Continents are rendered as a separate Points cloud above, using the
+    // same LAND[] dataset as the 2D world map. This guarantees the globe
+    // shows recognisable continent shapes (Africa / Americas / Asia /
+    // Oceania) instead of an abstract noise texture.
     const globeMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
@@ -121,45 +215,22 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
         varying vec3 vPosition;
         uniform float uTime;
 
-        // 3D simplex-ish noise (cheap, decorative).
-        float hash(vec3 p) {
-          p = fract(p * vec3(443.897, 441.423, 437.195));
-          p += dot(p, p.yzx + 19.19);
-          return fract((p.x + p.y) * p.z);
-        }
-        float noise(vec3 p) {
-          vec3 i = floor(p), f = fract(p);
-          vec3 u = f * f * (3.0 - 2.0 * f);
-          return mix(
-            mix(mix(hash(i + vec3(0,0,0)), hash(i + vec3(1,0,0)), u.x),
-                mix(hash(i + vec3(0,1,0)), hash(i + vec3(1,1,0)), u.x), u.y),
-            mix(mix(hash(i + vec3(0,0,1)), hash(i + vec3(1,0,1)), u.x),
-                mix(hash(i + vec3(0,1,1)), hash(i + vec3(1,1,1)), u.x), u.y),
-            u.z
-          );
-        }
-
         void main() {
           vec3 dir = normalize(vPosition);
-          float n = noise(dir * 4.5);
-          n += 0.5 * noise(dir * 9.0);
-          n = smoothstep(0.55, 0.85, n);
 
-          // Ocean (deep navy) → land (lighter navy).
-          vec3 ocean = vec3(0.020, 0.060, 0.135);
-          vec3 land  = vec3(0.043, 0.220, 0.420);
-          vec3 base = mix(ocean, land, n);
+          // Deep navy ocean base.
+          vec3 base = vec3(0.020, 0.060, 0.135);
 
-          // Edge-darkening on grazing angles for a soft sphere shading.
+          // Edge fresnel — gives the sphere soft volumetric depth.
           float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 1.6);
           base += vec3(0.12, 0.43, 0.85) * fresnel * 0.55;
 
-          // Lat/lon grid (subtle).
+          // Faint lat/lon graticule (every ~15°).
           float lat = asin(dir.y);
           float lon = atan(dir.z, dir.x);
-          float gridLat = smoothstep(0.02, 0.0, abs(mod(lat * 12.0 / 3.14159, 1.0) - 0.5));
-          float gridLon = smoothstep(0.02, 0.0, abs(mod(lon * 12.0 / 3.14159, 1.0) - 0.5));
-          base += vec3(0.10, 0.43, 0.85) * (gridLat + gridLon) * 0.08;
+          float gridLat = smoothstep(0.025, 0.0, abs(mod(lat * 12.0 / 3.14159, 1.0) - 0.5));
+          float gridLon = smoothstep(0.025, 0.0, abs(mod(lon * 12.0 / 3.14159, 1.0) - 0.5));
+          base += vec3(0.20, 0.55, 0.95) * (gridLat + gridLon) * 0.06;
 
           gl_FragColor = vec4(base, 1.0);
         }
@@ -167,6 +238,26 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
     });
     const globe = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 96, 96), globeMaterial);
     globeGroup.add(globe);
+
+    // Continent dot cloud — recognisable land shapes.
+    const landPositions = new Float32Array(LAND_DOTS.length * 3);
+    LAND_DOTS.forEach(([lon, lat], i) => {
+      const v = lonLatToVec3(lon, lat, RADIUS * 1.003);
+      landPositions[i * 3 + 0] = v.x;
+      landPositions[i * 3 + 1] = v.y;
+      landPositions[i * 3 + 2] = v.z;
+    });
+    const landGeometry = new THREE.BufferGeometry();
+    landGeometry.setAttribute('position', new THREE.BufferAttribute(landPositions, 3));
+    const landMaterial = new THREE.PointsMaterial({
+      color: 0x9ed0f9,
+      size: 0.018,
+      sizeAttenuation: true,
+      transparent: true,
+      opacity: 0.72,
+    });
+    const landCloud = new THREE.Points(landGeometry, landMaterial);
+    globeGroup.add(landCloud);
 
     // ---- Atmosphere halo --------------------------------------------
     const atmoMaterial = new THREE.ShaderMaterial({
@@ -323,6 +414,8 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
       renderer.dispose();
       globeMaterial.dispose();
       atmoMaterial.dispose();
+      landGeometry.dispose();
+      landMaterial.dispose();
       mount.removeChild(renderer.domElement);
     };
   }, [size, reduced]);

@@ -138,10 +138,16 @@ type Pin = {
 };
 
 const PINS: Pin[] = [
-  // North America — USA SaaS-primary surfaces
-  { code: 'US-W', city: 'San Francisco', country: 'USA', lon: -122.4, lat: 37.78, tier: 'primary', note: 'SaaS · customer-cloud west' },
-  { code: 'US-E', city: 'Northern Virginia', country: 'USA', lon: -77.4, lat: 39.0, tier: 'primary', note: 'SaaS · customer-cloud east' },
-  { code: 'CA-E', city: 'Toronto', country: 'Canada', lon: -79.4, lat: 43.7, tier: 'secondary', note: 'Edge presence' },
+  // North America — USA SaaS-primary + customer-cloud surfaces
+  { code: 'US-W',  city: 'San Francisco',     country: 'USA',    lon: -122.4, lat: 37.78, tier: 'primary',   note: 'SaaS · customer-cloud west' },
+  { code: 'US-E',  city: 'Northern Virginia', country: 'USA',    lon: -77.4,  lat: 39.0,  tier: 'primary',   note: 'SaaS · customer-cloud east' },
+  { code: 'US-NE', city: 'Boston',            country: 'USA',    lon: -71.06, lat: 42.36, tier: 'primary',   note: 'NA-East · enterprise SaaS' },
+  { code: 'US-NW', city: 'Seattle',           country: 'USA',    lon: -122.33, lat: 47.6, tier: 'primary',   note: 'NA-West · enterprise SaaS' },
+  { code: 'US-MW', city: 'Chicago',           country: 'USA',    lon: -87.65, lat: 41.88, tier: 'secondary', note: 'NA-Central · enterprise edge' },
+  { code: 'US-S',  city: 'Atlanta',           country: 'USA',    lon: -84.39, lat: 33.75, tier: 'secondary', note: 'NA-South · enterprise edge' },
+  { code: 'US-SC', city: 'Dallas',            country: 'USA',    lon: -96.8,  lat: 32.78, tier: 'secondary', note: 'NA-South-Central · IaaS' },
+  { code: 'US-SE', city: 'Miami',             country: 'USA',    lon: -80.19, lat: 25.76, tier: 'secondary', note: 'LatAm gateway · Enterprise' },
+  { code: 'CA-E',  city: 'Toronto',           country: 'Canada', lon: -79.4,  lat: 43.7,  tier: 'secondary', note: 'Edge presence' },
 
   // South America
   { code: 'BR-SE', city: 'São Paulo', country: 'Brazil', lon: -46.6, lat: -23.55, tier: 'secondary', note: 'LatAm hub' },
@@ -198,9 +204,88 @@ const ARCS: Array<[string, string]> = [
   ['NO-OS', 'ET-AA'],
   ['KE-NB', 'UG-KP'],
   ['NG-LG', 'CM-YA'],
+  // US backbone arcs — surfaces NA as a primary deployment plane
+  ['US-W', 'US-MW'],
+  ['US-MW', 'US-E'],
+  ['US-NE', 'UK-LN'],
+  ['US-NW', 'JP-TY'],
+  ['US-SE', 'BR-SE'],
 ];
 
 const PIN_INDEX = new Map(PINS.map((p) => [p.code, p]));
+
+// Continent silhouette paths — handcrafted simplified outlines drawn
+// in the same equirectangular viewBox used by project(). Read as a
+// real world map at a glance; the LAND[] dot field overlays for
+// regional texture. Coordinates are pre-projected to the 1000×480
+// viewBox so the SVG renderer doesn't have to recompute on every
+// vertex.
+const CONTINENT_OUTLINES: Array<{ name: string; d: string }> = [
+  {
+    name: 'North America',
+    d: 'M 42 18 L 83 14 L 165 8 L 222 7 L 285 12 L 319 18 L 347 53 L 339 89 L 322 110 L 305 130 L 283 149 L 273 168 L 269 185 L 252 196 L 250 203 L 240 218 L 236 224 L 222 220 L 208 203 L 195 188 L 181 167 L 167 145 L 153 124 L 138 95 L 125 60 L 100 45 L 83 36 L 60 28 Z',
+  },
+  {
+    name: 'Greenland',
+    d: 'M 360 35 L 392 28 L 412 38 L 408 60 L 396 78 L 378 80 L 367 65 L 360 50 Z',
+  },
+  {
+    name: 'Central America + Caribbean',
+    d: 'M 222 220 L 240 224 L 260 235 L 270 248 L 250 252 L 234 248 L 222 240 Z',
+  },
+  {
+    name: 'South America',
+    d: 'M 270 248 L 305 250 L 320 270 L 327 305 L 332 340 L 322 372 L 308 395 L 295 410 L 282 410 L 270 395 L 268 360 L 272 320 L 268 290 L 270 270 Z',
+  },
+  {
+    name: 'Europe',
+    d: 'M 480 60 L 500 50 L 525 50 L 542 65 L 555 78 L 562 95 L 555 110 L 540 122 L 522 130 L 505 132 L 488 128 L 478 118 L 472 100 L 470 80 Z',
+  },
+  {
+    name: 'United Kingdom',
+    d: 'M 478 95 L 488 88 L 492 100 L 488 115 L 478 117 L 472 108 Z',
+  },
+  {
+    name: 'Iceland',
+    d: 'M 458 70 L 470 67 L 472 78 L 462 80 Z',
+  },
+  {
+    name: 'Africa',
+    d: 'M 480 178 L 510 168 L 540 165 L 568 170 L 590 180 L 600 200 L 600 232 L 593 268 L 580 295 L 565 320 L 548 340 L 528 348 L 510 348 L 495 335 L 488 312 L 482 285 L 478 255 L 478 220 Z',
+  },
+  {
+    name: 'Madagascar',
+    d: 'M 605 305 L 615 305 L 618 322 L 610 340 L 605 332 Z',
+  },
+  {
+    name: 'Asia',
+    d: 'M 555 50 L 600 35 L 660 30 L 720 28 L 780 35 L 830 45 L 870 55 L 905 70 L 920 95 L 925 115 L 920 135 L 905 152 L 880 168 L 855 175 L 830 175 L 805 168 L 780 165 L 758 168 L 740 175 L 720 175 L 695 165 L 678 158 L 660 165 L 642 162 L 622 152 L 605 138 L 590 122 L 580 105 L 570 88 L 562 70 Z',
+  },
+  {
+    name: 'Indian subcontinent',
+    d: 'M 700 165 L 715 178 L 720 198 L 712 215 L 698 222 L 688 215 L 685 195 L 690 178 Z',
+  },
+  {
+    name: 'Arabian peninsula',
+    d: 'M 600 175 L 625 168 L 640 175 L 645 200 L 632 215 L 615 215 L 602 200 L 598 188 Z',
+  },
+  {
+    name: 'Southeast Asia + Indonesia',
+    d: 'M 745 198 L 770 200 L 790 212 L 808 225 L 820 245 L 815 262 L 800 270 L 780 268 L 762 258 L 752 240 L 745 220 Z',
+  },
+  {
+    name: 'Japan',
+    d: 'M 870 130 L 882 122 L 890 138 L 885 152 L 875 152 Z',
+  },
+  {
+    name: 'Australia',
+    d: 'M 800 305 L 845 298 L 880 305 L 902 318 L 905 342 L 892 360 L 868 365 L 838 360 L 818 348 L 802 332 Z',
+  },
+  {
+    name: 'New Zealand',
+    d: 'M 920 360 L 935 358 L 938 380 L 928 388 L 920 380 Z',
+  },
+];
 
 function arcPath(from: Pin, to: Pin): string {
   const a = project(from.lon, from.lat);
@@ -284,7 +369,25 @@ const WorldDeploymentMap: React.FC<{ className?: string }> = ({ className }) => 
           })}
         </g>
 
-        {/* Continent dot field — the world silhouette */}
+        {/* Continent silhouettes — soft fill + thin border so the map
+            reads as a real world map at a glance. The LAND[] dot field
+            overlays on top for textural depth. */}
+        <g>
+          {CONTINENT_OUTLINES.map((c) => (
+            <path
+              key={c.name}
+              d={c.d}
+              fill="#0A3A6B"
+              fillOpacity="0.07"
+              stroke="#0A3A6B"
+              strokeOpacity="0.28"
+              strokeWidth="0.7"
+              strokeLinejoin="round"
+            />
+          ))}
+        </g>
+
+        {/* Continent dot field — adds regional texture above the silhouettes */}
         <g>
           {LAND.map(([lon, lat], i) => {
             const { x, y } = project(lon, lat);
