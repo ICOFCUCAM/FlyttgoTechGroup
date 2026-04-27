@@ -96,8 +96,8 @@ const en: Dictionary = {
   'home.cta.eyebrow': 'Ready When You Are',
   'home.cta.title.part1': 'Start Deploying Your Platform',
   'home.cta.title.part2': 'Infrastructure Today',
-  'home.cta.primary': 'Deploy Your Platform',
-  'home.cta.secondary': 'Schedule Infrastructure Demo',
+  'home.cta.primary': 'Deploy your platform infrastructure',
+  'home.cta.secondary': 'Schedule infrastructure architecture discussion',
 
   // Industry sector page template
   'sector.challenges': 'Typical challenges',
@@ -272,8 +272,8 @@ const no: Dictionary = {
   'home.cta.eyebrow': 'Klar når du er det',
   'home.cta.title.part1': 'Start utrullingen av din',
   'home.cta.title.part2': 'plattform­infrastruktur i dag',
-  'home.cta.primary': 'Rull ut din plattform',
-  'home.cta.secondary': 'Planlegg infrastruktur­demo',
+  'home.cta.primary': 'Rull ut din plattforminfrastruktur',
+  'home.cta.secondary': 'Planlegg infrastrukturarkitektur-samtale',
 
   'sector.challenges': 'Typiske utfordringer',
   'sector.outcomes': 'FlyttGo-resultater',

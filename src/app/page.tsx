@@ -92,14 +92,20 @@ export default function HomePage() {
         <LiveOpsStrip />
         <HomeSectionRail />
         <TrustIndicators />
-        <Reveal>
-          <PlatformEcosystemOverview />
-        </Reveal>
+        {/* Phase-5 narrative order:
+            1. Orchestration core — explains the FlyttGoTech Core layer
+            2. Deployment models matrix — names the substrates the
+               modules run on (SaaS · customer cloud · sovereign)
+            3. Platform ecosystem — modules grid lands AFTER the
+               infrastructure explanation, not before */}
         <Reveal>
           <HomeOrchestrationCore />
         </Reveal>
         <Reveal>
           <HomeDeploymentStrip />
+        </Reveal>
+        <Reveal>
+          <PlatformEcosystemOverview />
         </Reveal>
         <Reveal>
           <HomeIndustriesStrip />
