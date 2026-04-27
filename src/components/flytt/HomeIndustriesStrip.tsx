@@ -126,9 +126,9 @@ const HomeIndustriesStrip: React.FC = () => {
               id="home-industries-heading"
               className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              {t('home.industries.title.part1') || 'Built for the institutions that '}
+              {t('home.industries.title.part1')}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                actually run cities and regions.
+                {t('home.industries.title.part2')}
               </em>
             </h2>
           </div>
