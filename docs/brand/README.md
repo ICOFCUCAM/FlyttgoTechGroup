@@ -5,11 +5,12 @@ files for the FlyttGo visual identity. Every file here is authoritative.
 
 | File                          | Purpose                                                                                                |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `symbol-spec.md`              | **Master specification.** Construction grid, stroke rules, gradient logic, safe-area, dark/mono variants, favicon scaling, module-color inheritance, surface validation matrix. |
+| `symbol-spec.md`              | **Master specification.** Construction grid, geometry rules, gradient logic, safe-area, dark/mono variants, favicon scaling, module-color inheritance, surface validation matrix. |
 | `symbol-construction.svg`     | Reference build with grid overlay + control points. Open in any SVG viewer to see how the mark is constructed. **Do not ship this file as the mark.** |
-| `symbol-canonical.svg`        | Canonical 24 × 24 mark, gradient-bound, ready for production. Consumes `--mark-stop-a` / `--mark-stop-b` for module-color inheritance. |
+| `symbol-canonical.svg`        | Canonical 24 × 24 F-symbol, gradient-bound, ready for production. Consumes `--mark-stop-a` / `--mark-stop-b` for module-color inheritance. |
 | `symbol-monochrome.svg`       | §7 monochrome variant. Uses `currentColor` so the host surface controls the ink. |
-| `symbol-favicon-16.svg`       | §8 pixel-snapped 16 × 16 favicon variant. One stroke, no echo, solid background. |
+| `symbol-favicon-16.svg`       | §8 pixel-snapped 16 × 16 favicon variant. Simplified path, solid fill, solid background. |
+| `system/`                     | **Distribution-ready logo system** — primary lockup, dark-mode lockup, symbol-only, monochrome, favicon, plus the eight module variants. See `system/README.md`. |
 
 ## Quick links into the spec
 

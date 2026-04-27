@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  FlyttGo infrastructure symbol — 16x16 favicon variant (section 8).
-  Simplified F path, pixel-snapped, solid fill on solid background.
-  This is the only sanctioned simplification. At 32+ px use the
-  canonical 24x24 path.
+  16x16 favicon variant — pixel-snapped simplified F.
+  Solid background. The only sanctioned simplification.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
      role="img" aria-label="FlyttGo"

@@ -20,54 +20,75 @@ maps, mobile launcher icons.
 | Canonical viewBox   | `0 0 24 24`                                           |
 | Major grid          | 4 px × 4 px (6 × 6 cells)                             |
 | Sub-grid            | 1 px × 1 px (24 × 24 cells)                           |
-| Stroke @ 24 px      | 2.0 px, `round` cap + `round` join                    |
-| Stroke scaling      | linear from 1.5 px (16) → 4.0 px (96+, capped)        |
-| Corner radius (chrome shape) | 4 px @ 24 (16.67%); squircle ≥ 32 px         |
+| Symbol type         | Solid-fill F-symbol, single closed path, hard right-angle corners |
+| Path data           | `M 4 2 H 22 V 7 H 9 V 10 H 18 V 15 H 9 V 22 H 4 Z`    |
 | Default gradient    | `linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 100%)`   |
-| Echo stroke opacity | 0.55 (color), 0.60 (mono)                             |
+| Corner radius (chrome shape) | 4 px @ 24 (16.67%); squircle ≥ 32 px         |
 | Safe-area clearance | 0.25 × mark height                                    |
 | Min standalone size | 16 px (favicon-class only — see §8)                   |
 | Min legible size    | 20 px (UI), 32 px (print)                             |
+| Tone reference      | Palantir, Databricks, Stripe, ServiceNow              |
 
 ---
 
 ## 1. Construction grid
 
 The symbol is constructed against a 24 × 24 pixel canvas. Every
-control point on every path snaps to either the major grid (4 px
-intervals) or the sub-grid (1 px intervals). No half-pixel control
-points are permitted on the canonical mark — this is what guarantees
-crisp rendering at integer multiples (32, 48, 96 px) without
-sub-pixel aliasing.
+control point on every path snaps to the major grid (4 px intervals)
+or the sub-grid (1 px intervals). No half-pixel control points are
+permitted on the canonical mark — this is what guarantees crisp
+rendering at integer multiples (32, 48, 96 px) without sub-pixel
+aliasing.
+
+The mark is the **FlyttGo F** — a confident geometric F-symbol in the
+infrastructure-platform tradition (Palantir / Databricks / Stripe /
+ServiceNow). One closed path, solid fill, no strokes, no decorative
+detail. Reads at 12 px, holds at 1024 px.
 
 ```
 0   4   8  12  16  20  24
 ┌───┬───┬───┬───┬───┬───┐  0
 │   │   │   │   │   │   │
-├───┼───┼───┼───┼───┼───┤  4
-│   │   │   │   │   │   │
-├───┼───┼───┼───┼───┼───┤  8
-│   │   │   │   │   │   │
-├───┼───┼───●───┼───┼───┤ 12   ← upper stroke vertex (10,6)→(14,10)
-│   │   │   │   │   │   │
-├───┼───●───┼───●───┼───┤ 16
-│   │   │   │   │   │   │
-├───●───┼───●───┼───●───┤ 20   ← lower stroke vertex
+├───●━━━━━━━━━━━━━━━━●──┤  2  ← top arm — top edge   (4,2) → (22,2)
+│   ┃███████████████┃   │
+│   ┃███████████████┃   │
+├───●━━━━━━━●━━━━━━━●──┤  7  ← top arm — bottom edge (4,7),(9,7),(22,7)
+│   ┃███┃   │   │   │   │
+├───●━━━●━━━━━━━●───┼───┤ 10  ← mid arm — top edge   (4,10) → (18,10)
+│   ┃█████████████┃ │   │
+├───●━━━●━━━━━━━●───┼───┤ 15  ← mid arm — bottom edge
+│   ┃███┃   │   │   │   │
+│   ┃███┃   │   │   │   │
+├───●━━━●───┼───┼───┼───┤ 22  ← stem foot
 │   │   │   │   │   │   │
 └───┴───┴───┴───┴───┴───┘ 24
+    4   9
+    └─stem─┘
 ```
 
-Path data (canonical):
+Path data (canonical, single closed path):
 
 ```
-M  4 12  L 10  6  L 14 10  L 20  4    ← upper stroke (foreground)
-M  4 18  L 10 12  L 14 16  L 20 10    ← lower stroke (echo)
+M 4 2  H 22  V 7   H 9   V 10  H 18  V 15  H 9   V 22  H 4   Z
 ```
 
-Both strokes span the full 16 px horizontal range (x ∈ [4, 20]) inside
-the 24 × 24 canvas, leaving 4 px of left/right safe area baked into
-the viewBox. Vertical separation between the two strokes is 6 px at
-every control point.
+Reading: start at (4,2) — top-left. Trace the outer boundary
+clockwise: across the top arm, down to the right edge, back along the
+top-arm underside to the stem, down the stem's right side, out along
+the mid-arm, back to the stem, down the lower stem, across the foot,
+and close on the left edge. Eleven inflection points.
+
+| Element     | Bounds              | Width | Height | Notes                       |
+| ----------- | ------------------- | ----- | ------ | --------------------------- |
+| Stem        | (4, 2) → (9, 22)    | 5 px  | 20 px  | 28% of mark width           |
+| Top arm     | (4, 2) → (22, 7)    | 18 px | 5 px   | Full mark width             |
+| Mid arm     | (4, 10) → (18, 15)  | 14 px | 5 px   | 78% of top-arm width (classic F ratio) |
+| Inter-arm gap | y ∈ [7, 10]       | n/a   | 3 px   | Negative space — never fill |
+| Stem foot   | y ∈ [15, 22]        | 5 px  | 7 px   | 35% of stem height          |
+| Right margin | x ∈ [22, 24]       | 2 px  | n/a    | Built-in safe area on right |
+| Bottom margin | y ∈ [22, 24]      | n/a   | 2 px   | Built-in safe area on bottom |
+| Top margin   | y ∈ [0, 2]          | n/a   | 2 px   | Built-in safe area on top   |
+| Left margin  | x ∈ [0, 4]          | 4 px  | n/a    | Built-in safe area on left  |
 
 ### 1.1 Sub-pixel rules at runtime
 
@@ -83,57 +104,47 @@ Never permit fractional translations on the SVG root when rendering at
 
 ---
 
-## 2. Stroke geometry
+## 2. Geometry rules
 
-The symbol is **stroke-only**. There are no filled shapes on the mark
-itself (chrome / containment shapes are separate — see §3).
+The symbol is a **single solid-fill closed path**. There are no
+strokes, no echoes, no internal cuts. Counter-shapes (the negative
+space inside the F) are part of the surface, never filled.
 
-### 2.1 Width band (size-responsive)
+### 2.1 Fill rule
 
-| Render size  | Stroke width | Notes                                 |
-| ------------ | ------------ | ------------------------------------- |
-| 16 px        | 1.5 px       | Snapped — use simplified mark (§8)    |
-| 20 px        | 1.75 px      | Sub-pixel; renders OK on Retina       |
-| 24 px        | 2.0 px       | **Canonical**                         |
-| 32 px        | 2.5 px       |                                       |
-| 48 px        | 3.5 px       |                                       |
-| 64 px        | 4.0 px       |                                       |
-| ≥ 96 px      | 4.0 px       | **Capped.** Above 96 the mark reads as form, not weight. |
+- `fill-rule="nonzero"` (SVG default).
+- Single subpath — no compound paths.
+- No `fill-opacity` on the canonical mark. (Module/dark variants set
+  the fill via gradient or token; opacity stays 1.)
 
-Implementation hint — use the spec-driven `strokeWidth` derived from
-the rendered height:
+### 2.2 Edges + corners
 
-```ts
-const strokeWidthForSize = (px: number): number => {
-  if (px <= 16) return 1.5;
-  if (px <= 24) return 1.75 + (px - 16) * (2.0 - 1.75) / 8;
-  if (px <= 64) return 2.0 + (px - 24) * (4.0 - 2.0) / 40;
-  return 4.0;
-};
-```
+The mark is composed entirely of **right angles**. No fillets, no
+chamfers, no rounded corners on the symbol itself. The platform tone
+demands hard edges — Stripe's monogram, ServiceNow's wordmark, and
+Palantir's brand all use right-angle geometry as the trust signal.
 
-### 2.2 Caps + joins
+Containment chrome (badges, buttons, app-icon shapes) does receive
+rounded corners — see §3.
 
-- `stroke-linecap="round"` — every cap. No `butt` or `square`.
-- `stroke-linejoin="round"` — every join. No `miter`.
-- `stroke-miterlimit="4"` — fallback if a renderer overrides joins.
+### 2.3 Optical-balance fixes
 
-### 2.3 Echo stroke (the platform-underneath line)
+At sizes below 24 px, the F's mid-arm and stem foot are perceptually
+narrow because the human eye over-weights horizontal stroke width.
+The canonical path **already accounts for this** — the mid-arm is 5
+px tall (same as the top arm) rather than the geometrically-honest
+4.5 px. Do not "correct" this perceived imbalance by trimming the
+mid-arm.
 
-The lower stroke is a literal echo of the upper stroke, offset
-+6 px on Y. It carries narrative weight: *"the platform replicates
-underneath."* Rendering rules:
+### 2.4 Forbidden treatments
 
-| Variant     | Echo stroke opacity | Echo color       |
-| ----------- | ------------------- | ---------------- |
-| Color       | 0.55                | Same as upper    |
-| Monochrome  | 0.60                | Same as upper    |
-| Reverse (white-on-dark) | 0.60    | White            |
-| Print B&W   | 0.65                | Black            |
-
-The echo is **never** a different hue. It is always the upper stroke
-at reduced opacity. Color-shifting the echo breaks the platform
-metaphor.
+- Outline-only (stroke without fill) — breaks the solid-fill family.
+- Inline cut-outs (negative-space carved into the F) — destroys
+  the single-path simplicity.
+- Drop shadows on the mark itself — chrome shadow is OK on the
+  containment shape, never on the F.
+- Skewed or italicised variants — the F is upright in every
+  context.
 
 ---
 
@@ -269,7 +280,6 @@ background. Use the dark-mode token swap below.
 | ----------------- | ----------------- | ------------------ |
 | `--mark-stop-a`   | `#0A3A6B`         | `#6FAEFF`          |
 | `--mark-stop-b`   | `#1E6FD9`         | `#9ED0F9`          |
-| `--mark-echo`     | inherits, 0.55 α  | inherits, 0.60 α   |
 | `--mark-bg`       | (transparent)     | (transparent)      |
 
 The dark variant lifts both stops one luminance step (+12 L\* in LCh)
@@ -294,11 +304,8 @@ Surface is a brand-color flood (sovereign violet, etc.) | **Do not swap.** Use m
       <stop offset="100%" stop-color="var(--mark-stop-b, #1E6FD9)" />
     </linearGradient>
   </defs>
-  <g stroke="url(#flytt-grad)" stroke-width="2" fill="none"
-     stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 12 L10 6 L14 10 L20 4" />
-    <path d="M4 18 L10 12 L14 16 L20 10" opacity="0.55" />
-  </g>
+  <path d="M 4 2 H 22 V 7 H 9 V 10 H 18 V 15 H 9 V 22 H 4 Z"
+        fill="url(#flytt-grad)" />
 </svg>
 ```
 
@@ -311,31 +318,33 @@ Hosting page declares the tokens — no per-mark recoloring in code.
 Single-color rendering for surfaces that forbid gradients (regulator
 PDFs, fax, embroidery, carved signage, single-channel print).
 
-### 7.1 Color values
+### 7.1 Fill values
 
-Surface | Stroke color | Echo opacity
---- | --- | ---
-White / cream | `#0A1F3D` (near-black, hint of warmth) | 0.60
-Black / charcoal | `#FFFFFF` | 0.60
-Brand-color flood | `#FFFFFF` | 0.65
-Single-channel print (CMYK K-only) | `100% K` | 65% K (screened)
-Pantone (spot) | `Black 7 C` | use 65% screen
-Embroidery | thread RGB closest match — **no echo** (drop the lower stroke entirely; embroidery cannot resolve 0.6 α) | n/a
+Surface | Fill color
+--- | ---
+White / cream | `#0A1F3D` (near-black, hint of warmth)
+Black / charcoal | `#FFFFFF`
+Brand-color flood (sovereign violet, etc.) | `#FFFFFF`
+Single-channel print (CMYK K-only) | `100% K`
+Pantone (spot) | `Black 7 C`
+Embroidery | thread RGB closest match
+Foil stamp | metallic match (gold or copper, never silver — silver reads as tech-cliché)
 
 ### 7.2 Geometry
 
-Identical path data to canonical. **Echo opacity raised to 0.60** (was
-0.55 in color) because mono surfaces lose the gradient depth that
-helped the echo read against the upper stroke.
+Identical path data to canonical. The F is a solid-fill mark; mono
+variants change only the `fill` attribute. Path data, viewBox,
+proportions and counter-shapes are invariant.
 
 ### 7.3 Forbidden monochrome treatments
 
-- Outline-only (drop strokes, fill the negative space) — breaks the
-  motion metaphor.
+- Outline-only (`fill="none"` + `stroke="…"`) — breaks the solid-fill
+  family.
 - Drop shadow added to compensate for missing gradient — adds noise,
   defeats the purpose of a mono variant.
-- Gradient mock via two solid greys — use one color or the gradient,
-  not a fake middle.
+- Gradient mock via two solid greys — use one color, not a fake
+  middle.
+- Halftone or screen pattern fills — illegible at small sizes.
 
 ---
 
@@ -346,36 +355,41 @@ ladder.
 
 ### 8.1 Size ladder
 
-| Size       | Geometry              | Stroke | Background          | Notes                         |
-| ---------- | --------------------- | ------ | ------------------- | ----------------------------- |
-| 16 × 16    | **Simplified** — one stroke only (drop echo) | 2 px (snapped) | Solid `#0A3A6B` | Browser tab. Pixel-snapped. |
-| 32 × 32    | Full canonical mark   | 2.5 px | Solid `#0A3A6B`     | Standard favicon              |
-| 48 × 48    | Full canonical mark   | 3.5 px | Solid `#0A3A6B`     | High-DPI tab                  |
-| 96 × 96    | Full canonical mark   | 4.0 px | Solid `#0A3A6B`     | Pinned site                   |
-| 180 × 180  | Full canonical, with iOS squircle chrome | 4.0 px | Solid `#0A3A6B` | apple-touch-icon |
-| 192 × 192  | Full canonical, transparent (Android masks) | 4.0 px | (transparent) | Android adaptive |
-| 512 × 512  | Full canonical, transparent | 4.0 px | (transparent) | PWA install               |
+| Size       | Path data    | Fill              | Background          | Notes                       |
+| ---------- | ------------ | ----------------- | ------------------- | --------------------------- |
+| 16 × 16    | **Simplified** — see §8.2 | `#9ED0F9` (light blue) | Solid `#0A3A6B` | Browser tab. Pixel-snapped. |
+| 32 × 32    | Canonical    | `#9ED0F9`         | Solid `#0A3A6B`     | Standard favicon            |
+| 48 × 48    | Canonical    | Gradient (canonical) | Solid `#0A3A6B`  | High-DPI tab                |
+| 96 × 96    | Canonical    | Gradient          | Solid `#0A3A6B`     | Pinned site                 |
+| 180 × 180  | Canonical, with iOS squircle chrome | Gradient | Solid `#0A3A6B` | apple-touch-icon |
+| 192 × 192  | Canonical, transparent (Android masks) | Gradient | (transparent) | Android adaptive |
+| 512 × 512  | Canonical, transparent | Gradient | (transparent) | PWA install                 |
 
 ### 8.2 Pixel-snap rules at 16 px
 
-The 16 × 16 favicon is the only size where the canonical mark is
-**redrawn**, not scaled. Use:
+The 16 × 16 favicon is the only size where the canonical path is
+**redrawn**, not scaled. The 24 × 24 path scaled to 16 × 16 produces
+fractional control points that bloom under aggressive browser
+downsampling. Use the simplified F:
 
 ```
-Path: M3 6 L7 2 L10 5 L13 1
-(single stroke, 2 px wide, no echo, solid color, on solid bg)
+M 3 2 H 13 V 5 H 6 V 7 H 10 V 10 H 6 V 14 H 3 Z
 ```
+
+(stem 3 wide, top arm 10 wide, mid arm 7 wide, all integer-aligned in
+a 16 × 16 viewBox)
 
 This is the **only** sanctioned simplification. At any other size the
-canonical path is mandatory.
+canonical 24 × 24 path is mandatory.
 
 ### 8.3 Forbidden favicon treatments
 
-- Echo stroke at 16 px (renders as a 1 px line — illegible).
 - Gradient at 16 px (browsers downsample the alpha channel and the
-  gradient becomes mud).
+  gradient becomes mud — use solid `#9ED0F9` on solid `#0A3A6B`).
 - Transparent background on `<link rel="icon">` (browser tab bars
   vary; solid background guarantees contrast).
+- Outline-only F at 16 px (the inter-arm gap collapses to 1 px and
+  the F becomes an unrecognisable rectangle).
 
 ---
 
@@ -470,7 +484,8 @@ PR.
 
 | Version | Date     | Change                          |
 | ------- | -------- | ------------------------------- |
-| 1.0     | 2026-04  | Initial production specification |
+| 1.0     | 2026-04  | Initial production specification (two-stroke zig-zag mark) |
+| 2.0     | 2026-04  | Canonical mark redesigned to solid-fill F-symbol. Lockup added. 8 module variants codified. Tone reference set to Palantir / Databricks / Stripe / ServiceNow. |
 
 Spec changes require a brand-systems sign-off and a corresponding
 update to all surface validations in §10.
