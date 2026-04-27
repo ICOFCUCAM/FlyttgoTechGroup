@@ -3,9 +3,6 @@ import { ImageResponse } from 'next/og';
 export const size = { width: 32, height: 32 };
 export const contentType = 'image/png';
 
-// 32x32 favicon — uses the canonical F-symbol path scaled into the
-// containing badge. Per docs/brand/symbol-spec.md §8, full canonical
-// geometry is mandatory at 32+ px (only 16 px gets the simplified path).
 export default function Icon() {
   return new ImageResponse(
     (
@@ -21,10 +18,8 @@ export default function Icon() {
         }}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M 4 2 H 22 V 7 H 9 V 10 H 18 V 15 H 9 V 22 H 4 Z"
-            fill="#9ED0F9"
-          />
+          <path d="M4 12L10 6L14 10L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M4 18L10 12L14 16L20 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
         </svg>
       </div>
     ),
