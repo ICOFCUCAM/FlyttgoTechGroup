@@ -5,6 +5,7 @@ import GovernmentPositioning from '@/components/flytt/government/GovernmentPosit
 import GovernmentServiceModels from '@/components/flytt/government/GovernmentServiceModels';
 import HomeOrchestrationCore from '@/components/flytt/HomeOrchestrationCore';
 import HomeDeploymentMatrix from '@/components/flytt/HomeDeploymentMatrix';
+import PlatformOrchestrationDiagram from '@/components/flytt/government/PlatformOrchestrationDiagram';
 import SovereigntyFramework from '@/components/flytt/government/SovereigntyFramework';
 import ComplianceBand from '@/components/flytt/ComplianceBand';
 import HomeProcurementEntry from '@/components/flytt/HomeProcurementEntry';
@@ -126,6 +127,11 @@ export default function GovernmentPage() {
         {/* GV.04 — deployment posture (re-uses HomeDeploymentMatrix DM.MX) */}
         <Reveal>
           <HomeDeploymentMatrix />
+        </Reveal>
+
+        {/* GV.04b — platform orchestration architecture diagram */}
+        <Reveal>
+          <PlatformOrchestrationDiagram />
         </Reveal>
 
         {/* GV.05 — sovereignty framework (the page's anchor moment) */}
