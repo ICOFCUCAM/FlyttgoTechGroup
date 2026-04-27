@@ -13,6 +13,7 @@ import GovernmentReferences from '@/components/flytt/government/GovernmentRefere
 import GovernmentEngagement from '@/components/flytt/government/GovernmentEngagement';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
+import { T } from '@/components/flytt/T';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
 
 export const dynamic = 'force-dynamic';
@@ -101,16 +102,16 @@ export default function GovernmentPage() {
         {/* GV.00 — page banner */}
         <PageHero
           code="GV.00"
-          eyebrow="Government & Public Sector"
+          eyebrow={<T k="government.hero.eyebrow" />}
           title={
             <>
-              Modular platform infrastructure for{' '}
+              <T k="government.hero.title.part1" />
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                sovereign-ready public-sector deployment.
+                <T k="government.hero.title.part2" />
               </em>
             </>
           }
-          description="Identity, payments, mobility, workforce, education, government services and financial operations — orchestrated through the FlyttGoTech Core. Three deployment modes: managed SaaS, customer cloud, sovereign national datacenter."
+          description={<T k="government.hero.description" />}
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Government' }]}
         />
 

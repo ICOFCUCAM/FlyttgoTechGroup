@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   Landmark,
@@ -8,63 +10,32 @@ import {
   FileCheck2,
   type LucideIcon,
 } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 /**
- * GV.01 — Programme positioning.
- *
- * Two-column institutional surface naming the public-sector
- * programme contexts FlyttGo serves. Left column carries the
- * positioning copy; right column lists the named buyer types so
- * a recipient knows immediately whether the page is for them.
+ * GV.01 — Programme positioning. Localised via i18n; primary
+ * jurisdiction copy lives in EN + NO.
  */
 
 type Buyer = {
   code: string;
   icon: LucideIcon;
-  label: string;
-  context: string;
+  labelKey: string;
+  contextKey: string;
 };
 
 const BUYERS: Buyer[] = [
-  {
-    code: 'BR.01',
-    icon: Landmark,
-    label: 'Ministry of Digital Affairs',
-    context: 'National digital-strategy programmes · cross-ministry data infrastructure',
-  },
-  {
-    code: 'BR.02',
-    icon: Bus,
-    label: 'Ministry of Transport',
-    context: 'Transport-data backbones · regional dispatch · statutory mobility reporting',
-  },
-  {
-    code: 'BR.03',
-    icon: GraduationCap,
-    label: 'Ministry of Education',
-    context: 'Admissions consolidation · scholarship orchestration · institutional analytics',
-  },
-  {
-    code: 'BR.04',
-    icon: Compass,
-    label: 'Central Digitalisation Agency',
-    context: 'National-eID rollouts · government-services portals · sovereign cloud programmes',
-  },
-  {
-    code: 'BR.05',
-    icon: Building2,
-    label: 'Municipal Modernisation Programme',
-    context: 'Citizen services unification · council operations · residents portals',
-  },
-  {
-    code: 'BR.06',
-    icon: FileCheck2,
-    label: 'Public-Sector Procurement Office',
-    context: 'Framework agreements · pilot procurement · multi-tier deployment commitments',
-  },
+  { code: 'BR.01', icon: Landmark,      labelKey: 'government.gv01.br01.label', contextKey: 'government.gv01.br01.context' },
+  { code: 'BR.02', icon: Bus,           labelKey: 'government.gv01.br02.label', contextKey: 'government.gv01.br02.context' },
+  { code: 'BR.03', icon: GraduationCap, labelKey: 'government.gv01.br03.label', contextKey: 'government.gv01.br03.context' },
+  { code: 'BR.04', icon: Compass,       labelKey: 'government.gv01.br04.label', contextKey: 'government.gv01.br04.context' },
+  { code: 'BR.05', icon: Building2,     labelKey: 'government.gv01.br05.label', contextKey: 'government.gv01.br05.context' },
+  { code: 'BR.06', icon: FileCheck2,    labelKey: 'government.gv01.br06.label', contextKey: 'government.gv01.br06.context' },
 ];
 
 export default function GovernmentPositioning() {
+  const { t } = useI18n();
+
   return (
     <section
       id="gv-01"
@@ -75,7 +46,7 @@ export default function GovernmentPositioning() {
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
           <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">GV.01</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
-          <span>Programme positioning</span>
+          <span>{t('government.gv01.eyebrow')}</span>
         </div>
 
         <div className="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
@@ -84,33 +55,22 @@ export default function GovernmentPositioning() {
               id="gv-01-heading"
               className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              Public-sector platform infrastructure,{' '}
+              {t('government.gv01.title.part1')}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                deployed under your jurisdiction.
+                {t('government.gv01.title.part2')}
               </em>
             </h2>
             <p className="mt-6 text-base md:text-lg text-slate-600 dark:text-slate-400 leading-[1.65] max-w-2xl">
-              FlyttGo Technologies Group AB designs and operates modular
-              cloud platform infrastructure deployed across European,
-              African and Middle Eastern public-sector programmes. The
-              capability surface this page describes is in production
-              today; the deployment posture is the same one our regulator-
-              bounded installations operate under.
+              {t('government.gv01.body1')}
             </p>
             <p className="mt-5 text-base md:text-lg text-slate-600 dark:text-slate-400 leading-[1.65] max-w-2xl">
-              Eight independently licensed modules — identity, payments,
-              mobility, workforce, education, government services,
-              financial operations and a regulated marketplace — are
-              orchestrated through the FlyttGoTech Core. Three deployment
-              modes accommodate every sovereignty posture from managed
-              SaaS in EU primary regions through to sovereign national
-              datacenters under national HSM and national-eID integration.
+              {t('government.gv01.body2')}
             </p>
           </div>
 
           <div className="lg:col-span-5">
             <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-slate-500 mb-4">
-              Recipients of this surface
+              {t('government.gv01.recipients.heading')}
             </div>
             <ul className="space-y-2.5">
               {BUYERS.map((b) => {
@@ -133,10 +93,10 @@ export default function GovernmentPositioning() {
                         </span>
                       </div>
                       <div className="mt-0.5 text-[13px] font-semibold tracking-tight text-slate-900 dark:text-white">
-                        {b.label}
+                        {t(b.labelKey)}
                       </div>
                       <div className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
-                        {b.context}
+                        {t(b.contextKey)}
                       </div>
                     </div>
                   </li>

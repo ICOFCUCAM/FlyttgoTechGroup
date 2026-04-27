@@ -1,16 +1,12 @@
+'use client';
+
 import React from 'react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 /**
- * GV.04b — Platform orchestration diagram.
- *
- * Inline SVG companion to docs/government/platform-orchestration.svg.
- * Sits between the deployment-mode comparison matrix (GV.04) and
- * the sovereignty framework (GV.05); makes the four-band
- * architecture (service-delivery surface · FlyttGoTech Core ·
- * deployment substrate · sovereignty band) visible without leaving
- * the page.
- *
- * Renders as a horizontally-scrollable SVG on small viewports.
+ * GV.04b — Platform orchestration diagram. Surface chrome (eyebrow,
+ * headline, description) localised; the inside-SVG technical labels
+ * (DM.01, OR.00, etc.) stay in EN since they're structural codes.
  */
 
 const MODULES: Array<{
@@ -32,6 +28,8 @@ const MODULES: Array<{
 ];
 
 export default function PlatformOrchestrationDiagram() {
+  const { t } = useI18n();
+
   return (
     <section
       id="gv-04b"
@@ -42,24 +40,20 @@ export default function PlatformOrchestrationDiagram() {
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
           <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">GV.04b</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
-          <span>Orchestration architecture</span>
+          <span>{t('government.gv04b.eyebrow')}</span>
         </div>
 
         <h2
           id="gv-04b-heading"
           className="mt-6 font-serif text-3xl md:text-4xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05] max-w-3xl"
         >
-          Eight modules.{' '}
+          {t('government.gv04b.title.part1')}
           <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-            One orchestration core.
+            {t('government.gv04b.title.part2')}
           </em>
         </h2>
         <p className="mt-4 max-w-3xl text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
-          Service-delivery surface · FlyttGoTech Core (PaaS) ·
-          deployment substrate (IaaS-compatible) · sovereignty
-          posture. The same architecture every public-sector
-          deployment lands against, regardless of which module
-          mix the programme licenses.
+          {t('government.gv04b.description')}
         </p>
 
         <div className="mt-10 p-3 sm:p-5 rounded-2xl bg-[#FBFCFE] dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 overflow-x-auto">

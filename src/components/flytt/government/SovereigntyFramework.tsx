@@ -1,61 +1,33 @@
+'use client';
+
 import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import { ShieldCheck, KeyRound, Globe2, FileSearch, ArrowUpRight, type LucideIcon } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 /**
- * GV.05 — Sovereignty framework.
- *
- * The dark editorial anchor of the page. Four sub-rows declare the
- * sovereignty posture that every contract instrument carries:
- * Cloud-Act exposure, encryption-key custody, data residency, and
- * the right-to-audit framework. This is the page's anchor moment —
- * the section a regulator or procurement officer screenshots.
+ * GV.05 — Sovereignty framework. The dark editorial anchor of the
+ * /government page. Localised via i18n.
  */
 
 type Row = {
   code: string;
   icon: LucideIcon;
-  title: string;
-  posture: string;
-  detail: string;
+  titleKey: string;
+  postureKey: string;
+  detailKey: string;
 };
 
 const ROWS: Row[] = [
-  {
-    code: 'SV.01',
-    icon: Globe2,
-    title: 'Data residency',
-    posture: 'Per-mode jurisdiction declaration',
-    detail:
-      'Managed SaaS keeps personal data in EU primary regions with optional regional uplift. Customer-cloud deployments inherit the recipient\'s tenancy region. Sovereign deployments operate 100% in-jurisdiction with explicit non-replication clauses across borders.',
-  },
-  {
-    code: 'SV.02',
-    icon: KeyRound,
-    title: 'Encryption-key custody',
-    posture: 'FlyttGo KMS · BYOK / HYOK · National HSM',
-    detail:
-      'Managed deployments use FlyttGo KMS with per-tenant data encryption keys. Customer-cloud deployments support BYOK and HYOK with the recipient\'s KMS as root. Sovereign deployments operate against a national HSM under regulator-supervised key ceremony.',
-  },
-  {
-    code: 'SV.03',
-    icon: ShieldCheck,
-    title: 'Cloud-Act exposure',
-    posture: 'Declared per deployment mode',
-    detail:
-      'Managed SaaS is potentially exposed to extraterritorial subpoena in line with the host hyperscaler\'s legal posture. Customer-cloud follows the recipient\'s tenancy. Sovereign deployments inside certified national datacenters are Cloud-Act-exempt by construction.',
-  },
-  {
-    code: 'SV.04',
-    icon: FileSearch,
-    title: 'Right-to-audit framework',
-    posture: '30-day notice · regulator-bounded',
-    detail:
-      'Every contract instrument carries a standard right-to-audit clause. The recipient or its national audit office may audit on 30-day notice. FlyttGo furnishes SOC 2 Type II report, ISO 27001 certificate, penetration-test executive summary, GDPR DPIA and configuration baseline on request.',
-  },
+  { code: 'SV.01', icon: Globe2,      titleKey: 'government.gv05.sv01.title', postureKey: 'government.gv05.sv01.posture', detailKey: 'government.gv05.sv01.detail' },
+  { code: 'SV.02', icon: KeyRound,    titleKey: 'government.gv05.sv02.title', postureKey: 'government.gv05.sv02.posture', detailKey: 'government.gv05.sv02.detail' },
+  { code: 'SV.03', icon: ShieldCheck, titleKey: 'government.gv05.sv03.title', postureKey: 'government.gv05.sv03.posture', detailKey: 'government.gv05.sv03.detail' },
+  { code: 'SV.04', icon: FileSearch,  titleKey: 'government.gv05.sv04.title', postureKey: 'government.gv05.sv04.posture', detailKey: 'government.gv05.sv04.detail' },
 ];
 
 export default function SovereigntyFramework() {
+  const { t } = useI18n();
+
   return (
     <section
       id="gv-05"
@@ -87,7 +59,7 @@ export default function SovereigntyFramework() {
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-white/55">
           <span className="text-[#D6B575] font-semibold">GV.05</span>
           <span aria-hidden="true" className="flex-1 h-px bg-white/15 max-w-[200px]" />
-          <span>Sovereignty framework</span>
+          <span>{t('government.gv05.eyebrow')}</span>
         </div>
 
         <div className="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
@@ -96,19 +68,15 @@ export default function SovereigntyFramework() {
               id="gv-05-heading"
               className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-[1.05]"
             >
-              Sovereignty as a{' '}
+              {t('government.gv05.title.part1')}
               <em className="not-italic font-serif italic font-normal text-[#D6B575]">
-                contractual instrument.
+                {t('government.gv05.title.part2')}
               </em>
             </h2>
           </div>
           <div className="lg:col-span-5">
             <p className="text-base text-white/80 leading-[1.65]">
-              The four declarations below are not marketing posture.
-              Each is a clause carried in every contract instrument
-              FlyttGo executes for a public-sector deployment, with
-              a corresponding artefact furnished on procurement
-              request.
+              {t('government.gv05.description')}
             </p>
           </div>
         </div>
@@ -133,15 +101,15 @@ export default function SovereigntyFramework() {
                       {r.code}
                     </div>
                     <div className="mt-1 text-[15px] font-semibold tracking-tight text-white">
-                      {r.title}
+                      {t(r.titleKey)}
                     </div>
                     <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">
-                      {r.posture}
+                      {t(r.postureKey)}
                     </div>
                   </div>
                 </div>
                 <p className="mt-4 text-[13px] leading-relaxed text-white/75">
-                  {r.detail}
+                  {t(r.detailKey)}
                 </p>
               </li>
             );
@@ -153,21 +121,19 @@ export default function SovereigntyFramework() {
             href="/government/orchestration"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-sm font-semibold tracking-tight hover:bg-white/[0.10] hover:border-white/25 motion-safe:transition-colors"
           >
-            Open orchestration architecture
+            {t('government.gv05.cta.orchestration')}
             <ArrowUpRight size={13} aria-hidden="true" className="text-[#D6B575]" />
           </Link>
           <Link
             href="/government/capability-brief"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-sm font-semibold tracking-tight hover:bg-white/[0.10] hover:border-white/25 motion-safe:transition-colors"
           >
-            Capability brief · GCB.00
+            {t('government.gv05.cta.brief')}
             <ArrowUpRight size={13} aria-hidden="true" className="text-[#D6B575]" />
           </Link>
         </div>
         <p className="mt-6 max-w-3xl font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
-          Full sovereignty posture detailed under NDA in the Government
-          Capability Brief (GCB.00) · §4 of the Pilot Deployment
-          Partnership Proposal (PP.00) · per-deployment addenda.
+          {t('government.gv05.footer')}
         </p>
       </div>
     </section>

@@ -1,77 +1,36 @@
+'use client';
+
 import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import { CloudCog, Layers3, ServerCog, ShieldCheck, ArrowUpRight, type LucideIcon } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 /**
- * GV.02 — Service-model declaration.
- *
- * Four-card row stating the four service postures FlyttGo operates
- * against. Read order matters: SaaS (most accessible) on the left,
- * Sovereign (most regulated) on the right. Government framing on
- * every card body — these are the same four service postures named
- * on the home page's SM.00 surface, rewritten for the regulator/
- * procurement-officer reader.
+ * GV.02 — Service-model declaration. Four-card row stating the four
+ * service postures FlyttGo operates against. Localised via i18n.
  */
 
 type Posture = {
   code: string;
   icon: LucideIcon;
   accent: string;
-  title: string;
-  service: string;
-  body: string;
+  titleKey: string;
+  serviceKey: string;
+  bodyKey: string;
   href: string;
-  cta: string;
+  ctaKey: string;
 };
 
 const POSTURES: Posture[] = [
-  {
-    code: 'SM.01',
-    icon: CloudCog,
-    accent: '#1E6FD9',
-    title: 'SaaS capability',
-    service: 'Managed regional tenants',
-    body:
-      'FlyttGo operates the platform; the recipient consumes operational services with statutory residency. Region-aware tenants in EU primary regions, with optional regional uplift to AF, MENA or APAC.',
-    href: '/deployment/managed',
-    cta: 'Managed deployment posture',
-  },
-  {
-    code: 'SM.02',
-    icon: Layers3,
-    accent: '#0FB5A6',
-    title: 'PaaS orchestration architecture',
-    service: 'FlyttGoTech Core substrate',
-    body:
-      'The FlyttGoTech Core exposes an orchestration substrate — identity broker, audit log, event bus, policy engine, workflow runner — that the recipient extends with internal services or in-house modules.',
-    href: '/infrastructure-architecture',
-    cta: 'Orchestration architecture',
-  },
-  {
-    code: 'SM.03',
-    icon: ServerCog,
-    accent: '#0A3A6B',
-    title: 'IaaS-compatible deployment environments',
-    service: 'Customer cloud or sovereign substrate',
-    body:
-      "Platform installs into the recipient's existing AWS, Azure, GCP or bare-metal sovereign environment under their tenancy. BYOK / HYOK key custody. Audit and patch cadence honour the recipient's change control.",
-    href: '/deployment/customer-cloud',
-    cta: 'Customer-cloud posture',
-  },
-  {
-    code: 'SM.04',
-    icon: ShieldCheck,
-    accent: '#7C5CE6',
-    title: 'Sovereign national infrastructure readiness',
-    service: 'Certified national datacenter',
-    body:
-      'Installation inside certified national datacenters under national HSM, national-eID integration, regulator-bounded change windows, and Cloud-Act-exempt operations. Full data residency in jurisdiction.',
-    href: '/deployment/sovereign',
-    cta: 'Sovereign deployment posture',
-  },
+  { code: 'SM.01', icon: CloudCog,    accent: '#1E6FD9', titleKey: 'government.gv02.sm01.title', serviceKey: 'government.gv02.sm01.service', bodyKey: 'government.gv02.sm01.body', href: '/deployment/managed',        ctaKey: 'government.gv02.sm01.cta' },
+  { code: 'SM.02', icon: Layers3,     accent: '#0FB5A6', titleKey: 'government.gv02.sm02.title', serviceKey: 'government.gv02.sm02.service', bodyKey: 'government.gv02.sm02.body', href: '/infrastructure-architecture', ctaKey: 'government.gv02.sm02.cta' },
+  { code: 'SM.03', icon: ServerCog,   accent: '#0A3A6B', titleKey: 'government.gv02.sm03.title', serviceKey: 'government.gv02.sm03.service', bodyKey: 'government.gv02.sm03.body', href: '/deployment/customer-cloud', ctaKey: 'government.gv02.sm03.cta' },
+  { code: 'SM.04', icon: ShieldCheck, accent: '#7C5CE6', titleKey: 'government.gv02.sm04.title', serviceKey: 'government.gv02.sm04.service', bodyKey: 'government.gv02.sm04.body', href: '/deployment/sovereign',      ctaKey: 'government.gv02.sm04.cta' },
 ];
 
 export default function GovernmentServiceModels() {
+  const { t } = useI18n();
+
   return (
     <section
       id="gv-02"
@@ -82,7 +41,7 @@ export default function GovernmentServiceModels() {
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
           <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">GV.02</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
-          <span>Service-model declaration</span>
+          <span>{t('government.gv02.eyebrow')}</span>
         </div>
 
         <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
@@ -91,18 +50,15 @@ export default function GovernmentServiceModels() {
               id="gv-02-heading"
               className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              Four service postures.{' '}
+              {t('government.gv02.title.part1')}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                Pick the one your jurisdiction operates under.
+                {t('government.gv02.title.part2')}
               </em>
             </h2>
           </div>
           <div className="lg:col-span-5">
             <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
-              Every public-sector deployment lands against one of these
-              postures. Each is a contractual frame, not a marketing
-              category — the sovereignty, key custody and regulator-
-              hand-off framework all derive from the chosen posture.
+              {t('government.gv02.description')}
             </p>
           </div>
         </div>
@@ -132,17 +88,17 @@ export default function GovernmentServiceModels() {
                     </span>
                   </div>
                   <div className="mt-4 text-[15px] font-semibold tracking-tight text-slate-900 dark:text-white leading-snug">
-                    {p.title}
+                    {t(p.titleKey)}
                   </div>
                   <div className="mt-1 font-mono text-[10px] tracking-[0.16em] uppercase text-slate-500">
-                    {p.service}
+                    {t(p.serviceKey)}
                   </div>
                   <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-1">
-                    {p.body}
+                    {t(p.bodyKey)}
                   </p>
                   <div className="mt-5 pt-4 border-t border-slate-200/70 dark:border-slate-800/60 flex items-center justify-between gap-2">
                     <span className="text-[12px] font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white motion-safe:transition-colors">
-                      {p.cta}
+                      {t(p.ctaKey)}
                     </span>
                     <ArrowUpRight
                       size={13}

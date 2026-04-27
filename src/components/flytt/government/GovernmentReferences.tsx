@@ -1,17 +1,13 @@
+'use client';
+
 import React from 'react';
 import { Lock, Bus, GraduationCap, Building2, type LucideIcon } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 /**
- * GV.08 — Reference programme shapes.
- *
- * Anonymised programme outlines; full reference details shared only
- * under NDA. Each card describes the SHAPE of an engagement
- * (sector, scale, geography, deployment mode, outcomes) without
- * naming the recipient. Cards bear the "Confidential · Reference
- * shape" classification mark to make the discretion explicit.
- *
- * When real anonymised references are cleared for circulation by
- * the engagement desk, replace the placeholder rows below.
+ * GV.08 — Reference programme shapes. Surface chrome localised; the
+ * placeholder reference data stays in EN until the engagement desk
+ * clears real anonymised programmes for circulation.
  */
 
 type Reference = {
@@ -67,6 +63,8 @@ const REFERENCES: Reference[] = [
 ];
 
 export default function GovernmentReferences() {
+  const { t } = useI18n();
+
   return (
     <section
       id="gv-08"
@@ -77,7 +75,7 @@ export default function GovernmentReferences() {
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
           <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">GV.08</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
-          <span>Reference programme shapes</span>
+          <span>{t('government.gv08.eyebrow')}</span>
         </div>
 
         <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
@@ -86,18 +84,15 @@ export default function GovernmentReferences() {
               id="gv-08-heading"
               className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
             >
-              Three programme shapes,{' '}
+              {t('government.gv08.title.part1')}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                anonymised for public circulation.
+                {t('government.gv08.title.part2')}
               </em>
             </h2>
           </div>
           <div className="lg:col-span-5">
             <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
-              Full reference details — recipient, contract instrument,
-              statutory metrics, audit outcomes — are released only
-              under NDA. Request the reference dossier via the
-              engagement intake below.
+              {t('government.gv08.description')}
             </p>
           </div>
         </div>
@@ -126,19 +121,19 @@ export default function GovernmentReferences() {
                 </div>
                 <dl className="mt-4 pt-4 border-t border-slate-200/70 dark:border-slate-800/60 space-y-2 font-mono text-[10px] tracking-[0.16em] uppercase">
                   <div>
-                    <dt className="text-slate-400">Scale</dt>
+                    <dt className="text-slate-400">{t('government.gv08.scale')}</dt>
                     <dd className="mt-0.5 text-slate-700 dark:text-slate-300 normal-case tracking-normal text-[12px] font-sans">
                       {r.scale}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-slate-400">Modules</dt>
+                    <dt className="text-slate-400">{t('government.gv08.modules')}</dt>
                     <dd className="mt-0.5 text-[#0A3A6B] dark:text-[#9ED0F9] normal-case tracking-normal text-[12px] font-sans">
                       {r.modules}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-slate-400">Deployment mode</dt>
+                    <dt className="text-slate-400">{t('government.gv08.mode')}</dt>
                     <dd className="mt-0.5 text-slate-700 dark:text-slate-300 normal-case tracking-normal text-[12px] font-sans">
                       {r.mode}
                     </dd>
@@ -165,7 +160,7 @@ export default function GovernmentReferences() {
 
         <div className="mt-8 inline-flex items-center gap-2 px-3 py-2 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
           <Lock size={11} strokeWidth={1.75} aria-hidden="true" />
-          <span>Confidential · reference shape · full details under NDA</span>
+          <span>{t('government.gv08.classification')}</span>
         </div>
       </div>
     </section>
