@@ -23,6 +23,8 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/platforms', priority: 0.9, freq: 'weekly' },
   { path: '/deployment', priority: 0.9, freq: 'weekly' },
   { path: '/industries', priority: 0.7, freq: 'monthly' },
+  { path: '/government', priority: 0.9, freq: 'monthly' },
+  { path: '/government/capability-brief', priority: 0.7, freq: 'monthly' },
   { path: '/technology', priority: 0.7, freq: 'monthly' },
   { path: '/infrastructure', priority: 0.8, freq: 'weekly' },
   { path: '/solutions', priority: 0.7, freq: 'monthly' },

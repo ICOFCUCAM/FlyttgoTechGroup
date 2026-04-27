@@ -32,6 +32,48 @@ export const metadata: Metadata = {
   },
 };
 
+const governmentServiceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'GovernmentService',
+  name: 'FlyttGo Public-Sector Platform Infrastructure',
+  serviceType: 'Modular cloud platform infrastructure for public-sector deployment',
+  provider: {
+    '@type': 'Organization',
+    name: 'FlyttGo Technologies Group AB',
+    url: 'https://flyttgo.tech',
+  },
+  audience: [
+    { '@type': 'GovernmentOrganization', name: 'Ministry of Digital Affairs' },
+    { '@type': 'GovernmentOrganization', name: 'Ministry of Transport' },
+    { '@type': 'GovernmentOrganization', name: 'Ministry of Education' },
+    { '@type': 'GovernmentOrganization', name: 'Central Digitalisation Agency' },
+    { '@type': 'GovernmentOrganization', name: 'Municipal Modernisation Programme' },
+    { '@type': 'GovernmentOrganization', name: 'Public-Sector Procurement Office' },
+  ],
+  areaServed: [
+    { '@type': 'Place', name: 'European Union' },
+    { '@type': 'Place', name: 'United Kingdom' },
+    { '@type': 'Place', name: 'Africa' },
+    { '@type': 'Place', name: 'Middle East and North Africa' },
+  ],
+  availableChannel: {
+    '@type': 'ServiceChannel',
+    serviceUrl: 'https://flyttgo.tech/contact?intent=government',
+    name: 'Public-sector engagement intake',
+  },
+  termsOfService: 'https://flyttgo.tech/terms',
+  category: [
+    'Identity infrastructure',
+    'Payment orchestration',
+    'Mobility infrastructure',
+    'Workforce coordination',
+    'Education intelligence',
+    'Municipal & government services',
+    'Financial operations',
+    'Regulated marketplace infrastructure',
+  ],
+};
+
 export default function GovernmentPage() {
   const ld = breadcrumbListLd([
     { name: 'Home', href: '/' },
@@ -41,6 +83,10 @@ export default function GovernmentPage() {
   return (
     <>
       <script {...jsonLdScript(ld)} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(governmentServiceLd) }}
+      />
       <Navbar />
       <main
         id="main"

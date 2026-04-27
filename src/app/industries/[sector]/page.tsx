@@ -84,6 +84,38 @@ export default function IndustrySectorPage({ params }: PageProps) {
           ]}
         />
 
+        {/* Cross-link to the dedicated government outreach surface
+            for procurement-tier visitors. Only shown on the
+            government sector page. */}
+        {data.slug === 'government' && (
+          <section className="bg-gradient-to-b from-[#F7FAFD] to-white dark:from-slate-900 dark:to-slate-950 border-b border-slate-200/60 dark:border-slate-800/60">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8 py-6">
+              <Link
+                href="/government"
+                className="group flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+              >
+                <span className="font-mono text-[10px] tracking-[0.22em] uppercase font-semibold text-[#0A3A6B] dark:text-[#9ED0F9]">
+                  GV.00
+                </span>
+                <span aria-hidden="true" className="hidden sm:inline text-slate-300 dark:text-slate-700">
+                  ·
+                </span>
+                <span className="text-[14px] font-semibold tracking-tight text-slate-900 dark:text-white">
+                  Procurement-tier surface for ministries, agencies and authorities
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 hidden md:inline">
+                  Capability brief · sovereignty framework · pilot proposal
+                </span>
+                <ArrowRight
+                  size={14}
+                  className="ml-auto text-slate-400 group-hover:text-[#0A3A6B] dark:group-hover:text-[#9ED0F9] motion-safe:transition-colors"
+                  aria-hidden="true"
+                />
+              </Link>
+            </div>
+          </section>
+        )}
+
         <Reveal>
           <section className="py-14 lg:py-20 bg-white dark:bg-slate-950">
             <div className="max-w-6xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10">
