@@ -2,13 +2,21 @@
 
 import React from 'react';
 import * as THREE from 'three';
+import { feature } from 'topojson-client';
+import type { Topology, GeometryCollection } from 'topojson-specification';
+import type { Feature, FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 
 /**
  * Interactive WebGL globe — three.js, hand-rolled (no react-globe.gl).
  *
- * Texture-mapped sphere built from a procedural land-mass fragment
- * shader so we don't need to ship an Earth texture asset. FlyttGo
- * region pulses sit on the surface as billboarded sprites; great-
+ * Real country borders rendered from the same world-atlas 110m
+ * TopoJSON the 2D WorldDeploymentMap consumes — fetched once at
+ * mount, parsed via `topojson-client`, projected onto the sphere as
+ * `THREE.LineSegments`. No texture asset is shipped; geometry is
+ * derived from real geo data so continents read as Africa, Eurasia,
+ * the Americas, Oceania at a glance.
+ *
+ * FlyttGo region pulses sit on the surface as small spheres; great-
  * circle arcs link primary regions. Drag to rotate; auto-rotates when
  * idle. Honours prefers-reduced-motion (auto-rotate pauses; arcs
  * stay; pulses stay; drag still works).
@@ -16,6 +24,9 @@ import * as THREE from 'three';
  * Lazy-loaded via dynamic import on /global-coverage so the three.js
  * bundle (~150 KB gzipped) doesn't touch the rest of the site.
  */
+
+const GEO_URL =
+  'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
 type Region = {
   code: string;
@@ -59,89 +70,6 @@ const TIER_COLOR: Record<Region['tier'], number> = {
   secondary: 0x0fb5a6,
   sovereign: 0x7c5ce6,
 };
-
-// LAND dot constellation — renders the same approximate continent
-// shapes the 2D WorldDeploymentMap uses, projected onto the sphere
-// surface. Each tuple is [lon, lat]. Read as recognisable Africa /
-// Americas / Asia / Oceania at a glance instead of an abstract
-// shader-noised sphere.
-const LAND_DOTS: Array<[number, number]> = [
-  // North America
-  [-160, 65], [-150, 65], [-140, 65], [-130, 65], [-120, 65],
-  [-160, 60], [-150, 60], [-140, 60], [-130, 60], [-120, 60], [-110, 60], [-100, 60], [-90, 60], [-80, 60], [-70, 60],
-  [-155, 55], [-140, 55], [-125, 55], [-115, 55], [-105, 55], [-95, 55], [-85, 55], [-75, 55], [-65, 55], [-58, 55],
-  [-128, 50], [-118, 50], [-108, 50], [-98, 50], [-88, 50], [-78, 50], [-68, 50], [-60, 50],
-  [-125, 45], [-115, 45], [-105, 45], [-95, 45], [-85, 45], [-75, 45], [-67, 45],
-  [-122, 40], [-112, 40], [-102, 40], [-92, 40], [-82, 40], [-74, 40],
-  [-120, 35], [-108, 35], [-98, 35], [-88, 35], [-78, 35], [-72, 35],
-  [-115, 30], [-105, 30], [-95, 30], [-85, 30], [-78, 30],
-  [-110, 25], [-100, 25], [-90, 25], [-82, 25],
-  [-105, 20], [-95, 20], [-88, 20],
-  [-100, 15], [-88, 15], [-82, 15],
-  [-92, 10], [-85, 10], [-78, 10],
-  // South America
-  [-78, 5], [-72, 5], [-65, 5], [-58, 5], [-52, 5],
-  [-78, 0], [-72, 0], [-65, 0], [-58, 0], [-50, 0],
-  [-78, -5], [-72, -5], [-65, -5], [-58, -5], [-50, -5], [-42, -5],
-  [-75, -10], [-68, -10], [-60, -10], [-52, -10], [-45, -10], [-38, -10],
-  [-72, -15], [-65, -15], [-58, -15], [-50, -15], [-42, -15],
-  [-70, -20], [-62, -20], [-55, -20], [-48, -20], [-42, -20],
-  [-70, -25], [-62, -25], [-55, -25], [-48, -25],
-  [-72, -30], [-65, -30], [-58, -30],
-  [-72, -35], [-65, -35], [-58, -35],
-  [-72, -40], [-65, -40],
-  [-70, -45], [-65, -45],
-  // Europe
-  [-10, 60], [0, 60], [10, 60], [20, 60], [30, 60], [40, 60], [55, 60],
-  [-8, 55], [2, 55], [12, 55], [22, 55], [32, 55], [42, 55],
-  [-8, 50], [2, 50], [12, 50], [22, 50], [32, 50], [42, 50],
-  [-8, 45], [0, 45], [10, 45], [20, 45], [30, 45], [40, 45],
-  [-5, 40], [5, 40], [15, 40], [25, 40], [35, 40], [42, 40],
-  [-20, 65], [10, 70], [22, 68], [25, 70],
-  // Africa
-  [-15, 30], [-5, 30], [5, 30], [15, 30], [25, 30], [33, 30],
-  [-15, 25], [-5, 25], [5, 25], [15, 25], [25, 25], [33, 25],
-  [-15, 20], [-5, 20], [5, 20], [15, 20], [25, 20], [33, 20],
-  [-15, 15], [-5, 15], [5, 15], [15, 15], [25, 15], [35, 15], [42, 15],
-  [-12, 10], [-5, 10], [5, 10], [15, 10], [25, 10], [35, 10], [42, 10],
-  [-8, 5], [0, 5], [10, 5], [20, 5], [30, 5], [38, 5],
-  [10, 0], [20, 0], [28, 0], [35, 0], [42, 0],
-  [12, -5], [22, -5], [30, -5], [38, -5],
-  [15, -10], [22, -10], [30, -10], [38, -10],
-  [15, -15], [22, -15], [30, -15], [38, -15],
-  [18, -20], [25, -20], [32, -20],
-  [20, -25], [27, -25], [32, -25],
-  [22, -30], [28, -30],
-  // MENA / Arabian peninsula
-  [38, 30], [45, 30], [50, 30], [55, 30],
-  [40, 25], [48, 25], [55, 25],
-  [42, 20], [50, 20], [55, 20],
-  [45, 15], [52, 15],
-  // Asia
-  [60, 65], [75, 65], [90, 65], [110, 65], [130, 65], [150, 65], [165, 65],
-  [60, 60], [75, 60], [90, 60], [105, 60], [120, 60], [135, 60], [155, 60],
-  [55, 55], [70, 55], [85, 55], [100, 55], [115, 55], [130, 55], [145, 55],
-  [55, 50], [70, 50], [85, 50], [100, 50], [115, 50], [130, 50], [142, 50],
-  [55, 45], [70, 45], [85, 45], [100, 45], [115, 45], [128, 45], [140, 45],
-  [60, 40], [70, 40], [80, 40], [95, 40], [110, 40], [125, 40], [138, 40],
-  [60, 35], [72, 35], [85, 35], [100, 35], [115, 35], [128, 35],
-  [62, 30], [75, 30], [88, 30], [100, 30], [115, 30],
-  [70, 25], [82, 25], [92, 25], [105, 25],
-  [72, 20], [82, 20], [95, 20], [105, 20],
-  [78, 15], [92, 15], [102, 15], [110, 15], [122, 15],
-  [80, 10], [98, 10], [108, 10], [118, 10],
-  [102, 5], [110, 5], [120, 5],
-  [100, 0], [110, 0], [120, 0],
-  // Indonesia / Philippines
-  [105, -5], [115, -5], [122, -5], [130, -5],
-  [115, -10], [122, -10], [130, -10], [138, -10],
-  // Australia / Oceania
-  [115, -20], [125, -20], [135, -20], [145, -20], [152, -20],
-  [115, -25], [125, -25], [135, -25], [145, -25],
-  [115, -30], [125, -30], [135, -30], [145, -30],
-  [120, -35], [130, -35], [140, -35], [148, -35],
-  [145, -40],
-];
 
 const ARCS: Array<[string, string]> = [
   ['NO-OS', 'US-E'],
@@ -193,10 +121,8 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
     scene.add(globeGroup);
 
     // Ocean shader — deep navy with a soft Fresnel + faint lat/lon grid.
-    // Continents are rendered as a separate Points cloud above, using the
-    // same LAND[] dataset as the 2D world map. This guarantees the globe
-    // shows recognisable continent shapes (Africa / Americas / Asia /
-    // Oceania) instead of an abstract noise texture.
+    // Country borders are rendered as a separate LineSegments mesh above,
+    // built from real world-atlas TopoJSON fetched at mount.
     const globeMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
@@ -239,25 +165,53 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
     const globe = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 96, 96), globeMaterial);
     globeGroup.add(globe);
 
-    // Continent dot cloud — recognisable land shapes.
-    const landPositions = new Float32Array(LAND_DOTS.length * 3);
-    LAND_DOTS.forEach(([lon, lat], i) => {
-      const v = lonLatToVec3(lon, lat, RADIUS * 1.003);
-      landPositions[i * 3 + 0] = v.x;
-      landPositions[i * 3 + 1] = v.y;
-      landPositions[i * 3 + 2] = v.z;
-    });
-    const landGeometry = new THREE.BufferGeometry();
-    landGeometry.setAttribute('position', new THREE.BufferAttribute(landPositions, 3));
-    const landMaterial = new THREE.PointsMaterial({
+    // Country borders — real geo data, fetched from world-atlas TopoJSON
+    // and projected onto the sphere as LineSegments. We thread an
+    // AbortController through so the fetch is cancelled if the component
+    // unmounts before it resolves.
+    const bordersGeometry = new THREE.BufferGeometry();
+    const bordersMaterial = new THREE.LineBasicMaterial({
       color: 0x9ed0f9,
-      size: 0.018,
-      sizeAttenuation: true,
       transparent: true,
       opacity: 0.72,
     });
-    const landCloud = new THREE.Points(landGeometry, landMaterial);
-    globeGroup.add(landCloud);
+    const borders = new THREE.LineSegments(bordersGeometry, bordersMaterial);
+    globeGroup.add(borders);
+
+    const abortController = new AbortController();
+    fetch(GEO_URL, { signal: abortController.signal })
+      .then((res) => res.json() as Promise<Topology>)
+      .then((topology) => {
+        const collection = topology.objects.countries as GeometryCollection;
+        const geo = feature(topology, collection) as FeatureCollection<Polygon | MultiPolygon>;
+        const segments: number[] = [];
+        for (const f of geo.features as Feature<Polygon | MultiPolygon>[]) {
+          const polygons =
+            f.geometry.type === 'Polygon'
+              ? [f.geometry.coordinates]
+              : f.geometry.coordinates;
+          for (const polygon of polygons) {
+            for (const ring of polygon) {
+              for (let i = 0; i < ring.length - 1; i++) {
+                const [lonA, latA] = ring[i];
+                const [lonB, latB] = ring[i + 1];
+                const a = lonLatToVec3(lonA, latA, RADIUS * 1.003);
+                const b = lonLatToVec3(lonB, latB, RADIUS * 1.003);
+                segments.push(a.x, a.y, a.z, b.x, b.y, b.z);
+              }
+            }
+          }
+        }
+        bordersGeometry.setAttribute(
+          'position',
+          new THREE.Float32BufferAttribute(segments, 3),
+        );
+      })
+      .catch((err) => {
+        if (err?.name !== 'AbortError') {
+          console.warn('WebGLGlobe: failed to load country borders', err);
+        }
+      });
 
     // ---- Atmosphere halo --------------------------------------------
     const atmoMaterial = new THREE.ShaderMaterial({
@@ -406,6 +360,7 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
 
     // ---- Cleanup -----------------------------------------------------
     return () => {
+      abortController.abort();
       cancelAnimationFrame(raf);
       renderer.domElement.removeEventListener('pointerdown', onPointerDown);
       renderer.domElement.removeEventListener('pointermove', onPointerMove);
@@ -414,8 +369,8 @@ export default function WebGLGlobe({ size = 420 }: { size?: number }) {
       renderer.dispose();
       globeMaterial.dispose();
       atmoMaterial.dispose();
-      landGeometry.dispose();
-      landMaterial.dispose();
+      bordersGeometry.dispose();
+      bordersMaterial.dispose();
       mount.removeChild(renderer.domElement);
     };
   }, [size, reduced]);
