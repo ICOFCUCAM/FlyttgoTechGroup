@@ -24,12 +24,17 @@ export const metadata: Metadata = {
     'FlyttGo Technologies Group designs and operates modular cloud platform infrastructure for ministries, transport authorities, universities and municipal modernisation programmes. Eight modules, three deployment modes, sovereign national infrastructure readiness.',
   alternates: { canonical: '/government' },
   openGraph: {
-    title:
-      'FlyttGo · Government Platform Infrastructure',
+    title: 'FlyttGo · Government Platform Infrastructure',
     description:
       'Modular cloud platform infrastructure for sovereign-ready public-sector deployment. Identity, payments, mobility, workforce, education, government services and financial operations — orchestrated through the FlyttGoTech Core.',
     url: '/government',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FlyttGo · Government Platform Infrastructure',
+    description:
+      'Modular platform infrastructure for sovereign-ready public-sector deployment. Eight modules · FlyttGoTech Core · three deployment modes.',
   },
 };
 
