@@ -1,10 +1,19 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Link from '@/components/flytt/LocaleLink';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import WorldDeploymentMap from '@/components/flytt/diagrams/WorldDeploymentMap';
 import RotatingGlobe from '@/components/flytt/diagrams/RotatingGlobe';
 import { ArrowUpRight } from 'lucide-react';
+
+// Lazy WebGL globe — three.js is ~150 KB gzipped, kept off the SSR
+// payload + off every other route. Falls back to the CSS RotatingGlobe
+// while the bundle loads, so the SSR HTML is still substantive.
+const WebGLGlobe = dynamic(
+  () => import('@/components/flytt/diagrams/WebGLGlobe'),
+  { ssr: false, loading: () => <RotatingGlobe size={420} /> },
+);
 
 export const metadata: Metadata = {
   title: 'Global coverage — FlyttGo deployment footprint',
@@ -54,7 +63,7 @@ export default function GlobalCoveragePage() {
               </p>
             </div>
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <RotatingGlobe size={360} />
+              <WebGLGlobe size={420} />
             </div>
           </div>
         </section>

@@ -10,8 +10,10 @@ import React, {
   useState,
 } from 'react';
 import Link from '@/components/flytt/LocaleLink';
+import { useRouter } from 'next/navigation';
 import { ArrowUpRight, Mic, MicOff, Sparkles, X, Zap } from 'lucide-react';
 import { KNOWLEDGE_BASE, scoreKb, type KbEntry } from '@/lib/ai/knowledge-base';
+import { parseVoiceCommand } from '@/lib/ai/voice-commands';
 
 /**
  * Ask FlyttGo (⌘J) — embedded assistant panel.
@@ -82,9 +84,25 @@ export function AskFlyttGoProvider({ children }: { children: React.ReactNode }) 
 }
 
 function AskFlyttGoPanel({ onClose }: { onClose: () => void }) {
+  const router = useRouter();
   const [query, setQuery] = useState('');
+  const [voiceRoute, setVoiceRoute] = useState<{ href: string; label: string } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const voice = useVoiceInput((spoken) => setQuery(spoken));
+
+  // Voice handler routes recognised nav commands and shows a quick
+  // confirmation toast. Otherwise the spoken text drops into the query
+  // box like normal.
+  const voice = useVoiceInput((spoken) => {
+    setQuery(spoken);
+    const parsed = parseVoiceCommand(spoken);
+    if (parsed.kind === 'route') {
+      setVoiceRoute({ href: parsed.href, label: parsed.label });
+      window.setTimeout(() => {
+        router.push(parsed.href);
+        onClose();
+      }, 900);
+    }
+  });
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -181,6 +199,16 @@ function AskFlyttGoPanel({ onClose }: { onClose: () => void }) {
           {voice.error && (
             <p className="mt-2 text-[12px] text-rose-600 dark:text-rose-400 font-mono">
               {voice.error}
+            </p>
+          )}
+          {voiceRoute && (
+            <p
+              role="status"
+              aria-live="polite"
+              className="mt-2 inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-300/50 text-emerald-700 dark:text-emerald-300 font-mono text-[10px] uppercase tracking-[0.18em]"
+            >
+              <ArrowUpRight size={11} aria-hidden="true" />
+              Voice command · routing to {voiceRoute.label}
             </p>
           )}
         </div>

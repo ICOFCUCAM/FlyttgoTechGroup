@@ -34,7 +34,7 @@ export default function HomeProcurementEntry() {
         <div className="mt-6 grid lg:grid-cols-12 gap-8 items-end">
           <h2
             id="procurement-entry-heading"
-            className="lg:col-span-7 font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
+            className="scroll-reveal-tighten lg:col-span-7 font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
           >
             From pilot{' '}
             <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
