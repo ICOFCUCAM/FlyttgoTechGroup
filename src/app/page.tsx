@@ -3,10 +3,10 @@ import Navbar from '@/components/flytt/Navbar';
 import HeroSlider from '@/components/flytt/HeroSlider';
 import HomeRegionsStrip from '@/components/flytt/HomeRegionsStrip';
 import LiveOpsStrip from '@/components/flytt/LiveOpsStrip';
-import HomeSectionRail from '@/components/flytt/HomeSectionRail';
 import TrustIndicators from '@/components/flytt/TrustIndicators';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
 import HomeDeploymentStrip from '@/components/flytt/HomeDeploymentStrip';
+import HomeDeploymentMatrix from '@/components/flytt/HomeDeploymentMatrix';
 import HomeIndustriesStrip from '@/components/flytt/HomeIndustriesStrip';
 import HomeTechStrip from '@/components/flytt/HomeTechStrip';
 import HomeServiceModels from '@/components/flytt/HomeServiceModels';
@@ -91,7 +91,6 @@ export default function HomePage() {
         <HeroSlider />
         <HomeRegionsStrip />
         <LiveOpsStrip />
-        <HomeSectionRail />
         <TrustIndicators />
         {/* Service-models surface (SM.00) — IaaS · SaaS · PaaS ·
             Sovereign explained explicitly so visitors see the four
@@ -110,6 +109,13 @@ export default function HomePage() {
         </Reveal>
         <Reveal>
           <HomeDeploymentStrip />
+        </Reveal>
+        {/* Procurement-grade comparison surface — DM.MX. Pairs with
+            HomeDeploymentStrip's mode cards (high-level lead-in) and
+            tabulates the 8 dimensions security/legal/ops actually
+            compare during sign-off. */}
+        <Reveal>
+          <HomeDeploymentMatrix />
         </Reveal>
         <Reveal>
           <PlatformEcosystemOverview />
