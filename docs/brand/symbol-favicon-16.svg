@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  FlyttGo infrastructure symbol — 16×16 favicon variant (§8).
+  ONE stroke (echo dropped). Pixel-snapped path. Solid background.
+  This is the only sanctioned simplification — at 32+ use canonical.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+     role="img" aria-label="FlyttGo"
+     shape-rendering="crispEdges">
+  <rect x="0" y="0" width="16" height="16" fill="#0A3A6B"/>
+  <path d="M 3 9 L 7 5 L 10 8 L 13 4"
+        fill="none"
+        stroke="#9ED0F9"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>
