@@ -54,6 +54,7 @@ const groups: FooterGroup[] = [
     code: 'DR.RL',
     links: [
       { label: 'Deployment architecture', href: '/deployment' },
+      { label: 'Government & public sector · GV.00', href: '/government' },
       { label: 'Deployment lifecycle · EP.00', href: '/deployment-lifecycle' },
       { label: 'Managed SaaS · DM.01', href: '/deployment/managed' },
       { label: 'Customer cloud · DM.02', href: '/deployment/customer-cloud' },
