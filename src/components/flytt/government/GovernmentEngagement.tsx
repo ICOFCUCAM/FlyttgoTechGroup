@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
-import { ArrowRight, ArrowUpRight, FileText, Users, Briefcase, type LucideIcon } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, FileText, Users, Briefcase, Download, type LucideIcon } from 'lucide-react';
 
 /**
  * GV.09 — Engagement intake.
@@ -140,6 +140,13 @@ export default function GovernmentEngagement() {
               className="motion-safe:transition-transform group-hover:translate-x-0.5"
               aria-hidden="true"
             />
+          </Link>
+          <Link
+            href="/government/capability-brief"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white text-sm font-semibold rounded-lg hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900/80 motion-safe:transition-colors"
+          >
+            <Download size={13} strokeWidth={2} aria-hidden="true" />
+            Capability brief · GCB.00
           </Link>
           <Link
             href="/procurement-compatibility"
