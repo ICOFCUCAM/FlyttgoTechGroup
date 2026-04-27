@@ -53,6 +53,7 @@ const groups: FooterGroup[] = [
     code: 'DR.RL',
     links: [
       { label: 'Deployment architecture', href: '/deployment' },
+      { label: 'Deployment lifecycle · EP.00', href: '/deployment-lifecycle' },
       { label: 'Managed SaaS · DM.01', href: '/deployment/managed' },
       { label: 'Customer cloud · DM.02', href: '/deployment/customer-cloud' },
       { label: 'Sovereign datacenter · DM.03', href: '/deployment/sovereign' },
@@ -85,6 +86,7 @@ const groups: FooterGroup[] = [
       { label: 'Partnership inquiries', href: '/contact?intent=partnership' },
       { label: 'Procurement & RFPs', href: '/contact?intent=procurement' },
       { label: 'Developer portal', href: '/developers' },
+      { label: 'API architecture · AP.00', href: '/api-architecture' },
       { label: 'Live API playground · API.PG', href: '/developers/playground' },
       { label: 'MCP discovery manifest', href: '/.well-known/mcp.json' },
       { label: 'Insights', href: '/insights' },

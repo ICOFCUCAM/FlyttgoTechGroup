@@ -167,6 +167,7 @@ const primaryLinks: NavLink[] = [
             { label: 'Sovereign Deployment', description: 'National hosting + data-residency posture', href: '/sovereign', icon: ShieldCheck },
             { label: 'Global Coverage', description: 'Nordic EU · Africa · MENA rollout footprint', href: '/global-coverage', icon: Globe2 },
             { label: 'Procurement Compatibility', description: 'Pilot · city · regional · national · white-label', href: '/procurement-compatibility', icon: FileCheck2 },
+            { label: 'Deployment Lifecycle', description: 'EP.01–05 stages · written deliverables · cadence', href: '/deployment-lifecycle', icon: Workflow },
           ],
         },
       ],
@@ -188,8 +189,9 @@ const primaryLinks: NavLink[] = [
           heading: 'Architecture & Developers',
           items: [
             { label: 'Architecture', description: 'Cloud-native platform stack', href: '/technology', icon: Code2 },
-            { label: 'Developer portal', description: 'APIs, SDKs and deployment pipelines', href: '/developers', icon: Terminal },
-            { label: 'API reference', description: 'Tenant-scoped REST endpoints', href: '/developers', icon: BookOpen },
+            { label: 'API architecture', description: 'Versioned REST · GraphQL · webhooks · MCP', href: '/api-architecture', icon: Network },
+            { label: 'Live API playground', description: 'Pick an endpoint · run it inside the docs', href: '/developers/playground', icon: Terminal },
+            { label: 'Developer portal', description: 'APIs, SDKs and deployment pipelines', href: '/developers', icon: BookOpen },
           ],
         },
         {
