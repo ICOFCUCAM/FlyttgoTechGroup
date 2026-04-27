@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  FlyttGoTech Core orchestration diagram.
+
+  Four horizontal bands top-to-bottom:
+    1. Service-delivery surface  - eight platform modules
+    2. FlyttGoTech Core          - orchestration substrate
+    3. Deployment substrate      - three deployment modes
+    4. Sovereignty band          - data residency / key custody / audit posture
+
+  Renders the SaaS / PaaS / IaaS / Sovereign positioning explicitly
+  so a regulator or procurement officer can read the architecture
+  in one glance. Suitable for the Government Capability Brief
+  (page 2) and the /government landing page sovereignty section.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720"
+     role="img"
+     aria-label="FlyttGoTech Core orchestration across identity, payments, education, workforce, mobility, municipal services and financial operations">
+  <defs>
+    <!-- Module gradients -->
+    <linearGradient id="g-transify" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0A3A6B"/><stop offset="100%" stop-color="#1E6FD9"/></linearGradient>
+    <linearGradient id="g-workverge" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0A3A2A"/><stop offset="100%" stop-color="#0FB5A6"/></linearGradient>
+    <linearGradient id="g-civitas" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2A1B47"/><stop offset="100%" stop-color="#7C5CE6"/></linearGradient>
+    <linearGradient id="g-edupro" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5C4A24"/><stop offset="100%" stop-color="#D6B575"/></linearGradient>
+    <linearGradient id="g-identra" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1B2D4D"/><stop offset="100%" stop-color="#5B7FBF"/></linearGradient>
+    <linearGradient id="g-payvera" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#143E2A"/><stop offset="100%" stop-color="#2BA876"/></linearGradient>
+    <linearGradient id="g-ledgera" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4D2818"/><stop offset="100%" stop-color="#B85C3E"/></linearGradient>
+    <linearGradient id="g-marketplace" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6B3D0A"/><stop offset="100%" stop-color="#D9A21E"/></linearGradient>
+
+    <!-- Core orchestration band gradient -->
+    <linearGradient id="g-core" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A1F3D"/>
+      <stop offset="100%" stop-color="#0A3A6B"/>
+    </linearGradient>
+
+    <!-- Sovereignty band gradient -->
+    <linearGradient id="g-sov" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#070D1A"/>
+      <stop offset="100%" stop-color="#0A1F3D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas -->
+  <rect x="0" y="0" width="1200" height="720" fill="#FBFCFE"/>
+
+  <!-- ═══ TITLE BAR ═══ -->
+  <g transform="translate(40,28)">
+    <text x="0" y="0" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="2.4" fill="#0A3A6B">FLYTTGOTECH.OR · ORCHESTRATION ARCHITECTURE</text>
+    <text x="0" y="28" font-family="'IBM Plex Serif', Georgia, serif" font-size="22" font-weight="500" fill="#0A1F3D">FlyttGoTech Core orchestrating eight platform modules across three deployment modes.</text>
+    <text x="0" y="50" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#475569">Service-delivery surface · orchestration substrate · deployment substrate · sovereignty posture</text>
+  </g>
+
+  <!-- ═══ BAND 1 · SERVICE-DELIVERY SURFACE (modules) ═══ -->
+  <g transform="translate(40,110)">
+    <text x="0" y="-8" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="600" letter-spacing="2.2" fill="#94A3B8">SD.00 · SERVICE-DELIVERY SURFACE · SAAS</text>
+
+    <!-- 8 module cards in a single row -->
+    <!-- Each card 130x110, gap 10, total width = 8*130 + 7*10 = 1110 -->
+    <g>
+      <!-- Identra -->
+      <rect x="0" y="0" width="130" height="110" rx="8" fill="url(#g-identra)"/>
+      <text x="14" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.05</text>
+      <text x="14" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Identra</text>
+      <text x="14" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Identity</text>
+      <text x="14" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">infrastructure</text>
+      <text x="14" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">eIDAS · SAML · OIDC</text>
+
+      <!-- Payvera -->
+      <rect x="140" y="0" width="130" height="110" rx="8" fill="url(#g-payvera)"/>
+      <text x="154" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.06</text>
+      <text x="154" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Payvera</text>
+      <text x="154" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Payment</text>
+      <text x="154" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">orchestration</text>
+      <text x="154" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">PSD2 · SEPA</text>
+
+      <!-- EduPro -->
+      <rect x="280" y="0" width="130" height="110" rx="8" fill="url(#g-edupro)"/>
+      <text x="294" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.04</text>
+      <text x="294" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">EduPro</text>
+      <text x="294" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Education</text>
+      <text x="294" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">intelligence</text>
+      <text x="294" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">Sectoral law</text>
+
+      <!-- Workverge -->
+      <rect x="420" y="0" width="130" height="110" rx="8" fill="url(#g-workverge)"/>
+      <text x="434" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.02</text>
+      <text x="434" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Workverge</text>
+      <text x="434" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Workforce</text>
+      <text x="434" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">coordination</text>
+      <text x="434" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">Labour-law aware</text>
+
+      <!-- Transify -->
+      <rect x="560" y="0" width="130" height="110" rx="8" fill="url(#g-transify)"/>
+      <text x="574" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.01</text>
+      <text x="574" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Transify</text>
+      <text x="574" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Mobility</text>
+      <text x="574" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">infrastructure</text>
+      <text x="574" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">Transport-reg</text>
+
+      <!-- Civitas -->
+      <rect x="700" y="0" width="130" height="110" rx="8" fill="url(#g-civitas)"/>
+      <text x="714" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.03</text>
+      <text x="714" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Civitas</text>
+      <text x="714" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Municipal &amp;</text>
+      <text x="714" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">government</text>
+      <text x="714" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">GDPR · sectoral</text>
+
+      <!-- Ledgera -->
+      <rect x="840" y="0" width="130" height="110" rx="8" fill="url(#g-ledgera)"/>
+      <text x="854" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.07</text>
+      <text x="854" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Ledgera</text>
+      <text x="854" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Financial</text>
+      <text x="854" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">operations</text>
+      <text x="854" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">IFRS · GAAP · SAF-T</text>
+
+      <!-- Marketplace -->
+      <rect x="980" y="0" width="130" height="110" rx="8" fill="url(#g-marketplace)"/>
+      <text x="994" y="22" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.6" fill="#FFFFFF" opacity="0.85">PL.08</text>
+      <text x="994" y="48" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF">Marketplace</text>
+      <text x="994" y="68" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">Regulated</text>
+      <text x="994" y="83" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.85">multi-sided</text>
+      <text x="994" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="8" letter-spacing="1.2" fill="#FFFFFF" opacity="0.65">Sectoral law</text>
+    </g>
+  </g>
+
+  <!-- ═══ DOWNWARD CONNECTORS module → core ═══ -->
+  <g stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="2 3" fill="none">
+    <line x1="105" y1="220" x2="105" y2="260"/>
+    <line x1="245" y1="220" x2="245" y2="260"/>
+    <line x1="385" y1="220" x2="385" y2="260"/>
+    <line x1="525" y1="220" x2="525" y2="260"/>
+    <line x1="665" y1="220" x2="665" y2="260"/>
+    <line x1="805" y1="220" x2="805" y2="260"/>
+    <line x1="945" y1="220" x2="945" y2="260"/>
+    <line x1="1085" y1="220" x2="1085" y2="260"/>
+  </g>
+
+  <!-- ═══ BAND 2 · FLYTTGOTECH CORE (orchestration) ═══ -->
+  <g transform="translate(40,260)">
+    <rect x="0" y="0" width="1110" height="120" rx="10" fill="url(#g-core)"/>
+    <text x="20" y="26" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="600" letter-spacing="2.2" fill="#9ED0F9">OR.00 · FLYTTGOTECH CORE · PAAS ORCHESTRATION</text>
+    <text x="20" y="56" font-family="'IBM Plex Serif', Georgia, serif" font-size="20" font-weight="500" fill="#FFFFFF">FlyttGoTech Core</text>
+    <text x="20" y="78" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#FFFFFF" opacity="0.78">Identity broker · audit log · event bus · policy engine · workflow runner · regional federation · observability fabric</text>
+    <text x="20" y="100" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.6" fill="#9ED0F9" opacity="0.78">Single substrate · all modules orchestrated · append-only audit · regional residency aware</text>
+
+    <!-- Core capability tags -->
+    <g font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" font-weight="600" letter-spacing="1.2" fill="#0A1F3D">
+      <g><rect x="700" y="60" width="80" height="22" rx="3" fill="#9ED0F9"/><text x="740" y="75" text-anchor="middle">IDENTITY</text></g>
+      <g><rect x="785" y="60" width="62" height="22" rx="3" fill="#9ED0F9"/><text x="816" y="75" text-anchor="middle">AUDIT</text></g>
+      <g><rect x="852" y="60" width="74" height="22" rx="3" fill="#9ED0F9"/><text x="889" y="75" text-anchor="middle">EVENTS</text></g>
+      <g><rect x="931" y="60" width="62" height="22" rx="3" fill="#9ED0F9"/><text x="962" y="75" text-anchor="middle">POLICY</text></g>
+      <g><rect x="998" y="60" width="100" height="22" rx="3" fill="#9ED0F9"/><text x="1048" y="75" text-anchor="middle">FEDERATION</text></g>
+    </g>
+  </g>
+
+  <!-- ═══ DOWNWARD CONNECTORS core → deployment ═══ -->
+  <g stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="2 3" fill="none">
+    <line x1="245" y1="380" x2="245" y2="420"/>
+    <line x1="595" y1="380" x2="595" y2="420"/>
+    <line x1="945" y1="380" x2="945" y2="420"/>
+  </g>
+
+  <!-- ═══ BAND 3 · DEPLOYMENT SUBSTRATE (3 modes) ═══ -->
+  <g transform="translate(40,420)">
+    <text x="0" y="-8" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="600" letter-spacing="2.2" fill="#94A3B8">DM.00 · DEPLOYMENT SUBSTRATE · IAAS-COMPATIBLE</text>
+
+    <!-- DM.01 Managed SaaS -->
+    <g>
+      <rect x="0" y="0" width="360" height="120" rx="8" fill="#FFFFFF" stroke="#1E6FD9" stroke-width="1.5"/>
+      <text x="20" y="26" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="700" letter-spacing="1.6" fill="#1E6FD9">DM.01 · MANAGED SAAS</text>
+      <text x="20" y="50" font-family="'IBM Plex Serif', Georgia, serif" font-size="16" font-weight="500" fill="#0A1F3D">FlyttGo-managed</text>
+      <text x="20" y="72" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#475569">Region-aware managed tenants in primary EU regions.</text>
+      <text x="20" y="92" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#94A3B8">FLYTTGO KMS · 99.95% · 14-DAY ROLLING</text>
+      <text x="20" y="108" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#94A3B8">PILOT-TO-PROD: 60–90 DAYS</text>
+    </g>
+
+    <!-- DM.02 Customer cloud -->
+    <g>
+      <rect x="375" y="0" width="360" height="120" rx="8" fill="#FFFFFF" stroke="#0FB5A6" stroke-width="1.5"/>
+      <text x="395" y="26" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="700" letter-spacing="1.6" fill="#0FB5A6">DM.02 · CUSTOMER CLOUD</text>
+      <text x="395" y="50" font-family="'IBM Plex Serif', Georgia, serif" font-size="16" font-weight="500" fill="#0A1F3D">Customer cloud</text>
+      <text x="395" y="72" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#475569">Inside customer AWS · Azure · GCP tenancy. BYO cloud.</text>
+      <text x="395" y="92" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#94A3B8">CUSTOMER KMS · BYOK / HYOK · CUSTOMER SOC</text>
+      <text x="395" y="108" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#94A3B8">PILOT-TO-PROD: 75–120 DAYS</text>
+    </g>
+
+    <!-- DM.03 Sovereign datacenter -->
+    <g>
+      <rect x="750" y="0" width="360" height="120" rx="8" fill="#FFFFFF" stroke="#7C5CE6" stroke-width="1.5"/>
+      <text x="770" y="26" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="700" letter-spacing="1.6" fill="#7C5CE6">DM.03 · SOVEREIGN DATACENTER</text>
+      <text x="770" y="50" font-family="'IBM Plex Serif', Georgia, serif" font-size="16" font-weight="500" fill="#0A1F3D">Sovereign national</text>
+      <text x="770" y="72" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#475569">Certified national datacenter · national HSM · sovereign eID.</text>
+      <text x="770" y="92" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#94A3B8">NATIONAL HSM · IN-JURISDICTION · CLOUD-ACT EXEMPT</text>
+      <text x="770" y="108" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#94A3B8">PILOT-TO-PROD: 120–180 DAYS</text>
+    </g>
+  </g>
+
+  <!-- ═══ DOWNWARD CONNECTORS deployment → sovereignty ═══ -->
+  <g stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="2 3" fill="none">
+    <line x1="220" y1="540" x2="220" y2="580"/>
+    <line x1="595" y1="540" x2="595" y2="580"/>
+    <line x1="970" y1="540" x2="970" y2="580"/>
+  </g>
+
+  <!-- ═══ BAND 4 · SOVEREIGNTY POSTURE ═══ -->
+  <g transform="translate(40,580)">
+    <rect x="0" y="0" width="1110" height="100" rx="10" fill="url(#g-sov)"/>
+    <text x="20" y="26" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="10" font-weight="600" letter-spacing="2.2" fill="#D6B575">SV.00 · SOVEREIGNTY · NATIONAL INFRASTRUCTURE READINESS</text>
+
+    <g font-family="Inter, system-ui, sans-serif" font-size="11" fill="#FFFFFF">
+      <g transform="translate(20,52)">
+        <text font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#D6B575">DATA RESIDENCY</text>
+        <text y="18" opacity="0.85">In-region · in-tenancy · in-jurisdiction</text>
+      </g>
+      <g transform="translate(290,52)">
+        <text font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#D6B575">KEY CUSTODY</text>
+        <text y="18" opacity="0.85">FlyttGo KMS · BYOK · National HSM</text>
+      </g>
+      <g transform="translate(560,52)">
+        <text font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#D6B575">IDENTITY BOUNDARY</text>
+        <text y="18" opacity="0.85">FlyttGo IdP · Customer IdP · Sovereign eID</text>
+      </g>
+      <g transform="translate(870,52)">
+        <text font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.4" fill="#D6B575">RIGHT TO AUDIT</text>
+        <text y="18" opacity="0.85">30-day notice · regulator-bounded</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ═══ FOOTER ═══ -->
+  <g transform="translate(40,700)">
+    <text x="0" y="0" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="1.6" fill="#94A3B8">FLYTTGO TECHNOLOGIES GROUP AB · GOVERNMENT CAPABILITY DIAGRAM · GCB.00</text>
+  </g>
+</svg>
