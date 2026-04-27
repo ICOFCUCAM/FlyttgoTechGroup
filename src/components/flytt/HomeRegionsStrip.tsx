@@ -11,12 +11,13 @@ import { Globe2 } from 'lucide-react';
  */
 
 const REGION_PILLS = [
-  { code: 'EU-N', label: 'Nordic EU', note: 'Oslo · primary HQ' },
-  { code: 'EU-W', label: 'Western EU', note: 'Frankfurt · London' },
-  { code: 'AF',   label: 'Africa',    note: 'Lagos · Yaoundé · Nairobi · Kampala · Addis · Johannesburg' },
-  { code: 'MENA', label: 'MENA',      note: 'Dubai · Riyadh sovereign' },
-  { code: 'NA',   label: 'NA SaaS',   note: 'San Francisco · Northern Virginia' },
-  { code: 'APAC', label: 'APAC',      note: 'Singapore · Tokyo · Mumbai' },
+  { code: 'NA',   label: 'NA SaaS · IaaS',  note: 'San Francisco · Seattle · Chicago · Boston · Northern Virginia · Atlanta · Dallas · Miami · Toronto' },
+  { code: 'EU-N', label: 'Nordic EU',       note: 'Oslo · Stockholm · primary EU + sovereign' },
+  { code: 'EU-W', label: 'Western EU',      note: 'London · Frankfurt · Amsterdam' },
+  { code: 'SA',   label: 'Latin America',   note: 'São Paulo · LatAm hub' },
+  { code: 'AF',   label: 'Africa',          note: 'Lagos · Yaoundé · Nairobi · Kampala · Addis · Johannesburg' },
+  { code: 'MENA', label: 'MENA',            note: 'Dubai · Riyadh · Cairo · sovereign' },
+  { code: 'APAC', label: 'APAC',            note: 'Singapore · Tokyo · Mumbai · Sydney' },
 ];
 
 export default function HomeRegionsStrip() {

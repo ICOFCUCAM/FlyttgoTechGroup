@@ -10,6 +10,10 @@ import {
   Truck,
   Briefcase,
   Landmark,
+  Banknote,
+  HeartPulse,
+  Factory,
+  ShoppingBag,
   type LucideIcon,
 } from 'lucide-react';
 import SectionIndex from '@/components/flytt/SectionIndex';
@@ -24,6 +28,7 @@ type Sector = {
 };
 
 const sectors: Sector[] = [
+  // Public sector
   {
     code: 'IN.01',
     icon: Landmark,
@@ -56,6 +61,7 @@ const sectors: Sector[] = [
     modules: 'Transify · Workverge',
     href: '/industries/transport',
   },
+  // Enterprise
   {
     code: 'IN.05',
     icon: Briefcase,
@@ -63,6 +69,38 @@ const sectors: Sector[] = [
     scale: 'BU-wide',
     modules: 'Workverge · Payvera · Ledgera',
     href: '/industries/enterprise',
+  },
+  {
+    code: 'IN.06',
+    icon: Banknote,
+    label: 'Financial services',
+    scale: 'Regulated',
+    modules: 'Payvera · Identra · Ledgera',
+    href: '/industries/enterprise',
+  },
+  {
+    code: 'IN.07',
+    icon: HeartPulse,
+    label: 'Healthcare networks',
+    scale: 'Multi-facility',
+    modules: 'Workverge · Identra · Civitas',
+    href: '/industries/enterprise',
+  },
+  {
+    code: 'IN.08',
+    icon: Factory,
+    label: 'Manufacturing & supply chain',
+    scale: 'Multi-plant',
+    modules: 'Transify · Workverge · Ledgera',
+    href: '/industries/logistics',
+  },
+  {
+    code: 'IN.09',
+    icon: ShoppingBag,
+    label: 'B2B SaaS + marketplaces',
+    scale: 'Multi-tenant',
+    modules: 'Identra · Payvera · Transify · Ledgera',
+    href: '/industries/marketplaces',
   },
 ];
 
@@ -78,7 +116,7 @@ const HomeIndustriesStrip: React.FC = () => {
         <SectionIndex
           code="IN.03"
           title="Institutional Deployment Sectors"
-          meta="5 sector profiles · platform-mapped · scale-graded"
+          meta="9 sector profiles · public + enterprise · platform-mapped"
           className="max-w-2xl"
         />
 

@@ -452,12 +452,15 @@ const SiteFooter: React.FC = () => {
             <span className="mx-2 text-white/20">·</span>
             Regional infrastructure
           </div>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { code: 'NO-OS', label: 'Oslo headquarters', sub: 'Nordic EU primary · sovereign-grade hosting' },
-              { code: 'EU',    label: 'EU infrastructure availability', sub: 'Frankfurt · London · Amsterdam' },
-              { code: 'AF',    label: 'Africa rollout presence', sub: 'Lagos · Yaoundé · Nairobi · Kampala · Addis · Johannesburg' },
-              { code: 'MENA',  label: 'MENA deployment readiness', sub: 'Dubai · Riyadh · Cairo · sovereign environments' },
+              { code: 'NA',    label: 'North America · SaaS + IaaS',     sub: 'San Francisco · Seattle · Chicago · Boston · Northern Virginia · Atlanta · Dallas · Miami' },
+              { code: 'EU-N',  label: 'Nordic EU + sovereign',           sub: 'Oslo HQ · Stockholm · Copenhagen · Helsinki' },
+              { code: 'EU-W',  label: 'Western EU infrastructure',       sub: 'London · Frankfurt · Amsterdam' },
+              { code: 'SA',    label: 'Latin America presence',          sub: 'São Paulo · LatAm hub · Miami gateway' },
+              { code: 'AF',    label: 'Africa rollout presence',         sub: 'Lagos · Yaoundé · Nairobi · Kampala · Addis · Johannesburg' },
+              { code: 'MENA',  label: 'MENA deployment readiness',       sub: 'Dubai · Riyadh · Cairo · sovereign environments' },
+              { code: 'APAC',  label: 'APAC SaaS + edge',                sub: 'Singapore · Tokyo · Mumbai · Sydney' },
             ].map((r) => (
               <li
                 key={r.code}
