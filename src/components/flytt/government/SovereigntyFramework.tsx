@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShieldCheck, KeyRound, Globe2, FileSearch, type LucideIcon } from 'lucide-react';
+import Link from '@/components/flytt/LocaleLink';
+import { ShieldCheck, KeyRound, Globe2, FileSearch, ArrowUpRight, type LucideIcon } from 'lucide-react';
 
 /**
  * GV.05 — Sovereignty framework.
@@ -147,7 +148,23 @@ export default function SovereigntyFramework() {
           })}
         </ul>
 
-        <p className="mt-10 max-w-3xl font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <Link
+            href="/government/orchestration"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-sm font-semibold tracking-tight hover:bg-white/[0.10] hover:border-white/25 motion-safe:transition-colors"
+          >
+            Open orchestration architecture
+            <ArrowUpRight size={13} aria-hidden="true" className="text-[#D6B575]" />
+          </Link>
+          <Link
+            href="/government/capability-brief"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-sm font-semibold tracking-tight hover:bg-white/[0.10] hover:border-white/25 motion-safe:transition-colors"
+          >
+            Capability brief · GCB.00
+            <ArrowUpRight size={13} aria-hidden="true" className="text-[#D6B575]" />
+          </Link>
+        </div>
+        <p className="mt-6 max-w-3xl font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
           Full sovereignty posture detailed under NDA in the Government
           Capability Brief (GCB.00) · §4 of the Pilot Deployment
           Partnership Proposal (PP.00) · per-deployment addenda.
