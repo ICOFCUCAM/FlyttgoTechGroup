@@ -61,7 +61,7 @@ const FinalCTA: React.FC = () => {
                 className="mt-6 font-serif text-4xl md:text-5xl lg:text-[60px] font-medium tracking-tight leading-[1.05]"
               >
                 {t('home.cta.title.part1')}{' '}
-                <em className="not-italic font-serif italic font-normal bg-gradient-to-r from-white via-white to-[#9ED0F9] bg-clip-text text-transparent">
+                <em className="not-italic font-serif italic font-normal bg-gradient-to-r from-white via-[#F0E0C8] to-[#D6B575] bg-clip-text text-transparent">
                   {t('home.cta.title.part2')}
                 </em>
               </h2>

@@ -84,7 +84,7 @@ const HeroSlider: React.FC = () => {
               style={{ animationDelay: '420ms' }}
             >
               {t('hero.title.part1')}{' '}
-              <em className="not-italic font-serif italic text-[#9ED0F9] font-normal">
+              <em className="not-italic font-serif italic text-[#D6B575] font-normal">
                 {t('hero.title.part2')}
               </em>
             </h1>
