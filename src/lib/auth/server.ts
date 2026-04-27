@@ -16,6 +16,12 @@ import {
  * Build a cookie-bound Supabase client for use in Server Components,
  * Server Actions and Route Handlers. Each request gets its own client —
  * cookie reads/writes are scoped to that request via next/headers.
+ *
+ * Throws if Supabase env vars are missing. The top-level helper
+ * `getSession()` catches that throw and returns null, so a missing
+ * backend renders the inline sign-in form instead of the global error
+ * boundary. Callers that go through `requireRole()` first are
+ * guaranteed a configured backend by the time they reach here.
  */
 export function getSupabaseAuthClient(): SupabaseClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -62,32 +68,41 @@ export type AuthenticatedSession = {
  * so repeated calls inside the same render are free.
  */
 export const getSession = cache(async (): Promise<AuthenticatedSession | null> => {
-  const supabase = getSupabaseAuthClient();
-  const { data: userData, error: userErr } = await supabase.auth.getUser();
-  if (userErr || !userData.user) return null;
+  try {
+    const supabase = getSupabaseAuthClient();
 
-  const { data: roleRow, error: roleErr } = await supabase
-    .from('users_roles')
-    .select('role, organization_id')
-    .eq('user_id', userData.user.id)
-    .single();
+    const { data: userData, error: userErr } = await supabase.auth.getUser();
+    if (userErr || !userData.user) return null;
 
-  if (roleErr || !roleRow) {
+    const { data: roleRow, error: roleErr } = await supabase
+      .from('users_roles')
+      .select('role, organization_id')
+      .eq('user_id', userData.user.id)
+      .single();
+
+    if (roleErr || !roleRow) {
+      return {
+        userId: userData.user.id,
+        email: userData.user.email ?? '',
+        role: 'finance_viewer',
+        organizationId: null,
+      };
+    }
+
+    const role: PlatformRole = isPlatformRole(roleRow.role) ? roleRow.role : 'finance_viewer';
     return {
       userId: userData.user.id,
       email: userData.user.email ?? '',
-      role: 'finance_viewer',
-      organizationId: null,
+      role,
+      organizationId: roleRow.organization_id ?? null,
     };
+  } catch {
+    // Backend unreachable / misconfigured — treat as signed-out so the
+    // protected layout renders its inline sign-in form rather than the
+    // global error boundary. The actual sign-in submit will surface a
+    // clearer error to the operator.
+    return null;
   }
-
-  const role: PlatformRole = isPlatformRole(roleRow.role) ? roleRow.role : 'finance_viewer';
-  return {
-    userId: userData.user.id,
-    email: userData.user.email ?? '',
-    role,
-    organizationId: roleRow.organization_id ?? null,
-  };
 });
 
 /**
