@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import { ArrowRight, CalendarClock, Sparkles, Globe2 } from 'lucide-react';
+import AmbientParticleField from './AmbientParticleField';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const highlights = [
@@ -21,6 +22,8 @@ const FinalCTA: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-br from-[#0A1F3D] via-[#0A3A6B] to-[#1E6FD9] text-white shadow-2xl shadow-slate-900/20">
+          {/* Ambient particle field — sits beneath the grid mesh */}
+          <AmbientParticleField count={180} />
           <div
             className="absolute inset-0 opacity-15 pointer-events-none"
             aria-hidden="true"

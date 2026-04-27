@@ -408,3 +408,34 @@
     animation: none;
   }
 }
+
+/* =====================================================================
+ * Cinematic staged hero entrance.
+ * Each .hero-stage element fades + lifts on mount with an
+ * animation-delay set via inline style. Reads as a filmic reveal
+ * (section-index → eyebrow → headline → subline → metadata → CTAs →
+ * orbit) rather than a single fade-up. Honours prefers-reduced-motion.
+ * ================================================================== */
+@keyframes hero-stage-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-stage {
+  opacity: 0;
+  animation: hero-stage-rise 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}

@@ -5,6 +5,7 @@ import Link from '@/components/flytt/LocaleLink';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import PlatformOrbitGraph from './PlatformOrbitGraph';
 import VisitorRegionAccent from './VisitorRegionAccent';
+import AmbientParticleField from './AmbientParticleField';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const HeroSlider: React.FC = () => {
@@ -15,6 +16,9 @@ const HeroSlider: React.FC = () => {
       aria-labelledby="hero-heading"
       className="relative isolate overflow-hidden bg-[#0A1F3D] text-white"
     >
+      {/* Ambient particle field — drifts behind the gradient mesh */}
+      <AmbientParticleField count={220} />
+
       {/* Radial gradient mesh backdrop */}
       <div
         aria-hidden="true"
@@ -44,14 +48,18 @@ const HeroSlider: React.FC = () => {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left — headline, subheadline, CTAs */}
           <div className="lg:col-span-7 xl:col-span-6">
-            {/* Engineering section index — sets institutional-platform tone */}
-            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] text-white/55">
+            {/* Engineering section index — sets institutional-platform tone.
+                Staged hero entrance: section-index → eyebrow → headline →
+                subline → metadata rail → CTAs, each fading up 120ms after
+                the previous. Honours prefers-reduced-motion via the
+                .hero-stage class in globals.css. */}
+            <div className="hero-stage flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] text-white/55" style={{ animationDelay: '60ms' }}>
               <span className="text-[#9ED0F9] font-semibold">PL.00</span>
               <span aria-hidden="true" className="flex-1 h-px bg-white/10 max-w-[160px]" />
               <span className="uppercase">Platform Infrastructure</span>
             </div>
 
-            <p className="mt-6 inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em]">
+            <p className="hero-stage mt-6 inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ animationDelay: '180ms' }}>
               <span
                 className="w-1.5 h-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse"
                 aria-hidden="true"
@@ -59,13 +67,14 @@ const HeroSlider: React.FC = () => {
               {t('hero.eyebrow')}
             </p>
 
-            <div className="mt-3">
+            <div className="hero-stage mt-3" style={{ animationDelay: '300ms' }}>
               <VisitorRegionAccent />
             </div>
 
             <h1
               id="hero-heading"
-              className="mt-6 font-serif text-[34px] sm:text-[40px] md:text-[46px] lg:text-[50px] xl:text-[58px] leading-[1.05] font-medium tracking-tight text-white"
+              className="hero-stage mt-6 font-serif text-[34px] sm:text-[40px] md:text-[46px] lg:text-[50px] xl:text-[58px] leading-[1.05] font-medium tracking-tight text-white"
+              style={{ animationDelay: '420ms' }}
             >
               {t('hero.title.part1')}{' '}
               <em className="not-italic font-serif italic text-[#9ED0F9] font-normal">
@@ -73,14 +82,15 @@ const HeroSlider: React.FC = () => {
               </em>
             </h1>
 
-            <p className="mt-6 text-base md:text-lg text-white/75 leading-[1.65] max-w-2xl font-normal">
+            <p className="hero-stage mt-6 text-base md:text-lg text-white/75 leading-[1.65] max-w-2xl font-normal" style={{ animationDelay: '560ms' }}>
               {t('hero.subtitle')}
             </p>
 
             {/* Capability metadata rail — monospace, infrastructure-grade signaling */}
             <ul
-              className="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 max-w-2xl font-mono text-[10px] tracking-[0.16em] uppercase text-white/55"
+              className="hero-stage mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 max-w-2xl font-mono text-[10px] tracking-[0.16em] uppercase text-white/55"
               aria-label="Platform capability metadata"
+              style={{ animationDelay: '700ms' }}
             >
               <li className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-emerald-300" aria-hidden="true" />
@@ -116,7 +126,7 @@ const HeroSlider: React.FC = () => {
               </li>
             </ul>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="hero-stage mt-8 flex flex-wrap items-center gap-3" style={{ animationDelay: '840ms' }}>
               <Link
                 href="/platforms"
                 className="group inline-flex items-center gap-2 px-6 py-3.5 bg-white text-[#0A3A6B] text-sm font-semibold rounded-lg hover:bg-slate-100 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
@@ -139,7 +149,7 @@ const HeroSlider: React.FC = () => {
           </div>
 
           {/* Right — interactive platform ecosystem graph */}
-          <div className="lg:col-span-5 xl:col-span-6">
+          <div className="hero-stage lg:col-span-5 xl:col-span-6" style={{ animationDelay: '960ms' }}>
             <PlatformOrbitGraph />
           </div>
         </div>
