@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from '@/components/flytt/LocaleLink';
 import Image from 'next/image';
+import BrandLogo, { type BrandModule } from '@/components/flytt/BrandLogo';
 import {
   AlertCircle,
   ArrowRight,
@@ -112,6 +113,16 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
 
           <div className="mt-10 grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
+              {/* Module-colored F-symbol — surfaces the platform-mark
+                  inheritance documented in docs/brand/symbol-spec.md §9.
+                  Same path as canonical; gradient stops switch to the
+                  active module's palette. */}
+              <BrandLogo
+                variant="mark"
+                module={data.slug as BrandModule}
+                height={48}
+                className="mb-6"
+              />
               <div
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider"
                 style={{ backgroundColor: '#ffffff', color: data.color, border: `1px solid ${data.color}22` }}

@@ -27,6 +27,12 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'd64gsuwffb70l.cloudfront.net' },
       { protocol: 'https', hostname: 'images.unsplash.com' },
+      // Brand-asset bucket on Supabase storage. Public-read; no auth.
+      {
+        protocol: 'https',
+        hostname: 'bxjynfuzqhlirdozlgno.supabase.co',
+        pathname: '/storage/v1/object/public/images/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

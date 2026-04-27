@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from '@/components/flytt/LocaleLink';
+import BrandLogo from '@/components/flytt/BrandLogo';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -165,39 +166,10 @@ const SiteFooter: React.FC = () => {
           <div className="lg:col-span-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-md"
+              className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050F22] rounded-md"
               aria-label="FlyttGo Technologies Group — home"
             >
-              <div
-                className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#0A3A6B] to-[#1E6FD9] flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M4 12L10 6L14 10L20 4"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M4 18L10 12L14 16L20 10"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0.5"
-                  />
-                </svg>
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="font-semibold text-white tracking-tight text-[15px]">
-                  FlyttGo
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-medium">
-                  Technologies Group
-                </span>
-              </div>
+              <BrandLogo variant="lockup-dark" height={36} />
             </Link>
 
             <p className="mt-5 text-sm text-slate-400 leading-relaxed max-w-sm">

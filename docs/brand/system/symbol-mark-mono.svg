@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Monochrome symbol mark — currentColor binding.
+  Host surface declares ink via CSS color (or fill="..." override).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+     role="img" aria-label="FlyttGo">
+  <path d="M 4 2 H 22 V 7 H 9 V 10 H 18 V 15 H 9 V 22 H 4 Z"
+        fill="currentColor"/>
+</svg>
