@@ -62,6 +62,7 @@ export default function CompliancePage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
+          code="CR.00"
           eyebrow={<T k="legal.compliance.eyebrow" />}
           title={<T k="legal.compliance.title" />}
           description="FlyttGo platforms are engineered to satisfy the compliance and sovereignty requirements of regulated enterprise and public-sector deployments. This page summarises the frameworks we support; per-deployment attestations are shared under NDA."

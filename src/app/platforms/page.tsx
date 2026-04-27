@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
+import PageHero from '@/components/flytt/PageHero';
 import PlatformEcosystem from '@/components/flytt/PlatformEcosystem';
 import TechnologySection from '@/components/flytt/TechnologySection';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -30,6 +31,20 @@ export default function PlatformsPage() {
       <script {...jsonLdScript(ld)} />
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+        <PageHero
+          code="PL.00"
+          eyebrow="Platform Ecosystem"
+          title={
+            <>
+              Eight modular platforms.{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                One infrastructure layer.
+              </em>
+            </>
+          }
+          description="Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and the FlyttGo Marketplace — each licensed independently, each deployable in any of three modes, each operating against the same shared identity, audit and orchestration core."
+          crumbs={[{ label: 'Home', href: '/' }, { label: 'Platforms' }]}
+        />
         <PlatformEcosystem />
         <Reveal>
           <TechnologySection />

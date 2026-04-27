@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
+import PageHero from '@/components/flytt/PageHero';
 import EnterpriseSection from '@/components/flytt/EnterpriseSection';
 import GovernmentSection from '@/components/flytt/GovernmentSection';
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
@@ -26,6 +27,20 @@ export default function SolutionsPage() {
     <>
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+        <PageHero
+          code="SO.00"
+          eyebrow="Deployment Solutions"
+          title={
+            <>
+              Programme-shaped engagements{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                for operators and institutions.
+              </em>
+            </>
+          }
+          description="Enterprise logistics, government services, education analytics and regulated-transport oversight. Each programme is composed from the same modular surface — picked, configured and deployed against the procurement tier the buyer's operating reality calls for."
+          crumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions' }]}
+        />
         <EnterpriseSection />
         <Reveal>
           <GovernmentSection />

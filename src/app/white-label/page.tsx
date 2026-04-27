@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
+import PageHero from '@/components/flytt/PageHero';
 import WhiteLabelStrategy from '@/components/flytt/WhiteLabelStrategy';
 import WhiteLabelSection from '@/components/flytt/WhiteLabelSection';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -24,6 +25,20 @@ export default function WhiteLabelPage() {
     <>
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+        <PageHero
+          code="WL.00"
+          eyebrow="White-Label Deployment"
+          title={
+            <>
+              Your brand on the surface.{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                FlyttGo infrastructure underneath.
+              </em>
+            </>
+          }
+          description="Tenant-isolated, brandable platforms launched on FlyttGo's multi-tenant infrastructure — logistics marketplaces, analytics environments, municipal coordination systems. Branded for the operator, hardened by the platform, deployable in weeks."
+          crumbs={[{ label: 'Home', href: '/' }, { label: 'White-label' }]}
+        />
         <WhiteLabelStrategy />
         <Reveal>
           <WhiteLabelSection />

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
+import PageHero from '@/components/flytt/PageHero';
 import DeploymentArchitecture from '@/components/flytt/DeploymentArchitecture';
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -30,6 +31,20 @@ export default function DeploymentPage() {
       <script {...jsonLdScript(ld)} />
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
+        <PageHero
+          code="DP.00"
+          eyebrow="Deployment Architecture"
+          title={
+            <>
+              Deploy on{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                your sovereignty terms.
+              </em>
+            </>
+          }
+          description="Three deployment modes — FlyttGo-managed SaaS, customer cloud and sovereign national datacenter — picked per programme. Each mode keeps the same module surface and the same audit posture; what changes is where the workload runs and who holds the keys."
+          crumbs={[{ label: 'Home', href: '/' }, { label: 'Deployment' }]}
+        />
         <DeploymentArchitecture />
         <Reveal>
           <DeploymentSpeed />

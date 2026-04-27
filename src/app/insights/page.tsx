@@ -35,8 +35,16 @@ export default function InsightsIndexPage() {
         className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased"
       >
         <PageHero
-          eyebrow="Insights"
-          title={<>Notes on deploying platform infrastructure at scale.</>}
+          code="IS.00"
+          eyebrow="Insights & Briefings"
+          title={
+            <>
+              Notes on deploying platform infrastructure{' '}
+              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                at scale.
+              </em>
+            </>
+          }
           description="Deployment guides, architecture notes and procurement playbooks from the FlyttGo platform, security and commercial teams. Written for operators and buyers evaluating modular infrastructure."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Insights' }]}
         />
