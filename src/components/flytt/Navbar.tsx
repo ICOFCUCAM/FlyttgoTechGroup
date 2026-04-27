@@ -212,6 +212,7 @@ const primaryLinks: NavLink[] = [
       },
     },
   },
+  { label: 'Insights', labelKey: 'nav.insights', href: '/insights' },
   {
     label: 'Company',
     labelKey: 'nav.company',

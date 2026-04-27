@@ -26,6 +26,7 @@ const en: Dictionary = {
   'nav.industries': 'Industries',
   'nav.deployment': 'Deployment',
   'nav.technology': 'Technology',
+  'nav.insights': 'Insights',
   'nav.company': 'Company',
   'nav.contact': 'Contact',
   'nav.search': 'Search',
