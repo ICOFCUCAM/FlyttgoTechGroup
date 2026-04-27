@@ -6,6 +6,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import PlatformOrbitGraph from './PlatformOrbitGraph';
 import VisitorRegionAccent from './VisitorRegionAccent';
 import AmbientParticleField from './AmbientParticleField';
+import HeroProfileOverride from './HeroProfileOverride';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const HeroSlider: React.FC = () => {
@@ -18,6 +19,12 @@ const HeroSlider: React.FC = () => {
     >
       {/* Ambient particle field — drifts behind the gradient mesh */}
       <AmbientParticleField count={220} />
+
+      {/* Visitor-profile-aware hero copy override (client-only).
+          Reads timezone + referrer post-hydration; gently crossfades
+          alternate copy if the visitor matches a known profile.
+          SSR HTML stays unchanged so cache keys remain valid. */}
+      <HeroProfileOverride />
 
       {/* Radial gradient mesh backdrop */}
       <div

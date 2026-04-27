@@ -78,6 +78,12 @@ const PlatformEcosystemOverview: React.FC = () => {
                 <Link
                   href={`/platforms/${p.slug}`}
                   title={isLedgera ? LEDGERA_TOOLTIP : undefined}
+                  /* View Transitions API — the card morphs into the matching
+                     element on /platforms/{slug} (PlatformView hero). Name
+                     must be unique per page, so only the linked module card
+                     carries it here. Browsers without support ignore the
+                     style with no fallback needed. */
+                  style={{ viewTransitionName: `platform-card-${p.slug}` }}
                   className="group relative flex flex-col gap-3 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] h-full"
                 >
                   {/* Top row — icon + module code */}

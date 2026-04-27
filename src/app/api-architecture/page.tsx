@@ -3,6 +3,7 @@ import Link from '@/components/flytt/LocaleLink';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Code2, Network, Lock, Workflow, Terminal, ArrowUpRight, GitBranch, ShieldCheck } from 'lucide-react';
+import ApiCodeRibbon from '@/components/flytt/ApiCodeRibbon';
 
 export const metadata: Metadata = {
   title: 'API architecture — FlyttGo platform',
@@ -111,6 +112,9 @@ export default function ApiArchitecturePage() {
             </ul>
           </div>
         </section>
+
+        {/* API.RB — Code preview ribbon */}
+        <ApiCodeRibbon />
 
         {/* Rate limit table */}
         <section className="py-16 lg:py-20 bg-slate-50 dark:bg-slate-900/60 border-y border-slate-200/60 dark:border-slate-800/60">

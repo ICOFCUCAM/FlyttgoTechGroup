@@ -120,7 +120,13 @@ const PlatformView: React.FC<PlatformViewProps> = ({ slug }) => {
                 {data.subtitle}
               </div>
 
-              <h1 className="mt-6 text-4xl md:text-5xl lg:text-[56px] leading-[1.05] font-semibold tracking-tight text-slate-900 dark:text-white">
+              <h1
+                className="mt-6 text-4xl md:text-5xl lg:text-[56px] leading-[1.05] font-semibold tracking-tight text-slate-900 dark:text-white"
+                /* Matches the view-transition-name set on the
+                   PlatformEcosystemOverview card so the card morphs
+                   into this headline on cross-page navigation. */
+                style={{ viewTransitionName: `platform-card-${data.slug}` }}
+              >
                 {data.name}
               </h1>
               <p className="mt-4 text-xl md:text-2xl text-slate-800 font-medium leading-snug max-w-xl">
