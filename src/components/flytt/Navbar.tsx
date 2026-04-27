@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { usePathname } from 'next/navigation';
 import {
   Menu,
@@ -18,10 +18,33 @@ import {
   Truck,
   Search,
   ArrowUpRight,
+  Code2,
+  Terminal,
+  Activity,
+  Lock,
+  ShieldCheck,
+  BookOpen,
+  Building2,
+  Bus,
+  ShoppingBag,
+  CloudCog,
+  ServerCog,
+  Briefcase,
+  Newspaper,
+  Users,
+  Compass,
+  Globe2,
+  Network,
+  FileCheck2,
+  Workflow,
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
+import { AskFlyttGoTrigger } from '@/components/flytt/AskFlyttGo';
+import OpsStatusRail from '@/components/flytt/OpsStatusRail';
 import { ThemeToggle } from '@/components/flytt/ThemeToggle';
+import TopUtilityBar from '@/components/flytt/TopUtilityBar';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 type DropdownItem = {
   label: string;
@@ -37,56 +60,185 @@ type DropdownColumn = {
 
 type NavLink = {
   label: string;
+  labelKey?: string;
   href: string;
   dropdown?: {
     columns: DropdownColumn[];
     feature?: {
       title: string;
+      titleKey?: string;
       description: string;
+      descriptionKey?: string;
       href: string;
       cta: string;
+      ctaKey?: string;
     };
   };
 };
 
 const primaryLinks: NavLink[] = [
+  { label: 'Home', labelKey: 'nav.home', href: '/' },
   {
     label: 'Platforms',
+    labelKey: 'nav.platforms',
     href: '/platforms',
     dropdown: {
       columns: [
         {
-          heading: 'Infrastructure Platforms',
+          heading: 'Platform Ecosystem',
           items: [
+            { label: 'Ecosystem overview', description: 'How the eight modules orchestrate together', href: '/platforms', icon: Workflow },
             { label: 'Transify', description: 'Mobility infrastructure platform', href: '/platforms/transify', icon: Route },
             { label: 'Workverge', description: 'Workforce coordination infrastructure', href: '/platforms/workverge', icon: UserCheck },
             { label: 'Civitas', description: 'Digital government services platform', href: '/platforms/civitas', icon: Landmark },
             { label: 'EduPro', description: 'Education intelligence infrastructure', href: '/platforms/edupro', icon: GraduationCap },
-            { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
-            { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
-            { label: 'Ledgera', description: 'Financial operations & bookkeeping infrastructure', href: '/platforms/ledgera', icon: Calculator },
           ],
         },
         {
-          heading: 'Marketplace Platform',
+          heading: 'Identity · Payments · Finance · Marketplace',
           items: [
-            { label: 'FlyttGo', description: 'Smart moving & transport marketplace — runs on Transify', href: '/platforms/flyttgo', icon: Truck },
+            { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
+            { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
+            { label: 'Ledgera', description: 'Financial operations & bookkeeping infrastructure', href: '/platforms/ledgera', icon: Calculator },
+            { label: 'FlyttGo Marketplace', description: 'Smart moving & transport — runs on Transify', href: '/platforms/flyttgo', icon: Truck },
           ],
         },
       ],
       feature: {
         title: 'Platform Ecosystem',
-        description: 'Six infrastructure platforms + one marketplace running on top of them.',
+        titleKey: 'nav.feature.title',
+        description:
+          'Modular infrastructure platforms plus the FlyttGo marketplace — licensed independently, deployed together.',
+        descriptionKey: 'nav.feature.description',
         href: '/platforms',
         cta: 'Explore the ecosystem',
+        ctaKey: 'nav.feature.cta',
       },
     },
   },
-  { label: 'Industries', href: '/industries' },
-  { label: 'Deployment', href: '/deployment' },
-  { label: 'Technology', href: '/technology' },
-  { label: 'Company', href: '/company' },
-  { label: 'Contact', href: '/contact' },
+  {
+    label: 'Industries',
+    labelKey: 'nav.industries',
+    href: '/industries',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Public sector',
+          items: [
+            { label: 'Government & municipal', description: 'Citizen services and sovereign deployment', href: '/industries/government', icon: Landmark },
+            { label: 'Education & ministries', description: 'Admissions, scholarships, institutional analytics', href: '/industries/education', icon: GraduationCap },
+          ],
+        },
+        {
+          heading: 'Transport, enterprise & commerce',
+          items: [
+            { label: 'Transport & logistics', description: 'Dispatch, telematics, regional mobility', href: '/industries/transport', icon: Bus },
+            { label: 'Enterprise operations', description: 'Internal platforms on customer-cloud tenancy', href: '/industries/enterprise', icon: Building2 },
+            { label: 'Marketplace operators', description: 'Regulated multi-sided platforms', href: '/industries/marketplaces', icon: ShoppingBag },
+            { label: 'Freight & logistics networks', description: 'Port-to-inland corridor coordination', href: '/industries/logistics', icon: Truck },
+          ],
+        },
+      ],
+      feature: {
+        title: 'All industries',
+        description: 'Every sector on one page — see the full range of FlyttGo deployments.',
+        href: '/industries',
+        cta: 'Industries overview',
+      },
+    },
+  },
+  {
+    label: 'Deployment',
+    labelKey: 'nav.deployment',
+    href: '/deployment',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Deployment Models',
+          items: [
+            { label: 'FlyttGo-managed', description: 'Fully managed SaaS, region-aware', href: '/deployment/managed', icon: CloudCog },
+            { label: 'Customer cloud', description: 'Runs inside your AWS, Azure or GCP tenancy', href: '/deployment/customer-cloud', icon: ServerCog },
+            { label: 'Sovereign datacenter', description: 'Self-hosted for public-sector procurement', href: '/deployment/sovereign', icon: ShieldCheck },
+          ],
+        },
+        {
+          heading: 'Architecture & Coverage',
+          items: [
+            { label: 'Infrastructure Architecture', description: 'Multi-tenant SaaS, API-first, multi-region', href: '/infrastructure-architecture', icon: Network },
+            { label: 'Sovereign Deployment', description: 'National hosting + data-residency posture', href: '/sovereign', icon: ShieldCheck },
+            { label: 'Global Coverage', description: 'Nordic EU · Africa · MENA rollout footprint', href: '/global-coverage', icon: Globe2 },
+            { label: 'Procurement Compatibility', description: 'Pilot · city · regional · national · white-label', href: '/procurement-compatibility', icon: FileCheck2 },
+            { label: 'Deployment Lifecycle', description: 'EP.01–05 stages · written deliverables · cadence', href: '/deployment-lifecycle', icon: Workflow },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Deployment architecture',
+        description: 'Three modes plus a full procurement compatibility surface — match any sovereignty posture.',
+        href: '/deployment',
+        cta: 'Compare all modes',
+      },
+    },
+  },
+  {
+    label: 'Technology',
+    labelKey: 'nav.technology',
+    href: '/technology',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Architecture & Developers',
+          items: [
+            { label: 'Architecture', description: 'Cloud-native platform stack', href: '/technology', icon: Code2 },
+            { label: 'API architecture', description: 'Versioned REST · GraphQL · webhooks · MCP', href: '/api-architecture', icon: Network },
+            { label: 'Live API playground', description: 'Pick an endpoint · run it inside the docs', href: '/developers/playground', icon: Terminal },
+            { label: 'Developer portal', description: 'APIs, SDKs and deployment pipelines', href: '/developers', icon: BookOpen },
+          ],
+        },
+        {
+          heading: 'Trust & Operations',
+          items: [
+            { label: 'Platform status', description: 'Live component health and incidents', href: '/status', icon: Activity },
+            { label: 'Security', description: 'Isolation, encryption, monitoring, incident response', href: '/security', icon: Lock },
+            { label: 'Compliance', description: 'SOC 2, ISO 27001, GDPR, WCAG, regional frameworks', href: '/compliance', icon: ShieldCheck },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Insights',
+        description:
+          'Deployment guides, architecture notes and procurement playbooks from the FlyttGo platform teams.',
+        href: '/insights',
+        cta: 'Read the latest insights',
+      },
+    },
+  },
+  { label: 'Insights', labelKey: 'nav.insights', href: '/insights' },
+  {
+    label: 'Company',
+    labelKey: 'nav.company',
+    href: '/company',
+    dropdown: {
+      columns: [
+        {
+          heading: 'About FlyttGo',
+          items: [
+            { label: 'Company overview', description: 'Nordic-origin platform infrastructure company', href: '/company', icon: Compass },
+            { label: 'Leadership', description: 'Platform, security, deployment, commercial', href: '/company/leadership', icon: Users },
+            { label: 'Careers', description: 'Open roles across engineering and commercial', href: '/company/careers', icon: Briefcase },
+            { label: 'Press & media', description: 'Boilerplate, logos, media contacts', href: '/company/press', icon: Newspaper },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Talk to partnerships',
+        description: 'Scope a deployment with our partnership and deployment engineering team.',
+        href: '/contact?intent=partnership',
+        cta: 'Start a conversation',
+      },
+    },
+  },
+  { label: 'Contact', labelKey: 'nav.contact', href: '/contact' },
 ];
 
 const isRouteActive = (pathname: string, href: string) => {
@@ -99,6 +251,8 @@ type IndicatorState = { left: number; width: number; opacity: number };
 const Navbar: React.FC = () => {
   const pathname = usePathname();
   const { toggle: toggleCommandPalette } = useCommandPalette();
+  const { t } = useI18n();
+  const label = (l: NavLink) => (l.labelKey ? t(l.labelKey) : l.label);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -203,6 +357,7 @@ const Navbar: React.FC = () => {
           : 'bg-white/80 supports-[backdrop-filter]:bg-white/60 backdrop-blur-sm border-b border-transparent'
       }`}
     >
+      <TopUtilityBar />
       <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-[68px] flex items-center justify-between gap-8">
         <Link
           href="/"
@@ -256,7 +411,7 @@ const Navbar: React.FC = () => {
                       active ? 'text-[#0A3A6B]' : 'text-slate-600 hover:text-slate-900 dark:text-white'
                     }`}
                   >
-                    {l.label}
+                    {label(l)}
                     {hasDropdown && (
                       <ChevronDown
                         size={13}
@@ -294,7 +449,7 @@ const Navbar: React.FC = () => {
                     : 'opacity-0 -translate-y-1 pointer-events-none'
                 }`}
                 role="menu"
-                aria-label={`${l.label} menu`}
+                aria-label={`${label(l)} menu`}
               >
                 <div className="w-[760px] max-w-[min(94vw,760px)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-[0_1px_0_0_rgb(15_23_42/0.04),0_24px_48px_-12px_rgb(15_23_42/0.18)] overflow-hidden">
                   <div className="grid grid-cols-[1fr_240px]">
@@ -335,9 +490,15 @@ const Navbar: React.FC = () => {
                         <div className="text-[10px] uppercase tracking-[0.2em] font-semibold text-white/60">
                           Featured
                         </div>
-                        <div className="mt-2 text-lg font-semibold tracking-tight">{l.dropdown.feature.title}</div>
+                        <div className="mt-2 text-lg font-semibold tracking-tight">
+                          {l.dropdown.feature.titleKey
+                            ? t(l.dropdown.feature.titleKey)
+                            : l.dropdown.feature.title}
+                        </div>
                         <p className="mt-2 text-[13px] text-white/70 leading-relaxed">
-                          {l.dropdown.feature.description}
+                          {l.dropdown.feature.descriptionKey
+                            ? t(l.dropdown.feature.descriptionKey)
+                            : l.dropdown.feature.description}
                         </p>
                         <div className="mt-auto pt-5">
                           <Link
@@ -345,7 +506,9 @@ const Navbar: React.FC = () => {
                             onClick={() => setOpenDropdown(null)}
                             className="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:gap-2.5 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A1F3D] rounded-sm"
                           >
-                            {l.dropdown.feature.cta}
+                            {l.dropdown.feature.ctaKey
+                              ? t(l.dropdown.feature.ctaKey)
+                              : l.dropdown.feature.cta}
                             <ArrowUpRight size={14} aria-hidden="true" />
                           </Link>
                         </div>
@@ -362,27 +525,28 @@ const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={toggleCommandPalette}
-            aria-label="Search platforms, modules and pages"
+            aria-label={t('nav.search')}
             className="group inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 text-[13px] text-slate-500 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 rounded-md hover:text-slate-700 dark:text-slate-300 hover:border-slate-300 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
             <Search size={13} aria-hidden="true" />
-            <span className="hidden xl:inline">Search</span>
+            <span className="hidden xl:inline">{t('nav.search')}</span>
             <kbd className="ml-1 font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded px-1.5 py-0.5">
               ⌘K
             </kbd>
           </button>
+          <AskFlyttGoTrigger />
           <ThemeToggle compact />
           <Link
             href="/contact"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-white motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px] rounded-md px-2"
           >
-            Sign in
+            {t('nav.signin')}
           </Link>
           <Link
             href="/contact"
             className="group inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md hover:bg-[#0a2f57] motion-safe:transition-colors shadow-[0_1px_0_0_rgb(10_58_107/0.6),0_6px_18px_-6px_rgb(10_58_107/0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           >
-            Deploy Your Platform
+            {t('nav.cta.primary')}
             <ArrowRight size={14} className="motion-safe:transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
         </div>
@@ -390,7 +554,7 @@ const Navbar: React.FC = () => {
         <button
           ref={toggleRef}
           type="button"
-          className="lg:hidden p-1.5 text-slate-700 dark:text-slate-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
+          className="lg:hidden inline-flex items-center justify-center w-11 h-11 -mr-2 text-slate-700 dark:text-slate-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]"
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-panel"
           aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -409,17 +573,46 @@ const Navbar: React.FC = () => {
           {primaryLinks.map((l) => {
             const active = isRouteActive(pathname, l.href);
             return (
-              <Link
-                key={l.href}
-                href={l.href}
-                aria-current={active ? 'page' : undefined}
-                onClick={closeMobile}
-                className={`px-3 py-2.5 text-sm font-medium rounded-md ${
-                  active ? 'text-[#0A3A6B] bg-slate-100 dark:bg-slate-800/60' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/60'
-                }`}
-              >
-                {l.label}
-              </Link>
+              <div key={l.href}>
+                <Link
+                  href={l.href}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={closeMobile}
+                  className={`block px-3 py-2.5 text-sm font-semibold rounded-md ${
+                    active
+                      ? 'text-[#0A3A6B] bg-slate-100 dark:bg-slate-800/60 dark:text-white'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900/60'
+                  }`}
+                >
+                  {label(l)}
+                </Link>
+                {l.dropdown && (
+                  <ul className="mt-1 mb-2 ml-3 pl-3 border-l border-slate-200/80 dark:border-slate-800/60 space-y-0.5">
+                    {l.dropdown.columns.flatMap((c) => c.items).map((item) => (
+                      <li key={`${l.href}-${item.href}-${item.label}`}>
+                        <Link
+                          href={item.href}
+                          onClick={closeMobile}
+                          className="block px-3 py-2 text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/60 rounded-md"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                    {l.dropdown.feature && (
+                      <li>
+                        <Link
+                          href={l.dropdown.feature.href}
+                          onClick={closeMobile}
+                          className="block px-3 py-2 text-[13px] font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] hover:underline underline-offset-4"
+                        >
+                          {l.dropdown.feature.title} →
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
+                )}
+              </div>
             );
           })}
           <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-slate-200/80 dark:border-slate-800/60">
@@ -433,7 +626,7 @@ const Navbar: React.FC = () => {
             >
               <span className="inline-flex items-center gap-2">
                 <Search size={14} aria-hidden="true" />
-                Search
+                {t('nav.search')}
               </span>
               <kbd className="font-mono text-[10px] text-slate-400 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/60 rounded px-1.5 py-0.5">
                 ⌘K
@@ -447,19 +640,24 @@ const Navbar: React.FC = () => {
               onClick={closeMobile}
               className="px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/60 rounded-md"
             >
-              Sign in
+              {t('nav.signin')}
             </Link>
             <Link
               href="/contact"
               onClick={closeMobile}
               className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-semibold bg-[#0A3A6B] text-white rounded-md"
             >
-              Deploy Your Platform
+              {t('nav.cta.primary')}
               <ArrowRight size={14} aria-hidden="true" />
             </Link>
           </div>
         </nav>
       </div>
+
+      {/* OPS.LIVE persistent status rail — visible on every page below
+          the primary bar. Sticks with the navbar since the parent
+          <header> is sticky. */}
+      <OpsStatusRail />
     </header>
   );
 };

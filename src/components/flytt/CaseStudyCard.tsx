@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import { Quote, ArrowUpRight, Building2 } from 'lucide-react';
 import { Reveal } from '@/components/flytt/Reveal';
 

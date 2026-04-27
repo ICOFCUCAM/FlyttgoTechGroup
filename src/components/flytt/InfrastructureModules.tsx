@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import {
   ArrowUpRight,
   CreditCard,
@@ -201,7 +201,7 @@ const InfrastructureModules: React.FC = () => {
                         href="/platforms/flyttgo"
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:gap-2.5 motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D] rounded-sm"
                       >
-                        See MarketStack in action
+                        See the FlyttGo marketplace in action
                         <ArrowUpRight size={14} aria-hidden="true" />
                       </Link>
                     </div>

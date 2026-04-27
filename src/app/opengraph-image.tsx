@@ -124,11 +124,13 @@ export default function OpenGraphImage() {
           }}
         >
           <div style={{ display: 'flex', gap: 28 }}>
-            <span>Logistics</span>
-            <span>EduPro AI</span>
-            <span>GovStack</span>
-            <span>MarketStack</span>
-            <span>FleetStack</span>
+            <span>Transify</span>
+            <span>Workverge</span>
+            <span>Civitas</span>
+            <span>EduPro</span>
+            <span>Identra</span>
+            <span>Payvera</span>
+            <span>Ledgera</span>
           </div>
           <div style={{ display: 'flex', fontFamily: 'ui-monospace, monospace', color: '#94A3B8' }}>
             flyttgo.tech

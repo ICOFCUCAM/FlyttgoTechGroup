@@ -1,10 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/flytt/LocaleLink';
 import {
   ServerCog,
   CloudCog,
   ShieldCheck,
   ArrowUpRight,
+  ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
 import { Reveal } from '@/components/flytt/Reveal';
@@ -146,6 +147,14 @@ const DeploymentArchitecture: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+                <a
+                  href={`/deployment/${m.id}`}
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold hover:gap-2.5 motion-safe:transition-all"
+                  style={{ color: m.accent }}
+                >
+                  View {m.eyebrow} details
+                  <ArrowRight size={13} aria-hidden="true" />
+                </a>
               </Reveal>
             );
           })}

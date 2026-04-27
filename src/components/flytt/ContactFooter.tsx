@@ -1,8 +1,54 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Mail, MapPin, ArrowRight, Linkedin, Twitter, Github, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { DEPLOYMENT_TYPES, type DeploymentType } from '@/lib/contact-schema';
+import TurnstileWidget from '@/components/flytt/TurnstileWidget';
+
+type Intent = 'partnership' | 'procurement' | 'demo' | 'careers' | 'press' | 'developer';
+
+const INTENT_COPY: Record<
+  Intent,
+  { eyebrow: string; title: string; description: string }
+> = {
+  partnership: {
+    eyebrow: 'Partnership',
+    title: 'Scope a partnership with FlyttGo.',
+    description:
+      'Tell us about your programme, region and preferred deployment mode. Our partnership team responds within one business day with a scoping outline and reference architecture.',
+  },
+  procurement: {
+    eyebrow: 'Procurement & RFPs',
+    title: 'Request procurement documentation.',
+    description:
+      'Share your procurement context — sovereign vs. cloud, compliance frameworks, timelines — and receive SOC 2 / ISO 27001 reports, DPIA templates and draft MSAs under NDA.',
+  },
+  demo: {
+    eyebrow: 'Platform demo',
+    title: 'Schedule a platform deployment demo.',
+    description:
+      'Pick a platform and we will walk you through a live tenant, the deployment architecture and the module roadmap relevant to your programme.',
+  },
+  careers: {
+    eyebrow: 'Careers',
+    title: 'Work with us.',
+    description:
+      'Tell us what role interests you, where you are based and a short note about the work you have shipped. We read every message and reply within one week.',
+  },
+  press: {
+    eyebrow: 'Press & media',
+    title: 'Press and media enquiries.',
+    description:
+      'Interview requests, press kits, speaker availability — share your publication and timeline and the communications team will respond within two business days.',
+  },
+  developer: {
+    eyebrow: 'Developer access',
+    title: 'Request developer access.',
+    description:
+      'Share your deployment context and we will get you API keys, sandbox credentials, SDK previews and developer-portal access as it rolls out.',
+  },
+};
 
 type FormState = {
   name: string;
@@ -12,6 +58,7 @@ type FormState = {
   deployment_type: DeploymentType;
   message: string;
   website: string; // honeypot
+  turnstile_token: string;
 };
 
 const initialState: FormState = {
@@ -22,17 +69,52 @@ const initialState: FormState = {
   deployment_type: 'White-Label Deployment',
   message: '',
   website: '',
+  turnstile_token: '',
 };
+
+const TURNSTILE_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 const ContactFooter: React.FC = () => {
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const intentRaw = searchParams?.get('intent') ?? '';
+  const intent: Intent | null =
+    (['partnership', 'procurement', 'demo', 'careers', 'press', 'developer'] as Intent[]).includes(
+      intentRaw as Intent,
+    )
+      ? (intentRaw as Intent)
+      : null;
+  const copy = intent
+    ? INTENT_COPY[intent]
+    : {
+        eyebrow: 'Start Deployment',
+        title: 'Deploy your platform with FlyttGo infrastructure',
+        description:
+          'Share your deployment context — logistics, education, government or marketplace — and our platform deployment team will respond within one business day.',
+      };
+
+  useEffect(() => {
+    // When arriving with ?intent=demo | partnership | procurement, preselect
+    // a sensible deployment_type so the form captures the right scope.
+    if (intent === 'procurement') {
+      setForm((f) => ({ ...f, deployment_type: 'Government / Municipal Platform' }));
+    } else if (intent === 'developer') {
+      setForm((f) => ({ ...f, deployment_type: 'White-Label Deployment' }));
+    }
+  }, [intent]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === 'submitting') return;
     if (!form.email || !form.name) return;
+    // When Turnstile is configured, require a solved token before POST.
+    if (TURNSTILE_CONFIGURED && !form.turnstile_token) {
+      setStatus('error');
+      setErrorMessage('Please complete the verification challenge and retry.');
+      return;
+    }
 
     setStatus('submitting');
     setErrorMessage(null);
@@ -54,6 +136,11 @@ const ContactFooter: React.FC = () => {
     } catch (err) {
       setStatus('error');
       setErrorMessage(err instanceof Error ? err.message : 'Submission failed. Please try again.');
+      // Token is single-use on the Turnstile side; clear client-side so
+      // the user has to solve a fresh challenge before the next retry.
+      if (TURNSTILE_CONFIGURED) {
+        setForm((f) => ({ ...f, turnstile_token: '' }));
+      }
     }
   };
 
@@ -65,14 +152,13 @@ const ContactFooter: React.FC = () => {
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0A3A6B]/5 rounded-full text-xs font-semibold text-[#0A3A6B] uppercase tracking-wider">
-                Start Deployment
+                {copy.eyebrow}
               </div>
               <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white leading-tight">
-                Deploy your platform with FlyttGo infrastructure
+                {copy.title}
               </h2>
               <p className="mt-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-                Share your deployment context — logistics, education, government or marketplace — and our
-                platform deployment team will respond within one business day.
+                {copy.description}
               </p>
 
               <div className="mt-8 space-y-4">
@@ -240,6 +326,19 @@ const ContactFooter: React.FC = () => {
                       />
                     </div>
 
+                    {TURNSTILE_CONFIGURED && (
+                      <div className="mt-4">
+                        <TurnstileWidget
+                          onVerify={(token) =>
+                            setForm((f) => ({ ...f, turnstile_token: token }))
+                          }
+                          onExpire={() =>
+                            setForm((f) => ({ ...f, turnstile_token: '' }))
+                          }
+                        />
+                      </div>
+                    )}
+
                     {status === 'error' && errorMessage ? (
                       <div
                         id="contact-form-status"
@@ -253,7 +352,10 @@ const ContactFooter: React.FC = () => {
 
                     <button
                       type="submit"
-                      disabled={status === 'submitting'}
+                      disabled={
+                        status === 'submitting' ||
+                        (TURNSTILE_CONFIGURED && !form.turnstile_token)
+                      }
                       className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0A3A6B] text-white font-semibold rounded-lg hover:bg-[#0a2f57] transition-colors disabled:opacity-70 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9] focus-visible:ring-offset-2"
                     >
                       {status === 'submitting' ? (
@@ -317,11 +419,13 @@ const ContactFooter: React.FC = () => {
               <div>
                 <div className="text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">Platforms</div>
                 <ul className="mt-4 space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">FlyttGo Logistics</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">EduPro AI</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">GovStack</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">MarketStack</a></li>
-                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">FleetStack</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Transify</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Workverge</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Civitas</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">EduPro</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Identra</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Payvera</a></li>
+                  <li><a className="hover:text-slate-900 dark:text-white transition-colors cursor-pointer">Ledgera</a></li>
                 </ul>
               </div>
               <div>

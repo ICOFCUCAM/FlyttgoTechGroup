@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { headers } from 'next/headers';
+import { Inter, JetBrains_Mono, IBM_Plex_Serif } from 'next/font/google';
 import { Providers } from './providers';
+import Analytics from '@/components/flytt/Analytics';
+import EstablishmentRail from '@/components/flytt/EstablishmentRail';
+import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import './globals.css';
 
 const inter = Inter({
@@ -13,6 +17,17 @@ const inter = Inter({
   display: 'swap',
 });
 
+// Editorial serif — used for display headlines + italic emphasis tokens.
+// Targets institutional infrastructure authority (Palantir / Stripe /
+// OpenAI use serif emphasis to signal engineering depth, not marketing).
+const ibmPlexSerif = IBM_Plex_Serif({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -22,11 +37,30 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
+const LOCALES_META = ['en', 'no', 'fr', 'de', 'es', 'sv', 'da', 'nl', 'pt', 'ar'] as const;
+
+// Root-level hreflang alternates. Pages that define their own
+// `alternates.canonical` keep their canonical URL; this sets the default
+// per-language alternate mapping for the homepage and pages that don't
+// override it.
+const languageAlternates = Object.fromEntries(
+  LOCALES_META.map((l) => [l, l === 'en' ? '/' : `/${l}`]),
+);
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: 'FlyttGo Technologies Group — Smart Digital Infrastructure for Logistics, Education, Government & Enterprise',
     template: '%s · FlyttGo Technologies Group',
+  },
+  alternates: {
+    canonical: '/',
+    languages: { ...languageAlternates, 'x-default': '/' },
+    types: {
+      'application/rss+xml': [
+        { url: '/rss.xml', title: 'FlyttGo Insights · RSS' },
+      ],
+    },
   },
   description:
     'FlyttGo Technologies Group builds modular AI-powered platform infrastructure — logistics marketplaces, education analytics, municipal dashboards, fleet intelligence and white-label digital platforms — deployable across Europe, Africa and the Middle East.',
@@ -34,15 +68,21 @@ export const metadata: Metadata = {
   keywords: [
     'FlyttGo',
     'platform infrastructure',
-    'logistics marketplace',
-    'education analytics',
-    'municipal dashboards',
-    'fleet intelligence',
-    'white-label platform',
-    'GovStack',
-    'EduPro AI',
-    'FleetStack',
-    'MarketStack',
+    'mobility infrastructure',
+    'workforce coordination',
+    'government services platform',
+    'education intelligence',
+    'identity infrastructure',
+    'payment orchestration',
+    'financial operations',
+    'marketplace infrastructure',
+    'Transify',
+    'Workverge',
+    'Civitas',
+    'EduPro',
+    'Identra',
+    'Payvera',
+    'Ledgera',
   ],
   authors: [{ name: 'FlyttGo Technologies Group' }],
   creator: 'FlyttGo Technologies Group',
@@ -78,9 +118,113 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'FlyttGo Technologies Group',
+  alternateName: 'FlyttGo Tech Group',
+  url: siteUrl,
+  logo: `${siteUrl}/icon`,
+  description:
+    'Modular platform infrastructure for mobility, workforce, government, education, identity, payments, financial operations and marketplaces — deployed across Europe, Africa and the Middle East.',
+  foundingLocation: {
+    '@type': 'Place',
+    name: 'Oslo, Norway',
+  },
+  areaServed: [
+    { '@type': 'Place', name: 'European Union' },
+    { '@type': 'Place', name: 'Africa' },
+    { '@type': 'Place', name: 'Middle East and North Africa' },
+  ],
+  sameAs: [
+    'https://www.linkedin.com/',
+    'https://x.com/',
+    'https://github.com/',
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: 'platform@flyttgotech.com',
+      availableLanguage: ['English', 'Norwegian', 'French', 'German', 'Arabic'],
+      areaServed: ['EU', 'AF', 'MENA'],
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'technical support',
+      email: 'security@flyttgotech.com',
+      availableLanguage: ['English'],
+    },
+  ],
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'FlyttGo Technologies Group',
+  url: siteUrl,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteUrl}/platforms?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+// Reads the middleware-set `x-flyttgo-locale` header so server-rendered
+// HTML carries the right <html lang/dir> and the I18nProvider boots with
+// the correct dictionary on first paint — no English FOUC for non-EN
+// visitors, and crawlers get properly-translated HTML.
+function resolveServerLocale(): LocaleCode {
+  try {
+    const raw = headers().get('x-flyttgo-locale') ?? DEFAULT_LOCALE.toLowerCase();
+    const upper = raw.toUpperCase() as LocaleCode;
+    return LOCALES.some((l) => l.code === upper) ? upper : DEFAULT_LOCALE;
+  } catch {
+    return DEFAULT_LOCALE;
+  }
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = resolveServerLocale();
+  const meta = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang={locale.toLowerCase()}
+      dir={meta.rtl ? 'rtl' : 'ltr'}
+      className={`${inter.variable} ${ibmPlexSerif.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        {/* Phase next — Speculation Rules. Hover-prefetches the most
+            commonly visited next pages so the View Transitions in
+            globals.css land instantly. Browsers without support
+            silently ignore the script. */}
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prerender: [
+                {
+                  where: {
+                    href_matches:
+                      '/(platforms|industries|deployment|technology|company|contact|security|compliance)*',
+                  },
+                  eagerness: 'moderate',
+                },
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <a
           href="#main"
@@ -88,7 +232,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Providers>{children}</Providers>
+        <EstablishmentRail />
+        <Providers initialLocale={locale}>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );

@@ -68,6 +68,7 @@ export default {
       fontFamily: {
         sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'JetBrains Mono', 'ui-monospace', 'monospace'],
+        serif: ['var(--font-serif)', 'IBM Plex Serif', 'Georgia', 'serif'],
       },
       borderRadius: {
         lg: 'calc(var(--radius) + 2px)',
@@ -107,6 +108,24 @@ export default {
           from: { width: '0%' },
           to: { width: '100%' },
         },
+        orbit: {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
+        'orbit-counter': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(-360deg)' },
+        },
+        'pulse-spoke': {
+          '0%': { transform: 'translateY(0)', opacity: '0' },
+          '12%': { opacity: '1' },
+          '88%': { opacity: '1' },
+          '100%': { transform: 'translateY(-215px)', opacity: '0' },
+        },
+        'core-breathe': {
+          '0%, 100%': { transform: 'scale(1)', opacity: '0.85' },
+          '50%': { transform: 'scale(1.06)', opacity: '1' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -116,6 +135,10 @@ export default {
         'fade-up': 'fade-up 0.9s ease-out both',
         'fade-up-slow': 'fade-up-delayed 1.2s ease-out both',
         'bar-grow': 'bar-grow 1s ease-out both',
+        orbit: 'orbit 120s linear infinite',
+        'orbit-counter': 'orbit-counter 120s linear infinite',
+        'pulse-spoke': 'pulse-spoke 6s ease-out infinite',
+        'core-breathe': 'core-breathe 6s ease-in-out infinite',
       },
       // Layered shadow stack: every elevation pairs a 1px hairline highlight
       // with a soft, focused ambient blur — feels closer to Linear / Stripe

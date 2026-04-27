@@ -64,7 +64,7 @@ const tabs = [
     image: imagery.solutions.marketplace,
     headline: 'Deploy Branded Service Marketplaces at City and Regional Scale',
     description:
-      'Launch multi-vendor marketplaces supporting order routing, vendor coordination, workforce platforms and logistics-enabled digital service ecosystems using MarketStack infrastructure.',
+      'Launch multi-vendor marketplaces supporting order routing, vendor coordination, workforce platforms and logistics-enabled digital service ecosystems — built on the FlyttGo marketplace engine running on Transify infrastructure.',
     capabilities: [
       'Multi-vendor orchestration',
       'Order routing infrastructure',

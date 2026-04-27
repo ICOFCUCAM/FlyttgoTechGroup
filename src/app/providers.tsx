@@ -8,8 +8,19 @@ import { Toaster } from '@/components/ui/toaster';
 import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
 import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
+import { AskFlyttGoProvider } from '@/components/flytt/AskFlyttGo';
+import ScrollToTop from '@/components/flytt/ScrollToTop';
+import ReadingProgress from '@/components/flytt/ReadingProgress';
+import { I18nProvider } from '@/lib/i18n/I18nProvider';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  children,
+  initialLocale,
+}: {
+  children: React.ReactNode;
+  initialLocale?: LocaleCode;
+}) {
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -23,13 +34,19 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider defaultTheme="light">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <AppProvider>
-            <CommandPaletteProvider>
-              {children}
-              <Toaster />
-              <Sonner />
-            </CommandPaletteProvider>
-          </AppProvider>
+          <I18nProvider initialLocale={initialLocale}>
+            <AppProvider>
+              <CommandPaletteProvider>
+                <AskFlyttGoProvider>
+                  <ReadingProgress />
+                  {children}
+                  <ScrollToTop />
+                  <Toaster />
+                  <Sonner />
+                </AskFlyttGoProvider>
+              </CommandPaletteProvider>
+            </AppProvider>
+          </I18nProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>
