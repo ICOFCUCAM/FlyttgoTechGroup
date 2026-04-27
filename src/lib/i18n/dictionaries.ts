@@ -40,11 +40,11 @@ const en: Dictionary = {
   'nav.group.marketplace': 'Marketplace Platform',
 
   // Hero
-  'hero.eyebrow': 'Platform Infrastructure · EU · AF · MENA',
-  'hero.title.part1': 'Deploy National-Scale Digital Infrastructure Platforms',
-  'hero.title.part2': 'Without Building Systems From Scratch',
+  'hero.eyebrow': 'Platform infrastructure · IaaS · SaaS · PaaS · Sovereign',
+  'hero.title.part1': 'Cloud platform infrastructure for enterprises',
+  'hero.title.part2': 'and public-sector deployments.',
   'hero.subtitle':
-    'FlyttGo Technologies Group designs modular platforms supporting mobility coordination, workforce systems, education intelligence, financial operations automation, identity verification, and government service delivery across cities and regions.',
+    'IaaS · SaaS · PaaS · sovereign environments — the same eight modules deployed your way across the Americas, Europe, Africa, MENA and APAC. Mobility, workforce, identity, payments, government services, education and financial operations on one orchestration layer.',
   'hero.cta.primary': 'Explore Platform Ecosystem',
   'hero.cta.secondary': 'Request Partnership Discussion',
 

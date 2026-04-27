@@ -9,6 +9,7 @@ import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverv
 import HomeDeploymentStrip from '@/components/flytt/HomeDeploymentStrip';
 import HomeIndustriesStrip from '@/components/flytt/HomeIndustriesStrip';
 import HomeTechStrip from '@/components/flytt/HomeTechStrip';
+import HomeServiceModels from '@/components/flytt/HomeServiceModels';
 import HomeOrchestrationCore from '@/components/flytt/HomeOrchestrationCore';
 import HomeProcurementEntry from '@/components/flytt/HomeProcurementEntry';
 import ComplianceBand from '@/components/flytt/ComplianceBand';
@@ -92,6 +93,12 @@ export default function HomePage() {
         <LiveOpsStrip />
         <HomeSectionRail />
         <TrustIndicators />
+        {/* Service-models surface (SM.00) — IaaS · SaaS · PaaS ·
+            Sovereign explained explicitly so visitors see the four
+            delivery shapes before module / deployment detail. */}
+        <Reveal>
+          <HomeServiceModels />
+        </Reveal>
         {/* Phase-5 narrative order:
             1. Orchestration core — explains the FlyttGoTech Core layer
             2. Deployment models matrix — names the substrates the

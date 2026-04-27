@@ -48,20 +48,18 @@ const VARIANTS: Record<Exclude<Profile, 'default'>, Variant> = {
 };
 
 function detectProfile(): Profile {
-  if (typeof Intl === 'undefined' || typeof document === 'undefined') return 'default';
+  // Profile override is intentionally CONSERVATIVE — only fires on
+  // strong referrer signals. Timezone alone was too noisy (a Stockholm
+  // visitor was being shown Norwegian-sovereign copy, etc). The
+  // canonical default copy now leads with multi-cloud + IaaS/SaaS/PaaS
+  // + enterprise + public-sector positioning, which serves every
+  // visitor well; the override is reserved for unambiguous deep links
+  // from named .gov / .kommune / .mil domains.
+  if (typeof document === 'undefined') return 'default';
 
   const referrer = (document.referrer || '').toLowerCase();
-  if (/\.gov\.no(?:[\/]|$)|\.kommune\.no(?:[\/]|$)/.test(referrer)) return 'gov-no';
-  if (/\.gov(?:[\/]|$)|\.mil(?:[\/]|$)|\.gov\.us(?:[\/]|$)/.test(referrer)) return 'us-cc';
-
-  let tz = '';
-  try {
-    tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-  } catch {
-    return 'default';
-  }
-  if (/^Europe\/(Oslo|Stockholm|Copenhagen|Helsinki|Reykjavik)$/.test(tz)) return 'gov-no';
-  if (/^America\/(New_York|Los_Angeles|Chicago|Denver|Phoenix|Detroit|Boston)$/.test(tz)) return 'us-cc';
+  if (/\.gov\.no(?:\/|$)|\.kommune\.no(?:\/|$)/.test(referrer)) return 'gov-no';
+  if (/\.gov(?:\/|$)|\.mil(?:\/|$)|\.gov\.us(?:\/|$)/.test(referrer)) return 'us-cc';
 
   return 'default';
 }
