@@ -232,6 +232,18 @@ const DeploymentIntake: React.FC = () => {
 
   const searchParams = useSearchParams();
   const intentRaw = searchParams?.get('intent') ?? '';
+  const isGovernmentIntent = intentRaw === 'government';
+
+  // Pre-fill institution when arriving from /government so the visitor
+  // lands at step 2 (objective) — institution is already known from
+  // the surface they came from.
+  React.useEffect(() => {
+    if (isGovernmentIntent && !form.institution) {
+      setForm((f) => ({ ...f, institution: 'Ministry' }));
+      setStep(2);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isGovernmentIntent]);
 
   // Step gating — `next` is only enabled when the current step's anchor
   // field is filled (or, for the contact step, when name + email pass
@@ -276,6 +288,7 @@ const DeploymentIntake: React.FC = () => {
     // summary goes into `message` so the existing deployment_leads row
     // captures the full picture without a DB migration.
     const summary = [
+      isGovernmentIntent ? '[GV.00 · Public-sector engagement intake]' : '',
       `Institution:   ${form.institution ?? '—'}`,
       `Objective:     ${form.objective ?? '—'}`,
       `Scale:         ${form.scale ?? '—'}`,
@@ -342,6 +355,21 @@ const DeploymentIntake: React.FC = () => {
 
   return (
     <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm overflow-hidden">
+      {isGovernmentIntent && (
+        <div className="px-6 sm:px-8 lg:px-10 py-4 bg-gradient-to-r from-[#0A1F3D] to-[#0A3A6B] text-white border-b border-slate-200/0 flex flex-wrap items-center gap-3">
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] font-semibold text-[#D6B575]">
+            GV.00
+          </span>
+          <span aria-hidden="true" className="text-white/30">·</span>
+          <span className="text-[13px] font-semibold tracking-tight">
+            Public-sector engagement intake
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 ml-auto">
+            Routed to public-sector desk · response within one business day
+          </span>
+        </div>
+      )}
+
       <IntakeProgress step={step} />
 
       <div className="p-6 sm:p-8 lg:p-10 min-h-[460px]">
