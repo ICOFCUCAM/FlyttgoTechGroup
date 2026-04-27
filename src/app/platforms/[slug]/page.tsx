@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { platforms } from '@/data/platforms';
 import PlatformView from '@/components/flytt/PlatformView';
+import ModuleAuthorityPanel from '@/components/flytt/ModuleAuthorityPanel';
 import { canonicalFor, languageAlternates } from '@/lib/seo/canonical';
 
 interface PageProps {
@@ -103,6 +104,7 @@ export default function PlatformSlugPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <PlatformView slug={params.slug} />
+      <ModuleAuthorityPanel slug={params.slug} />
     </>
   );
 }
