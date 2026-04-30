@@ -81,149 +81,179 @@ type NavLink = {
 
 const primaryLinks: NavLink[] = [
   { label: 'Home', labelKey: 'nav.home', href: '/' },
+
+  // ─── Cluster 1 — Engineering Studio ─────────────────────────────
+  // Build pathways: capability ladder · cost configurator ·
+  // consultation booking · deployment lifecycle.
   {
-    label: 'Platforms',
-    labelKey: 'nav.platforms',
-    href: '/platforms',
+    label: 'Engineering Studio',
+    href: '/engineering',
     dropdown: {
       columns: [
         {
-          heading: 'Platform Ecosystem',
+          heading: 'Build pathways',
           items: [
-            { label: 'Ecosystem overview', description: 'How the eight modules orchestrate together', href: '/platforms', icon: Workflow },
-            { label: 'Transify', description: 'Mobility infrastructure platform', href: '/platforms/transify', icon: Route },
-            { label: 'Workverge', description: 'Workforce coordination infrastructure', href: '/platforms/workverge', icon: UserCheck },
-            { label: 'Civitas', description: 'Digital government services platform', href: '/platforms/civitas', icon: Landmark },
-            { label: 'EduPro', description: 'Education intelligence infrastructure', href: '/platforms/edupro', icon: GraduationCap },
+            { label: 'Engineering overview',     description: 'Division entry surface · SE.00',                                  href: '/engineering',                  icon: Compass },
+            { label: 'Web Studio capability ladder', description: 'Six escalating tiers · SE.02 · L.01 → L.06',                  href: '/engineering/ladder',           icon: Layers },
+            { label: 'Modular add-ons',          description: 'Eight extensions · SE.03 · AO.01 → AO.08',                        href: '/engineering/modules',          icon: Calculator },
+            { label: 'Delivery model',           description: 'Three-step engagement cadence · SE.04 · SE.D1 → SE.D3',           href: '/engineering/delivery',         icon: Workflow },
           ],
         },
         {
-          heading: 'Identity · Payments · Finance · Marketplace',
+          heading: 'Estimate & engage',
           items: [
-            { label: 'Identra', description: 'Identity infrastructure platform', href: '/platforms/identra', icon: Fingerprint },
-            { label: 'Payvera', description: 'Public service payment infrastructure', href: '/platforms/payvera', icon: CreditCard },
-            { label: 'Ledgera', description: 'Financial operations & bookkeeping infrastructure', href: '/platforms/ledgera', icon: Calculator },
-            { label: 'FlyttGo Marketplace', description: 'Smart moving & transport — runs on Transify', href: '/platforms/flyttgo', icon: Truck },
-          ],
-        },
-      ],
-      feature: {
-        title: 'Platform Ecosystem',
-        titleKey: 'nav.feature.title',
-        description:
-          'Modular infrastructure platforms plus the FlyttGo marketplace — licensed independently, deployed together.',
-        descriptionKey: 'nav.feature.description',
-        href: '/platforms',
-        cta: 'Explore the ecosystem',
-        ctaKey: 'nav.feature.cta',
-      },
-    },
-  },
-  {
-    label: 'Industries',
-    labelKey: 'nav.industries',
-    href: '/industries',
-    dropdown: {
-      columns: [
-        {
-          heading: 'Public sector',
-          items: [
-            { label: 'Government & municipal', description: 'Citizen services and sovereign deployment', href: '/industries/government', icon: Landmark },
-            { label: 'Education & ministries', description: 'Admissions, scholarships, institutional analytics', href: '/industries/education', icon: GraduationCap },
-          ],
-        },
-        {
-          heading: 'Transport, enterprise & commerce',
-          items: [
-            { label: 'Transport & logistics', description: 'Dispatch, telematics, regional mobility', href: '/industries/transport', icon: Bus },
-            { label: 'Enterprise operations', description: 'Internal platforms on customer-cloud tenancy', href: '/industries/enterprise', icon: Building2 },
-            { label: 'Marketplace operators', description: 'Regulated multi-sided platforms', href: '/industries/marketplaces', icon: ShoppingBag },
-            { label: 'Freight & logistics networks', description: 'Port-to-inland corridor coordination', href: '/industries/logistics', icon: Truck },
-          ],
-        },
-      ],
-      feature: {
-        title: 'Government & public sector · GV.00',
-        description: 'Procurement-tier outreach surface — capability brief, sovereignty framework, pilot proposal.',
-        href: '/government',
-        cta: 'Open public-sector surface',
-      },
-    },
-  },
-  {
-    label: 'Deployment',
-    labelKey: 'nav.deployment',
-    href: '/deployment',
-    dropdown: {
-      columns: [
-        {
-          heading: 'Deployment Models',
-          items: [
-            { label: 'FlyttGo-managed', description: 'Fully managed SaaS, region-aware', href: '/deployment/managed', icon: CloudCog },
-            { label: 'Customer cloud', description: 'Runs inside your AWS, Azure or GCP tenancy', href: '/deployment/customer-cloud', icon: ServerCog },
-            { label: 'Sovereign datacenter', description: 'Self-hosted for public-sector procurement', href: '/deployment/sovereign', icon: ShieldCheck },
-          ],
-        },
-        {
-          heading: 'Architecture & Coverage',
-          items: [
-            { label: 'Infrastructure Architecture', description: 'Multi-tenant SaaS, API-first, multi-region', href: '/infrastructure-architecture', icon: Network },
-            { label: 'Sovereign Deployment', description: 'National hosting + data-residency posture', href: '/sovereign', icon: ShieldCheck },
-            { label: 'Global Coverage', description: 'Nordic EU · Africa · MENA rollout footprint', href: '/global-coverage', icon: Globe2 },
-            { label: 'Procurement Compatibility', description: 'Pilot · city · regional · national · white-label', href: '/procurement-compatibility', icon: FileCheck2 },
-            { label: 'Deployment Lifecycle', description: 'EP.01–05 stages · written deliverables · cadence', href: '/deployment-lifecycle', icon: Workflow },
-          ],
-        },
-      ],
-      feature: {
-        title: 'Deployment architecture',
-        description: 'Three modes plus a full procurement compatibility surface — match any sovereignty posture.',
-        href: '/deployment',
-        cta: 'Compare all modes',
-      },
-    },
-  },
-  {
-    label: 'Technology',
-    labelKey: 'nav.technology',
-    href: '/technology',
-    dropdown: {
-      columns: [
-        {
-          heading: 'Engineering Division',
-          items: [
-            { label: 'Engineering overview · SE.00', description: 'Division entry surface — capability ladder, modules, delivery, proposal', href: '/engineering', icon: Layers },
-            { label: 'Capability ladder · SE.02', description: 'Six escalating tiers · L.01 → L.06', href: '/engineering/ladder', icon: Layers },
-            { label: 'Modular add-ons · SE.03', description: 'Eight extensions · AO.01 → AO.08', href: '/engineering/modules', icon: Calculator },
-            { label: 'Cost configurator · PR.00', description: 'Live procurement estimator', href: '/engineering/configurator', icon: Calculator },
-            { label: 'Proposal generator · SE.PG', description: 'Auto-generate a pilot proposal from the configurator output', href: '/engineering/proposal', icon: Calculator },
-            { label: 'Consultation booking · CB.00', description: 'Five-step intake · four consultation categories', href: '/consultation', icon: CalendarClock },
-          ],
-        },
-        {
-          heading: 'Architecture & Developers',
-          items: [
-            { label: 'Architecture', description: 'Cloud-native platform stack', href: '/technology', icon: Code2 },
-            { label: 'API architecture', description: 'Versioned REST · GraphQL · webhooks · MCP', href: '/api-architecture', icon: Network },
-            { label: 'Live API playground', description: 'Pick an endpoint · run it inside the docs', href: '/developers/playground', icon: Terminal },
-            { label: 'Developer portal', description: 'APIs, SDKs and deployment pipelines', href: '/developers', icon: BookOpen },
-          ],
-        },
-        {
-          heading: 'Trust & Operations',
-          items: [
-            { label: 'Platform status', description: 'Live component health and incidents', href: '/status', icon: Activity },
-            { label: 'Security', description: 'Isolation, encryption, monitoring, incident response', href: '/security', icon: Lock },
-            { label: 'Compliance', description: 'SOC 2, ISO 27001, GDPR, WCAG, regional frameworks', href: '/compliance', icon: ShieldCheck },
+            { label: 'Cost configurator',        description: 'Live procurement estimator · PR.00 · PDF / Word / email',         href: '/engineering/configurator',     icon: Calculator },
+            { label: 'Proposal generator',       description: 'Auto-generate a pilot proposal · SE.PG · printable',              href: '/engineering/proposal',         icon: BookOpen },
+            { label: 'Consultation booking',     description: 'Five-step intake · CB.00 · four consultation categories',         href: '/consultation',                 icon: CalendarClock },
+            { label: 'Deployment Lifecycle',     description: 'EP.00 · five-stage written deliverables and cadence',             href: '/deployment-lifecycle',         icon: Workflow },
           ],
         },
       ],
       feature: {
         title: 'Build Your Digital Platform Infrastructure · PR.00',
         description:
-          'Live procurement estimator. Pick a level, layer feature modules, choose a deployment substrate and region — total cost + delivery window + architecture tier update live.',
-        href: '/pricing',
+          'Live procurement estimator. Pick a level, layer feature modules, choose a deployment substrate and region — total cost, delivery window and exportable estimate update live.',
+        href: '/engineering/configurator',
         cta: 'Open the live configurator',
+      },
+    },
+  },
+
+  // ─── Cluster 2 — Deployment Architecture ────────────────────────
+  // Mode selection · lifecycle · architecture · regional coverage.
+  {
+    label: 'Deployment Architecture',
+    href: '/deployment',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Deployment modes',
+          items: [
+            { label: 'Managed SaaS',             description: 'DM.01 · FlyttGo-managed regional tenants',                        href: '/deployment/managed',           icon: CloudCog },
+            { label: 'Customer Cloud',           description: 'DM.02 · runs inside your AWS, Azure or GCP tenancy',              href: '/deployment/customer-cloud',    icon: ServerCog },
+            { label: 'Sovereign Datacenter',     description: 'DM.03 · self-hosted for public-sector procurement',               href: '/deployment/sovereign',         icon: ShieldCheck },
+          ],
+        },
+        {
+          heading: 'Architecture & coverage',
+          items: [
+            { label: 'Deployment Lifecycle',     description: 'EP.00 · five-stage cadence with written deliverables',            href: '/deployment-lifecycle',         icon: Workflow },
+            { label: 'Infrastructure Architecture', description: 'IA.00 · multi-tenant SaaS · API-first · multi-region',         href: '/infrastructure-architecture',  icon: Network },
+            { label: 'Global Coverage',          description: 'GC.00 · NA · Nordic EU · Africa · MENA · APAC footprint',         href: '/global-coverage',              icon: Globe2 },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Deployment architecture overview',
+        description: 'Three modes plus a full procurement compatibility surface — match any sovereignty posture in one read.',
+        href: '/deployment',
+        cta: 'Compare all modes',
+      },
+    },
+  },
+
+  // ─── Cluster 3 — Government & Public Sector ─────────────────────
+  {
+    label: 'Government',
+    href: '/government',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Public-sector surfaces',
+          items: [
+            { label: 'Government & Public Sector', description: 'GV.00 · capability brief, sovereignty framework, pilot proposal', href: '/government',                  icon: Landmark },
+            { label: 'Procurement Compatibility',  description: 'PC.00 · pilot, city, regional, national, white-label tiers',     href: '/procurement-compatibility',   icon: FileCheck2 },
+            { label: 'Sovereign Deployment',       description: 'SV.00 · national hosting and data-residency posture',            href: '/sovereign',                   icon: ShieldCheck },
+          ],
+        },
+        {
+          heading: 'Sector entry points',
+          items: [
+            { label: 'Government & municipal',   description: 'Citizen services and sovereign deployment',                       href: '/industries/government',        icon: Landmark },
+            { label: 'Education & ministries',   description: 'Admissions, scholarships, institutional analytics',               href: '/industries/education',         icon: GraduationCap },
+            { label: 'Transport authorities',    description: 'Dispatch, telematics, regional mobility',                          href: '/industries/transport',         icon: Bus },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Public-sector engagement intake · GV.00',
+        description: 'Capability brief, sovereignty framework, pilot proposal — routed to the public-sector engagement desk.',
+        href: '/government',
+        cta: 'Open public-sector surface',
+      },
+    },
+  },
+
+  // ─── Cluster 4 — Platform Infrastructure ────────────────────────
+  // The eight platform modules + infrastructure architecture surfaces.
+  {
+    label: 'Platform Infrastructure',
+    href: '/platforms',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Platform ecosystem · PL.00',
+          items: [
+            { label: 'Ecosystem overview',       description: 'Eight modules orchestrated through the FlyttGoTech Core',         href: '/platforms',                    icon: Workflow },
+            { label: 'Transify',                 description: 'Mobility infrastructure platform',                                href: '/platforms/transify',           icon: Route },
+            { label: 'Workverge',                description: 'Workforce coordination infrastructure',                           href: '/platforms/workverge',          icon: UserCheck },
+            { label: 'Civitas',                  description: 'Digital government services platform',                            href: '/platforms/civitas',            icon: Landmark },
+            { label: 'EduPro',                   description: 'Education intelligence infrastructure',                           href: '/platforms/edupro',             icon: GraduationCap },
+          ],
+        },
+        {
+          heading: 'Identity · Payments · Finance',
+          items: [
+            { label: 'Identra',                  description: 'Identity infrastructure platform',                                href: '/platforms/identra',            icon: Fingerprint },
+            { label: 'Payvera',                  description: 'Public-service payment infrastructure',                           href: '/platforms/payvera',            icon: CreditCard },
+            { label: 'Ledgera',                  description: 'Financial operations & bookkeeping infrastructure',               href: '/platforms/ledgera',            icon: Calculator },
+          ],
+        },
+        {
+          heading: 'Architecture & coverage',
+          items: [
+            { label: 'Infrastructure Architecture', description: 'IA.00 · multi-tenant SaaS · API-first · multi-region',          href: '/infrastructure-architecture', icon: Network },
+            { label: 'Global Coverage',          description: 'GC.00 · regional rollout footprint',                              href: '/global-coverage',              icon: Globe2 },
+            { label: 'White-Label Program',      description: 'Tenant-isolated, brandable platforms on FlyttGo infrastructure',  href: '/white-label',                  icon: Layers },
+          ],
+        },
+      ],
+      feature: {
+        title: 'Platform Ecosystem · PL.00',
+        description: 'Modular infrastructure platforms plus the FlyttGo marketplace — licensed independently, deployed together.',
+        href: '/platforms',
+        cta: 'Explore the ecosystem',
+      },
+    },
+  },
+
+  // ─── Cluster 5 — Marketplace Programs ───────────────────────────
+  {
+    label: 'Marketplace Programs',
+    href: '/platforms/flyttgo',
+    dropdown: {
+      columns: [
+        {
+          heading: 'Marketplace surfaces',
+          items: [
+            { label: 'FlyttGo Marketplace',      description: 'Smart moving & transport — runs on Transify',                     href: '/platforms/flyttgo',            icon: Truck },
+            { label: 'Marketplace operators',    description: 'Regulated multi-sided platforms · industry surface',              href: '/industries/marketplaces',      icon: ShoppingBag },
+            { label: 'White-Label Program',      description: 'Tenant-isolated, brandable platforms on FlyttGo infrastructure',  href: '/white-label',                  icon: Layers },
+          ],
+        },
+        {
+          heading: 'Operator onboarding',
+          items: [
+            { label: 'Marketplace consultation', description: 'CT.02 · provider onboarding · compliance · service integration',  href: '/consultation',                 icon: CalendarClock },
+            { label: 'Freight & logistics',      description: 'Port-to-inland corridor coordination · industry surface',         href: '/industries/logistics',         icon: Truck },
+          ],
+        },
+      ],
+      feature: {
+        title: 'FlyttGo Marketplace · regulated multi-sided platforms',
+        description: 'Provider onboarding, service integration and compliance for marketplace operators across mobility and logistics.',
+        href: '/platforms/flyttgo',
+        cta: 'Open marketplace surface',
       },
     },
   },
