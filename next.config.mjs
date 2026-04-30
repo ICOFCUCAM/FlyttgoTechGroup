@@ -61,6 +61,9 @@ const nextConfig = {
       { source: '/legal', destination: '/privacy', permanent: false },
       { source: '/docs', destination: '/developers', permanent: false },
       { source: '/api', destination: '/developers', permanent: false },
+      // Web Studio rename — /engineering moved to /website-design when
+      // the surface was reorganised into a parent landing + 3 sub-pages.
+      { source: '/engineering', destination: '/website-design', permanent: true },
     ];
   },
 };
