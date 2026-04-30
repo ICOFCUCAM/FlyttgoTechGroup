@@ -206,11 +206,11 @@ const primaryLinks: NavLink[] = [
         },
       ],
       feature: {
-        title: 'Insights',
+        title: 'Institutional Systems Engineering · SE.00',
         description:
-          'Deployment guides, architecture notes and procurement playbooks from the FlyttGo platform teams.',
-        href: '/insights',
-        cta: 'Read the latest insights',
+          'Six capability levels — from digital presence to national platform infrastructure. Indicative pricing per region.',
+        href: '/engineering',
+        cta: 'Open engineering surface',
       },
     },
   },

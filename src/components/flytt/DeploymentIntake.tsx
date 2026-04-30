@@ -233,6 +233,7 @@ const DeploymentIntake: React.FC = () => {
   const searchParams = useSearchParams();
   const intentRaw = searchParams?.get('intent') ?? '';
   const isGovernmentIntent = intentRaw === 'government';
+  const isEngineeringIntent = intentRaw === 'engineering';
 
   // Pre-fill institution when arriving from /government so the visitor
   // lands at step 2 (objective) — institution is already known from
@@ -289,6 +290,7 @@ const DeploymentIntake: React.FC = () => {
     // captures the full picture without a DB migration.
     const summary = [
       isGovernmentIntent ? '[GV.00 · Public-sector engagement intake]' : '',
+      isEngineeringIntent ? '[SE.00 · Institutional Systems Engineering scoping intake]' : '',
       `Institution:   ${form.institution ?? '—'}`,
       `Objective:     ${form.objective ?? '—'}`,
       `Scale:         ${form.scale ?? '—'}`,
@@ -366,6 +368,21 @@ const DeploymentIntake: React.FC = () => {
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 ml-auto">
             Routed to public-sector desk · response within one business day
+          </span>
+        </div>
+      )}
+
+      {isEngineeringIntent && (
+        <div className="px-6 sm:px-8 lg:px-10 py-4 bg-gradient-to-r from-[#0A1F3D] to-[#0A3A6B] text-white border-b border-slate-200/0 flex flex-wrap items-center gap-3">
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] font-semibold text-[#D6B575]">
+            SE.00
+          </span>
+          <span aria-hidden="true" className="text-white/30">·</span>
+          <span className="text-[13px] font-semibold tracking-tight">
+            Institutional Systems Engineering · scoping intake
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 ml-auto">
+            Routed to engineering division · response within one business day
           </span>
         </div>
       )}
