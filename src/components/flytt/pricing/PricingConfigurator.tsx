@@ -608,6 +608,21 @@ export default function PricingConfigurator() {
     return `/contact?${params.toString()}`;
   }, [level, addons, addonIds, deployment, region, pathway, totals]);
 
+  // Proposal generator deeplink — same state, but routed to the
+  // /engineering/proposal sub-page so the visitor can render a
+  // procurement-grade pilot proposal document from the current config.
+  const proposalUrl = useMemo(() => {
+    const params = new URLSearchParams({
+      level: level.code,
+      deploy: deployment.code,
+      region: region.code,
+    });
+    if (addonIds.size) {
+      params.set('addons', addons.map((a) => a.code).join(','));
+    }
+    return `/engineering/proposal?${params.toString()}`;
+  }, [level, addons, addonIds, deployment, region]);
+
   return (
     <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
       {/* === LEFT: STEPS === */}
@@ -917,6 +932,18 @@ export default function PricingConfigurator() {
               Open scoping engagement
               <ArrowRight
                 size={14}
+                className="motion-safe:transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </a>
+            <a
+              href={proposalUrl}
+              className="mt-2 group flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-[12px] font-semibold tracking-tight hover:bg-white/[0.10] hover:border-white/25 motion-safe:transition-colors"
+            >
+              <FileText size={12} strokeWidth={2} aria-hidden="true" />
+              Generate pilot proposal · SE.PG
+              <ArrowRight
+                size={12}
                 className="motion-safe:transition-transform group-hover:translate-x-0.5"
                 aria-hidden="true"
               />

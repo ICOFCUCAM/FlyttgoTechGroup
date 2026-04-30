@@ -190,11 +190,14 @@ const primaryLinks: NavLink[] = [
     dropdown: {
       columns: [
         {
-          heading: 'Build with FlyttGo',
+          heading: 'Engineering Division',
           items: [
-            { label: 'Institutional Systems Engineering', description: 'Six capability tiers · digital presence to platform-class', href: '/engineering', icon: Layers },
-            { label: 'Cost configurator', description: 'Live procurement estimator · PDF / Word export', href: '/pricing', icon: Calculator },
-            { label: 'Consultation booking', description: 'Five-step intake · four consultation categories', href: '/consultation', icon: CalendarClock },
+            { label: 'Engineering overview · SE.00', description: 'Division entry surface — capability ladder, modules, delivery, proposal', href: '/engineering', icon: Layers },
+            { label: 'Capability ladder · SE.02', description: 'Six escalating tiers · L.01 → L.06', href: '/engineering/ladder', icon: Layers },
+            { label: 'Modular add-ons · SE.03', description: 'Eight extensions · AO.01 → AO.08', href: '/engineering/modules', icon: Calculator },
+            { label: 'Cost configurator · PR.00', description: 'Live procurement estimator', href: '/engineering/configurator', icon: Calculator },
+            { label: 'Proposal generator · SE.PG', description: 'Auto-generate a pilot proposal from the configurator output', href: '/engineering/proposal', icon: Calculator },
+            { label: 'Consultation booking · CB.00', description: 'Five-step intake · four consultation categories', href: '/consultation', icon: CalendarClock },
           ],
         },
         {
