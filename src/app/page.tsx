@@ -4,6 +4,7 @@ import HeroSlider from '@/components/flytt/HeroSlider';
 import HomeRegionsStrip from '@/components/flytt/HomeRegionsStrip';
 import LiveOpsStrip from '@/components/flytt/LiveOpsStrip';
 import TrustIndicators from '@/components/flytt/TrustIndicators';
+import HomeCapabilityPathways from '@/components/flytt/HomeCapabilityPathways';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
 import HomeDeploymentStrip from '@/components/flytt/HomeDeploymentStrip';
 import HomeDeploymentMatrix from '@/components/flytt/HomeDeploymentMatrix';
@@ -92,6 +93,13 @@ export default function HomePage() {
         <HomeRegionsStrip />
         <LiveOpsStrip />
         <TrustIndicators />
+        {/* Capability pathways (HP.IDX) — eight clusters routed to
+            their own intake. Sits before module / deployment detail
+            so visitors choose the surface their programme starts from
+            instead of being walked through the full taxonomy. */}
+        <Reveal>
+          <HomeCapabilityPathways />
+        </Reveal>
         {/* Service-models surface (SM.00) — IaaS · SaaS · PaaS ·
             Sovereign explained explicitly so visitors see the four
             delivery shapes before module / deployment detail. */}
