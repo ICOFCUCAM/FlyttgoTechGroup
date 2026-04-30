@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { ArrowUpRight, type LucideIcon, FileText, Briefcase, LayoutDashboard, Building2, Landmark, Network } from 'lucide-react';
+import Link from '@/components/flytt/LocaleLink';
+import { ArrowUpRight, Calculator, type LucideIcon, FileText, Briefcase, LayoutDashboard, Building2, Landmark, Network } from 'lucide-react';
 
 /**
  * SE.02 — Capability ladder. Six capability levels stacked from
@@ -408,7 +409,24 @@ export default function CapabilityLadder() {
           })}
         </ol>
 
-        <p className="mt-8 max-w-3xl font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 leading-relaxed">
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <Link
+            href="/pricing"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#0A3A6B] text-white text-sm font-semibold tracking-tight hover:bg-[#0A3A6B]/90 motion-safe:transition-colors"
+          >
+            <Calculator size={14} strokeWidth={2} aria-hidden="true" />
+            Open the live cost configurator · PR.00
+            <ArrowUpRight
+              size={13}
+              className="motion-safe:transition-transform group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </Link>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+            Live total · delivery window · export to PDF · .doc · email
+          </span>
+        </div>
+        <p className="mt-6 max-w-3xl font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 leading-relaxed">
           Pricing bands are indicative · per programme · final point pricing on the order form
           after a scoping engagement (SE.04 · scoping)
         </p>

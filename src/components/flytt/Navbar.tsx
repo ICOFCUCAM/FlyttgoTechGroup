@@ -206,11 +206,11 @@ const primaryLinks: NavLink[] = [
         },
       ],
       feature: {
-        title: 'Institutional Systems Engineering · SE.00',
+        title: 'Cost configurator · PR.00',
         description:
-          'Six capability levels — from digital presence to national platform infrastructure. Indicative pricing per region.',
-        href: '/engineering',
-        cta: 'Open engineering surface',
+          'Live infrastructure pricing across six capability levels. Pick a level, layer add-ons, choose a deployment substrate and a region — total + delivery window update live.',
+        href: '/pricing',
+        cta: 'Open the live configurator',
       },
     },
   },

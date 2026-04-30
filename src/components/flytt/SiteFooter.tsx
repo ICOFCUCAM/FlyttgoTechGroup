@@ -56,6 +56,7 @@ const groups: FooterGroup[] = [
       { label: 'Deployment architecture', href: '/deployment' },
       { label: 'Government & public sector · GV.00', href: '/government' },
       { label: 'Institutional Systems Engineering · SE.00', href: '/engineering' },
+      { label: 'Cost configurator · PR.00', href: '/pricing' },
       { label: 'Deployment lifecycle · EP.00', href: '/deployment-lifecycle' },
       { label: 'Managed SaaS · DM.01', href: '/deployment/managed' },
       { label: 'Customer cloud · DM.02', href: '/deployment/customer-cloud' },
