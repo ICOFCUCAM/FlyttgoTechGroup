@@ -55,7 +55,7 @@ const groups: FooterGroup[] = [
     links: [
       { label: 'Deployment architecture', href: '/deployment' },
       { label: 'Government & public sector · GV.00', href: '/government' },
-      { label: 'Web Studio · WS.00', href: '/website-design' },
+      { label: 'Institutional Systems Engineering · SE.00', href: '/engineering' },
       { label: 'Cost configurator · PR.00', href: '/pricing' },
       { label: 'Consultation booking · CB.00', href: '/consultation' },
       { label: 'Deployment lifecycle · EP.00', href: '/deployment-lifecycle' },

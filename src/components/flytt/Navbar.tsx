@@ -190,11 +190,9 @@ const primaryLinks: NavLink[] = [
     dropdown: {
       columns: [
         {
-          heading: 'Web Studio · Build with FlyttGo',
+          heading: 'Build with FlyttGo',
           items: [
-            { label: 'Web Studio overview', description: 'Website design + platform engineering across 6 tiers', href: '/website-design', icon: Layers },
-            { label: 'Capability levels', description: 'L.01 → L.06 · pricing per region · delivery cadence', href: '/website-design/levels', icon: Layers },
-            { label: 'Feature modules', description: '15 modular extensions · auth · payments · marketplace · AI', href: '/website-design/modules', icon: Calculator },
+            { label: 'Institutional Systems Engineering', description: 'Six capability tiers · digital presence to platform-class', href: '/engineering', icon: Layers },
             { label: 'Cost configurator', description: 'Live procurement estimator · PDF / Word export', href: '/pricing', icon: Calculator },
             { label: 'Consultation booking', description: 'Five-step intake · four consultation categories', href: '/consultation', icon: CalendarClock },
           ],

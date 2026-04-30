@@ -147,11 +147,11 @@ const HeroSlider: React.FC = () => {
                 />
               </Link>
               <Link
-                href="/website-design"
+                href="/engineering"
                 className="group inline-flex items-center gap-2 px-6 py-3.5 bg-[#D6B575] text-[#0A1F3D] text-sm font-semibold rounded-lg hover:bg-[#D6B575]/90 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B575]/60 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
               >
                 <Layers3 size={15} strokeWidth={2} aria-hidden="true" />
-                Build a website
+                Build a website · SE.00
                 <ArrowRight
                   size={16}
                   className="motion-safe:transition-transform group-hover:translate-x-0.5"

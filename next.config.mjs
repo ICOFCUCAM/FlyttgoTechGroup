@@ -61,9 +61,11 @@ const nextConfig = {
       { source: '/legal', destination: '/privacy', permanent: false },
       { source: '/docs', destination: '/developers', permanent: false },
       { source: '/api', destination: '/developers', permanent: false },
-      // Web Studio rename — /engineering moved to /website-design when
-      // the surface was reorganised into a parent landing + 3 sub-pages.
-      { source: '/engineering', destination: '/website-design', permanent: true },
+      // Web Studio routes were the old framing — Website Design now lives
+      // only as Levels 1–2 inside the /engineering capability ladder.
+      // Redirect any inbound /website-design* traffic back to /engineering.
+      { source: '/website-design', destination: '/engineering', permanent: true },
+      { source: '/website-design/:path*', destination: '/engineering', permanent: true },
     ];
   },
 };
