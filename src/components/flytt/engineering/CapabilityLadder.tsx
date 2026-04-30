@@ -212,34 +212,35 @@ export default function CapabilityLadder() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
-          <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">SE.LD</span>
+          <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">SE.02</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
           <span>Capability ladder · six levels</span>
         </div>
 
-        <div className="mt-8 grid lg:grid-cols-12 gap-8 items-end">
-          <div className="lg:col-span-7">
-            <h2
-              id="se-ld-heading"
-              className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
-            >
-              From website design to{' '}
-              <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                national platform infrastructure.
-              </em>
-            </h2>
-          </div>
-          <div className="lg:col-span-5">
-            <p className="text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
-              Click any level to expand. Each tier carries a defined feature set,
-              technology profile, delivery cadence and indicative pricing band
-              per region. Programmes typically start at one level and advance
-              up the ladder as scope and audience grow.
-            </p>
-          </div>
-        </div>
+        <h2
+          id="se-ld-heading"
+          className="mt-6 font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05] max-w-3xl"
+        >
+          From website design to{' '}
+          <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+            national platform infrastructure.
+          </em>
+        </h2>
+        <p className="mt-4 max-w-3xl text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
+          Each level represents a defined engagement shape with a defined
+          feature set, technology profile, delivery cadence and indicative
+          regional pricing band. Click any level to expand.
+        </p>
 
-        <ol className="mt-10 grid gap-3">
+        {/* Escalation connector + cards. The connector is a vertical line
+            on the left that visually unifies the six tiers into a single
+            ladder rather than independent blocks. */}
+        <ol className="mt-10 relative grid gap-3">
+          <span
+            aria-hidden="true"
+            className="absolute left-[27px] top-3 bottom-3 w-px bg-gradient-to-b from-[#0A3A6B]/30 via-slate-300/60 dark:via-slate-700/50 to-[#D6B575]/40 hidden sm:block"
+          />
+
           {LEVELS.map((l) => {
             const Icon = l.icon;
             const open = openCode === l.code;

@@ -74,34 +74,44 @@ export default function AudienceGrid() {
           </div>
         </div>
 
-        <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {/* 2-column matrix on tablet + desktop, 1-column stack on mobile.
+            grid-auto-rows: 1fr ensures every cell shares the same height
+            so the matrix reads as a structured taxonomy surface, not a
+            paragraph list with ragged wrapping. */}
+        <ul
+          className="mt-10 grid sm:grid-cols-2 gap-3"
+          style={{ gridAutoRows: '1fr' }}
+        >
           {AUDIENCES.map((a) => {
             const Icon = a.icon;
             return (
               <li
                 key={a.code}
-                className="flex flex-col p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200/70 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 motion-safe:transition-colors"
+                className="flex items-stretch p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200/70 dark:border-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700 motion-safe:transition-colors"
               >
-                <div className="flex items-start justify-between">
+                <div className="flex w-full items-start gap-4">
                   <span
-                    className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0A3A6B] dark:text-[#9ED0F9] flex items-center justify-center"
+                    className="w-11 h-11 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0A3A6B] dark:text-[#9ED0F9] flex items-center justify-center flex-shrink-0"
                     aria-hidden="true"
                   >
-                    <Icon size={16} strokeWidth={1.75} />
+                    <Icon size={17} strokeWidth={1.75} />
                   </span>
-                  <span className="font-mono text-[10px] tracking-[0.22em] font-semibold text-[#0A3A6B] dark:text-[#9ED0F9]">
-                    {a.code}
-                  </span>
-                </div>
-                <div className="mt-4 text-[14px] font-semibold tracking-tight text-slate-900 dark:text-white leading-snug">
-                  {a.label}
-                </div>
-                <div className="mt-1 text-[12px] text-slate-500 dark:text-slate-400 leading-snug flex-1">
-                  {a.context}
-                </div>
-                <div className="mt-4 pt-3 border-t border-slate-200/70 dark:border-slate-800/60 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.16em]">
-                  <span className="text-slate-400">Common entry</span>
-                  <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">{a.match}</span>
+                  <div className="flex-1 min-w-0 flex flex-col">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-[10px] tracking-[0.22em] uppercase font-semibold text-[#0A3A6B] dark:text-[#9ED0F9]">
+                        {a.code}
+                      </span>
+                      <span className="font-mono text-[9px] tracking-[0.18em] uppercase text-slate-400">
+                        {a.match}
+                      </span>
+                    </div>
+                    <div className="mt-1.5 text-[14px] font-semibold tracking-tight text-slate-900 dark:text-white leading-snug">
+                      {a.label}
+                    </div>
+                    <div className="mt-1 text-[12px] text-slate-500 dark:text-slate-400 leading-snug flex-1">
+                      {a.context}
+                    </div>
+                  </div>
                 </div>
               </li>
             );

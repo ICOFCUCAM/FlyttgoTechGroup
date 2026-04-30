@@ -46,7 +46,7 @@ const STEPS: Step[] = [
     duration: 'Per level · 5 days – 18 months',
     body:
       'Sprint-cadenced build under the agreed delivery schedule. Levels 1–3 ship in days to weeks; levels 4–6 ship in months under steering cadence. Every engagement closes with a written hand-over, optional ongoing operations and a documented audit trail.',
-    artefact: 'Output: live deployment · written hand-over · operations runbook',
+    artefact: 'Output: live deployment · written hand-over · operations runbook · audit trail',
   },
 ];
 

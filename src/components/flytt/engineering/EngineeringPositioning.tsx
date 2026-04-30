@@ -15,11 +15,11 @@ export default function EngineeringPositioning() {
       aria-labelledby="se-01-heading"
       className="relative bg-white dark:bg-slate-950 py-24 lg:py-28 border-t border-slate-200/60 dark:border-slate-800/60 scroll-mt-24"
     >
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
         <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
           <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">SE.01</span>
           <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
-          <span>Division positioning · doctrine</span>
+          <span>Division positioning</span>
         </div>
 
         <h2
@@ -34,12 +34,10 @@ export default function EngineeringPositioning() {
 
         <div className="mt-8 grid gap-5 text-base md:text-lg text-slate-600 dark:text-slate-400 leading-[1.65]">
           <p>
-            FlyttGoTech designs and operates modular cloud platform
-            infrastructure deployed across European, African and Middle
-            Eastern public-sector and enterprise programmes. The capability
-            surface this page describes is in production today; the
-            deployment posture is the same one our regulator-bounded
-            installations operate under.
+            The capability surface this page describes is in production
+            today; the deployment posture is the same one our regulator-
+            bounded installations operate under across European, African
+            and Middle Eastern public-sector and enterprise programmes.
           </p>
           <p>
             Six capability tiers — from a 5-day digital presence website
@@ -52,10 +50,14 @@ export default function EngineeringPositioning() {
             datacenters under national HSM and national-eID integration.
           </p>
         </div>
+      </div>
 
-        <div className="mt-10 pt-6 border-t border-slate-200/70 dark:border-slate-800/60 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
-          Every engagement runs on the same FlyttGoTech Core · same compliance posture · same audit log
-        </div>
+      {/* Thin divider after section */}
+      <div
+        aria-hidden="true"
+        className="mt-20 lg:mt-24 mx-auto max-w-3xl px-6 lg:px-8"
+      >
+        <div className="h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent" />
       </div>
     </section>
   );

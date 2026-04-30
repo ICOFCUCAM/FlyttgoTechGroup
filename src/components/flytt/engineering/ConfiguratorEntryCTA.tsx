@@ -14,7 +14,7 @@ const META = [
   { icon: Clock3,    label: 'Delivery window' },
   { icon: FileText,  label: 'Export to PDF' },
   { icon: FileType,  label: 'Export to Word' },
-  { icon: Mail,      label: 'Send via email' },
+  { icon: Mail,      label: 'Send estimate via email' },
 ];
 
 export default function ConfiguratorEntryCTA() {

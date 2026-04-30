@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import PageHero from '@/components/flytt/PageHero';
+import DoctrineStrip from '@/components/flytt/engineering/DoctrineStrip';
 import EngineeringPositioning from '@/components/flytt/engineering/EngineeringPositioning';
 import AudienceGrid from '@/components/flytt/engineering/AudienceGrid';
 import CapabilityLadder from '@/components/flytt/engineering/CapabilityLadder';
@@ -94,11 +95,14 @@ export default function EngineeringPage() {
               </em>
             </>
           }
-          description="FlyttGoTech builds digital presence websites, smart platforms, enterprise systems and sovereign-ready public infrastructure using the same engineering core that powers the FlyttGo platform ecosystem. Every engagement runs on the same FlyttGoTech Core, the same compliance posture, the same audit log."
+          description="FlyttGoTech builds digital presence websites, smart platforms, enterprise systems and sovereign-ready public infrastructure using the same engineering core that powers the FlyttGo platform ecosystem."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Engineering' }]}
         />
 
-        {/* SE.01 — Division positioning (doctrine block) */}
+        {/* SE.00 — single-source doctrine strip */}
+        <DoctrineStrip />
+
+        {/* SE.01 — Division positioning */}
         <Reveal>
           <EngineeringPositioning />
         </Reveal>
