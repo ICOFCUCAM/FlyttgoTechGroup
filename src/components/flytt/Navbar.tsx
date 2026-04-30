@@ -37,6 +37,8 @@ import {
   Globe2,
   Network,
   FileCheck2,
+  CalendarClock,
+  Layers,
   Workflow,
   type LucideIcon,
 } from 'lucide-react';
@@ -188,6 +190,14 @@ const primaryLinks: NavLink[] = [
     dropdown: {
       columns: [
         {
+          heading: 'Build with FlyttGo',
+          items: [
+            { label: 'Engineering capability ladder', description: 'Six tiers · digital presence to platform-class', href: '/engineering', icon: Layers },
+            { label: 'Cost configurator', description: 'Live procurement estimator · PDF / Word export', href: '/pricing', icon: Calculator },
+            { label: 'Consultation booking', description: 'Five-step intake · four consultation categories', href: '/consultation', icon: CalendarClock },
+          ],
+        },
+        {
           heading: 'Architecture & Developers',
           items: [
             { label: 'Architecture', description: 'Cloud-native platform stack', href: '/technology', icon: Code2 },
@@ -206,9 +216,9 @@ const primaryLinks: NavLink[] = [
         },
       ],
       feature: {
-        title: 'Cost configurator · PR.00',
+        title: 'Build Your Digital Platform Infrastructure · PR.00',
         description:
-          'Live infrastructure pricing across six capability levels. Pick a level, layer add-ons, choose a deployment substrate and a region — total + delivery window update live.',
+          'Live procurement estimator. Pick a level, layer feature modules, choose a deployment substrate and region — total cost + delivery window + architecture tier update live.',
         href: '/pricing',
         cta: 'Open the live configurator',
       },
