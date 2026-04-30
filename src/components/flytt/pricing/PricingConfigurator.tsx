@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Globe2,
   ListChecks,
+  Link2,
 } from 'lucide-react';
 
 /**
@@ -449,6 +450,20 @@ export default function PricingConfigurator() {
     window.location.href = href;
   };
 
+  // Copy the canonical shareable URL (current configurator state) to
+  // the clipboard. Recipient gets the same configuration on open.
+  const [linkCopied, setLinkCopied] = useState(false);
+  const copyShareableLink = async () => {
+    if (typeof window === 'undefined') return;
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setLinkCopied(true);
+      window.setTimeout(() => setLinkCopied(false), 2000);
+    } catch {
+      // Older browsers without clipboard API — silently no-op.
+    }
+  };
+
   const intakeUrl = useMemo(() => {
     const params = new URLSearchParams({
       intent: 'engineering',
@@ -579,16 +594,29 @@ export default function PricingConfigurator() {
           </div>
 
           <div className="px-6 py-5">
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
-              Estimated total · USD
-            </div>
-            <div className="mt-1.5 font-serif tabular-nums leading-none text-white motion-safe:transition-all">
-              <div className="text-[28px] font-medium">{fmt(totals.totalLow)}</div>
-              <div className="text-[12px] text-white/55 mt-1 font-sans uppercase tracking-[0.18em]">to</div>
-              <div className="text-[28px] font-medium text-[#D6B575]">{fmt(totals.totalHigh)}</div>
+            <div
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label={`Estimated total ${fmt(totals.totalLow)} to ${fmt(totals.totalHigh)} USD`}
+            >
+              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
+                Estimated total · USD
+              </div>
+              <div className="mt-1.5 font-serif tabular-nums leading-none text-white motion-safe:transition-all">
+                <div className="text-[28px] font-medium">{fmt(totals.totalLow)}</div>
+                <div className="text-[12px] text-white/55 mt-1 font-sans uppercase tracking-[0.18em]">to</div>
+                <div className="text-[28px] font-medium text-[#D6B575]">{fmt(totals.totalHigh)}</div>
+              </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10">
+            <div
+              className="mt-5 pt-4 border-t border-white/10"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label={`Estimated delivery window ${totals.weeksLow} to ${totals.weeksHigh} weeks`}
+            >
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
                 Estimated delivery window
               </div>
@@ -598,7 +626,7 @@ export default function PricingConfigurator() {
             </div>
           </div>
 
-          <div className="px-6 py-4 border-t border-white/10 grid grid-cols-3 gap-2">
+          <div className="px-6 py-4 border-t border-white/10 grid grid-cols-4 gap-2">
             <button
               type="button"
               onClick={printEstimate}
@@ -625,6 +653,25 @@ export default function PricingConfigurator() {
             >
               <Mail size={14} strokeWidth={1.75} aria-hidden="true" />
               <span className="text-[10px] font-mono tracking-[0.16em] uppercase">Email</span>
+            </button>
+            <button
+              type="button"
+              onClick={copyShareableLink}
+              aria-label={linkCopied ? 'Shareable link copied to clipboard' : 'Copy shareable link'}
+              className={`flex flex-col items-center gap-1 px-2 py-2.5 rounded-md border motion-safe:transition-colors ${
+                linkCopied
+                  ? 'bg-[#0FB5A6]/15 border-[#0FB5A6]/40 text-[#0FB5A6]'
+                  : 'bg-white/[0.06] border-white/10 text-white/85 hover:bg-white/[0.10] hover:border-white/20'
+              }`}
+            >
+              {linkCopied ? (
+                <Check size={14} strokeWidth={2} aria-hidden="true" />
+              ) : (
+                <Link2 size={14} strokeWidth={1.75} aria-hidden="true" />
+              )}
+              <span className="text-[10px] font-mono tracking-[0.16em] uppercase">
+                {linkCopied ? 'Copied' : 'Link'}
+              </span>
             </button>
           </div>
 
