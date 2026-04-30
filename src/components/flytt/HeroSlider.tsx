@@ -61,9 +61,9 @@ const HeroSlider: React.FC = () => {
                 the previous. Honours prefers-reduced-motion via the
                 .hero-stage class in globals.css. */}
             <div className="hero-stage flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] text-white/55" style={{ animationDelay: '60ms' }}>
-              <span className="text-[#9ED0F9] font-semibold">PL.00</span>
+              <span className="text-[#9ED0F9] font-semibold">HP.00</span>
               <span aria-hidden="true" className="flex-1 h-px bg-white/10 max-w-[160px]" />
-              <span className="uppercase">Platform Infrastructure</span>
+              <span className="uppercase">FlyttGo Technologies Group</span>
             </div>
 
             <p className="hero-stage mt-6 inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur border border-white/15 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ animationDelay: '180ms' }}>
@@ -151,7 +151,7 @@ const HeroSlider: React.FC = () => {
                 className="group inline-flex items-center gap-2 px-6 py-3.5 bg-[#D6B575] text-[#0A1F3D] text-sm font-semibold rounded-lg hover:bg-[#D6B575]/90 motion-safe:transition-all shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B575]/60 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D]"
               >
                 <Layers3 size={15} strokeWidth={2} aria-hidden="true" />
-                Build a website · SE.00
+                Engineering division · SE.00
                 <ArrowRight
                   size={16}
                   className="motion-safe:transition-transform group-hover:translate-x-0.5"
