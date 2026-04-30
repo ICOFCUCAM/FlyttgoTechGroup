@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Check,
   FileText,
@@ -11,6 +12,7 @@ import {
   Calculator,
   ShieldCheck,
   Globe2,
+  ListChecks,
 } from 'lucide-react';
 
 /**
@@ -74,29 +76,30 @@ const LEVELS: Level[] = [
 ];
 
 const ADDONS: AddOn[] = [
-  { id: 'auth',         code: 'AO.01', name: 'Authentication system',          priceUSD: 2500,   weeks: 2, context: 'SSO · SAML · OIDC' },
-  { id: 'roles',        code: 'AO.02', name: 'Role permissions',               priceUSD: 1500,   weeks: 1, context: 'Multi-role access control' },
-  { id: 'pay',          code: 'AO.03', name: 'Payment integration',            priceUSD: 3000,   weeks: 3, context: 'PSD2 · Stripe · SEPA' },
-  { id: 'admin',        code: 'AO.04', name: 'Admin dashboard',                priceUSD: 4000,   weeks: 3, context: 'Multi-tenant · audit-log' },
-  { id: 'api',          code: 'AO.05', name: 'API integrations',               priceUSD: 2000,   weeks: 2, context: 'REST · GraphQL · webhooks' },
-  { id: 'marketplace',  code: 'AO.06', name: 'Marketplace engine',             priceUSD: 40000,  weeks: 6, context: 'Multi-sided · provider directory' },
-  { id: 'mobile',       code: 'AO.07', name: 'Mobile app companion',           priceUSD: 20000,  weeks: 6, context: 'iOS + Android · React Native' },
-  { id: 'gov',          code: 'AO.08', name: 'Government compliance layer',    priceUSD: 60000,  weeks: 8, context: 'eIDAS · GDPR · DPIA' },
-  { id: 'ai',           code: 'AO.09', name: 'AI routing engine',              priceUSD: 80000,  weeks: 6, context: 'Demand · routing · MLOps' },
+  { id: 'auth',         code: 'AO.01', name: 'Authentication system',         priceUSD: 2500,   weeks: 2, context: 'SSO · SAML · OIDC' },
+  { id: 'roles',        code: 'AO.02', name: 'Role permissions',              priceUSD: 1500,   weeks: 1, context: 'Multi-role access control' },
+  { id: 'pay',          code: 'AO.03', name: 'Payment integration',           priceUSD: 3000,   weeks: 3, context: 'PSD2 · Stripe · SEPA' },
+  { id: 'admin',        code: 'AO.04', name: 'Admin dashboard',               priceUSD: 4000,   weeks: 3, context: 'Multi-tenant · audit-log' },
+  { id: 'mobile',       code: 'AO.05', name: 'Mobile companion app',          priceUSD: 20000,  weeks: 6, context: 'iOS + Android · React Native' },
+  { id: 'api',          code: 'AO.06', name: 'API integrations',              priceUSD: 2000,   weeks: 2, context: 'REST · GraphQL · webhooks' },
+  { id: 'marketplace',  code: 'AO.07', name: 'Marketplace engine',            priceUSD: 40000,  weeks: 6, context: 'Multi-sided · provider directory' },
+  { id: 'workflow',     code: 'AO.08', name: 'Enterprise workflow engine',    priceUSD: 25000,  weeks: 5, context: 'Approval chains · SLA queues · DMS' },
+  { id: 'gov',          code: 'AO.09', name: 'Government compliance module',  priceUSD: 60000,  weeks: 8, context: 'eIDAS · GDPR · DPIA' },
+  { id: 'ai',           code: 'AO.10', name: 'AI routing engine',             priceUSD: 80000,  weeks: 6, context: 'Demand · routing · MLOps' },
 ];
 
 const DEPLOYMENT: Deployment[] = [
-  { id: 'saas',      code: 'DM.01', name: 'SaaS',                  priceMult: 1.00, weeksAdd: 0, sub: 'FlyttGo-managed regional tenants' },
-  { id: 'dedicated', code: 'DM.02', name: 'Dedicated tenant',      priceMult: 1.20, weeksAdd: 2, sub: 'Isolated tenant · dedicated resources' },
-  { id: 'paas',      code: 'DM.OR', name: 'PaaS integration',      priceMult: 1.35, weeksAdd: 3, sub: 'FlyttGoTech Core orchestration substrate' },
-  { id: 'sovereign', code: 'DM.03', name: 'Sovereign deployment',  priceMult: 1.65, weeksAdd: 8, sub: 'National datacenter · national HSM · regulator-bounded' },
+  { id: 'saas',      code: 'DM.01', name: 'Managed SaaS',                       priceMult: 1.00, weeksAdd: 0, sub: 'FlyttGo-managed regional tenants' },
+  { id: 'dedicated', code: 'DM.02', name: 'Dedicated Tenant',                   priceMult: 1.20, weeksAdd: 2, sub: 'Isolated tenant · dedicated resources' },
+  { id: 'paas',      code: 'DM.OR', name: 'Platform Integration (PaaS)',        priceMult: 1.35, weeksAdd: 3, sub: 'FlyttGoTech Core orchestration substrate' },
+  { id: 'sovereign', code: 'DM.03', name: 'Sovereign Infrastructure Deployment', priceMult: 1.65, weeksAdd: 8, sub: 'National datacenter · national HSM · regulator-bounded' },
 ];
 
 const REGIONS: Region[] = [
-  { id: 'usa', code: 'RG.NA',  name: 'USA',                    priceMult: 1.05, weeksAdd: 0, sub: 'Primary NA region' },
-  { id: 'eu',  code: 'RG.EU',  name: 'Europe',                 priceMult: 1.00, weeksAdd: 0, sub: 'Primary EU region · GDPR baseline' },
-  { id: 'af',  code: 'RG.AF',  name: 'Africa',                 priceMult: 0.30, weeksAdd: 0, sub: 'Regional pricing band' },
-  { id: 'gov', code: 'RG.GV',  name: 'Government deployment',  priceMult: 1.40, weeksAdd: 4, sub: 'Sovereignty + compliance overhead' },
+  { id: 'usa', code: 'RG.NA',  name: 'USA',                              priceMult: 1.05, weeksAdd: 0, sub: 'Primary NA region' },
+  { id: 'eu',  code: 'RG.EU',  name: 'Europe',                           priceMult: 1.00, weeksAdd: 0, sub: 'Primary EU region · GDPR baseline' },
+  { id: 'af',  code: 'RG.AF',  name: 'Africa',                           priceMult: 0.30, weeksAdd: 0, sub: 'Regional pricing band' },
+  { id: 'gov', code: 'RG.GV',  name: 'Government deployment environments', priceMult: 1.40, weeksAdd: 4, sub: 'Sovereignty + compliance overhead' },
 ];
 
 const fmt = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
@@ -302,11 +305,53 @@ const DEFAULT_LEVEL = 'l2';
 const DEFAULT_DEPLOYMENT = 'saas';
 const DEFAULT_REGION = 'eu';
 
+const VALID_LEVELS = new Set(LEVELS.map((l) => l.id));
+const VALID_ADDONS = new Set(ADDONS.map((a) => a.id));
+const VALID_DEPLOYMENTS = new Set(DEPLOYMENT.map((d) => d.id));
+const VALID_REGIONS = new Set(REGIONS.map((r) => r.id));
+
 export default function PricingConfigurator() {
-  const [levelId, setLevelId] = useState<string>(DEFAULT_LEVEL);
-  const [addonIds, setAddonIds] = useState<Set<string>>(new Set());
-  const [deploymentId, setDeploymentId] = useState<string>(DEFAULT_DEPLOYMENT);
-  const [regionId, setRegionId] = useState<string>(DEFAULT_REGION);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Hydrate initial state from URL params so the configurator is
+  // shareable — sending a link with ?level=l3&addons=auth,pay
+  // restores the recipient's view exactly. Falls back to defaults
+  // for any missing/invalid parameter.
+  const initial = useMemo(() => {
+    const levelParam = searchParams?.get('level') ?? '';
+    const deployParam = searchParams?.get('deploy') ?? '';
+    const regionParam = searchParams?.get('region') ?? '';
+    const addonsParam = (searchParams?.get('addons') ?? '').split(',').filter(Boolean);
+    return {
+      level: VALID_LEVELS.has(levelParam) ? levelParam : DEFAULT_LEVEL,
+      deployment: VALID_DEPLOYMENTS.has(deployParam) ? deployParam : DEFAULT_DEPLOYMENT,
+      region: VALID_REGIONS.has(regionParam) ? regionParam : DEFAULT_REGION,
+      addons: new Set(addonsParam.filter((a) => VALID_ADDONS.has(a))),
+    };
+    // Hydrate once on mount; URL is then updated by the configurator
+    // itself so subsequent searchParams changes are our own.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const [levelId, setLevelId] = useState<string>(initial.level);
+  const [addonIds, setAddonIds] = useState<Set<string>>(initial.addons);
+  const [deploymentId, setDeploymentId] = useState<string>(initial.deployment);
+  const [regionId, setRegionId] = useState<string>(initial.region);
+
+  // Persist state into the URL on every change so the link is always
+  // shareable. router.replace is shallow (no scroll, no re-render of
+  // server tree).
+  useEffect(() => {
+    const sp = new URLSearchParams();
+    if (levelId !== DEFAULT_LEVEL) sp.set('level', levelId);
+    if (addonIds.size) sp.set('addons', Array.from(addonIds).join(','));
+    if (deploymentId !== DEFAULT_DEPLOYMENT) sp.set('deploy', deploymentId);
+    if (regionId !== DEFAULT_REGION) sp.set('region', regionId);
+    const query = sp.toString();
+    const url = query ? `/pricing?${query}` : '/pricing';
+    router.replace(url, { scroll: false });
+  }, [levelId, addonIds, deploymentId, regionId, router]);
 
   const level = useMemo(() => LEVELS.find((l) => l.id === levelId)!, [levelId]);
   const addons = useMemo(
@@ -410,10 +455,16 @@ export default function PricingConfigurator() {
       level: level.code,
       deployment: deployment.code,
       region: region.code,
-      addons: Array.from(addonIds).join(','),
     });
+    if (addonIds.size) {
+      params.set('addons', addons.map((a) => a.code).join(','));
+    }
+    params.set(
+      'estimate',
+      `${fmt(totals.totalLow)}-${fmt(totals.totalHigh)} · ${totals.weeksLow}-${totals.weeksHigh}w`,
+    );
     return `/contact?${params.toString()}`;
-  }, [level, addonIds, deployment, region]);
+  }, [level, addons, addonIds, deployment, region, totals]);
 
   return (
     <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
@@ -440,6 +491,20 @@ export default function PricingConfigurator() {
 
         {/* STEP 2 — ADD-ONS */}
         <StepCard code="PR.02" number={2} title="Add feature modules">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">
+              {addons.length} of {ADDONS.length} add-ons selected
+            </span>
+            {addons.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setAddonIds(new Set())}
+                className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 hover:text-slate-900 dark:hover:text-white motion-safe:transition-colors"
+              >
+                Clear all
+              </button>
+            )}
+          </div>
           <ul className="grid sm:grid-cols-2 gap-3">
             {ADDONS.map((a) => (
               <li key={a.id}>
@@ -451,6 +516,7 @@ export default function PricingConfigurator() {
                   body={a.context}
                   meta={`+${fmt(a.priceUSD)} · +${a.weeks}w`}
                   type="checkbox"
+                  accent="#0FB5A6"
                 />
               </li>
             ))}
@@ -473,6 +539,7 @@ export default function PricingConfigurator() {
                   body={d.sub}
                   meta={`${pct(d.priceMult)} cost · +${d.weeksAdd}w`}
                   type="radio"
+                  accent="#7C5CE6"
                 />
               </li>
             ))}
@@ -492,6 +559,7 @@ export default function PricingConfigurator() {
                   body={r.sub}
                   meta={`${pct(r.priceMult)} cost${r.weeksAdd ? ` · +${r.weeksAdd}w` : ''}`}
                   type="radio"
+                  accent="#D6B575"
                 />
               </li>
             ))}
@@ -499,8 +567,9 @@ export default function PricingConfigurator() {
         </StepCard>
       </div>
 
-      {/* === RIGHT: STICKY SUMMARY === */}
-      <aside className="lg:col-span-4 lg:sticky lg:top-24">
+      {/* === RIGHT: STICKY SUMMARY (cost + feature manifest) === */}
+      <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-4">
+        {/* COST SUMMARY PANEL */}
         <div className="rounded-2xl bg-[#0A1F3D] text-white border border-white/10 overflow-hidden shadow-[0_24px_60px_-30px_rgb(10_31_61/0.5)]">
           <div className="px-6 py-4 bg-gradient-to-r from-[#0A1F3D] to-[#0A3A6B] border-b border-white/10 flex items-center gap-2 font-mono text-[10px] tracking-[0.22em] uppercase">
             <Calculator size={12} strokeWidth={2} aria-hidden="true" className="text-[#D6B575]" />
@@ -513,7 +582,7 @@ export default function PricingConfigurator() {
             <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
               Estimated total · USD
             </div>
-            <div className="mt-1.5 font-serif tabular-nums leading-none text-white">
+            <div className="mt-1.5 font-serif tabular-nums leading-none text-white motion-safe:transition-all">
               <div className="text-[28px] font-medium">{fmt(totals.totalLow)}</div>
               <div className="text-[12px] text-white/55 mt-1 font-sans uppercase tracking-[0.18em]">to</div>
               <div className="text-[28px] font-medium text-[#D6B575]">{fmt(totals.totalHigh)}</div>
@@ -523,26 +592,17 @@ export default function PricingConfigurator() {
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
                 Estimated delivery window
               </div>
-              <div className="mt-1 text-[18px] font-semibold tracking-tight text-white tabular-nums">
+              <div className="mt-1 text-[18px] font-semibold tracking-tight text-white tabular-nums motion-safe:transition-all">
                 {totals.weeksLow} – {totals.weeksHigh} weeks
               </div>
             </div>
-          </div>
-
-          <div className="px-6 py-4 border-t border-white/10 space-y-1">
-            <SummaryRow label={`${level.code} · ${level.name}`} value={fmt(level.baseUSD)} />
-            {addons.map((a) => (
-              <SummaryRow key={a.id} label={`+ ${a.name}`} value={`+${fmt(a.priceUSD)}`} small />
-            ))}
-            <div className="my-2 h-px bg-white/10" aria-hidden="true" />
-            <SummaryRow label={`${deployment.code} · ${deployment.name}`} value={pct(deployment.priceMult)} small />
-            <SummaryRow label={`${region.code} · ${region.name}`} value={pct(region.priceMult)} small />
           </div>
 
           <div className="px-6 py-4 border-t border-white/10 grid grid-cols-3 gap-2">
             <button
               type="button"
               onClick={printEstimate}
+              aria-label="Print or save as PDF"
               className="flex flex-col items-center gap-1 px-2 py-2.5 rounded-md bg-white/[0.06] border border-white/10 text-white/85 hover:bg-white/[0.10] hover:border-white/20 motion-safe:transition-colors"
             >
               <Printer size={14} strokeWidth={1.75} aria-hidden="true" />
@@ -551,14 +611,16 @@ export default function PricingConfigurator() {
             <button
               type="button"
               onClick={downloadDoc}
+              aria-label="Download Word estimate"
               className="flex flex-col items-center gap-1 px-2 py-2.5 rounded-md bg-white/[0.06] border border-white/10 text-white/85 hover:bg-white/[0.10] hover:border-white/20 motion-safe:transition-colors"
             >
               <FileText size={14} strokeWidth={1.75} aria-hidden="true" />
-              <span className="text-[10px] font-mono tracking-[0.16em] uppercase">.doc</span>
+              <span className="text-[10px] font-mono tracking-[0.16em] uppercase">Word</span>
             </button>
             <button
               type="button"
               onClick={emailEstimate}
+              aria-label="Send estimate via email"
               className="flex flex-col items-center gap-1 px-2 py-2.5 rounded-md bg-white/[0.06] border border-white/10 text-white/85 hover:bg-white/[0.10] hover:border-white/20 motion-safe:transition-colors"
             >
               <Mail size={14} strokeWidth={1.75} aria-hidden="true" />
@@ -589,7 +651,92 @@ export default function PricingConfigurator() {
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500">
+        {/* SELECTED FEATURE MANIFEST PANEL */}
+        <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 overflow-hidden">
+          <div className="px-5 py-3 border-b border-slate-200/70 dark:border-slate-800/60 flex items-center gap-2 font-mono text-[10px] tracking-[0.22em] uppercase">
+            <ListChecks size={12} strokeWidth={2} aria-hidden="true" className="text-[#0A3A6B] dark:text-[#9ED0F9]" />
+            <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">PR.05</span>
+            <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
+            <span className="text-slate-700 dark:text-slate-300">Configuration manifest</span>
+            <span className="ml-auto text-[10px] text-slate-500 tabular-nums">
+              {1 + addons.length + 2} items
+            </span>
+          </div>
+
+          <ul className="px-5 py-4 space-y-2.5 text-[12px]">
+            {/* Level */}
+            <li className="flex items-baseline justify-between gap-3">
+              <span className="flex items-baseline gap-2 min-w-0">
+                <span className="font-mono text-[9px] tracking-[0.18em] uppercase font-semibold text-[#0A3A6B] dark:text-[#9ED0F9] flex-shrink-0">
+                  {level.code}
+                </span>
+                <span className="text-slate-700 dark:text-slate-300 truncate">
+                  {level.name}
+                </span>
+              </span>
+              <span className="font-mono tabular-nums text-slate-900 dark:text-white font-semibold flex-shrink-0">
+                {fmt(level.baseUSD)}
+              </span>
+            </li>
+
+            {/* Addons */}
+            {addons.length === 0 ? (
+              <li className="text-[11px] text-slate-400 dark:text-slate-500 italic py-1">
+                No add-ons selected
+              </li>
+            ) : (
+              addons.map((a) => (
+                <li key={a.id} className="flex items-baseline justify-between gap-3">
+                  <span className="flex items-baseline gap-2 min-w-0">
+                    <span className="font-mono text-[9px] tracking-[0.18em] uppercase font-semibold text-[#0FB5A6] flex-shrink-0">
+                      {a.code}
+                    </span>
+                    <span className="text-slate-600 dark:text-slate-400 truncate">
+                      + {a.name}
+                    </span>
+                  </span>
+                  <span className="font-mono tabular-nums text-slate-700 dark:text-slate-300 flex-shrink-0">
+                    +{fmt(a.priceUSD)}
+                  </span>
+                </li>
+              ))
+            )}
+
+            <li aria-hidden="true" className="border-t border-slate-200/70 dark:border-slate-800/60 my-2" />
+
+            {/* Deployment */}
+            <li className="flex items-baseline justify-between gap-3">
+              <span className="flex items-baseline gap-2 min-w-0">
+                <span className="font-mono text-[9px] tracking-[0.18em] uppercase font-semibold text-[#7C5CE6] flex-shrink-0">
+                  {deployment.code}
+                </span>
+                <span className="text-slate-600 dark:text-slate-400 truncate">
+                  {deployment.name}
+                </span>
+              </span>
+              <span className="font-mono tabular-nums text-slate-700 dark:text-slate-300 flex-shrink-0">
+                {pct(deployment.priceMult)}
+              </span>
+            </li>
+
+            {/* Region */}
+            <li className="flex items-baseline justify-between gap-3">
+              <span className="flex items-baseline gap-2 min-w-0">
+                <span className="font-mono text-[9px] tracking-[0.18em] uppercase font-semibold text-[#D6B575] flex-shrink-0">
+                  {region.code}
+                </span>
+                <span className="text-slate-600 dark:text-slate-400 truncate">
+                  {region.name}
+                </span>
+              </span>
+              <span className="font-mono tabular-nums text-slate-700 dark:text-slate-300 flex-shrink-0">
+                {pct(region.priceMult)}
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500">
           <div className="flex items-center justify-center gap-1.5 p-2.5 rounded-md border border-slate-200/70 dark:border-slate-800/60">
             <ShieldCheck size={11} className="text-[#0FB5A6]" aria-hidden="true" />
             Indicative band
