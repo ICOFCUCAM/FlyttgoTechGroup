@@ -232,10 +232,11 @@ const primaryLinks: NavLink[] = [
         },
       ],
       feature: {
-        title: 'Talk to partnerships',
-        description: 'Scope a deployment with our partnership and deployment engineering team.',
-        href: '/contact?intent=partnership',
-        cta: 'Start a conversation',
+        title: 'Architecture Consultation Booking · CB.00',
+        description:
+          'Structured five-step consultation intake. Four categories: platform architecture, marketplace onboarding, government pilot deployment, enterprise relocation programme setup.',
+        href: '/consultation',
+        cta: 'Book a consultation',
       },
     },
   },

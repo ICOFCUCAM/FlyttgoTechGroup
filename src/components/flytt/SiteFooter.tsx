@@ -57,6 +57,7 @@ const groups: FooterGroup[] = [
       { label: 'Government & public sector · GV.00', href: '/government' },
       { label: 'Institutional Systems Engineering · SE.00', href: '/engineering' },
       { label: 'Cost configurator · PR.00', href: '/pricing' },
+      { label: 'Consultation booking · CB.00', href: '/consultation' },
       { label: 'Deployment lifecycle · EP.00', href: '/deployment-lifecycle' },
       { label: 'Managed SaaS · DM.01', href: '/deployment/managed' },
       { label: 'Customer cloud · DM.02', href: '/deployment/customer-cloud' },
