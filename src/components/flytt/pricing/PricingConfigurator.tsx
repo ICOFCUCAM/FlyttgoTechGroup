@@ -14,6 +14,14 @@ import {
   Globe2,
   ListChecks,
   Link2,
+  Users,
+  Clock3,
+  Landmark,
+  Building2,
+  GraduationCap,
+  Network,
+  Layers3,
+  type LucideIcon,
 } from 'lucide-react';
 
 /**
@@ -38,6 +46,7 @@ type Level = {
   baseUSD: number;
   baseWeeks: number;
   audience: string;
+  users: string;
 };
 
 type AddOn = {
@@ -68,25 +77,30 @@ type Region = {
 };
 
 const LEVELS: Level[] = [
-  { id: 'l1', code: 'L.01', name: 'Digital Presence Website',          baseUSD: 1500,    baseWeeks: 2,  audience: 'SMB · consultants · startups' },
-  { id: 'l2', code: 'L.02', name: 'Professional Business Website',     baseUSD: 4000,    baseWeeks: 4,  audience: 'SMEs · schools · health centres' },
-  { id: 'l3', code: 'L.03', name: 'Smart Interactive Platform',        baseUSD: 15000,   baseWeeks: 8,  audience: 'Marketplaces · universities · NGOs' },
-  { id: 'l4', code: 'L.04', name: 'Enterprise Operations Platform',    baseUSD: 60000,   baseWeeks: 18, audience: 'Corporations · transport systems' },
-  { id: 'l5', code: 'L.05', name: 'National Institutional Platform',   baseUSD: 300000,  baseWeeks: 36, audience: 'Ministries · transport authorities' },
-  { id: 'l6', code: 'L.06', name: 'Platform Ecosystem Infrastructure', baseUSD: 1000000, baseWeeks: 60, audience: 'Cross-border · platform-class' },
+  { id: 'l1', code: 'L.01', name: 'Digital Presence Website',          baseUSD: 1500,    baseWeeks: 2,  audience: 'SMB · consultants · startups',     users: 'Solo · 1–5 users' },
+  { id: 'l2', code: 'L.02', name: 'Professional Business Website',     baseUSD: 4000,    baseWeeks: 4,  audience: 'SMEs · schools · health centres',  users: '5–50 users' },
+  { id: 'l3', code: 'L.03', name: 'Smart Interactive Platform',        baseUSD: 15000,   baseWeeks: 8,  audience: 'Marketplaces · universities · NGOs', users: '50–5,000 users' },
+  { id: 'l4', code: 'L.04', name: 'Enterprise Operations Platform',    baseUSD: 60000,   baseWeeks: 18, audience: 'Corporations · transport systems', users: '1,000–50,000 users' },
+  { id: 'l5', code: 'L.05', name: 'National Institutional Platform',   baseUSD: 300000,  baseWeeks: 36, audience: 'Ministries · transport authorities', users: '100k–5M residents' },
+  { id: 'l6', code: 'L.06', name: 'Platform Ecosystem Infrastructure', baseUSD: 1000000, baseWeeks: 60, audience: 'Cross-border · platform-class',     users: 'Multi-country · 5M+ users' },
 ];
 
 const ADDONS: AddOn[] = [
-  { id: 'auth',         code: 'AO.01', name: 'Authentication system',         priceUSD: 2500,   weeks: 2, context: 'SSO · SAML · OIDC' },
-  { id: 'roles',        code: 'AO.02', name: 'Role permissions',              priceUSD: 1500,   weeks: 1, context: 'Multi-role access control' },
-  { id: 'pay',          code: 'AO.03', name: 'Payment integration',           priceUSD: 3000,   weeks: 3, context: 'PSD2 · Stripe · SEPA' },
-  { id: 'admin',        code: 'AO.04', name: 'Admin dashboard',               priceUSD: 4000,   weeks: 3, context: 'Multi-tenant · audit-log' },
-  { id: 'mobile',       code: 'AO.05', name: 'Mobile companion app',          priceUSD: 20000,  weeks: 6, context: 'iOS + Android · React Native' },
-  { id: 'api',          code: 'AO.06', name: 'API integrations',              priceUSD: 2000,   weeks: 2, context: 'REST · GraphQL · webhooks' },
-  { id: 'marketplace',  code: 'AO.07', name: 'Marketplace engine',            priceUSD: 40000,  weeks: 6, context: 'Multi-sided · provider directory' },
-  { id: 'workflow',     code: 'AO.08', name: 'Enterprise workflow engine',    priceUSD: 25000,  weeks: 5, context: 'Approval chains · SLA queues · DMS' },
-  { id: 'gov',          code: 'AO.09', name: 'Government compliance module',  priceUSD: 60000,  weeks: 8, context: 'eIDAS · GDPR · DPIA' },
-  { id: 'ai',           code: 'AO.10', name: 'AI routing engine',             priceUSD: 80000,  weeks: 6, context: 'Demand · routing · MLOps' },
+  { id: 'auth',         code: 'AO.01', name: 'Authentication system',          priceUSD: 2500,   weeks: 2, context: 'SSO · SAML · OIDC' },
+  { id: 'roles',        code: 'AO.02', name: 'Role-based permissions',         priceUSD: 1500,   weeks: 1, context: 'Multi-role access control' },
+  { id: 'pay',          code: 'AO.03', name: 'Payment gateway integration',    priceUSD: 3000,   weeks: 3, context: 'PSD2 · Stripe · SEPA' },
+  { id: 'admin',        code: 'AO.04', name: 'Admin control dashboard',        priceUSD: 4000,   weeks: 3, context: 'Multi-tenant · audit-log' },
+  { id: 'mobile',       code: 'AO.05', name: 'Mobile companion app',           priceUSD: 20000,  weeks: 6, context: 'iOS + Android · React Native' },
+  { id: 'api',          code: 'AO.06', name: 'API integrations',               priceUSD: 2000,   weeks: 2, context: 'REST · GraphQL · webhooks' },
+  { id: 'marketplace',  code: 'AO.07', name: 'Marketplace engine',             priceUSD: 40000,  weeks: 6, context: 'Multi-sided · provider directory' },
+  { id: 'workflow',     code: 'AO.08', name: 'Enterprise workflow automation', priceUSD: 25000,  weeks: 5, context: 'Approval chains · SLA queues' },
+  { id: 'gov',          code: 'AO.09', name: 'Government compliance module',   priceUSD: 60000,  weeks: 8, context: 'eIDAS · GDPR · DPIA' },
+  { id: 'ai',           code: 'AO.10', name: 'AI routing engine',              priceUSD: 80000,  weeks: 6, context: 'Demand · routing · MLOps' },
+  { id: 'i18n',         code: 'AO.11', name: 'Multi-language support',         priceUSD: 4000,   weeks: 3, context: '10+ locales · ICU plurals · RTL' },
+  { id: 'currency',     code: 'AO.12', name: 'Multi-currency support',         priceUSD: 3500,   weeks: 2, context: 'FX rates · regional pricing curves' },
+  { id: 'audit',        code: 'AO.13', name: 'Audit logging system',           priceUSD: 5000,   weeks: 3, context: 'Append-only · regulator-grade retention' },
+  { id: 'dms',          code: 'AO.14', name: 'Document management system',     priceUSD: 8000,   weeks: 4, context: 'Versioning · WORM storage · search' },
+  { id: 'identity',     code: 'AO.15', name: 'Identity verification layer',    priceUSD: 12000,  weeks: 5, context: 'KYC · eID · biometric optional' },
 ];
 
 const DEPLOYMENT: Deployment[] = [
@@ -97,27 +111,62 @@ const DEPLOYMENT: Deployment[] = [
 ];
 
 const REGIONS: Region[] = [
-  { id: 'usa', code: 'RG.NA',  name: 'USA',                              priceMult: 1.05, weeksAdd: 0, sub: 'Primary NA region' },
-  { id: 'eu',  code: 'RG.EU',  name: 'Europe',                           priceMult: 1.00, weeksAdd: 0, sub: 'Primary EU region · GDPR baseline' },
-  { id: 'af',  code: 'RG.AF',  name: 'Africa',                           priceMult: 0.30, weeksAdd: 0, sub: 'Regional pricing band' },
-  { id: 'gov', code: 'RG.GV',  name: 'Government deployment environments', priceMult: 1.40, weeksAdd: 4, sub: 'Sovereignty + compliance overhead' },
+  { id: 'usa',  code: 'RG.US',  name: 'United States',                     priceMult: 1.05, weeksAdd: 0, sub: 'Primary NA region' },
+  { id: 'eu',   code: 'RG.EU',  name: 'Europe',                            priceMult: 1.00, weeksAdd: 0, sub: 'Primary EU region · GDPR baseline' },
+  { id: 'uk',   code: 'RG.UK',  name: 'United Kingdom',                    priceMult: 1.05, weeksAdd: 0, sub: 'GBP zone · UK GDPR · post-Brexit framework' },
+  { id: 'nor',  code: 'RG.NO',  name: 'Norway / Nordics',                  priceMult: 1.10, weeksAdd: 0, sub: 'NO · SE · DK · FI · IS · primary Nordic band' },
+  { id: 'ca',   code: 'RG.CA',  name: 'Canada',                            priceMult: 1.00, weeksAdd: 0, sub: 'PIPEDA · provincial residency optional' },
+  { id: 'af',   code: 'RG.AF',  name: 'Africa',                            priceMult: 0.30, weeksAdd: 0, sub: 'Regional pricing band' },
+  { id: 'gov',  code: 'RG.GV',  name: 'Government modernization environments', priceMult: 1.40, weeksAdd: 4, sub: 'Sovereignty + compliance overhead' },
 ];
 
 const fmt = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
 const pct = (n: number) => `×${n.toFixed(2)}`;
+
+// Maps the computed weeks midpoint to a human-readable bucket label
+// (per the institutional procurement spec: 2–4 weeks · 1–3 months ·
+// 3–6 months · 6–12 months · 12+ months).
+function timelineBucket(weeks: number): string {
+  if (weeks <= 4)  return '2–4 weeks';
+  if (weeks <= 12) return '1–3 months';
+  if (weeks <= 24) return '3–6 months';
+  if (weeks <= 48) return '6–12 months';
+  return '12+ months';
+}
+
+// Institutional-mode pathways — surfaced when the visitor selects
+// Level 5 (national institutional) or Level 6 (platform ecosystem).
+type Pathway = {
+  id: string;
+  code: string;
+  icon: LucideIcon;
+  name: string;
+  body: string;
+};
+
+const PATHWAYS: Pathway[] = [
+  { id: 'pilot',     code: 'PA.01', icon: Layers3,        name: 'Pilot deployment option',                       body: '60–90 day pilot · single tenant · 1 region · go/no-go decision package at the end' },
+  { id: 'ministry',  code: 'PA.02', icon: Landmark,       name: 'Ministry deployment pathway',                   body: 'Cross-ministry rollout · regulator-bounded ops · capability brief GCB.00 framework' },
+  { id: 'university',code: 'PA.03', icon: GraduationCap,  name: 'University rollout pathway',                    body: 'Multi-faculty · admissions / scholarships · research-data residency posture' },
+  { id: 'municipal', code: 'PA.04', icon: Building2,      name: 'Municipal platform pathway',                    body: 'Council-grade citizen services · residents portal · GDPR-compliant operations' },
+  { id: 'national',  code: 'PA.05', icon: Network,        name: 'National infrastructure deployment compatibility', body: 'Sovereign datacenter · national HSM · national-eID · cross-border federation' },
+];
 
 function buildEstimateHTML(args: {
   level: Level;
   addons: AddOn[];
   deployment: Deployment;
   region: Region;
+  pathway: Pathway | null;
   totalLow: number;
   totalHigh: number;
   weeksLow: number;
   weeksHigh: number;
+  weeksMid: number;
   issued: string;
 }): string {
-  const { level, addons, deployment, region, totalLow, totalHigh, weeksLow, weeksHigh, issued } = args;
+  const { level, addons, deployment, region, pathway, totalLow, totalHigh, weeksLow, weeksHigh, weeksMid, issued } = args;
+  const bucket = timelineBucket(weeksMid);
   return `
 <style>
   body { font-family: 'IBM Plex Serif', Georgia, serif; color: #0A1F3D; padding: 56px 64px; max-width: 794px; margin: 0 auto; }
@@ -139,19 +188,20 @@ function buildEstimateHTML(args: {
 <h1>Infrastructure cost estimate</h1>
 <p class="lede">Generated by the FlyttGo Pricing Configurator (PR.00). Indicative — final pricing on the order form after a scoping engagement.</p>
 
-<h2>Configuration</h2>
+<h2>Project scope</h2>
 <table>
-  <tr><th>Capability level</th><td>${level.code} · ${level.name}</td><td class="num">${fmt(level.baseUSD)}</td></tr>
+  <tr><th>Architecture level</th><td>${level.code} · ${level.name} · ${level.users}</td><td class="num">${fmt(level.baseUSD)}</td></tr>
   ${addons.map((a) => `<tr><th>+ ${a.code}</th><td>${a.name}</td><td class="num">${fmt(a.priceUSD)}</td></tr>`).join('')}
   <tr><th>Deployment substrate</th><td>${deployment.code} · ${deployment.name}</td><td class="num">${pct(deployment.priceMult)}</td></tr>
   <tr><th>Region</th><td>${region.code} · ${region.name}</td><td class="num">${pct(region.priceMult)}</td></tr>
+  ${pathway ? `<tr><th>Institutional pathway</th><td>${pathway.code} · ${pathway.name}</td><td class="num">—</td></tr>` : ''}
 </table>
 
 <div class="total">
-  <div class="total-label">Estimated total · USD · indicative band</div>
+  <div class="total-label">Estimated cost range · USD · indicative band</div>
   <div class="total-value">${fmt(totalLow)} – ${fmt(totalHigh)}</div>
   <div class="total-label" style="margin-top: 14px;">Estimated delivery window</div>
-  <div class="total-value" style="font-size: 16pt;">${weeksLow} – ${weeksHigh} weeks</div>
+  <div class="total-value" style="font-size: 16pt;">${weeksLow} – ${weeksHigh} weeks · ${bucket}</div>
 </div>
 
 <div class="meta">Issued ${issued} · pricing in USD · per scoping engagement</div>
@@ -164,16 +214,20 @@ function buildEstimatePlainText(args: {
   addons: AddOn[];
   deployment: Deployment;
   region: Region;
+  pathway: Pathway | null;
   totalLow: number;
   totalHigh: number;
   weeksLow: number;
   weeksHigh: number;
+  weeksMid: number;
 }): string {
-  const { level, addons, deployment, region, totalLow, totalHigh, weeksLow, weeksHigh } = args;
+  const { level, addons, deployment, region, pathway, totalLow, totalHigh, weeksLow, weeksHigh, weeksMid } = args;
+  const bucket = timelineBucket(weeksMid);
   const lines: string[] = [];
   lines.push('FlyttGo Pricing Configurator — indicative estimate');
   lines.push('');
   lines.push(`Level:        ${level.code} · ${level.name}`);
+  lines.push(`Users:        ${level.users}`);
   lines.push(`Base:         ${fmt(level.baseUSD)}`);
   if (addons.length) {
     lines.push('');
@@ -185,9 +239,12 @@ function buildEstimatePlainText(args: {
   lines.push('');
   lines.push(`Deployment:   ${deployment.code} · ${deployment.name} (${pct(deployment.priceMult)})`);
   lines.push(`Region:       ${region.code} · ${region.name} (${pct(region.priceMult)})`);
+  if (pathway) {
+    lines.push(`Pathway:      ${pathway.code} · ${pathway.name}`);
+  }
   lines.push('');
   lines.push(`Total band:   ${fmt(totalLow)} – ${fmt(totalHigh)}`);
-  lines.push(`Delivery:     ${weeksLow} – ${weeksHigh} weeks`);
+  lines.push(`Delivery:     ${weeksLow} – ${weeksHigh} weeks · ${bucket}`);
   lines.push('');
   lines.push('Indicative — final pricing on the order form after a scoping engagement.');
   lines.push('FlyttGo Technologies Group AB · platform@flyttgotech.com');
@@ -310,6 +367,8 @@ const VALID_LEVELS = new Set(LEVELS.map((l) => l.id));
 const VALID_ADDONS = new Set(ADDONS.map((a) => a.id));
 const VALID_DEPLOYMENTS = new Set(DEPLOYMENT.map((d) => d.id));
 const VALID_REGIONS = new Set(REGIONS.map((r) => r.id));
+const VALID_PATHWAYS = new Set(PATHWAYS.map((p) => p.id));
+const INSTITUTIONAL_LEVELS = new Set(['l5', 'l6']);
 
 export default function PricingConfigurator() {
   const router = useRouter();
@@ -323,12 +382,14 @@ export default function PricingConfigurator() {
     const levelParam = searchParams?.get('level') ?? '';
     const deployParam = searchParams?.get('deploy') ?? '';
     const regionParam = searchParams?.get('region') ?? '';
+    const pathwayParam = searchParams?.get('pathway') ?? '';
     const addonsParam = (searchParams?.get('addons') ?? '').split(',').filter(Boolean);
     return {
       level: VALID_LEVELS.has(levelParam) ? levelParam : DEFAULT_LEVEL,
       deployment: VALID_DEPLOYMENTS.has(deployParam) ? deployParam : DEFAULT_DEPLOYMENT,
       region: VALID_REGIONS.has(regionParam) ? regionParam : DEFAULT_REGION,
       addons: new Set(addonsParam.filter((a) => VALID_ADDONS.has(a))),
+      pathway: VALID_PATHWAYS.has(pathwayParam) ? pathwayParam : '',
     };
     // Hydrate once on mount; URL is then updated by the configurator
     // itself so subsequent searchParams changes are our own.
@@ -339,6 +400,13 @@ export default function PricingConfigurator() {
   const [addonIds, setAddonIds] = useState<Set<string>>(initial.addons);
   const [deploymentId, setDeploymentId] = useState<string>(initial.deployment);
   const [regionId, setRegionId] = useState<string>(initial.region);
+  const [pathwayId, setPathwayId] = useState<string>(initial.pathway);
+
+  const isInstitutional = INSTITUTIONAL_LEVELS.has(levelId);
+  const pathway = useMemo(
+    () => (pathwayId ? PATHWAYS.find((p) => p.id === pathwayId) ?? null : null),
+    [pathwayId],
+  );
 
   // Persist state into the URL on every change so the link is always
   // shareable. router.replace is shallow (no scroll, no re-render of
@@ -349,10 +417,19 @@ export default function PricingConfigurator() {
     if (addonIds.size) sp.set('addons', Array.from(addonIds).join(','));
     if (deploymentId !== DEFAULT_DEPLOYMENT) sp.set('deploy', deploymentId);
     if (regionId !== DEFAULT_REGION) sp.set('region', regionId);
+    // Pathway is only meaningful when an institutional level is
+    // selected; clear it from the URL otherwise so a downgrade
+    // doesn't carry a stale pathway forward.
+    if (pathwayId && isInstitutional) sp.set('pathway', pathwayId);
     const query = sp.toString();
     const url = query ? `/pricing?${query}` : '/pricing';
     router.replace(url, { scroll: false });
-  }, [levelId, addonIds, deploymentId, regionId, router]);
+  }, [levelId, addonIds, deploymentId, regionId, pathwayId, isInstitutional, router]);
+
+  // Auto-clear pathway when leaving institutional levels.
+  useEffect(() => {
+    if (!isInstitutional && pathwayId) setPathwayId('');
+  }, [isInstitutional, pathwayId]);
 
   const level = useMemo(() => LEVELS.find((l) => l.id === levelId)!, [levelId]);
   const addons = useMemo(
@@ -394,6 +471,7 @@ export default function PricingConfigurator() {
     setAddonIds(new Set());
     setDeploymentId(DEFAULT_DEPLOYMENT);
     setRegionId(DEFAULT_REGION);
+    setPathwayId('');
   };
 
   const exportArgs = () => ({
@@ -401,10 +479,12 @@ export default function PricingConfigurator() {
     addons,
     deployment,
     region,
+    pathway,
     totalLow: totals.totalLow,
     totalHigh: totals.totalHigh,
     weeksLow: totals.weeksLow,
     weeksHigh: totals.weeksHigh,
+    weeksMid: totals.weeks,
     issued: new Date().toISOString().slice(0, 10),
   });
 
@@ -441,10 +521,12 @@ export default function PricingConfigurator() {
       addons,
       deployment,
       region,
+      pathway,
       totalLow: totals.totalLow,
       totalHigh: totals.totalHigh,
       weeksLow: totals.weeksLow,
       weeksHigh: totals.weeksHigh,
+      weeksMid: totals.weeks,
     });
     const href = `mailto:platform@flyttgotech.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
@@ -474,12 +556,15 @@ export default function PricingConfigurator() {
     if (addonIds.size) {
       params.set('addons', addons.map((a) => a.code).join(','));
     }
+    if (pathway) {
+      params.set('pathway', pathway.code);
+    }
     params.set(
       'estimate',
-      `${fmt(totals.totalLow)}-${fmt(totals.totalHigh)} · ${totals.weeksLow}-${totals.weeksHigh}w`,
+      `${fmt(totals.totalLow)}-${fmt(totals.totalHigh)} · ${totals.weeksLow}-${totals.weeksHigh}w · ${timelineBucket(totals.weeks)}`,
     );
     return `/contact?${params.toString()}`;
-  }, [level, addons, addonIds, deployment, region, totals]);
+  }, [level, addons, addonIds, deployment, region, pathway, totals]);
 
   return (
     <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
@@ -496,7 +581,7 @@ export default function PricingConfigurator() {
                   code={l.code}
                   title={l.name}
                   body={l.audience}
-                  meta={`Base ${fmt(l.baseUSD)} · ${l.baseWeeks}w`}
+                  meta={`${l.users} · base ${fmt(l.baseUSD)} · ${l.baseWeeks}w`}
                   type="radio"
                 />
               </li>
@@ -580,6 +665,76 @@ export default function PricingConfigurator() {
             ))}
           </ul>
         </StepCard>
+
+        {/* STEP 5 — INSTITUTIONAL MODE (conditional) */}
+        {isInstitutional && (
+          <section className="rounded-2xl bg-[#0A1F3D] text-white border border-[#D6B575]/20 p-6 lg:p-7 shadow-[0_24px_60px_-30px_rgb(214_181_117/0.30)]">
+            <div className="flex items-center gap-3 mb-4 font-mono text-[10px] tracking-[0.22em] uppercase">
+              <span className="text-[#D6B575] font-semibold">PR.IM</span>
+              <span aria-hidden="true" className="text-white/30">·</span>
+              <span className="text-white/55">Step 5</span>
+              <span aria-hidden="true" className="text-white/30">·</span>
+              <span className="text-white/85 normal-case tracking-tight font-sans">
+                Institutional mode
+              </span>
+              <span className="ml-auto inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#D6B575]/15 border border-[#D6B575]/30 text-[#D6B575] text-[10px] tracking-[0.16em]">
+                Activated by {levelId.toUpperCase()}
+              </span>
+            </div>
+            <h3 className="font-serif text-lg md:text-xl font-medium tracking-tight text-white mb-1">
+              Pick the deployment pathway your programme runs against.
+            </h3>
+            <p className="text-[12px] text-white/65 leading-relaxed mb-5">
+              Levels 5 and 6 ship under one of five institutional pathways.
+              The pathway shapes the contract instrument, regulator hand-off
+              and procurement tier — picked here, locked at the SE.D2
+              scoping engagement.
+            </p>
+            <ul className="grid sm:grid-cols-2 gap-3">
+              {PATHWAYS.map((p) => {
+                const active = pathwayId === p.id;
+                const Icon = p.icon;
+                return (
+                  <li key={p.id}>
+                    <button
+                      type="button"
+                      onClick={() => setPathwayId(active ? '' : p.id)}
+                      aria-pressed={active}
+                      className={`group w-full text-left p-4 rounded-xl border-2 motion-safe:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B575]/40 focus-visible:ring-offset-[3px] focus-visible:ring-offset-[#0A1F3D] ${
+                        active
+                          ? 'bg-[#D6B575]/15'
+                          : 'bg-white/[0.03] hover:bg-white/[0.06]'
+                      }`}
+                      style={{ borderColor: active ? '#D6B575' : 'rgba(255,255,255,0.08)' }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <span
+                          className={`mt-0.5 w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 ${
+                            active ? 'bg-[#D6B575] text-[#0A1F3D]' : 'bg-white/[0.06] text-[#D6B575]'
+                          }`}
+                          aria-hidden="true"
+                        >
+                          <Icon size={13} strokeWidth={1.75} />
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-mono text-[10px] tracking-[0.22em] uppercase font-semibold text-[#D6B575]">
+                            {p.code}
+                          </div>
+                          <div className="mt-1 text-[13px] font-semibold tracking-tight text-white leading-snug">
+                            {p.name}
+                          </div>
+                          <div className="mt-1 text-[11px] text-white/65 leading-snug">
+                            {p.body}
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
       </div>
 
       {/* === RIGHT: STICKY SUMMARY (cost + feature manifest) === */}
@@ -615,13 +770,19 @@ export default function PricingConfigurator() {
               role="status"
               aria-live="polite"
               aria-atomic="true"
-              aria-label={`Estimated delivery window ${totals.weeksLow} to ${totals.weeksHigh} weeks`}
+              aria-label={`Estimated delivery window ${totals.weeksLow} to ${totals.weeksHigh} weeks, bucket ${timelineBucket(totals.weeks)}`}
             >
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
                 Estimated delivery window
               </div>
-              <div className="mt-1 text-[18px] font-semibold tracking-tight text-white tabular-nums motion-safe:transition-all">
-                {totals.weeksLow} – {totals.weeksHigh} weeks
+              <div className="mt-1 flex items-baseline gap-3 flex-wrap">
+                <div className="text-[18px] font-semibold tracking-tight text-white tabular-nums motion-safe:transition-all">
+                  {totals.weeksLow} – {totals.weeksHigh} weeks
+                </div>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#D6B575]/15 border border-[#D6B575]/30 font-mono text-[10px] uppercase tracking-[0.16em] text-[#D6B575]">
+                  <Clock3 size={10} strokeWidth={2} aria-hidden="true" />
+                  {timelineBucket(totals.weeks)}
+                </span>
               </div>
             </div>
           </div>
@@ -706,7 +867,7 @@ export default function PricingConfigurator() {
             <span aria-hidden="true" className="text-slate-300 dark:text-slate-700">·</span>
             <span className="text-slate-700 dark:text-slate-300">Configuration manifest</span>
             <span className="ml-auto text-[10px] text-slate-500 tabular-nums">
-              {1 + addons.length + 2} items
+              {1 + addons.length + 2 + (pathway ? 1 : 0)} items
             </span>
           </div>
 
@@ -778,6 +939,36 @@ export default function PricingConfigurator() {
               </span>
               <span className="font-mono tabular-nums text-slate-700 dark:text-slate-300 flex-shrink-0">
                 {pct(region.priceMult)}
+              </span>
+            </li>
+
+            {/* Pathway (institutional only) */}
+            {pathway && (
+              <li className="flex items-baseline justify-between gap-3 pt-2 mt-2 border-t border-slate-200/70 dark:border-slate-800/60">
+                <span className="flex items-baseline gap-2 min-w-0">
+                  <span className="font-mono text-[9px] tracking-[0.18em] uppercase font-semibold text-[#D6B575] flex-shrink-0">
+                    {pathway.code}
+                  </span>
+                  <span className="text-slate-600 dark:text-slate-400 truncate">
+                    {pathway.name}
+                  </span>
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400 flex-shrink-0">
+                  Pathway
+                </span>
+              </li>
+            )}
+
+            {/* Timeline bucket */}
+            <li className="flex items-baseline justify-between gap-3 pt-2 mt-2 border-t border-slate-200/70 dark:border-slate-800/60">
+              <span className="flex items-baseline gap-2 min-w-0">
+                <Clock3 size={11} strokeWidth={2} aria-hidden="true" className="text-[#0FB5A6] flex-shrink-0 -mb-0.5" />
+                <span className="text-slate-600 dark:text-slate-400 truncate">
+                  Delivery bucket
+                </span>
+              </span>
+              <span className="font-mono text-[11px] tracking-tight text-[#0FB5A6] tabular-nums flex-shrink-0">
+                {timelineBucket(totals.weeks)}
               </span>
             </li>
           </ul>

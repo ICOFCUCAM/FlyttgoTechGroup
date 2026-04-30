@@ -10,22 +10,22 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title:
-    'Infrastructure Cost Configurator — Live Pricing Across Six Capability Levels',
+    'Build Your Digital Platform Infrastructure — Live Procurement Estimator',
   description:
-    "FlyttGo's live infrastructure cost configurator. Pick a capability level, layer feature add-ons, choose a deployment substrate and a region — total pricing band, delivery window and exportable estimate update live.",
+    "FlyttGo's institutional infrastructure procurement estimator. Pick architecture level, feature modules, deployment substrate, region and (for institutional levels) deployment pathway — total pricing band, delivery window, recommended architecture and exportable estimate update live.",
   alternates: { canonical: '/pricing' },
   openGraph: {
-    title: 'FlyttGo · Infrastructure Cost Configurator',
+    title: 'Build Your Digital Platform Infrastructure · FlyttGo',
     description:
-      'Live pricing across six capability levels and eight modular add-ons. SaaS / Dedicated / PaaS / Sovereign deployment substrates. USA / Europe / Africa / Government regional pricing.',
+      'Live infrastructure procurement estimator. 6 architecture levels · 15 feature modules · 4 deployment substrates · 7 regions · 5 institutional pathways. Export to PDF / Word / email · shareable URL state.',
     url: '/pricing',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FlyttGo · Infrastructure Cost Configurator',
+    title: 'Build Your Digital Platform Infrastructure · FlyttGo',
     description:
-      'Live pricing band + delivery window across six capability levels. Export to PDF / .doc / email.',
+      'Live procurement estimator across 6 architecture levels. Export to PDF / Word / email.',
   },
 };
 
@@ -45,17 +45,17 @@ export default function PricingPage() {
       >
         <PageHero
           code="PR.00"
-          eyebrow="Infrastructure Cost Configurator"
+          eyebrow="Build Your Digital Platform Infrastructure"
           title={
             <>
-              Live infrastructure pricing,{' '}
+              Live procurement estimator,{' '}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
                 from digital presence to platform-class.
               </em>
             </>
           }
-          description="Pick a capability level, layer feature add-ons, choose a deployment substrate, choose a region. Total pricing band, delivery window and an exportable estimate update live. Indicative — final pricing on the order form after a scoping engagement (SE.D2)."
-          crumbs={[{ label: 'Home', href: '/' }, { label: 'Pricing' }]}
+          description="Pick an architecture level, layer feature modules, choose a deployment substrate, choose a region — and for Level 5 / Level 6 programmes, pick the institutional deployment pathway. Total pricing band, delivery window, complexity tier and exportable estimate update live. Indicative — final pricing on the order form after a scoping engagement (SE.D2)."
+          crumbs={[{ label: 'Home', href: '/' }, { label: 'Build Your Platform' }]}
         />
 
         <Reveal>
