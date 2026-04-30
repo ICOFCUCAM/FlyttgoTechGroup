@@ -14,13 +14,14 @@ import {
   Globe2,
   ListChecks,
   Link2,
-  Users,
   Clock3,
   Landmark,
   Building2,
   GraduationCap,
   Network,
   Layers3,
+  Save,
+  Loader2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -546,6 +547,47 @@ export default function PricingConfigurator() {
     }
   };
 
+  // Persist the estimate to public.project_estimates via /api/estimates
+  // for administrator retrieval. Optional — the configurator works
+  // fine without persistence; this is for visitors who want their
+  // estimate logged inside FlyttGo's engagement-desk register.
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [savedId, setSavedId] = useState<string | null>(null);
+  const saveEstimate = async () => {
+    if (saveState === 'saving') return;
+    setSaveState('saving');
+    try {
+      const res = await fetch('/api/estimates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          architecture_level: level.code,
+          selected_modules: addons.map((a) => a.code),
+          deployment_model: deployment.code,
+          region: region.code,
+          pathway: pathway?.code ?? null,
+          cost_estimate_low_usd: Math.round(totals.totalLow),
+          cost_estimate_high_usd: Math.round(totals.totalHigh),
+          timeline_weeks_low: totals.weeksLow,
+          timeline_weeks_high: totals.weeksHigh,
+          timeline_bucket: timelineBucket(totals.weeks),
+        }),
+      });
+      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; id?: string };
+      if (!res.ok || !json.ok || !json.id) {
+        setSaveState('error');
+        window.setTimeout(() => setSaveState('idle'), 3000);
+        return;
+      }
+      setSavedId(json.id);
+      setSaveState('saved');
+      window.setTimeout(() => setSaveState('idle'), 4000);
+    } catch {
+      setSaveState('error');
+      window.setTimeout(() => setSaveState('idle'), 3000);
+    }
+  };
+
   const intakeUrl = useMemo(() => {
     const params = new URLSearchParams({
       intent: 'engineering',
@@ -837,9 +879,40 @@ export default function PricingConfigurator() {
           </div>
 
           <div className="px-6 py-4 border-t border-white/10">
+            <button
+              type="button"
+              onClick={saveEstimate}
+              disabled={saveState === 'saving'}
+              aria-live="polite"
+              className={`w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-[12px] font-semibold tracking-tight motion-safe:transition-colors disabled:cursor-not-allowed ${
+                saveState === 'saved'
+                  ? 'bg-[#0FB5A6]/15 border border-[#0FB5A6]/40 text-[#0FB5A6]'
+                  : saveState === 'error'
+                  ? 'bg-rose-500/10 border border-rose-400/40 text-rose-300'
+                  : 'bg-white/[0.06] border border-white/10 text-white/85 hover:bg-white/[0.10] hover:border-white/20'
+              }`}
+            >
+              {saveState === 'saving' ? (
+                <Loader2 size={13} strokeWidth={2} className="motion-safe:animate-spin" aria-hidden="true" />
+              ) : saveState === 'saved' ? (
+                <Check size={13} strokeWidth={2} aria-hidden="true" />
+              ) : (
+                <Save size={13} strokeWidth={1.75} aria-hidden="true" />
+              )}
+              <span className="font-mono uppercase tracking-[0.16em] text-[11px]">
+                {saveState === 'saving'
+                  ? 'Saving estimate…'
+                  : saveState === 'saved'
+                  ? `Saved · ${savedId?.slice(0, 8) ?? ''}`
+                  : saveState === 'error'
+                  ? 'Save failed · retry'
+                  : 'Save estimate to platform'}
+              </span>
+            </button>
+
             <a
               href={intakeUrl}
-              className="group flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#D6B575] text-[#0A1F3D] text-sm font-semibold tracking-tight hover:bg-[#D6B575]/90 motion-safe:transition-colors"
+              className="mt-3 group flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#D6B575] text-[#0A1F3D] text-sm font-semibold tracking-tight hover:bg-[#D6B575]/90 motion-safe:transition-colors"
             >
               Open scoping engagement
               <ArrowRight
