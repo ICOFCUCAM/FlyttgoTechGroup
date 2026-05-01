@@ -3,6 +3,7 @@ import Navbar from '@/components/flytt/Navbar';
 import PageHero from '@/components/flytt/PageHero';
 import DeploymentArchitecture from '@/components/flytt/DeploymentArchitecture';
 import DeploymentSpeed from '@/components/flytt/DeploymentSpeed';
+import DeploymentNextSteps from '@/components/flytt/DeploymentNextSteps';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
@@ -32,7 +33,7 @@ export default function DeploymentPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
         <PageHero
-          code="DP.00"
+          code="DM.00"
           eyebrow="Deployment Architecture"
           title={
             <>
@@ -48,6 +49,9 @@ export default function DeploymentPage() {
         <DeploymentArchitecture />
         <Reveal>
           <DeploymentSpeed />
+        </Reveal>
+        <Reveal>
+          <DeploymentNextSteps />
         </Reveal>
       </main>
       <SiteFooter />
