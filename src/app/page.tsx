@@ -5,6 +5,7 @@ import HomeRegionsStrip from '@/components/flytt/HomeRegionsStrip';
 import LiveOpsStrip from '@/components/flytt/LiveOpsStrip';
 import TrustIndicators from '@/components/flytt/TrustIndicators';
 import HomeCapabilityPathways from '@/components/flytt/HomeCapabilityPathways';
+import HomeGlobalDeploymentMap from '@/components/flytt/HomeGlobalDeploymentMap';
 import PlatformEcosystemOverview from '@/components/flytt/PlatformEcosystemOverview';
 import HomeDeploymentStrip from '@/components/flytt/HomeDeploymentStrip';
 import HomeDeploymentMatrix from '@/components/flytt/HomeDeploymentMatrix';
@@ -114,6 +115,14 @@ export default function HomePage() {
                infrastructure explanation, not before */}
         <Reveal>
           <HomeOrchestrationCore />
+        </Reveal>
+        {/* HP.MAP — global deployment surface visualization. Lands
+            between the orchestration core (what FlyttGoTech is) and
+            the deployment-mode cards (which substrates it runs on)
+            so visitors see WHERE the substrate is deployed before
+            HOW the substrate is configured. */}
+        <Reveal>
+          <HomeGlobalDeploymentMap />
         </Reveal>
         <Reveal>
           <HomeDeploymentStrip />
