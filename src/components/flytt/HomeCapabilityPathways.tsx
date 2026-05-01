@@ -78,13 +78,13 @@ const PATHWAYS: Pathway[] = [
     meta: 'CT.01 → CT.04',
   },
   {
-    href: '/infrastructure',
+    href: '/infrastructure-architecture',
     code: 'IA.00',
     icon: ServerCog,
     cluster: 'Infrastructure',
     title: 'Infrastructure architecture',
-    body: 'The orchestration core that powers every module — global coverage, sovereign substrate, procurement compatibility, technology stack and security posture.',
-    meta: 'GC.00 · SV.00 · PC.00',
+    body: 'The platform stack end to end — multi-tenant SaaS, API-first interoperability, Kubernetes orchestration, multi-region deployment, identity federation and append-only data pipeline.',
+    meta: 'IA.01 → IA.07',
   },
   {
     href: '/company',
