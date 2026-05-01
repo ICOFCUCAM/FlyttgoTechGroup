@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import PageHero from '@/components/flytt/PageHero';
 import PlatformEcosystem from '@/components/flytt/PlatformEcosystem';
+import PlatformsNextSteps from '@/components/flytt/PlatformsNextSteps';
 import TechnologySection from '@/components/flytt/TechnologySection';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
@@ -48,6 +49,9 @@ export default function PlatformsPage() {
         <PlatformEcosystem />
         <Reveal>
           <TechnologySection />
+        </Reveal>
+        <Reveal>
+          <PlatformsNextSteps />
         </Reveal>
       </main>
       <SiteFooter />
