@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import PageHero from '@/components/flytt/PageHero';
 import EngineeringSubNav from '@/components/flytt/engineering/EngineeringSubNav';
+import CapabilityMatrix from '@/components/flytt/engineering/CapabilityMatrix';
 import CapabilityLadder from '@/components/flytt/engineering/CapabilityLadder';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
@@ -50,6 +51,11 @@ export default function LadderPage() {
           ]}
         />
         <EngineeringSubNav />
+        {/* SE.MX — side-by-side comparator first; SE.LD expandable
+            cards below carry the full feature inventory per level. */}
+        <Reveal>
+          <CapabilityMatrix />
+        </Reveal>
         <Reveal>
           <CapabilityLadder />
         </Reveal>
