@@ -3,6 +3,7 @@ import { platformList } from '@/data/platforms';
 import { industrySectors } from '@/data/industries';
 import { deploymentModes } from '@/data/deployment-modes';
 import { insights } from '@/data/insights';
+import { caseStudies } from '@/data/case-studies';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
@@ -53,6 +54,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/security', priority: 0.5, freq: 'monthly' },
   { path: '/compliance', priority: 0.5, freq: 'monthly' },
   { path: '/trust', priority: 0.85, freq: 'monthly' },
+  { path: '/customers', priority: 0.8, freq: 'monthly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -110,11 +112,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  const caseStudyEntries: MetadataRoute.Sitemap = caseStudies.map((c) => {
+    const path = `/customers/${c.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
+
   return [
     ...staticEntries,
     ...platformEntries,
     ...industryEntries,
     ...deploymentEntries,
     ...insightEntries,
+    ...caseStudyEntries,
   ];
 }
