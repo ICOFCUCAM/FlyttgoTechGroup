@@ -5,6 +5,7 @@ import { deploymentModes } from '@/data/deployment-modes';
 import { insights } from '@/data/insights';
 import { caseStudies } from '@/data/case-studies';
 import { JURISDICTIONS } from '@/data/jurisdictions';
+import { COMPARISONS } from '@/data/comparisons';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
@@ -62,6 +63,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/jurisdictions', priority: 0.8, freq: 'monthly' },
   { path: '/partners', priority: 0.7, freq: 'monthly' },
   { path: '/console', priority: 0.7, freq: 'monthly' },
+  { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -141,6 +143,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  const comparisonEntries: MetadataRoute.Sitemap = COMPARISONS.map((c) => {
+    const path = `/compare/${c.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
+
   return [
     ...staticEntries,
     ...platformEntries,
@@ -149,5 +162,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...insightEntries,
     ...caseStudyEntries,
     ...jurisdictionEntries,
+    ...comparisonEntries,
   ];
 }
