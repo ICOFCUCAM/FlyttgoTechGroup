@@ -40,6 +40,8 @@ import {
   CalendarClock,
   Layers,
   Workflow,
+  Scale,
+  LayoutDashboard,
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
@@ -111,6 +113,8 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'Infrastructure Architecture', description: 'IA.00 · multi-tenant SaaS · API-first · multi-region',            href: '/infrastructure-architecture', icon: Network },
             { label: 'Global Coverage',             description: 'GC.00 · NA · Nordic EU · Africa · MENA · APAC footprint',         href: '/global-coverage',             icon: Globe2 },
+            { label: 'Operator Console preview',    description: 'OC.00 · what tenants see post-deployment',                         href: '/console',                     icon: LayoutDashboard },
+            { label: 'FlyttGo vs. comparators',     description: 'CP.00 · honest comparisons · Stripe · Palantir · Databricks · AWS', href: '/compare',                     icon: Scale },
           ],
         },
       ],
@@ -137,6 +141,15 @@ const primaryLinks: NavLink[] = [
             { label: 'Capability Ladder',           description: 'SE.02 · six escalating tiers · L.01 → L.06',                      href: '/engineering/ladder',          icon: Layers },
             { label: 'Modular Add-ons',             description: 'SE.03 · eight extensions · AO.01 → AO.08',                        href: '/engineering/modules',         icon: Calculator },
             { label: 'Delivery Model',              description: 'SE.04 · three-step engagement cadence · SE.D1 → SE.D3',           href: '/engineering/delivery',        icon: Workflow },
+          ],
+        },
+        {
+          heading: 'Developer experience',
+          items: [
+            { label: 'API reference',               description: 'AP.RF · OpenAPI 3.1 · 634+ endpoints across eight modules',        href: '/developers/api',              icon: Code2 },
+            { label: 'Developer playground',        description: 'API.PG · live endpoint explorer with real responses',              href: '/developers/playground',       icon: Terminal },
+            { label: 'Public roadmap',              description: 'RM.00 · shipped, in-flight and planned · refreshed quarterly',     href: '/roadmap',                     icon: Compass },
+            { label: 'Changelog',                   description: 'CL.00 · canonical record of every release',                        href: '/changelog',                   icon: BookOpen },
           ],
         },
       ],
@@ -193,7 +206,9 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'Government & Public Sector',  description: 'GV.00 · capability brief, sovereignty framework, pilot proposal', href: '/government',                  icon: Landmark },
             { label: 'Procurement Compatibility',   description: 'PC.00 · pilot, city, regional, national, white-label tiers',     href: '/procurement-compatibility',   icon: FileCheck2 },
-            { label: 'Sovereign Deployment',        description: 'SV.00 · national hosting and data-residency posture',             href: '/sovereign',                   icon: ShieldCheck },
+            { label: 'Trust Center',                description: 'TC.00 · SOC 2 · ISO 27001 · DPA · subprocessors · disclosure',    href: '/trust',                       icon: ShieldCheck },
+            { label: 'Jurisdictions',               description: 'JU.00 · UK · EU · Norway · KSA · UAE · ZA framework alignment',   href: '/jurisdictions',               icon: Globe2 },
+            { label: 'Sovereign Deployment',        description: 'SV.00 · national hosting and data-residency posture',             href: '/sovereign',                   icon: Lock },
           ],
         },
         {
@@ -309,8 +324,10 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'About FlyttGo',               description: 'Nordic-origin platform infrastructure company',                   href: '/company',                     icon: Compass },
             { label: 'Leadership',                  description: 'Platform, security, deployment, commercial',                      href: '/company/leadership',          icon: Users },
+            { label: 'Customer reference programmes', description: 'CS.00 · six anonymised programmes with delivered metrics',       href: '/customers',                   icon: Building2 },
+            { label: 'Partners',                    description: 'PR.00 · four tiers · twelve listed partners · EU · MENA · Africa', href: '/partners',                    icon: Briefcase },
             { label: 'Insights',                    description: 'Deployment guides, architecture notes, procurement playbooks',    href: '/insights',                    icon: BookOpen },
-            { label: 'Careers',                     description: 'Open roles across engineering and commercial',                    href: '/company/careers',             icon: Briefcase },
+            { label: 'Careers',                     description: 'Open roles across engineering and commercial',                    href: '/company/careers',             icon: Users },
             { label: 'Contact',                     description: 'Engagement-desk intake · partnerships · procurement',              href: '/contact',                     icon: Newspaper },
           ],
         },

@@ -25,7 +25,7 @@ import {
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'API reference · AP.00 — FlyttGo developer portal',
+  title: 'API reference · AP.RF — FlyttGo developer portal',
   description:
     'OpenAPI 3.1 reference across the FlyttGo platform — Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and FlyttGo Marketplace. Versioned REST, GraphQL gateway, idempotency keys, webhooks.',
   alternates: { canonical: '/developers/api' },
@@ -156,7 +156,7 @@ export default function ApiReferencePage() {
         className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased"
       >
         <PageHero
-          code="AP.00"
+          code="AP.RF"
           eyebrow="API reference"
           title={
             <>

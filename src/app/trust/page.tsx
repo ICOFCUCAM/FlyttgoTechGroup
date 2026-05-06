@@ -173,15 +173,10 @@ export default function TrustCenterPage() {
                 {ARTEFACTS.map((a) => {
                   const Icon = a.icon;
                   const status = STATUS_LABEL[a.status];
-                  const Wrapper = a.href ? Link : 'div';
-                  const wrapperProps = a.href ? { href: a.href } : {};
-                  return (
-                    <li key={a.code}>
-                      <Wrapper
-                        {...(wrapperProps as Record<string, string>)}
-                        className={`group flex flex-col h-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 ${a.href ? 'hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]' : ''}`}
-                      >
-                        <div className="flex items-start justify-between gap-4">
+                  const cardClass = `group flex flex-col h-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 ${a.href ? 'hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md motion-safe:transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E6FD9]/40 focus-visible:ring-offset-[3px]' : ''}`;
+                  const cardBody = (
+                    <>
+                      <div className="flex items-start justify-between gap-4">
                           <span
                             className="w-11 h-11 rounded-xl bg-[#0A3A6B]/8 dark:bg-[#9ED0F9]/12 text-[#0A3A6B] dark:text-[#9ED0F9] flex items-center justify-center"
                             aria-hidden="true"
@@ -221,14 +216,24 @@ export default function TrustCenterPage() {
                             />
                           )}
                         </div>
-                      </Wrapper>
+                    </>
+                  );
+                  return (
+                    <li key={a.code}>
+                      {a.href ? (
+                        <Link href={a.href} className={cardClass}>
+                          {cardBody}
+                        </Link>
+                      ) : (
+                        <div className={cardClass}>{cardBody}</div>
+                      )}
                     </li>
                   );
                 })}
               </ul>
 
               <p className="mt-10 max-w-3xl font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400 leading-relaxed">
-                Live downloads ship from the page. Items marked 'on request'
+                Live downloads ship from the page. Items marked &lsquo;on request&rsquo;
                 are released after a brief MNDA — the consultation desk
                 routes the request within one business day.
               </p>

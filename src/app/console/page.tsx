@@ -103,7 +103,7 @@ export default function ConsolePreviewPage() {
             <>
               What tenants see{' '}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                once they're deployed.
+                once they&apos;re deployed.
               </em>
             </>
           }

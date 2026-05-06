@@ -164,7 +164,7 @@ export default function RoadmapPage() {
                   </em>
                 </h2>
                 <p className="mt-4 max-w-2xl text-base text-white/70 leading-[1.65]">
-                  The changelog is the canonical 'shipped' record — RSS, JSON
+                  The changelog is the canonical &lsquo;shipped&rsquo; record — RSS, JSON
                   feed and email digest available. Roadmap commitments that
                   slip a quarter get an explicit changelog entry rather than a
                   silent rewrite.
