@@ -42,6 +42,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/solutions', priority: 0.7, freq: 'monthly' },
   { path: '/white-label', priority: 0.7, freq: 'monthly' },
   { path: '/developers', priority: 0.6, freq: 'monthly' },
+  { path: '/developers/api', priority: 0.7, freq: 'monthly' },
   { path: '/insights', priority: 0.7, freq: 'weekly' },
   { path: '/company', priority: 0.5, freq: 'monthly' },
   { path: '/company/leadership', priority: 0.4, freq: 'monthly' },
