@@ -9,6 +9,7 @@ import { Toaster as Sonner } from '@/components/ui/sonner';
 import { AppProvider } from '@/contexts/AppContext';
 import { CommandPaletteProvider } from '@/components/flytt/CommandPalette';
 import { AskFlyttGoProvider } from '@/components/flytt/AskFlyttGo';
+import AskFlyttGoLauncher from '@/components/flytt/AskFlyttGoLauncher';
 import ScrollToTop from '@/components/flytt/ScrollToTop';
 import ReadingProgress from '@/components/flytt/ReadingProgress';
 import { I18nProvider } from '@/lib/i18n/I18nProvider';
@@ -40,6 +41,7 @@ export function Providers({
                 <AskFlyttGoProvider>
                   <ReadingProgress />
                   {children}
+                  <AskFlyttGoLauncher />
                   <ScrollToTop />
                   <Toaster />
                   <Sonner />
