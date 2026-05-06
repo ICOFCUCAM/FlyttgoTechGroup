@@ -67,6 +67,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/console', priority: 0.7, freq: 'monthly' },
   { path: '/agents', priority: 0.85, freq: 'monthly' },
   { path: '/wallet', priority: 0.85, freq: 'monthly' },
+  { path: '/post-quantum', priority: 0.8, freq: 'monthly' },
   { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 
