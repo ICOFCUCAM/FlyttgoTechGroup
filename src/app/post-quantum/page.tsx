@@ -187,7 +187,7 @@ export default function PostQuantumPage() {
               </h2>
               <p className="mt-4 max-w-3xl text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
                 Each row tracks where a primitive lives today, what it
-                migrates to, and what stage it's at. Symmetric primitives
+                migrates to, and what stage it&apos;s at. Symmetric primitives
                 (AES-256-GCM, SHA-2/3) are already PQ-resistant; only public-key
                 surfaces need the migration.
               </p>
