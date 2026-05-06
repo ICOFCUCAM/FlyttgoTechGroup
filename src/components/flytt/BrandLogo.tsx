@@ -47,13 +47,23 @@ const BrandLogo: React.FC<Props> = ({
   const isDark = variant === 'lockup-dark';
   const altText = decorative ? '' : 'FlyttGo Technologies Group';
 
-  const wordmarkColour = isDark ? 'text-white' : 'text-slate-900 dark:text-white';
-  const wordmarkSize = Math.round(height * 0.62);
-  const wordmarkLetterSpacing = '-0.018em';
+  // Brand display: 'FlyttGo' set in serif as the primary wordmark, with
+  // 'Technologies Group' as a smaller mono kicker beneath. Together they
+  // read as the full company name without the wordmark line getting too
+  // long for navbar / footer fits.
+  const primaryColour = isDark ? 'text-white' : 'text-slate-900 dark:text-white';
+  const secondaryColour = isDark
+    ? 'text-white/60'
+    : 'text-slate-500 dark:text-slate-400';
+  const primarySize = Math.round(height * 0.62);
+  const secondarySize = Math.max(8, Math.round(height * 0.22));
+  // Below ~24 px the kicker becomes unreadable, so the lockup
+  // gracefully degrades to mark + 'FlyttGo' wordmark only.
+  const showKicker = isLockup && height >= 24;
 
   return (
     <span
-      className={`inline-flex items-center gap-2 ${className ?? ''}`}
+      className={`inline-flex items-center gap-2.5 ${className ?? ''}`}
       role={decorative ? 'presentation' : undefined}
       aria-label={decorative ? undefined : altText}
     >
@@ -66,11 +76,21 @@ const BrandLogo: React.FC<Props> = ({
         style={{ height, width: height, objectFit: 'contain' }}
       />
       {isLockup && (
-        <span
-          className={`font-serif font-medium tracking-tight ${wordmarkColour}`}
-          style={{ fontSize: wordmarkSize, letterSpacing: wordmarkLetterSpacing, lineHeight: 1 }}
-        >
-          FlyttGo
+        <span className="flex flex-col leading-none">
+          <span
+            className={`font-serif font-medium tracking-tight ${primaryColour}`}
+            style={{ fontSize: primarySize, letterSpacing: '-0.018em', lineHeight: 1 }}
+          >
+            FlyttGo
+          </span>
+          {showKicker && (
+            <span
+              className={`mt-1 font-mono uppercase font-medium ${secondaryColour}`}
+              style={{ fontSize: secondarySize, letterSpacing: '0.18em', lineHeight: 1 }}
+            >
+              Technologies Group
+            </span>
+          )}
         </span>
       )}
     </span>
