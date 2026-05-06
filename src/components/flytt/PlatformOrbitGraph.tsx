@@ -166,8 +166,14 @@ const PlatformOrbitGraph: React.FC = () => {
           <circle aria-hidden="true" cx={CENTER} cy={CENTER} r={RING_RADIUS} fill="none" stroke="rgba(158,208,249,0.12)" strokeDasharray="2 5" />
 
           {/* Rotating layer — spokes, arcs, pills all rotate together.
-              Pauses on hover/focus so the user can read a pill. */}
-          <g className="motion-safe:animate-orbit group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] [transform-box:fill-box] [transform-origin:center]">
+              Pauses on hover/focus so the user can read a pill.
+              transform-origin uses the SVG view-box center (300, 300)
+              so the ring rotates in-place rather than drifting around
+              its bounding box. */}
+          <g
+            className="motion-safe:animate-orbit group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
+            style={{ transformOrigin: '300px 300px', transformBox: 'view-box' }}
+          >
             {/* Decorative: spokes, arcs, endpoint dots, pulses — hidden from AT. */}
             <g aria-hidden="true">
             {/* Spokes from core to each node */}
