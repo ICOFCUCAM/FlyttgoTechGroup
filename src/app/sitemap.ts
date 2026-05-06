@@ -56,6 +56,8 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/compliance', priority: 0.5, freq: 'monthly' },
   { path: '/trust', priority: 0.85, freq: 'monthly' },
   { path: '/customers', priority: 0.8, freq: 'monthly' },
+  { path: '/roadmap', priority: 0.7, freq: 'monthly' },
+  { path: '/changelog', priority: 0.7, freq: 'weekly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
