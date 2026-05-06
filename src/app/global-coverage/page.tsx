@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import Link from '@/components/flytt/LocaleLink';
 import Navbar from '@/components/flytt/Navbar';
 import SiteFooter from '@/components/flytt/SiteFooter';
+import WorldDeploymentMap from '@/components/flytt/diagrams/WorldDeploymentMap';
 import RotatingGlobe from '@/components/flytt/diagrams/RotatingGlobe';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -63,6 +64,19 @@ export default function GlobalCoveragePage() {
             </div>
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <WebGLGlobe size={420} />
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 shadow-sm overflow-hidden">
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500 mb-3">
+                <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">WM.00</span>
+                <span className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+                Deployment topology
+              </div>
+              <WorldDeploymentMap className="overflow-x-auto" />
             </div>
           </div>
         </section>

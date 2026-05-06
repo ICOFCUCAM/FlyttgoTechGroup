@@ -154,6 +154,44 @@ export default function HomeGlobalDeploymentMap() {
             role="img"
             aria-label="FlyttGo global deployment map showing primary, sovereign, secondary and rollout regions"
           >
+            <defs>
+              {/* Subtle ocean-floor radial — gives the canvas depth */}
+              <radialGradient id="hp-map-ocean" cx="50%" cy="50%" r="65%">
+                <stop offset="0%" stopColor="#0F2D55" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#06152B" stopOpacity="0" />
+              </radialGradient>
+              {/* Land gradient — north warmer, south cooler */}
+              <linearGradient id="hp-map-land" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#9ED0F9" stopOpacity="0.13" />
+                <stop offset="100%" stopColor="#7AB7E6" stopOpacity="0.08" />
+              </linearGradient>
+              {/* Halo gradients per tier */}
+              <radialGradient id="hp-halo-primary">
+                <stop offset="0%" stopColor="#9ED0F9" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#9ED0F9" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="hp-halo-sovereign">
+                <stop offset="0%" stopColor="#D6B575" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#D6B575" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="hp-halo-secondary">
+                <stop offset="0%" stopColor="#0FB5A6" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#0FB5A6" stopOpacity="0" />
+              </radialGradient>
+              <radialGradient id="hp-halo-rollout">
+                <stop offset="0%" stopColor="#7C5CE6" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#7C5CE6" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+
+            {/* Ocean depth radial */}
+            <rect x="0" y="0" width="980" height="500" fill="url(#hp-map-ocean)" />
+
+            {/* Equator + tropics graticule — subtle institutional reference */}
+            <line x1="0" y1="250" x2="980" y2="250" stroke="#9ED0F9" strokeOpacity={0.07} strokeWidth={0.4} strokeDasharray="2 5" />
+            <line x1="0" y1="186" x2="980" y2="186" stroke="#9ED0F9" strokeOpacity={0.04} strokeWidth={0.3} strokeDasharray="1 6" />
+            <line x1="0" y1="314" x2="980" y2="314" stroke="#9ED0F9" strokeOpacity={0.04} strokeWidth={0.3} strokeDasharray="1 6" />
+
             {/* Continents from world-atlas TopoJSON, dark-themed */}
             <Geographies geography={GEO_URL}>
               {({ geographies }) =>
@@ -161,14 +199,13 @@ export default function HomeGlobalDeploymentMap() {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill="#9ED0F9"
-                    fillOpacity={0.07}
+                    fill="url(#hp-map-land)"
                     stroke="#9ED0F9"
-                    strokeOpacity={0.22}
-                    strokeWidth={0.4}
+                    strokeOpacity={0.30}
+                    strokeWidth={0.45}
                     style={{
                       default: { outline: 'none' },
-                      hover:   { outline: 'none', fillOpacity: 0.12 },
+                      hover:   { outline: 'none', fillOpacity: 1 },
                       pressed: { outline: 'none' },
                     }}
                   />
@@ -181,43 +218,66 @@ export default function HomeGlobalDeploymentMap() {
               const from = PIN_INDEX.get(a);
               const to = PIN_INDEX.get(b);
               if (!from || !to) return null;
+              const isPrimary = from.tier === 'primary' && to.tier === 'primary';
               return (
                 <Line
                   key={`arc-${i}`}
                   from={from.coords}
                   to={to.coords}
-                  stroke="#D6B575"
-                  strokeWidth={0.65}
-                  strokeOpacity={0.55}
-                  strokeDasharray="3 3"
+                  stroke={isPrimary ? '#D6B575' : '#9ED0F9'}
+                  strokeWidth={isPrimary ? 0.7 : 0.5}
+                  strokeOpacity={isPrimary ? 0.65 : 0.30}
+                  strokeDasharray={isPrimary ? '4 3' : '2 4'}
                   strokeLinecap="round"
                 />
               );
             })}
 
-            {/* Pins with halo + dot */}
+            {/* Pins — halo · ring · dot · code label · city label */}
             {PINS.map((p) => {
               const colour = TIER_COLOUR[p.tier].dot;
+              const beginDelay = `${((p.coords[0] + 180) / 200).toFixed(2)}s`;
+              const labelOffsetY = p.coords[1] > 30 ? -8 : 11;
               return (
                 <Marker key={p.code} coordinates={p.coords}>
                   <title>{`${p.code} · ${p.city} — ${p.note}`}</title>
-                  <circle r={3.4} fill={colour} fillOpacity={0.20}>
+                  {/* Animated halo */}
+                  <circle r={3.4} fill={`url(#hp-halo-${p.tier})`}>
                     <animate
                       attributeName="r"
-                      values="3.4;8;3.4"
-                      dur="3.6s"
+                      values="3.4;9;3.4"
+                      dur="4s"
                       repeatCount="indefinite"
-                      begin={`${(p.coords[0] + 180) / 200}s`}
+                      begin={beginDelay}
                     />
                     <animate
                       attributeName="opacity"
-                      values="0.55;0;0.55"
-                      dur="3.6s"
+                      values="0.7;0;0.7"
+                      dur="4s"
                       repeatCount="indefinite"
-                      begin={`${(p.coords[0] + 180) / 200}s`}
+                      begin={beginDelay}
                     />
                   </circle>
-                  <circle r={2.0} fill={colour} stroke="#06152B" strokeWidth={0.6} />
+                  {/* Outer ring */}
+                  <circle r={2.6} fill="none" stroke={colour} strokeOpacity={0.55} strokeWidth={0.6} />
+                  {/* Solid dot */}
+                  <circle r={1.6} fill={colour} stroke="#06152B" strokeWidth={0.5} />
+                  {/* City label — only shown for tier === primary or sovereign or rollout */}
+                  {p.tier !== 'secondary' && (
+                    <text
+                      x={0}
+                      y={labelOffsetY}
+                      textAnchor="middle"
+                      fontFamily="ui-sans-serif, Inter, system-ui, sans-serif"
+                      fontSize={6.8}
+                      fontWeight={500}
+                      fill={colour}
+                      fillOpacity={0.95}
+                      style={{ pointerEvents: 'none' }}
+                    >
+                      {p.city}
+                    </text>
+                  )}
                 </Marker>
               );
             })}

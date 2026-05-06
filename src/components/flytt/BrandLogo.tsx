@@ -4,49 +4,31 @@ import Image from 'next/image';
 /**
  * Single source of truth for the FlyttGo brand mark across the site.
  *
- * Four artworks live on Supabase storage; this component picks the
- * right one for the surface it's rendered on. To swap an asset for a
- * variant, edit the `BRAND_ASSETS` map below — every consumer in the
- * site updates automatically.
+ * Renders the FlyttGo F-mark from /public/logo-mark.png alongside an
+ * optional text wordmark — composed at runtime rather than baked
+ * into a single image, so the wordmark stays crisp at any zoom level
+ * and the mark / wordmark spacing follows the surrounding type
+ * rhythm.
  *
  * Variants:
- *   - "lockup"           Full mark + wordmark, dark artwork, light surfaces.
+ *   - "lockup"           Mark + 'FlyttGo' wordmark, slate text. Light surfaces.
  *                        Default. Used in the Navbar.
- *   - "lockup-dark"      Full mark + wordmark, light artwork, dark surfaces.
+ *   - "lockup-dark"      Mark + 'FlyttGo' wordmark, white text. Dark surfaces.
  *                        Used in the SiteFooter and dark hero panels.
  *   - "mark"             Glyph only. Used in tight spaces — the
- *                        EstablishmentRail and OG/social previews.
- *   - "mark-secondary"   Alternate mark, available for ad-hoc placement
- *                        (cert badges, leadership masthead, etc.).
+ *                        EstablishmentRail and OG / social previews.
+ *   - "mark-secondary"   Same glyph at the secondary scale. Available
+ *                        for cert badges and leadership masthead use.
  */
 
 export type BrandLogoVariant = 'lockup' | 'lockup-dark' | 'mark' | 'mark-secondary';
 
-const BRAND_ASSETS: Record<BrandLogoVariant, { src: string; alt: string }> = {
-  lockup: {
-    src: 'https://bxjynfuzqhlirdozlgno.supabase.co/storage/v1/object/public/images/Flyt%20Tech%20Group.png',
-    alt: 'FlyttGo Technologies Group',
-  },
-  'lockup-dark': {
-    src: 'https://bxjynfuzqhlirdozlgno.supabase.co/storage/v1/object/public/images/Fly%20Dark.png',
-    alt: 'FlyttGo Technologies Group',
-  },
-  mark: {
-    src: 'https://bxjynfuzqhlirdozlgno.supabase.co/storage/v1/object/public/images/FlyLogo.png',
-    alt: 'FlyttGo',
-  },
-  'mark-secondary': {
-    src: 'https://bxjynfuzqhlirdozlgno.supabase.co/storage/v1/object/public/images/flytlogo.png',
-    alt: 'FlyttGo',
-  },
-};
+const MARK_SRC = '/logo-mark.png';
 
 type Props = {
   variant?: BrandLogoVariant;
-  /** Rendered height in px. Width is derived from the natural aspect ratio. */
+  /** Rendered height in px. Mark is rendered at this height; wordmark scales from it. */
   height?: number;
-  /** Optional aspect-ratio override when the natural ratio is unknown. */
-  width?: number;
   className?: string;
   /** Whether the logo is decorative (default false — it's the brand mark). */
   decorative?: boolean;
@@ -57,28 +39,41 @@ type Props = {
 const BrandLogo: React.FC<Props> = ({
   variant = 'lockup',
   height = 32,
-  width,
   className,
   decorative = false,
   priority = false,
 }) => {
-  const asset = BRAND_ASSETS[variant];
-  // Use a generous default aspect ratio so layout is stable while the
-  // image loads; the rendered element uses h-{height}, w-auto so the
-  // intrinsic ratio takes over once the image resolves.
-  const w = width ?? Math.round(height * 3.5);
+  const isLockup = variant === 'lockup' || variant === 'lockup-dark';
+  const isDark = variant === 'lockup-dark';
+  const altText = decorative ? '' : 'FlyttGo Technologies Group';
+
+  const wordmarkColour = isDark ? 'text-white' : 'text-slate-900 dark:text-white';
+  const wordmarkSize = Math.round(height * 0.62);
+  const wordmarkLetterSpacing = '-0.018em';
+
   return (
-    <Image
-      src={asset.src}
-      alt={decorative ? '' : asset.alt}
+    <span
+      className={`inline-flex items-center gap-2 ${className ?? ''}`}
       role={decorative ? 'presentation' : undefined}
-      width={w}
-      height={height}
-      priority={priority}
-      className={className}
-      style={{ height, width: 'auto', objectFit: 'contain' }}
-      unoptimized
-    />
+      aria-label={decorative ? undefined : altText}
+    >
+      <Image
+        src={MARK_SRC}
+        alt={decorative || isLockup ? '' : altText}
+        width={height}
+        height={height}
+        priority={priority}
+        style={{ height, width: height, objectFit: 'contain' }}
+      />
+      {isLockup && (
+        <span
+          className={`font-serif font-medium tracking-tight ${wordmarkColour}`}
+          style={{ fontSize: wordmarkSize, letterSpacing: wordmarkLetterSpacing, lineHeight: 1 }}
+        >
+          FlyttGo
+        </span>
+      )}
+    </span>
   );
 };
 

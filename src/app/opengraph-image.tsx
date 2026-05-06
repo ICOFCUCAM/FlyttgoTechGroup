@@ -38,19 +38,25 @@ export default function OpenGraphImage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 20, zIndex: 1 }}>
           <div
             style={{
-              width: 72,
-              height: 72,
-              borderRadius: 16,
-              background: 'linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 100%)',
+              width: 86,
+              height: 86,
+              borderRadius: 18,
+              background: '#FFFFFF',
+              border: '1px solid #E2E8F0',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              fontFamily: 'system-ui, sans-serif',
+              fontWeight: 800,
+              fontSize: 60,
+              letterSpacing: -3,
+              color: 'transparent',
+              backgroundImage: 'linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 50%, #0FB5A6 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
             }}
           >
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
-              <path d="M4 12L10 6L14 10L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M4 18L10 12L14 16L20 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
-            </svg>
+            F
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', fontSize: 34, fontWeight: 600, letterSpacing: -0.5, color: '#0A1F3D' }}>
