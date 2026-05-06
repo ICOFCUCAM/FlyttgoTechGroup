@@ -172,7 +172,7 @@ const PlatformOrbitGraph: React.FC = () => {
               its bounding box. */}
           <g
             className="motion-safe:animate-orbit group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
-            style={{ transformOrigin: '300px 300px', transformBox: 'view-box' }}
+            style={{ transformOrigin: '50% 50%', transformBox: 'view-box' }}
           >
             {/* Decorative: spokes, arcs, endpoint dots, pulses — hidden from AT. */}
             <g aria-hidden="true">
