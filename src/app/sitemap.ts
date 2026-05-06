@@ -4,6 +4,7 @@ import { industrySectors } from '@/data/industries';
 import { deploymentModes } from '@/data/deployment-modes';
 import { insights } from '@/data/insights';
 import { caseStudies } from '@/data/case-studies';
+import { JURISDICTIONS } from '@/data/jurisdictions';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
@@ -58,6 +59,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/customers', priority: 0.8, freq: 'monthly' },
   { path: '/roadmap', priority: 0.7, freq: 'monthly' },
   { path: '/changelog', priority: 0.7, freq: 'weekly' },
+  { path: '/jurisdictions', priority: 0.8, freq: 'monthly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -126,6 +128,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  const jurisdictionEntries: MetadataRoute.Sitemap = JURISDICTIONS.map((j) => {
+    const path = `/jurisdictions/${j.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
+
   return [
     ...staticEntries,
     ...platformEntries,
@@ -133,5 +146,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...deploymentEntries,
     ...insightEntries,
     ...caseStudyEntries,
+    ...jurisdictionEntries,
   ];
 }
