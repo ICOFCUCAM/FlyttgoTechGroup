@@ -80,6 +80,10 @@ const groups: FooterGroup[] = [
     links: [
       { label: 'Security architecture', href: '/security' },
       { label: 'Trust Center · TC.00', href: '/trust' },
+      { label: 'EU Digital Identity Wallet · VC.00', href: '/wallet' },
+      { label: 'Post-quantum cryptography · PQ.00', href: '/post-quantum' },
+      { label: 'Open standards · OS.00', href: '/standards' },
+      { label: 'SBOM registry · SB.00', href: '/sbom' },
       { label: 'Trust signals · TS.00', href: '/security#trust-signals-heading' },
       { label: 'Alignment registry · CR.00', href: '/security' },
       { label: 'Compliance overview', href: '/compliance' },
@@ -99,6 +103,7 @@ const groups: FooterGroup[] = [
       { label: 'Developer portal', href: '/developers' },
       { label: 'API architecture · AP.00', href: '/api-architecture' },
       { label: 'API reference · AP.RF', href: '/developers/api' },
+      { label: 'AI agent surface · AI.00', href: '/agents' },
       { label: 'Live API playground · API.PG', href: '/developers/playground' },
       { label: 'Public roadmap · RM.00', href: '/roadmap' },
       { label: 'Changelog · CL.00', href: '/changelog' },

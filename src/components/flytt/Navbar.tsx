@@ -148,6 +148,9 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'API reference',               description: 'AP.RF · OpenAPI 3.1 · 634+ endpoints across eight modules',        href: '/developers/api',              icon: Code2 },
             { label: 'Developer playground',        description: 'API.PG · live endpoint explorer with real responses',              href: '/developers/playground',       icon: Terminal },
+            { label: 'AI agent surface',            description: 'AI.00 · MCP-discoverable platform · LLM agents drive safely',      href: '/agents',                      icon: Workflow },
+            { label: 'Open standards',              description: 'OS.00 · 33 open standards across six interop categories',          href: '/standards',                   icon: Network },
+            { label: 'SBOM registry',               description: 'SB.00 · CycloneDX 1.6 · Sigstore-signed · per-module',              href: '/sbom',                        icon: ShieldCheck },
             { label: 'Public roadmap',              description: 'RM.00 · shipped, in-flight and planned · refreshed quarterly',     href: '/roadmap',                     icon: Compass },
             { label: 'Changelog',                   description: 'CL.00 · canonical record of every release',                        href: '/changelog',                   icon: BookOpen },
           ],
@@ -207,6 +210,8 @@ const primaryLinks: NavLink[] = [
             { label: 'Government & Public Sector',  description: 'GV.00 · capability brief, sovereignty framework, pilot proposal', href: '/government',                  icon: Landmark },
             { label: 'Procurement Compatibility',   description: 'PC.00 · pilot, city, regional, national, white-label tiers',     href: '/procurement-compatibility',   icon: FileCheck2 },
             { label: 'Trust Center',                description: 'TC.00 · SOC 2 · ISO 27001 · DPA · subprocessors · disclosure',    href: '/trust',                       icon: ShieldCheck },
+            { label: 'EU Digital Identity Wallet',  description: 'VC.00 · eIDAS 2.0 · W3C VC · OID4VP · DIDs · qualified signatures', href: '/wallet',                      icon: Fingerprint },
+            { label: 'Post-quantum cryptography',   description: 'PQ.00 · NIST FIPS 203/204/205 hybrid migration roadmap',          href: '/post-quantum',                icon: Lock },
             { label: 'Jurisdictions',               description: 'JU.00 · UK · EU · Norway · KSA · UAE · ZA framework alignment',   href: '/jurisdictions',               icon: Globe2 },
             { label: 'Sovereign Deployment',        description: 'SV.00 · national hosting and data-residency posture',             href: '/sovereign',                   icon: Lock },
           ],
