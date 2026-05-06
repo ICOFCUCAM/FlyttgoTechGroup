@@ -65,6 +65,14 @@ export const metadata: Metadata = {
   description:
     'FlyttGo Technologies Group builds modular AI-powered platform infrastructure — logistics marketplaces, education analytics, municipal dashboards, fleet intelligence and white-label digital platforms — deployable across Europe, Africa and the Middle East.',
   applicationName: 'FlyttGo Technologies Group',
+  icons: {
+    icon: [
+      { url: '/icon', type: 'image/png', sizes: '32x32' },
+      { url: '/logo-mark.png', type: 'image/png', sizes: '1254x1254' },
+    ],
+    apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
+    shortcut: ['/icon'],
+  },
   keywords: [
     'FlyttGo',
     'platform infrastructure',
