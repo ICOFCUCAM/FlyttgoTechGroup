@@ -6,6 +6,7 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 import PageHero from '@/components/flytt/PageHero';
 import { Reveal } from '@/components/flytt/Reveal';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
+import { getSupabaseServerClient } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,7 +42,9 @@ const makeHistory = (seed: number): Array<0 | 1 | 2> => {
   return out;
 };
 
-const services: Service[] = [
+// Static seed used as the synthetic-fallback baseline; Supabase data
+// (when present) overrides each service's status / uptime90.
+const SEED_SERVICES: Service[] = [
   { code: 'ST.PL.01', name: 'Transify — Mobility API',         status: 'operational', uptime90: 99.998, history: makeHistory(11) },
   { code: 'ST.PL.02', name: 'Workverge — Workforce API',       status: 'operational', uptime90: 99.992, history: makeHistory(22) },
   { code: 'ST.PL.03', name: 'Civitas — Government Services',   status: 'operational', uptime90: 99.989, history: makeHistory(33) },
@@ -142,8 +145,37 @@ const SEVERITY_CLS: Record<Incident['severity'], string> = {
   critical: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
 };
 
-export default function StatusPage() {
+/**
+ * Merge live status_latest rows with the seed baseline. The seed
+ * supplies the 90-day history bars + the canonical service order;
+ * Supabase rows override status + uptime90 per matching service_code.
+ * Falls through silently to the seed when Supabase is unreachable.
+ */
+async function loadServices(): Promise<{ services: Service[]; backend: 'supabase' | 'baseline' }> {
+  try {
+    const supabase = getSupabaseServerClient();
+    const { data, error } = await supabase
+      .from('status_latest')
+      .select('service_code, status, uptime_pct');
+    if (error) throw new Error(error.message);
+    if (!data || data.length === 0) {
+      return { services: SEED_SERVICES, backend: 'baseline' };
+    }
+    const live = new Map(data.map((r) => [r.service_code as string, r as { service_code: string; status: ServiceStatus; uptime_pct: number }]));
+    const merged: Service[] = SEED_SERVICES.map((s) => {
+      const row = live.get(s.code);
+      if (!row) return s;
+      return { ...s, status: row.status, uptime90: row.uptime_pct };
+    });
+    return { services: merged, backend: 'supabase' };
+  } catch {
+    return { services: SEED_SERVICES, backend: 'baseline' };
+  }
+}
+
+export default async function StatusPage() {
   const now = new Date();
+  const { services } = await loadServices();
   const allOperational = services.every((s) => s.status === 'operational');
   const overall = allOperational ? STATUS_META.operational : STATUS_META.degraded;
   const OverallIcon = overall.icon;

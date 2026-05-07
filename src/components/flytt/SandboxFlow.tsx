@@ -44,6 +44,8 @@ type Workspace = {
   token: string;
   createdAt: number;
   ttlMs: number;
+  /** 'supabase' if the workspace was persisted server-side, 'synthetic' if local-only. */
+  backend?: 'supabase' | 'synthetic';
 };
 
 const LS_KEY = 'flytt:sandbox:workspace';
@@ -90,17 +92,63 @@ const INTENT_OPTIONS = [
   { value: 'other',     label: 'Other' },
 ];
 
-const generateToken = () => {
-  // Synthetic but realistic-looking token. In production a real workspace
-  // token is issued by the trust desk; this is the sandbox stand-in.
-  const seg = (n: number) =>
-    Array.from({ length: n }, () =>
-      'abcdef0123456789'[Math.floor(Math.random() * 16)],
-    ).join('');
-  return `sk_sbx_${seg(8)}_${seg(24)}`;
-};
-
-const generateId = () => `ws_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+/**
+ * Provision a workspace via /api/sandbox/provision. The route is
+ * Supabase-backed when env vars are set; falls back to a synthetic
+ * workspace shape otherwise. Both paths return the same wire shape.
+ */
+async function provisionWorkspace(form: FormState): Promise<{
+  workspace: Workspace;
+  backend: 'supabase' | 'synthetic';
+}> {
+  const res = await fetch('/api/sandbox/provision', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email:        form.email,
+      organisation: form.org,
+      jurisdiction: form.jurisdiction,
+      intent:       form.intent,
+      modules:      form.modules,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`provision failed: HTTP ${res.status}`);
+  }
+  const json = await res.json() as {
+    backend: 'supabase' | 'synthetic';
+    workspace: {
+      id: string | null;
+      workspace_code: string;
+      token: string;
+      email: string;
+      organisation: string;
+      jurisdiction: string;
+      intent: string;
+      modules: string[];
+      created_at: string;
+      expires_at: string;
+    };
+  };
+  const w = json.workspace;
+  const created = new Date(w.created_at).getTime();
+  const expires = new Date(w.expires_at).getTime();
+  return {
+    backend: json.backend,
+    workspace: {
+      id:           w.workspace_code,
+      email:        w.email,
+      org:          w.organisation,
+      jurisdiction: w.jurisdiction,
+      intent:       w.intent,
+      modules:      w.modules,
+      token:        w.token,
+      createdAt:    created,
+      ttlMs:        Math.max(0, expires - created),
+      backend:      json.backend,
+    },
+  };
+}
 
 export default function SandboxFlow() {
   const [state, setState] = useState<SandboxState>({ phase: 'intake' });
@@ -140,28 +188,50 @@ export default function SandboxFlow() {
     return () => window.clearInterval(t);
   }, [state.phase]);
 
-  // Provisioning step ticker.
+  // Provisioning step ticker. The visual ticker advances through the 9
+  // canned steps; in parallel the network call to /api/sandbox/provision
+  // races. When both finish we transition to ready.
   useEffect(() => {
     if (state.phase !== 'provisioning') return;
+
     if (state.step >= PROVISIONING_STEPS.length - 1) {
-      // Last step lingers for a beat then resolves.
-      const t = window.setTimeout(() => {
-        const workspace: Workspace = {
-          id:           generateId(),
-          email:        form.email,
-          org:          form.org,
-          jurisdiction: form.jurisdiction,
-          intent:       form.intent,
-          modules:      form.modules,
-          token:        generateToken(),
-          createdAt:    Date.now(),
-          ttlMs:        TTL_MS,
-        };
-        window.localStorage.setItem(LS_KEY, JSON.stringify(workspace));
-        setState({ phase: 'ready', workspace });
-      }, 1100);
-      return () => window.clearTimeout(t);
+      let cancelled = false;
+      (async () => {
+        try {
+          const { workspace } = await provisionWorkspace(form);
+          if (cancelled) return;
+          window.localStorage.setItem(LS_KEY, JSON.stringify(workspace));
+          // Hold the last step for a beat so the visual ticker doesn't snap.
+          window.setTimeout(() => {
+            if (!cancelled) setState({ phase: 'ready', workspace });
+          }, 700);
+        } catch (err) {
+          if (cancelled) return;
+          // Fall back to a fully-local workspace so the UX never dead-ends.
+          const localToken = `sk_sbx_local_${Math.random().toString(36).slice(2, 14)}`;
+          const workspace: Workspace = {
+            id:           `ws_${Math.random().toString(36).slice(2, 10)}`,
+            email:        form.email,
+            org:          form.org,
+            jurisdiction: form.jurisdiction,
+            intent:       form.intent,
+            modules:      form.modules,
+            token:        localToken,
+            createdAt:    Date.now(),
+            ttlMs:        TTL_MS,
+            backend:      'synthetic',
+          };
+          window.localStorage.setItem(LS_KEY, JSON.stringify(workspace));
+          window.setTimeout(() => {
+            if (!cancelled) setState({ phase: 'ready', workspace });
+          }, 700);
+          // err intentionally swallowed — UI keeps working without a backend.
+          void err;
+        }
+      })();
+      return () => { cancelled = true; };
     }
+
     const t = window.setTimeout(() => {
       setState({ phase: 'provisioning', step: state.step + 1 });
     }, 850 + Math.random() * 600);
@@ -175,8 +245,18 @@ export default function SandboxFlow() {
   };
 
   const teardown = () => {
+    const token = state.phase === 'ready' ? state.workspace.token : null;
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem(LS_KEY);
+    }
+    if (token) {
+      // Fire-and-forget the server-side teardown. Idempotent; the UI
+      // doesn't wait on it.
+      void fetch('/api/sandbox/teardown', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      }).catch(() => { /* swallow — teardown is best-effort */ });
     }
     setState({ phase: 'intake' });
   };

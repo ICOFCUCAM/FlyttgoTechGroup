@@ -77,6 +77,9 @@ type StoredArtefact = {
   output: string;
   ctx: ArtefactContext;
   generatedAt: number;
+  artefactCode?: string;
+  outputSha256?: string;
+  backend?: 'supabase' | 'synthetic';
 };
 
 type ArtefactContext = {
@@ -104,6 +107,7 @@ export default function AskFlyttGoSurface() {
   const [output, setOutput] = useState('');
   const [copied, setCopied] = useState(false);
   const [generatedAt, setGeneratedAt] = useState<number | null>(null);
+  const [provenance, setProvenance] = useState<{ code: string; sha: string } | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   // Hydrate last artefact (per-mode) from localStorage on mount + when mode flips.
@@ -113,6 +117,7 @@ export default function AskFlyttGoSurface() {
     if (!raw) {
       setOutput('');
       setGeneratedAt(null);
+      setProvenance(null);
       return;
     }
     try {
@@ -120,21 +125,66 @@ export default function AskFlyttGoSurface() {
       setOutput(parsed.output);
       setGeneratedAt(parsed.generatedAt);
       setCtx(parsed.ctx);
+      setProvenance(
+        parsed.artefactCode && parsed.outputSha256
+          ? { code: parsed.artefactCode, sha: parsed.outputSha256 }
+          : null,
+      );
     } catch {
       setOutput('');
       setGeneratedAt(null);
+      setProvenance(null);
     }
   }, [activeArtefact]);
 
-  const persist = (artefact: Artefact, fullOutput: string, snapshot: ArtefactContext) => {
+  const persist = (artefact: Artefact, fullOutput: string, snapshot: ArtefactContext, prov: { code: string; sha: string; backend?: 'supabase' | 'synthetic' } | null) => {
     if (typeof window === 'undefined') return;
     const stored: StoredArtefact = {
       artefact,
       output: fullOutput,
       ctx: snapshot,
       generatedAt: Date.now(),
+      artefactCode: prov?.code,
+      outputSha256: prov?.sha,
+      backend: prov?.backend,
     };
     window.localStorage.setItem(`${LS_KEY}:${artefact}`, JSON.stringify(stored));
+  };
+
+  /**
+   * Once the stream lands in full, log it to /api/artefacts/log to
+   * receive the C2PA-style provenance hash + artefact_code that
+   * /governance/ai/artefacts surfaces. Falls back gracefully if the
+   * route is unreachable.
+   */
+  const logArtefact = async (
+    artefact: Artefact,
+    fullOutput: string,
+    snapshot: ArtefactContext,
+  ): Promise<{ code: string; sha: string; backend: 'supabase' | 'synthetic' } | null> => {
+    try {
+      const res = await fetch('/api/artefacts/log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: artefact,
+          output: fullOutput,
+          context: snapshot,
+        }),
+      });
+      if (!res.ok) return null;
+      const json = await res.json() as {
+        backend: 'supabase' | 'synthetic';
+        artefact: { artefact_code: string; output_sha256: string };
+      };
+      return {
+        code:    json.artefact.artefact_code,
+        sha:     json.artefact.output_sha256,
+        backend: json.backend,
+      };
+    } catch {
+      return null;
+    }
   };
 
   const generate = async () => {
@@ -151,6 +201,7 @@ export default function AskFlyttGoSurface() {
     setStreaming(true);
     setOutput('');
     setGeneratedAt(null);
+    setProvenance(null);
 
     let assembled = '';
     const snapshot = { ...ctx };
@@ -186,10 +237,13 @@ export default function AskFlyttGoSurface() {
           const payload = line.slice(5).trim();
           if (!payload) continue;
           if (payload === '[DONE]') {
-            // Stream complete.
+            // Stream complete. Log the artefact to the provenance store
+            // and persist locally with the returned hash.
             setStreaming(false);
             setGeneratedAt(Date.now());
-            persist(activeArtefact, assembled, snapshot);
+            const prov = await logArtefact(activeArtefact, assembled, snapshot);
+            if (prov) setProvenance({ code: prov.code, sha: prov.sha });
+            persist(activeArtefact, assembled, snapshot, prov);
             return;
           }
           try {
@@ -207,7 +261,9 @@ export default function AskFlyttGoSurface() {
       // If we exited the loop without a [DONE] sentinel, persist what we have.
       setStreaming(false);
       setGeneratedAt(Date.now());
-      persist(activeArtefact, assembled, snapshot);
+      const prov = await logArtefact(activeArtefact, assembled, snapshot);
+      if (prov) setProvenance({ code: prov.code, sha: prov.sha });
+      persist(activeArtefact, assembled, snapshot, prov);
     } catch (err) {
       const aborted = err instanceof Error && err.name === 'AbortError';
       setStreaming(false);
@@ -485,25 +541,52 @@ export default function AskFlyttGoSurface() {
           </div>
 
           {output && !streaming && (
-            <div className="mt-4 flex flex-wrap items-center gap-3">
-              <Link
-                href="/consultation"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white text-sm font-semibold hover:border-slate-300 motion-safe:transition-colors"
-              >
-                Open consultation · CB.00
-                <ArrowUpRight size={13} aria-hidden="true" />
-              </Link>
-              <Link
-                href="/sandbox"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white text-sm font-semibold hover:border-slate-300 motion-safe:transition-colors"
-              >
-                Spin up sandbox · SB.SP
-                <ArrowUpRight size={13} aria-hidden="true" />
-              </Link>
-              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">
-                Indicative output · final artefacts countersigned during scoping (SE.D2)
-              </span>
-            </div>
+            <>
+              {provenance && (
+                <div className="mt-4 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200/80 dark:border-emerald-800/60">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] font-semibold text-emerald-700 dark:text-emerald-400">
+                      AS.PV · provenance logged
+                    </div>
+                    <Link
+                      href="/governance/ai/artefacts"
+                      className="font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-700 dark:text-emerald-400 hover:underline underline-offset-4"
+                    >
+                      Open registry →
+                    </Link>
+                  </div>
+                  <div className="mt-2 grid sm:grid-cols-2 gap-2 font-mono text-[11px]">
+                    <div>
+                      <span className="text-emerald-700 dark:text-emerald-400">Code · </span>
+                      <span className="text-slate-700 dark:text-slate-300">{provenance.code}</span>
+                    </div>
+                    <div className="break-all">
+                      <span className="text-emerald-700 dark:text-emerald-400">SHA-256 · </span>
+                      <span className="text-slate-700 dark:text-slate-300">{provenance.sha.slice(0, 32)}…</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/consultation"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white text-sm font-semibold hover:border-slate-300 motion-safe:transition-colors"
+                >
+                  Open consultation · CB.00
+                  <ArrowUpRight size={13} aria-hidden="true" />
+                </Link>
+                <Link
+                  href="/sandbox"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/60 text-slate-900 dark:text-white text-sm font-semibold hover:border-slate-300 motion-safe:transition-colors"
+                >
+                  Spin up sandbox · SB.SP
+                  <ArrowUpRight size={13} aria-hidden="true" />
+                </Link>
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-400">
+                  Indicative output · final artefacts countersigned during scoping (SE.D2)
+                </span>
+              </div>
+            </>
           )}
         </div>
       </div>
