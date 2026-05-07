@@ -68,11 +68,10 @@ export const metadata: Metadata = {
   applicationName: 'FlyttGo Technologies Group',
   icons: {
     icon: [
-      { url: '/icon', type: 'image/png', sizes: '32x32' },
-      { url: '/logo-mark.png', type: 'image/png', sizes: '1254x1254' },
+      { url: '/logo-mark.png', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
-    shortcut: ['/icon'],
+    apple: [{ url: '/logo-mark.png', type: 'image/png' }],
+    shortcut: ['/logo-mark.png'],
   },
   keywords: [
     'FlyttGo',

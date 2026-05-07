@@ -13,9 +13,8 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: 'en',
     categories: ['business', 'productivity', 'developer'],
     icons: [
-      { src: '/icon', sizes: '32x32', type: 'image/png', purpose: 'any' },
-      { src: '/apple-icon', sizes: '180x180', type: 'image/png', purpose: 'any' },
-      { src: '/logo-mark.png', sizes: '1254x1254', type: 'image/png', purpose: 'maskable' },
+      { src: '/logo-mark.png', sizes: 'any',          type: 'image/png', purpose: 'any' },
+      { src: '/logo-mark.png', sizes: '1254x1254',    type: 'image/png', purpose: 'maskable' },
     ],
   };
 }

@@ -4,11 +4,10 @@ import Image from 'next/image';
 /**
  * Single source of truth for the FlyttGo brand mark across the site.
  *
- * Renders the FlyttGo F-mark from /public/logo-mark.png alongside an
- * optional text wordmark — composed at runtime rather than baked
- * into a single image, so the wordmark stays crisp at any zoom level
- * and the mark / wordmark spacing follows the surrounding type
- * rhythm.
+ * Renders the F-mark from /public/logo-mark.png next to a 'FlyttGo'
+ * wordmark in serif. The full 'FlyttGo Technologies Group' name is
+ * surfaced elsewhere (top utility bar, footer brand block, JSON-LD)
+ * so the navbar lockup stays compact.
  *
  * Variants:
  *   - "lockup"           Mark + 'FlyttGo' wordmark, slate text. Light surfaces.
@@ -47,19 +46,8 @@ const BrandLogo: React.FC<Props> = ({
   const isDark = variant === 'lockup-dark';
   const altText = decorative ? '' : 'FlyttGo Technologies Group';
 
-  // Brand display: 'FlyttGo' set in serif as the primary wordmark, with
-  // 'Technologies Group' as a smaller mono kicker beneath. Together they
-  // read as the full company name without the wordmark line getting too
-  // long for navbar / footer fits.
-  const primaryColour = isDark ? 'text-white' : 'text-slate-900 dark:text-white';
-  const secondaryColour = isDark
-    ? 'text-white/60'
-    : 'text-slate-500 dark:text-slate-400';
-  const primarySize = Math.round(height * 0.62);
-  const secondarySize = Math.max(8, Math.round(height * 0.22));
-  // Below ~24 px the kicker becomes unreadable, so the lockup
-  // gracefully degrades to mark + 'FlyttGo' wordmark only.
-  const showKicker = isLockup && height >= 24;
+  const wordmarkColour = isDark ? 'text-white' : 'text-slate-900 dark:text-white';
+  const wordmarkSize = Math.round(height * 0.66);
 
   return (
     <span
@@ -76,21 +64,11 @@ const BrandLogo: React.FC<Props> = ({
         style={{ height, width: height, objectFit: 'contain' }}
       />
       {isLockup && (
-        <span className="flex flex-col leading-none">
-          <span
-            className={`font-serif font-medium tracking-tight ${primaryColour}`}
-            style={{ fontSize: primarySize, letterSpacing: '-0.018em', lineHeight: 1 }}
-          >
-            FlyttGo
-          </span>
-          {showKicker && (
-            <span
-              className={`mt-1 font-mono uppercase font-medium ${secondaryColour}`}
-              style={{ fontSize: secondarySize, letterSpacing: '0.18em', lineHeight: 1 }}
-            >
-              Technologies Group
-            </span>
-          )}
+        <span
+          className={`font-serif font-medium tracking-tight ${wordmarkColour}`}
+          style={{ fontSize: wordmarkSize, letterSpacing: '-0.018em', lineHeight: 1 }}
+        >
+          FlyttGo
         </span>
       )}
     </span>
