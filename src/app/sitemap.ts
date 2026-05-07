@@ -77,6 +77,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/deployment/confidential', priority: 0.8, freq: 'monthly' },
   { path: '/learn', priority: 0.7, freq: 'monthly' },
   { path: '/open-source', priority: 0.7, freq: 'monthly' },
+  { path: '/ask-flyttgo', priority: 0.85, freq: 'monthly' },
   { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 
