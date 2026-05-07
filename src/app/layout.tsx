@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { Inter, JetBrains_Mono, IBM_Plex_Serif } from 'next/font/google';
 import { Providers } from './providers';
 import Analytics from '@/components/flytt/Analytics';
+import SentryInit from '@/components/flytt/SentryInit';
 import EstablishmentRail from '@/components/flytt/EstablishmentRail';
 import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import './globals.css';
@@ -65,6 +66,14 @@ export const metadata: Metadata = {
   description:
     'FlyttGo Technologies Group builds modular AI-powered platform infrastructure — logistics marketplaces, education analytics, municipal dashboards, fleet intelligence and white-label digital platforms — deployable across Europe, Africa and the Middle East.',
   applicationName: 'FlyttGo Technologies Group',
+  icons: {
+    icon: [
+      { url: '/icon', type: 'image/png', sizes: '32x32' },
+      { url: '/logo-mark.png', type: 'image/png', sizes: '1254x1254' },
+    ],
+    apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
+    shortcut: ['/icon'],
+  },
   keywords: [
     'FlyttGo',
     'platform infrastructure',
@@ -235,6 +244,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <EstablishmentRail />
         <Providers initialLocale={locale}>{children}</Providers>
         <Analytics />
+        <SentryInit />
       </body>
     </html>
   );

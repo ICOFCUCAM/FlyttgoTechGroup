@@ -40,6 +40,9 @@ import {
   CalendarClock,
   Layers,
   Workflow,
+  Scale,
+  LayoutDashboard,
+  Cpu,
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
@@ -111,6 +114,10 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'Infrastructure Architecture', description: 'IA.00 · multi-tenant SaaS · API-first · multi-region',            href: '/infrastructure-architecture', icon: Network },
             { label: 'Global Coverage',             description: 'GC.00 · NA · Nordic EU · Africa · MENA · APAC footprint',         href: '/global-coverage',             icon: Globe2 },
+            { label: 'Operator Console preview',    description: 'OC.00 · what tenants see post-deployment',                         href: '/console',                     icon: LayoutDashboard },
+            { label: 'Self-serve sandbox',          description: 'SB.SP · 60-second sandbox tenant · 7-day TTL',                     href: '/sandbox',                     icon: Cpu },
+            { label: 'FlyttGo vs. comparators',     description: 'CP.00 · honest comparisons · Stripe · Palantir · Databricks · AWS', href: '/compare',                     icon: Scale },
+            { label: 'ROI / TCO calculator',        description: 'RO.00 · 1/3/5-year TCO · 3-path procurement comparison',          href: '/roi',                         icon: Calculator },
           ],
         },
       ],
@@ -139,6 +146,23 @@ const primaryLinks: NavLink[] = [
             { label: 'Delivery Model',              description: 'SE.04 · three-step engagement cadence · SE.D1 → SE.D3',           href: '/engineering/delivery',        icon: Workflow },
           ],
         },
+        {
+          heading: 'Developer experience',
+          items: [
+            { label: 'API reference',               description: 'AP.RF · OpenAPI 3.1 · 634+ endpoints across eight modules',        href: '/developers/api',              icon: Code2 },
+            { label: 'Developer playground',        description: 'API.PG · live endpoint explorer with real responses',              href: '/developers/playground',       icon: Terminal },
+            { label: 'Webhook tester',              description: 'WH.00 · inspector URL + HMAC-SHA256 signature validator',          href: '/developers/webhooks',         icon: Activity },
+            { label: 'AI procurement assistant',    description: 'AS.00 · Claude-powered CAIQ + RFP + proposal generation',          href: '/ask-flyttgo',                 icon: Cpu },
+            { label: 'Deployment recommendation',   description: 'RC.00 · tier + substrate + module bundle tailored to inputs',     href: '/recommend',                   icon: Compass },
+            { label: 'AI agent surface',            description: 'AI.00 · MCP-discoverable platform · LLM agents drive safely',      href: '/agents',                      icon: Workflow },
+            { label: 'AI governance',               description: 'AG.00 · AIBOM · model cards · EU AI Act risk-tier registry',       href: '/governance/ai',               icon: ShieldCheck },
+            { label: 'Open standards',              description: 'OS.00 · 33 open standards across six interop categories',          href: '/standards',                   icon: Network },
+            { label: 'SBOM registry',               description: 'SB.00 · CycloneDX 1.6 · Sigstore-signed · per-module',              href: '/sbom',                        icon: ShieldCheck },
+            { label: 'Open source',                  description: 'OS.MF · OSPO policy · maintained · sponsored · contributed',      href: '/open-source',                 icon: Code2 },
+            { label: 'Public roadmap',              description: 'RM.00 · shipped, in-flight and planned · refreshed quarterly',     href: '/roadmap',                     icon: Compass },
+            { label: 'Changelog',                   description: 'CL.00 · canonical record of every release',                        href: '/changelog',                   icon: BookOpen },
+          ],
+        },
       ],
       feature: {
         title: 'Build Your Digital Platform Infrastructure · PR.00',
@@ -163,6 +187,7 @@ const primaryLinks: NavLink[] = [
             { label: 'Managed SaaS',                description: 'DM.01 · FlyttGo-managed regional tenants',                        href: '/deployment/managed',          icon: CloudCog },
             { label: 'Customer Cloud',              description: 'DM.02 · runs inside your AWS, Azure or GCP tenancy',              href: '/deployment/customer-cloud',   icon: ServerCog },
             { label: 'Sovereign Datacenter',        description: 'DM.03 · self-hosted in certified national datacenters',           href: '/deployment/sovereign',        icon: ShieldCheck },
+            { label: 'Confidential compute',        description: 'DM.04 · TEE-isolated · Nitro · Intel SGX · AMD SEV-SNP',          href: '/deployment/confidential',     icon: Lock },
           ],
         },
         {
@@ -193,7 +218,12 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'Government & Public Sector',  description: 'GV.00 · capability brief, sovereignty framework, pilot proposal', href: '/government',                  icon: Landmark },
             { label: 'Procurement Compatibility',   description: 'PC.00 · pilot, city, regional, national, white-label tiers',     href: '/procurement-compatibility',   icon: FileCheck2 },
-            { label: 'Sovereign Deployment',        description: 'SV.00 · national hosting and data-residency posture',             href: '/sovereign',                   icon: ShieldCheck },
+            { label: 'Trust Center',                description: 'TC.00 · SOC 2 · ISO 27001 · DPA · subprocessors · disclosure',    href: '/trust',                       icon: ShieldCheck },
+            { label: 'Vertical accelerators',       description: 'VT.00 · defense · healthcare · financial services',                href: '/verticals',                   icon: Briefcase },
+            { label: 'EU Digital Identity Wallet',  description: 'VC.00 · eIDAS 2.0 · W3C VC · OID4VP · DIDs · qualified signatures', href: '/wallet',                      icon: Fingerprint },
+            { label: 'Post-quantum cryptography',   description: 'PQ.00 · NIST FIPS 203/204/205 hybrid migration roadmap',          href: '/post-quantum',                icon: Lock },
+            { label: 'Jurisdictions',               description: 'JU.00 · UK · EU · Norway · KSA · UAE · ZA framework alignment',   href: '/jurisdictions',               icon: Globe2 },
+            { label: 'Sovereign Deployment',        description: 'SV.00 · national hosting and data-residency posture',             href: '/sovereign',                   icon: Lock },
           ],
         },
         {
@@ -309,8 +339,14 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'About FlyttGo',               description: 'Nordic-origin platform infrastructure company',                   href: '/company',                     icon: Compass },
             { label: 'Leadership',                  description: 'Platform, security, deployment, commercial',                      href: '/company/leadership',          icon: Users },
+            { label: 'Customer reference programmes', description: 'CS.00 · six anonymised programmes with delivered metrics',       href: '/customers',                   icon: Building2 },
+            { label: 'Partners',                    description: 'PR.00 · four tiers · twelve listed partners · EU · MENA · Africa', href: '/partners',                    icon: Briefcase },
+            { label: 'Research library',            description: 'RS.00 · 8 long-form papers · architecture · regulatory · sector',  href: '/research',                    icon: BookOpen },
+            { label: 'Education hub',               description: 'LR.00 · 6 certification tracks · verifiable credentials',          href: '/learn',                       icon: GraduationCap },
+            { label: 'Transparency report',         description: 'TR.00 · annual numbers · uptime · CVE · AI · sustainability',     href: '/transparency/2026',           icon: Activity },
+            { label: 'Press & media kit',           description: 'PR.MK · brand assets · press releases · analyst relations',         href: '/press',                       icon: Newspaper },
             { label: 'Insights',                    description: 'Deployment guides, architecture notes, procurement playbooks',    href: '/insights',                    icon: BookOpen },
-            { label: 'Careers',                     description: 'Open roles across engineering and commercial',                    href: '/company/careers',             icon: Briefcase },
+            { label: 'Careers',                     description: 'Open roles across engineering and commercial',                    href: '/company/careers',             icon: Users },
             { label: 'Contact',                     description: 'Engagement-desk intake · partnerships · procurement',              href: '/contact',                     icon: Newspaper },
           ],
         },

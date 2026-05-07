@@ -3,6 +3,12 @@ import { ImageResponse } from 'next/og';
 export const size = { width: 180, height: 180 };
 export const contentType = 'image/png';
 
+/**
+ * Apple touch icon — renders the FlyttGo F-mark in the brand gradient
+ * at 180×180 px on a white rounded card. Generated via Next.js
+ * ImageResponse so the output is crisp at the iOS home-screen size
+ * and avoids serving the multi-hundred-KB master PNG.
+ */
 export default function AppleIcon() {
   return new ImageResponse(
     (
@@ -13,14 +19,28 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 100%)',
-          borderRadius: 36,
+          background: '#FFFFFF',
+          borderRadius: 38,
         }}
       >
-        <svg width="112" height="112" viewBox="0 0 24 24" fill="none">
-          <path d="M4 12L10 6L14 10L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M4 18L10 12L14 16L20 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
-        </svg>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: 'system-ui, sans-serif',
+            fontWeight: 800,
+            fontSize: 138,
+            letterSpacing: -7,
+            color: 'transparent',
+            backgroundImage: 'linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 50%, #0FB5A6 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            lineHeight: 1,
+          }}
+        >
+          F
+        </div>
       </div>
     ),
     { ...size },

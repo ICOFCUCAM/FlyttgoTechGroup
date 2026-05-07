@@ -101,7 +101,7 @@ export default function InlineSignIn({ workspaceLabel, code, requiredRole }: Pro
 
       <div className="relative w-full max-w-lg">
         {/* Big centered mark — the one trust-anchor moment on the
-            entire route. Uses the FlyLogo glyph so the mark reads at
+            entire route. Uses the F-mark so the brand reads at
             a glance even on small screens. */}
         <div className="flex flex-col items-center text-center">
           <BrandLogo variant="mark" height={64} priority />

@@ -3,6 +3,11 @@ import { ImageResponse } from 'next/og';
 export const size = { width: 32, height: 32 };
 export const contentType = 'image/png';
 
+/**
+ * Browser favicon — renders the FlyttGo F-mark in the brand gradient
+ * at exactly 32×32 px. Generated via Next.js ImageResponse so the
+ * output is crisp at favicon size, ~1 KB, and edge-runtime served.
+ */
 export default function Icon() {
   return new ImageResponse(
     (
@@ -13,14 +18,28 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 100%)',
+          background: '#FFFFFF',
           borderRadius: 6,
         }}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M4 12L10 6L14 10L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M4 18L10 12L14 16L20 10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.55" />
-        </svg>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: 'system-ui, sans-serif',
+            fontWeight: 800,
+            fontSize: 26,
+            letterSpacing: -1.4,
+            color: 'transparent',
+            backgroundImage: 'linear-gradient(135deg, #0A3A6B 0%, #1E6FD9 50%, #0FB5A6 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            lineHeight: 1,
+          }}
+        >
+          F
+        </div>
       </div>
     ),
     { ...size },

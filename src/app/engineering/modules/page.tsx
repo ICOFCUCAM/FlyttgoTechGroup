@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/flytt/Navbar';
 import PageHero from '@/components/flytt/PageHero';
 import EngineeringSubNav from '@/components/flytt/engineering/EngineeringSubNav';
+import AddOnStackDiagram from '@/components/flytt/engineering/AddOnStackDiagram';
 import AddOnPricing from '@/components/flytt/engineering/AddOnPricing';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
@@ -50,6 +51,11 @@ export default function ModulesPage() {
           ]}
         />
         <EngineeringSubNav />
+        {/* SE.SK — architecture stack diagram first; SE.03 add-on
+            cards below carry the per-module price band. */}
+        <Reveal>
+          <AddOnStackDiagram />
+        </Reveal>
         <Reveal>
           <AddOnPricing />
         </Reveal>

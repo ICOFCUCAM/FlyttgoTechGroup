@@ -3,7 +3,6 @@ import Link from '@/components/flytt/LocaleLink';
 import Navbar from '@/components/flytt/Navbar';
 import PageHero from '@/components/flytt/PageHero';
 import DoctrineStrip from '@/components/flytt/engineering/DoctrineStrip';
-import EngineeringSubNav from '@/components/flytt/engineering/EngineeringSubNav';
 import EngineeringPositioning from '@/components/flytt/engineering/EngineeringPositioning';
 import AudienceGrid from '@/components/flytt/engineering/AudienceGrid';
 import SiteFooter from '@/components/flytt/SiteFooter';
@@ -120,7 +119,6 @@ export default function EngineeringOverviewPage() {
         />
 
         <DoctrineStrip />
-        <EngineeringSubNav />
 
         <Reveal>
           <EngineeringPositioning />

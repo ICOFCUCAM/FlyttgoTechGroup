@@ -5,9 +5,11 @@ import SectorsOverview from '@/components/flytt/SectorsOverview';
 import TargetUsers from '@/components/flytt/TargetUsers';
 import IndustryGrid from '@/components/flytt/IndustryGrid';
 import DeploymentMap from '@/components/flytt/DeploymentMap';
+import NextStepsGrid from '@/components/flytt/NextStepsGrid';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
+import { Layers3, Workflow, Globe2, Compass } from 'lucide-react';
 
 // SSR so the layout's server-detected locale drives the sector card copy.
 export const dynamic = 'force-dynamic';
@@ -62,6 +64,49 @@ export default function IndustriesPage() {
         </Reveal>
         <Reveal>
           <DeploymentMap />
+        </Reveal>
+        <Reveal>
+          <NextStepsGrid
+            code="IN.NX"
+            eyebrow="Where these sectors go next"
+            titleLead="The sector view is"
+            titleEmphasis="one cut across the substrate."
+            intro="Every sector deployment composes from the same modular surface — the platform ecosystem above, run on the deployment substrate below, optionally engineered into a bespoke shape and routed through the engagement intake."
+            steps={[
+              {
+                href: '/platforms',
+                code: 'PL.00',
+                icon: Layers3,
+                title: 'The modules each sector composes from',
+                body: 'Eight platform modules — Transify, Workverge, Civitas, EduPro, Identra, Payvera, Ledgera and FlyttGo Marketplace.',
+                meta: 'PL.00 · 8 modules',
+              },
+              {
+                href: '/deployment',
+                code: 'DM.00',
+                icon: Globe2,
+                title: 'The substrate each sector runs on',
+                body: 'FlyttGo-managed SaaS, customer cloud, sovereign datacenter — picked per programme and per regulator perimeter.',
+                meta: 'DM.01 · DM.02 · DM.03',
+              },
+              {
+                href: '/engineering',
+                code: 'SE.00',
+                icon: Workflow,
+                title: 'Engineer a bespoke programme',
+                body: 'Six engagement tiers (L.01 → L.06). For sector deployments that need a shape outside the standard module surface.',
+                meta: 'L.01 → L.06',
+              },
+              {
+                href: '/consultation',
+                code: 'CB.00',
+                icon: Compass,
+                title: 'Open a sector engagement',
+                body: 'Routed into the right consultation category — platform architecture, government pilot, marketplace onboarding or enterprise rollout.',
+                meta: 'CT.01 → CT.04',
+              },
+            ]}
+          />
         </Reveal>
       </main>
       <SiteFooter />

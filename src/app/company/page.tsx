@@ -56,15 +56,19 @@ export default function CompanyPage() {
         >
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="max-w-3xl motion-safe:animate-fade-up">
-              <p className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-800/60 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-                Company
-              </p>
+              <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
+                <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">CO.00</span>
+                <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
+                <span>Company</span>
+              </div>
               <h1
                 id="company-heading"
-                className="mt-5 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-slate-900 dark:text-white leading-[1.05]"
+                className="mt-6 font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
               >
                 Platform infrastructure for{' '}
-                <span className="text-[#0A3A6B]">global operators and institutions.</span>
+                <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
+                  global operators and institutions.
+                </em>
               </h1>
               <p className="mt-6 text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
                 FlyttGo Technologies Group is a Nordic-origin platform infrastructure company.
@@ -152,11 +156,11 @@ export default function CompanyPage() {
               </div>
               <div>
                 <dt className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Platforms</dt>
-                <dd className="mt-1 text-base font-semibold text-slate-900 dark:text-white">5 infrastructure platforms</dd>
+                <dd className="mt-1 text-base font-semibold text-slate-900 dark:text-white">8 modular platforms</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Modules</dt>
-                <dd className="mt-1 text-base font-semibold text-slate-900 dark:text-white">18+ composable modules</dd>
+                <dt className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Engagement tiers</dt>
+                <dd className="mt-1 text-base font-semibold text-slate-900 dark:text-white">L.01 → L.06</dd>
               </div>
             </dl>
           </div>

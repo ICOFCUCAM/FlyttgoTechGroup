@@ -19,7 +19,7 @@ export const revalidate = 3600;
 const MCP_MANIFEST = {
   $schema: 'https://modelcontextprotocol.io/specs/manifest/v1',
   name: 'flyttgo-platform',
-  version: '0.1.0',
+  version: '1.0.0',
   description:
     'FlyttGo Technologies Group platform infrastructure — discovery surface for AI agents querying platform capabilities, deployment options, compliance posture, and public documentation.',
   vendor: {
@@ -30,7 +30,8 @@ const MCP_MANIFEST = {
   endpoint: {
     transport: 'http',
     url: '/api/mcp',
-    auth: 'planned · API-key + organization-scoped tokens',
+    protocol: '2025-03-26',
+    auth: 'optional Bearer token (sk_sbx_* sandbox · sk_live_* production); public-data tools callable without auth',
   },
   tools: [
     {
@@ -97,9 +98,9 @@ const MCP_MANIFEST = {
       description: 'Alignment registry, certification pathways, supply-chain provenance.',
     },
   ],
-  status: 'preview',
+  status: 'live',
   notes:
-    'This manifest is a forward-looking surface. The /api/mcp transport endpoint ships when authentication for agent clients is specced. Until then, treat this manifest as the intended capability registry — AI agents that auto-discover MCP services will see FlyttGo here, even if calls don\'t yet succeed.',
+    'JSON-RPC 2.0 over HTTP at /api/mcp. POST { jsonrpc, id, method, params } and receive { jsonrpc, id, result | error }. Methods: initialize, tools/list, tools/call, resources/list, resources/read, prompts/list. Public-data tools require no auth; tenant-scoped tools require Bearer sandbox / live tokens.',
 } as const;
 
 export async function GET() {
