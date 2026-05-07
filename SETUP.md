@@ -9,15 +9,21 @@ intermediate state.
 
 ## 0. What's already done
 
-The Supabase migration `0009_sandbox_artefacts_status.sql` has been
-applied to the live project. Three new tables exist:
+Migrations `0009_sandbox_artefacts_status.sql` and
+`0010_artefact_kind_recommendation.sql` define the marketing-site
+data layer. They must be applied to the FlyttgoTech Supabase project
+(`bxjynfuzqhlirdozlgno`) before sandbox / artefact / status surfaces
+go live with real persistence — paste both files into the Supabase
+SQL Editor in order, or run `supabase db push` once the project is
+linked.
+
+Once applied, three new tables exist:
 
   - `public.sandbox_workspaces`  — `/sandbox` provisioning · 7-day TTL
   - `public.ai_artefacts`        — AI artefact provenance log · SHA-256 hash
   - `public.status_events`       — append-only telemetry feed · `status_latest` view
 
-All three are RLS-gated (anon read, service-role write). No migration
-work is required to bring up the data layer.
+All three are RLS-gated (anon read, service-role write).
 
 ---
 
@@ -32,17 +38,17 @@ works at every intermediate state.
 NEXT_PUBLIC_SITE_URL=https://flyttgo.tech
 ```
 
-### 1b. Supabase (already provisioned)
+### 1b. Supabase (FlyttgoTech project)
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://ewzjsxsttsgflhcwjekc.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_FV8-TVio7AKDa13Ecx9OKg_PiBqv1cH
-SUPABASE_SERVICE_ROLE_KEY=<from Supabase dashboard → Project Settings → API>
+NEXT_PUBLIC_SUPABASE_URL=https://bxjynfuzqhlirdozlgno.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<from Supabase dashboard → Project Settings → API → publishable>
+SUPABASE_SERVICE_ROLE_KEY=<from Supabase dashboard → Project Settings → API → service_role>
 ```
 
-The first two are already populated in `.env.example`. The
-service-role key is the only thing you need to copy in. **Server only —
-must never reach the browser.**
+All three values come from the FlyttgoTech project's API settings. The
+publishable / anon key is browser-safe; the service-role key is
+**server only — must never reach the browser**.
 
 When set, these flip on:
   - real sandbox workspace persistence (`/sandbox` survives across browsers)
