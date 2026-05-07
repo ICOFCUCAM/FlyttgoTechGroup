@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { Inter, JetBrains_Mono, IBM_Plex_Serif } from 'next/font/google';
 import { Providers } from './providers';
 import Analytics from '@/components/flytt/Analytics';
+import SentryInit from '@/components/flytt/SentryInit';
 import EstablishmentRail from '@/components/flytt/EstablishmentRail';
 import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import './globals.css';
@@ -243,6 +244,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <EstablishmentRail />
         <Providers initialLocale={locale}>{children}</Providers>
         <Analytics />
+        <SentryInit />
       </body>
     </html>
   );

@@ -1,27 +1,54 @@
 import Script from 'next/script';
 
 /**
- * Cookieless, GDPR-friendly analytics. Enabled by setting
- * `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` (e.g. "flyttgo.tech") at build time.
- * Optional `NEXT_PUBLIC_PLAUSIBLE_SRC` overrides the script source for
- * self-hosted Plausible instances.
+ * Privacy-first analytics. Two providers wired, both env-gated, both
+ * cookieless out of the box. Pick whichever provider you've signed up
+ * with (or run both — they don't conflict).
  *
- * When the env var is unset this component renders nothing — the site
- * ships with zero tracking by default, and no cookie banner is required
- * (Plausible does not set cookies or collect personal data).
+ *   Plausible: set NEXT_PUBLIC_PLAUSIBLE_DOMAIN (e.g. "flyttgo.tech")
+ *              optional NEXT_PUBLIC_PLAUSIBLE_SRC for self-hosted
+ *
+ *   PostHog:   set NEXT_PUBLIC_POSTHOG_KEY (phc_*)
+ *              optional NEXT_PUBLIC_POSTHOG_HOST (default https://eu.posthog.com)
+ *
+ * When neither env var is set this component renders nothing — the
+ * site ships with zero tracking by default; no cookie banner needed.
  */
 const Analytics: React.FC = () => {
-  const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-  if (!domain) return null;
-  const src =
+  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+  const plausibleSrc =
     process.env.NEXT_PUBLIC_PLAUSIBLE_SRC ?? 'https://plausible.io/js/script.js';
+
+  const posthogKey  = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+  const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? 'https://eu.posthog.com';
+
   return (
-    <Script
-      defer
-      src={src}
-      data-domain={domain}
-      strategy="afterInteractive"
-    />
+    <>
+      {plausibleDomain && (
+        <Script
+          defer
+          src={plausibleSrc}
+          data-domain={plausibleDomain}
+          strategy="afterInteractive"
+        />
+      )}
+
+      {posthogKey && (
+        <Script
+          id="posthog-init"
+          strategy="afterInteractive"
+          // PostHog snippet — defers loader, runs init once.
+          // Cookies disabled by default (persistence: 'memory') for
+          // GDPR-friendly defaults; toggle in PostHog dashboard if needed.
+          dangerouslySetInnerHTML={{
+            __html: `
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("${posthogKey}", { api_host: "${posthogHost}", persistence: "memory", autocapture: false });
+            `,
+          }}
+        />
+      )}
+    </>
   );
 };
 
