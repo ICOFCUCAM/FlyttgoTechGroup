@@ -68,13 +68,13 @@ export default function PreviewBanner() {
           governance roadmap, post-quantum migration plan. Those are{' '}
           <strong className="text-white">indicative or aspirational</strong>,
           not yet attested. Trust artefacts and live metrics will switch to real
-          values as they're signed and shipped.
+          values as they&apos;re signed and shipped.
         </span>
         <Link
           href="/trust"
           className="hidden sm:inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] font-semibold text-[#9ED0F9] hover:underline underline-offset-4 flex-shrink-0"
         >
-          What's real today →
+          What&apos;s real today →
         </Link>
         <button
           type="button"
