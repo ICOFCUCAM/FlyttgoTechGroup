@@ -43,7 +43,6 @@ import {
   Scale,
   LayoutDashboard,
   Cpu,
-  GraduationCap,
   type LucideIcon,
 } from 'lucide-react';
 import { useCommandPalette } from '@/components/flytt/CommandPalette';
