@@ -6,6 +6,7 @@ import { insights } from '@/data/insights';
 import { caseStudies } from '@/data/case-studies';
 import { JURISDICTIONS } from '@/data/jurisdictions';
 import { COMPARISONS } from '@/data/comparisons';
+import { VERTICALS } from '@/data/verticals';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://flyttgo.tech';
 
@@ -83,6 +84,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/developers/webhooks', priority: 0.75, freq: 'monthly' },
   { path: '/press', priority: 0.65, freq: 'monthly' },
   { path: '/governance/ai/artefacts', priority: 0.7, freq: 'daily' },
+  { path: '/verticals', priority: 0.85, freq: 'monthly' },
   { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 
@@ -174,6 +176,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  const verticalEntries: MetadataRoute.Sitemap = VERTICALS.map((v) => {
+    const path = `/verticals/${v.slug}`;
+    return {
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.75,
+      alternates: { languages: localeAlternates(path) },
+    };
+  });
+
   return [
     ...staticEntries,
     ...platformEntries,
@@ -183,5 +196,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...caseStudyEntries,
     ...jurisdictionEntries,
     ...comparisonEntries,
+    ...verticalEntries,
   ];
 }

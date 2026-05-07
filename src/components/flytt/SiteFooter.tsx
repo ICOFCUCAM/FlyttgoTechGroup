@@ -77,6 +77,7 @@ const groups: FooterGroup[] = [
       { label: 'Global coverage · GC.00', href: '/global-coverage' },
       { label: 'Procurement compatibility · PC.00', href: '/procurement-compatibility' },
       { label: 'Jurisdictions · JU.00', href: '/jurisdictions' },
+      { label: 'Vertical accelerators · VT.00', href: '/verticals' },
       { label: 'Infrastructure architecture · IA.00', href: '/infrastructure-architecture' },
       { label: 'White-label program', href: '/white-label' },
     ],

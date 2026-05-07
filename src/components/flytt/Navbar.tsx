@@ -218,6 +218,7 @@ const primaryLinks: NavLink[] = [
             { label: 'Government & Public Sector',  description: 'GV.00 · capability brief, sovereignty framework, pilot proposal', href: '/government',                  icon: Landmark },
             { label: 'Procurement Compatibility',   description: 'PC.00 · pilot, city, regional, national, white-label tiers',     href: '/procurement-compatibility',   icon: FileCheck2 },
             { label: 'Trust Center',                description: 'TC.00 · SOC 2 · ISO 27001 · DPA · subprocessors · disclosure',    href: '/trust',                       icon: ShieldCheck },
+            { label: 'Vertical accelerators',       description: 'VT.00 · defense · healthcare · financial services',                href: '/verticals',                   icon: Briefcase },
             { label: 'EU Digital Identity Wallet',  description: 'VC.00 · eIDAS 2.0 · W3C VC · OID4VP · DIDs · qualified signatures', href: '/wallet',                      icon: Fingerprint },
             { label: 'Post-quantum cryptography',   description: 'PQ.00 · NIST FIPS 203/204/205 hybrid migration roadmap',          href: '/post-quantum',                icon: Lock },
             { label: 'Jurisdictions',               description: 'JU.00 · UK · EU · Norway · KSA · UAE · ZA framework alignment',   href: '/jurisdictions',               icon: Globe2 },
