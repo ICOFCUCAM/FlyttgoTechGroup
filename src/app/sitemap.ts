@@ -78,6 +78,10 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/learn', priority: 0.7, freq: 'monthly' },
   { path: '/open-source', priority: 0.7, freq: 'monthly' },
   { path: '/ask-flyttgo', priority: 0.85, freq: 'monthly' },
+  { path: '/transparency', priority: 0.7, freq: 'yearly' },
+  { path: '/transparency/2026', priority: 0.75, freq: 'monthly' },
+  { path: '/developers/webhooks', priority: 0.75, freq: 'monthly' },
+  { path: '/press', priority: 0.65, freq: 'monthly' },
   { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 

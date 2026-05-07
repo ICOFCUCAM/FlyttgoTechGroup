@@ -151,6 +151,8 @@ const primaryLinks: NavLink[] = [
           items: [
             { label: 'API reference',               description: 'AP.RF · OpenAPI 3.1 · 634+ endpoints across eight modules',        href: '/developers/api',              icon: Code2 },
             { label: 'Developer playground',        description: 'API.PG · live endpoint explorer with real responses',              href: '/developers/playground',       icon: Terminal },
+            { label: 'Webhook tester',              description: 'WH.00 · inspector URL + HMAC-SHA256 signature validator',          href: '/developers/webhooks',         icon: Activity },
+            { label: 'AI procurement assistant',    description: 'AS.00 · Claude-powered CAIQ + RFP + proposal generation',          href: '/ask-flyttgo',                 icon: Cpu },
             { label: 'AI agent surface',            description: 'AI.00 · MCP-discoverable platform · LLM agents drive safely',      href: '/agents',                      icon: Workflow },
             { label: 'AI governance',               description: 'AG.00 · AIBOM · model cards · EU AI Act risk-tier registry',       href: '/governance/ai',               icon: ShieldCheck },
             { label: 'Open standards',              description: 'OS.00 · 33 open standards across six interop categories',          href: '/standards',                   icon: Network },
@@ -339,6 +341,8 @@ const primaryLinks: NavLink[] = [
             { label: 'Partners',                    description: 'PR.00 · four tiers · twelve listed partners · EU · MENA · Africa', href: '/partners',                    icon: Briefcase },
             { label: 'Research library',            description: 'RS.00 · 8 long-form papers · architecture · regulatory · sector',  href: '/research',                    icon: BookOpen },
             { label: 'Education hub',               description: 'LR.00 · 6 certification tracks · verifiable credentials',          href: '/learn',                       icon: GraduationCap },
+            { label: 'Transparency report',         description: 'TR.00 · annual numbers · uptime · CVE · AI · sustainability',     href: '/transparency/2026',           icon: Activity },
+            { label: 'Press & media kit',           description: 'PR.MK · brand assets · press releases · analyst relations',         href: '/press',                       icon: Newspaper },
             { label: 'Insights',                    description: 'Deployment guides, architecture notes, procurement playbooks',    href: '/insights',                    icon: BookOpen },
             { label: 'Careers',                     description: 'Open roles across engineering and commercial',                    href: '/company/careers',             icon: Users },
             { label: 'Contact',                     description: 'Engagement-desk intake · partnerships · procurement',              href: '/contact',                     icon: Newspaper },
