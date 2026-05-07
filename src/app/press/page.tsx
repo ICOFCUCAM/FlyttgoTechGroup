@@ -5,6 +5,7 @@ import PageHero from '@/components/flytt/PageHero';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import NextStepsGrid from '@/components/flytt/NextStepsGrid';
+import IndicativeNotice from '@/components/flytt/IndicativeNotice';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
 import {
   Newspaper,
@@ -107,6 +108,11 @@ export default function PressPage() {
           }
           description="Brand assets, press release archive, analyst relations contact, embargo policy, executive bios, speaking availability. Everything a writer or programme committee needs in one place — refreshed alongside the changelog."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Press & media kit' }]}
+        />
+
+        <IndicativeNotice
+          code="PR.MK.IND"
+          body="Brand-asset bundles below are real downloadable artwork. The press release archive shows the publication shape — dated entries are illustrative until the first real release ships. Contact press@flyttgotech.com to confirm what's on the record."
         />
 
         {/* PR.MK.AS — brand assets */}

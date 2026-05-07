@@ -6,6 +6,7 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import NextStepsGrid from '@/components/flytt/NextStepsGrid';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
+import IndicativeNotice from '@/components/flytt/IndicativeNotice';
 import { caseStudies } from '@/data/case-studies';
 import {
   Landmark,
@@ -73,6 +74,11 @@ export default function CustomersPage() {
           }
           description="Anonymised reference programmes spanning government, mobility, education, municipal modernisation, marketplace operations and enterprise fleet. Modules selected, deployment substrate, delivery duration and the metrics that landed."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Customers' }]}
+        />
+
+        <IndicativeNotice
+          code="CS.IND"
+          body="The six programmes below are reference shapes — the architecture, modules, deployment substrate and tier are real, but no live customer is identified or implied. Named-customer references will be published with written consent as engagements close."
         />
 
         {/* CS.IDX — programme grid */}

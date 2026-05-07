@@ -5,6 +5,7 @@ import PageHero from '@/components/flytt/PageHero';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import NextStepsGrid from '@/components/flytt/NextStepsGrid';
+import IndicativeNotice from '@/components/flytt/IndicativeNotice';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
 import {
   Activity,
@@ -165,6 +166,11 @@ export default function Transparency2026Page() {
           }
           description="Aggregate uptime, incident posture, security and supply-chain discipline, AI governance, open source, sustainability, privacy + trust desk, and the people behind the platform. Refreshed every January with FY-prior numbers attached."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Transparency · 2026' }]}
+        />
+
+        <IndicativeNotice
+          code="TR.26.IND"
+          body="FY2026 numbers below are aspirational targets, not attested results. The first transparency report grounded in audited telemetry publishes after SOC 2 Type II issuance + the FY2026 close."
         />
 
         {/* TR.SUM — single-line annual posture */}

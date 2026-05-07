@@ -5,6 +5,7 @@ import { Providers } from './providers';
 import Analytics from '@/components/flytt/Analytics';
 import SentryInit from '@/components/flytt/SentryInit';
 import EstablishmentRail from '@/components/flytt/EstablishmentRail';
+import PreviewBanner from '@/components/flytt/PreviewBanner';
 import { DEFAULT_LOCALE, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import './globals.css';
 
@@ -241,6 +242,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <EstablishmentRail />
+        <PreviewBanner />
         <Providers initialLocale={locale}>{children}</Providers>
         <Analytics />
         <SentryInit />

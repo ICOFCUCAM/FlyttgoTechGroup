@@ -16,6 +16,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from 'lucide-react';
+import IndicativeNotice from '@/components/flytt/IndicativeNotice';
 
 export const dynamic = 'force-dynamic';
 
@@ -138,6 +139,11 @@ export default function PartnersPage() {
           }
           description="Four partner tiers — system integrators, resellers, training partners, technology partners — across EU, MENA and Africa. Programme delivery scales beyond FlyttGo's own consulting bench."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Partners' }]}
+        />
+
+        <IndicativeNotice
+          code="PR.IND"
+          body="The directory below illustrates the partner programme shape — four tiers, regional coverage, modules, eligibility. No partners are enrolled yet. Open the partner intake at the bottom of the page to register interest; the first cohort will be listed publicly with written consent."
         />
 
         {/* PR.TI — partner tiers */}

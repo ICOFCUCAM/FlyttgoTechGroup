@@ -5,7 +5,8 @@ import PageHero from '@/components/flytt/PageHero';
 import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
-import { Activity, ArrowUpRight, Download, FileText } from 'lucide-react';
+import { Activity, ArrowUpRight, FileText } from 'lucide-react';
+import IndicativeNotice from '@/components/flytt/IndicativeNotice';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,6 +57,11 @@ export default function TransparencyIndexPage() {
           }
           description="Aggregate reports refreshed every January. Eight pillars per year — uptime, incidents, security and supply chain, AI governance, open source, sustainability, trust desk, and the people behind the platform."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Transparency reports' }]}
+        />
+
+        <IndicativeNotice
+          code="TR.IND"
+          body="Reports below show the eight-pillar reporting shape and the cadence (refresh every January). Year-over-year numbers are aspirational — the first attested transparency report will publish once SOC 2 Type II + ISO 27001 audits close and the underlying telemetry is being captured live."
         />
 
         <Reveal>
