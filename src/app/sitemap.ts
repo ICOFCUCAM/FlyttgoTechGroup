@@ -74,6 +74,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/roi', priority: 0.8, freq: 'monthly' },
   { path: '/governance/ai', priority: 0.8, freq: 'monthly' },
   { path: '/research', priority: 0.75, freq: 'monthly' },
+  { path: '/deployment/confidential', priority: 0.8, freq: 'monthly' },
   { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 
