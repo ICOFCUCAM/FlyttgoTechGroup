@@ -51,6 +51,7 @@ const groups: FooterGroup[] = [
       { label: 'Operator console preview · OC.00', href: '/console' },
       { label: 'Self-serve sandbox · SB.SP', href: '/sandbox' },
       { label: 'AI procurement assistant · AS.00', href: '/ask-flyttgo' },
+      { label: 'Deployment recommendation · RC.00', href: '/recommend' },
       { label: 'ROI / TCO calculator · RO.00', href: '/roi' },
       { label: 'Research library · RS.00', href: '/research' },
       { label: 'Education hub · LR.00', href: '/learn' },

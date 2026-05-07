@@ -29,7 +29,7 @@ type AskBody =
   | { mode: 'ask'; query: string }
   | {
       mode: 'artefact';
-      artefact: 'caiq' | 'rfp' | 'proposal';
+      artefact: 'caiq' | 'rfp' | 'proposal' | 'recommendation';
       context: ArtefactContext;
     };
 
@@ -40,6 +40,10 @@ type ArtefactContext = {
   modules?: string[];
   programme?: string;
   intent?: string;
+  /** Recommendation-mode-only inputs. */
+  scale?: string;
+  sensitivity?: string;
+  vertical?: string;
 };
 
 const MODEL_DEFAULT = 'claude-sonnet-4-6';
@@ -53,13 +57,39 @@ Knowledge base (authoritative):
 
 ${KNOWLEDGE_BASE.map((e, i) => `KB.${String(i + 1).padStart(2, '0')} · Q: ${e.question}\n  A: ${e.answer.replace(/\n/g, ' ')}`).join('\n\n')}`;
 
-function artefactPrompt(artefact: 'caiq' | 'rfp' | 'proposal', ctx: ArtefactContext): string {
+function artefactPrompt(artefact: 'caiq' | 'rfp' | 'proposal' | 'recommendation', ctx: ArtefactContext): string {
   const org = ctx.organisation ?? 'the buyer';
   const jur = ctx.jurisdiction ?? 'EU';
   const tier = ctx.tier ?? 'L.04';
   const modules = (ctx.modules ?? ['identra']).join(', ');
   const programme = ctx.programme ?? 'platform deployment';
   const intent = ctx.intent ?? 'evaluate';
+  const scale = ctx.scale ?? 'mid-scale';
+  const sensitivity = ctx.sensitivity ?? 'standard';
+  const vertical = ctx.vertical ?? 'general';
+
+  if (artefact === 'recommendation') {
+    return `Generate a deployment-architecture recommendation for ${org}.
+
+Inputs:
+  · Programme:    ${programme}
+  · Jurisdiction: ${jur}
+  · Vertical:     ${vertical}
+  · Scale:        ${scale}
+  · Sensitivity:  ${sensitivity}
+  · Modules of interest: ${modules}
+
+Sections (be concise, procurement-friendly, cite section codes):
+1. Recommended tier (L.01-L.06) with rationale tied to the inputs
+2. Recommended deployment substrate (DM.01 managed SaaS / DM.02 customer cloud / DM.03 sovereign datacenter / DM.04 confidential compute) with rationale
+3. Recommended module bundle — minimum viable bundle plus one or two strong-fit additions; cite each module's role
+4. Engagement cadence — SE.D1 / SE.D2 / SE.D3 timing for this tier
+5. Indicative pricing band pointer (refer to /pricing for live)
+6. Vertical-specific caveats — if the vertical is defense / healthcare / financial, surface the one most-important regulatory consideration; otherwise note 'no vertical-specific caveats'
+7. Next-step routing — explicit pathway through /sandbox → /ask-flyttgo → /consultation
+
+Close with a single-sentence summary line.`;
+  }
 
   if (artefact === 'caiq') {
     return `Generate a CAIQ-style security questionnaire response for ${org} (jurisdiction: ${jur}). Cover the 16 standard CAIQ control families. For each family:
@@ -203,7 +233,132 @@ function syntheticAnswer(query: string): string {
   return lines.join('\n\n');
 }
 
-function syntheticArtefact(artefact: 'caiq' | 'rfp' | 'proposal', ctx: ArtefactContext): string {
+// Synthetic-fallback recommendation engine. Picks tier + substrate + modules
+// from a small rule-set on the inputs, generates a procurement-friendly brief.
+function syntheticRecommendation(ctx: ArtefactContext): string {
+  const org = ctx.organisation ?? 'the buyer';
+  const jur = ctx.jurisdiction ?? 'EU';
+  const vertical = ctx.vertical ?? 'general';
+  const scale = ctx.scale ?? 'mid-scale';
+  const sensitivity = ctx.sensitivity ?? 'standard';
+  const programme = ctx.programme ?? 'platform deployment';
+  const requestedModules = ctx.modules ?? [];
+
+  // Tier rule-set: scale + sensitivity drive tier selection.
+  let tier = 'L.04';
+  let tierRationale = 'L.04 enterprise platform balances feature depth against the 3-6 month delivery window typical for institutional pilots.';
+  if (scale === 'pilot' || scale === 'small-scale') {
+    tier = 'L.03';
+    tierRationale = 'L.03 smart platform fits a pilot-scale programme with a 1-3 month delivery window; clear upgrade path to L.04 once the programme moves to operational scale.';
+  } else if (scale === 'national-scale' || sensitivity === 'classified') {
+    tier = 'L.05';
+    tierRationale = 'L.05 national institutional tier is the right fit for national-scale or classified-sensitivity programmes; sovereign-deployment posture and 6-12 month delivery cadence are baseline.';
+  } else if (scale === 'cross-border' || vertical === 'defense') {
+    tier = 'L.06';
+    tierRationale = 'L.06 platform-ecosystem tier handles cross-border or defense-vertical complexity — multi-substrate orchestration, regulatory hand-off and 6-18 month delivery.';
+  }
+
+  // Substrate rule-set: vertical + sensitivity drive substrate selection.
+  let substrate = 'DM.02';
+  let substrateLabel = 'Customer cloud';
+  let substrateRationale = 'DM.02 customer cloud lets the buyer hold the cloud commitment and the data-residency posture while FlyttGo operates the platform layer.';
+  if (vertical === 'defense' || sensitivity === 'classified') {
+    substrate = 'DM.04';
+    substrateLabel = 'Confidential compute';
+    substrateRationale = 'DM.04 confidential compute is the only substrate that removes the privileged-insider attack vector; required for defense or classified-sensitivity workloads.';
+  } else if (jur === 'sa' || jur === 'ae' || sensitivity === 'sovereign-required') {
+    substrate = 'DM.03';
+    substrateLabel = 'Sovereign datacenter';
+    substrateRationale = 'DM.03 sovereign datacenter enforces in-jurisdiction data residency by default; required for KSA / UAE programmes and any sovereignty-mandated flow.';
+  } else if (scale === 'pilot') {
+    substrate = 'DM.01';
+    substrateLabel = 'Managed SaaS';
+    substrateRationale = 'DM.01 managed SaaS removes operational overhead at pilot scale; clear upgrade path to DM.02 / DM.03 as the programme moves to operational scale.';
+  }
+
+  // Module bundle: vertical-aware defaults.
+  const baseModules = ['Identra'];
+  if (vertical === 'defense')         baseModules.push('Civitas', 'Workverge');
+  else if (vertical === 'healthcare') baseModules.push('Civitas', 'EduPro', 'Workverge');
+  else if (vertical === 'financial')  baseModules.push('Payvera', 'Ledgera');
+  else                                 baseModules.push('Payvera', 'Workverge');
+
+  const finalModules = Array.from(new Set([...baseModules, ...requestedModules]));
+
+  return `# Deployment-architecture recommendation · ${org}
+
+**Inputs**
+- Programme: ${programme}
+- Jurisdiction: ${jur} · Vertical: ${vertical} · Scale: ${scale} · Sensitivity: ${sensitivity}
+
+---
+
+## 1. Recommended tier · **${tier}**
+
+${tierRationale}
+
+Reference: /engineering/ladder for the full tier matrix.
+
+## 2. Recommended substrate · **${substrate} · ${substrateLabel}**
+
+${substrateRationale}
+
+Reference: /deployment for the full substrate comparison.
+
+## 3. Recommended module bundle
+
+Minimum viable bundle: **${finalModules.join(', ')}**.
+
+Each module's role:
+${finalModules.map((m) => {
+  const role: Record<string, string> = {
+    'Identra':  '· Identra anchors identity, MFA + qualified signature, federation across IdPs',
+    'Civitas':  '· Civitas runs the citizen-facing service templates and the inter-agency routing',
+    'Workverge': '· Workverge handles workforce coordination, shift rostering, presence',
+    'Payvera':  '· Payvera orchestrates payments — PSD2 SCA, SEPA + national rails',
+    'Ledgera':  '· Ledgera carries financial operations, multi-jurisdiction posting trees, statutory exports',
+    'EduPro':   '· EduPro supports cohort analytics with privacy-preserving aggregation',
+    'Transify': '· Transify drives mobility / order routing where the programme has logistics',
+  };
+  return role[m] ?? `· ${m}`;
+}).join('\n')}
+
+## 4. Engagement cadence
+
+${tier} delivery follows the SE.D1 → SE.D2 → SE.D3 cadence:
+- **SE.D1 Capability scope** (1-2 weeks): joint architecture scope + risk register baseline
+- **SE.D2 Build scoping under MNDA** (3-6 weeks): final architecture, order form, security review
+- **SE.D3 Build & deployment** (per ${tier} cadence): production go-live + handover
+
+## 5. Indicative pricing pointer
+
+Live pricing band per tier ${tier} in jurisdiction ${jur.toUpperCase()} published at /pricing — indicative ±15 %, final on the order form post-SE.D2. Total-cost-of-ownership comparison vs build-from-scratch and hybrid stacks at /roi.
+
+## 6. Vertical-specific caveats
+
+${vertical === 'defense'    ? 'Defense vertical: NSA CNSA 2.0 PQC migration deadlines (2030 signing / 2035 everything) make crypto-agility a baseline. /post-quantum tracks the FlyttGo migration; align on it during SE.D2.' :
+  vertical === 'healthcare' ? 'Healthcare vertical: GDPR Article 9 (special-category personal data) + region-pinned data residency are non-negotiable in EU programmes. /verticals/healthcare carries the full framework matrix.' :
+  vertical === 'financial'  ? 'Financial-services vertical: PSD2 → PSD3 transition is a cliff for hand-rolled SCA implementations. Payvera abstracts SCA so PSD3 lands as a platform release, not a tenant rebuild. /verticals/financial details the framework alignment.' :
+  'No vertical-specific caveats. The standard regulatory matrix applies (GDPR + ISO 27001 + SOC 2 baseline).'}
+
+## 7. Next-step routing
+
+1. **Spin up a sandbox** at /sandbox — 60-second provisioning; drive the recommended modules with synthetic telemetry
+2. **Generate procurement artefacts** at /ask-flyttgo — CAIQ + RFP + tailored proposal in this jurisdiction
+3. **Open scoping** at /consultation — five-step intake routes under ${vertical === 'defense' ? 'CT.03 government pilot' : vertical === 'healthcare' || vertical === 'financial' ? 'CT.01 platform architecture' : 'CT.01 platform architecture'} session within one business day
+
+---
+
+**Summary**: For ${org} — ${tier} on ${substrate} ${substrateLabel} with ${finalModules.join(' + ')} is the recommended starting shape; revisit tier and substrate after the SE.D2 scoping engagement nails final scope.
+
+— FlyttGo Technologies Group · Solution Architecture`;
+}
+
+function syntheticArtefact(artefact: 'caiq' | 'rfp' | 'proposal' | 'recommendation', ctx: ArtefactContext): string {
+  if (artefact === 'recommendation') {
+    return syntheticRecommendation(ctx);
+  }
+
   const org = ctx.organisation ?? 'the buyer';
   const jur = ctx.jurisdiction ?? 'EU';
   const tier = ctx.tier ?? 'L.04';
@@ -256,8 +411,8 @@ export async function POST(req: NextRequest) {
     userPrompt = body.query.trim().slice(0, 1200);
     syntheticText = syntheticAnswer(userPrompt);
   } else {
-    if (!['caiq', 'rfp', 'proposal'].includes(body.artefact)) {
-      return new Response(JSON.stringify({ error: 'artefact must be caiq | rfp | proposal' }), {
+    if (!['caiq', 'rfp', 'proposal', 'recommendation'].includes(body.artefact)) {
+      return new Response(JSON.stringify({ error: 'artefact must be caiq | rfp | proposal | recommendation' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });

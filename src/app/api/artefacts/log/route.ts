@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic';
  */
 
 type LogBody = {
-  kind:    'caiq' | 'rfp' | 'proposal' | 'answer';
+  kind:    'caiq' | 'rfp' | 'proposal' | 'answer' | 'recommendation';
   output:  string;
   context?: Record<string, unknown>;
   model?:  string;
@@ -46,8 +46,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
   }
 
-  if (!body.kind || !['caiq', 'rfp', 'proposal', 'answer'].includes(body.kind)) {
-    return NextResponse.json({ error: 'kind must be caiq | rfp | proposal | answer' }, { status: 400 });
+  if (!body.kind || !['caiq', 'rfp', 'proposal', 'answer', 'recommendation'].includes(body.kind)) {
+    return NextResponse.json({ error: 'kind must be caiq | rfp | proposal | answer | recommendation' }, { status: 400 });
   }
   if (typeof body.output !== 'string' || body.output.length < 16) {
     return NextResponse.json({ error: 'output too short to log' }, { status: 400 });

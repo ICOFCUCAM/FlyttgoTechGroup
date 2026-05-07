@@ -153,6 +153,7 @@ const primaryLinks: NavLink[] = [
             { label: 'Developer playground',        description: 'API.PG · live endpoint explorer with real responses',              href: '/developers/playground',       icon: Terminal },
             { label: 'Webhook tester',              description: 'WH.00 · inspector URL + HMAC-SHA256 signature validator',          href: '/developers/webhooks',         icon: Activity },
             { label: 'AI procurement assistant',    description: 'AS.00 · Claude-powered CAIQ + RFP + proposal generation',          href: '/ask-flyttgo',                 icon: Cpu },
+            { label: 'Deployment recommendation',   description: 'RC.00 · tier + substrate + module bundle tailored to inputs',     href: '/recommend',                   icon: Compass },
             { label: 'AI agent surface',            description: 'AI.00 · MCP-discoverable platform · LLM agents drive safely',      href: '/agents',                      icon: Workflow },
             { label: 'AI governance',               description: 'AG.00 · AIBOM · model cards · EU AI Act risk-tier registry',       href: '/governance/ai',               icon: ShieldCheck },
             { label: 'Open standards',              description: 'OS.00 · 33 open standards across six interop categories',          href: '/standards',                   icon: Network },

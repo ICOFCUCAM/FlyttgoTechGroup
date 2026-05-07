@@ -85,6 +85,7 @@ const staticRoutes: { path: string; priority: number; freq: MetadataRoute.Sitema
   { path: '/press', priority: 0.65, freq: 'monthly' },
   { path: '/governance/ai/artefacts', priority: 0.7, freq: 'daily' },
   { path: '/verticals', priority: 0.85, freq: 'monthly' },
+  { path: '/recommend', priority: 0.85, freq: 'monthly' },
   { path: '/compare', priority: 0.7, freq: 'monthly' },
 ];
 
