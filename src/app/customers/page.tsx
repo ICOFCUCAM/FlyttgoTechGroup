@@ -6,7 +6,6 @@ import SiteFooter from '@/components/flytt/SiteFooter';
 import { Reveal } from '@/components/flytt/Reveal';
 import NextStepsGrid from '@/components/flytt/NextStepsGrid';
 import { breadcrumbListLd, jsonLdScript } from '@/lib/seo/jsonld';
-import IndicativeNotice from '@/components/flytt/IndicativeNotice';
 import { caseStudies } from '@/data/case-studies';
 import {
   Landmark,
@@ -28,7 +27,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Customer reference programmes · CS.00 — FlyttGo Technologies Group',
   description:
-    'Reference programmes — government identity, regional mobility, education networks, municipal modernisation, regulated marketplaces, enterprise fleet operations. Modules used, deployment substrate, delivered metrics.',
+    'Live deployments running on FlyttGo platform substrate today — flyttgo.com global marketplace, flyttgo.no Norwegian deployment, Golden Dimensions UK marketplace, fastandman UK removals marketplace. Each card links to the live site.',
   alternates: { canonical: '/customers' },
 };
 
@@ -63,22 +62,17 @@ export default function CustomersPage() {
       >
         <PageHero
           code="CS.00"
-          eyebrow="Reference programmes"
+          eyebrow="Live deployments"
           title={
             <>
-              Six programmes,{' '}
+              Four shipped platforms,{' '}
               <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
                 one substrate underneath.
               </em>
             </>
           }
-          description="Anonymised reference programmes spanning government, mobility, education, municipal modernisation, marketplace operations and enterprise fleet. Modules selected, deployment substrate, delivery duration and the metrics that landed."
+          description="Public, verifiable deployments running on the FlyttGo platform substrate today — flyttgo.com global marketplace, flyttgo.no Norwegian deployment, Golden Dimensions UK marketplace at goldendimensions.co.uk, fastandman UK removals marketplace at ukremoval.net. Each card links to the live site. Per-customer transactional volumes released only with written consent."
           crumbs={[{ label: 'Home', href: '/' }, { label: 'Customers' }]}
-        />
-
-        <IndicativeNotice
-          code="CS.IND"
-          body="The six programmes below are reference shapes — the architecture, modules, deployment substrate and tier are real, but no live customer is identified or implied. Named-customer references will be published with written consent as engagements close."
         />
 
         {/* CS.IDX — programme grid */}
@@ -92,22 +86,23 @@ export default function CustomersPage() {
               <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.22em] uppercase text-slate-400">
                 <span className="text-[#0A3A6B] dark:text-[#9ED0F9] font-semibold">CS.IDX</span>
                 <span aria-hidden="true" className="flex-1 h-px bg-slate-200/80 dark:bg-slate-800/60 max-w-[200px]" />
-                <span>Six reference programmes</span>
+                <span>Four shipped deployments</span>
               </div>
               <h2
                 id="cs-idx-heading"
                 className="mt-6 max-w-3xl font-serif text-3xl md:text-4xl font-medium tracking-tight text-slate-900 dark:text-white leading-[1.05]"
               >
-                Programmes anonymised{' '}
+                Live platforms,{' '}
                 <em className="not-italic font-serif italic font-normal text-[#0A3A6B] dark:text-[#9ED0F9]">
-                  to the procurement style.
+                  verifiable at the URL.
                 </em>
               </h2>
               <p className="mt-4 max-w-3xl text-base text-slate-600 dark:text-slate-400 leading-[1.65]">
-                Named-customer references are released under a separate
-                consent-controlled wall after written agreement. The
-                programme shape, module selection and delivered metrics
-                below are accurate to the engagements they describe.
+                Each programme below points at a public production deployment
+                you can hit today. Architecture, module surface, deployment
+                substrate and tier are accurate to what the live site runs;
+                per-customer transactional volumes are released only with
+                written consent on a separate consent-controlled wall.
               </p>
 
               <ul className="mt-12 grid lg:grid-cols-2 gap-4">

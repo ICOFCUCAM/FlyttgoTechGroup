@@ -17,9 +17,9 @@ import { AlertTriangle, X } from 'lucide-react';
  * device — it isn't a one-and-done global toggle, by design.
  *
  * The banner doesn't claim things are wrong; it's an honest statement
- * that the site shows reference shapes for many surfaces (customer
- * programmes, partner directory, transparency report, press archive)
- * that are aspirational rather than live.
+ * that the site shows reference shapes for several surfaces (partner
+ * directory, transparency report, press archive, AI governance + PQC
+ * roadmap) that are aspirational rather than live.
  */
 
 const LS_KEY = 'flytt:preview-banner-dismissed';
@@ -63,9 +63,9 @@ export default function PreviewBanner() {
           PV.00 · preview
         </span>
         <span className="text-[12px] text-white/85 leading-snug min-w-0 flex-1">
-          This site shows reference shapes for several surfaces — customer
-          programmes, partners, transparency numbers, press releases, AI
-          governance roadmap, post-quantum migration plan. Those are{' '}
+          Customer deployments on /customers are real and verifiable at the
+          live URLs shown. Other surfaces — partner directory, transparency
+          numbers, press archive, AI governance + post-quantum roadmap — are{' '}
           <strong className="text-white">indicative or aspirational</strong>,
           not yet attested. Trust artefacts and live metrics will switch to real
           values as they&apos;re signed and shipped.

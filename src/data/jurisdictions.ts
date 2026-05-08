@@ -38,7 +38,7 @@ export const JURISDICTIONS: Jurisdiction[] = [
       { code: 'JU.UK.CO.03', name: 'NHS DSP Toolkit',            body: 'Standards Met submission for the EduPro + Civitas surfaces deployed into NHS-adjacent programmes.' },
     ],
     deploymentSubstrates: ['DM.01', 'DM.02', 'DM.03'],
-    caseRefs: ['CS.05'],
+    caseRefs: ['CS.03', 'CS.04'],
   },
   {
     slug: 'european-union',
@@ -65,7 +65,7 @@ export const JURISDICTIONS: Jurisdiction[] = [
       { code: 'JU.EU.CO.03', name: 'NIS2 / DORA',                 body: 'NIS2 essential-entity classification + DORA-aligned operational resilience controls; tabletop exercise log refreshed quarterly.' },
     ],
     deploymentSubstrates: ['DM.01', 'DM.02', 'DM.03'],
-    caseRefs: ['CS.03', 'CS.05', 'CS.06'],
+    caseRefs: ['CS.01'],
   },
   {
     slug: 'norway',
@@ -90,7 +90,7 @@ export const JURISDICTIONS: Jurisdiction[] = [
       { code: 'JU.NO.CO.02', name: 'Sikkerhetsloven',            body: 'Compatibility for security-classified workloads up to NEK-relevant level under the sovereign substrate.' },
     ],
     deploymentSubstrates: ['DM.01', 'DM.02', 'DM.03'],
-    caseRefs: ['CS.01'],
+    caseRefs: ['CS.01', 'CS.02'],
   },
   {
     slug: 'saudi-arabia',
@@ -116,7 +116,7 @@ export const JURISDICTIONS: Jurisdiction[] = [
       { code: 'JU.SA.CO.03', name: 'SAMA · Cyber Security Framework', body: 'CSF-aligned operational controls on Payvera deployments handling regulated payment flows.' },
     ],
     deploymentSubstrates: ['DM.03'],
-    caseRefs: ['CS.02'],
+    caseRefs: [],
   },
   {
     slug: 'united-arab-emirates',
@@ -142,7 +142,7 @@ export const JURISDICTIONS: Jurisdiction[] = [
       { code: 'JU.AE.CO.03', name: 'CBUAE payment orchestration', body: 'Central Bank of the UAE retail payment-services regulation alignment for Payvera deployments.' },
     ],
     deploymentSubstrates: ['DM.03'],
-    caseRefs: ['CS.02'],
+    caseRefs: [],
   },
   {
     slug: 'south-africa',
@@ -167,6 +167,6 @@ export const JURISDICTIONS: Jurisdiction[] = [
       { code: 'JU.ZA.CO.02', name: 'SARS financial alignment',    body: 'Financial-operations envelope (Ledgera) aligned with SARS reporting expectations.' },
     ],
     deploymentSubstrates: ['DM.02', 'DM.03'],
-    caseRefs: ['CS.04'],
+    caseRefs: [],
   },
 ];

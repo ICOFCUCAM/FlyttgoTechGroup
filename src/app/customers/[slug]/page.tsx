@@ -134,6 +134,24 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                         <span>{cs.duration}</span>
                       </dd>
                     </div>
+                    {cs.liveUrl && (
+                      <div className="flex items-baseline gap-3">
+                        <dt className="w-28 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 flex-shrink-0">
+                          Live at
+                        </dt>
+                        <dd className="text-[14px]">
+                          <a
+                            href={cs.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[#9ED0F9] hover:underline underline-offset-4 break-all"
+                          >
+                            {cs.liveUrl.replace(/^https?:\/\//, '')}
+                            <ArrowUpRight size={11} aria-hidden="true" />
+                          </a>
+                        </dd>
+                      </div>
+                    )}
                     <div className="flex items-baseline gap-3">
                       <dt className="w-28 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 flex-shrink-0">
                         Modules

@@ -59,7 +59,7 @@ export const VERTICALS: Vertical[] = [
       { code: 'VT.DF.RK.03', title: 'Supply-chain compromise',           body: 'CycloneDX 1.6 SBOM published per release; Sigstore-signed images; SLSA L3 build provenance; OSV.dev + NVD cross-reference every six hours with auto-revocation.' },
       { code: 'VT.DF.RK.04', title: 'Cross-domain information flow',     body: 'STANAG 4774-compatible labels carried through the audit envelope; cross-domain solution integration available as a tier-bounded engagement add-on.' },
     ],
-    caseRefs: ['CS.01'],
+    caseRefs: [],
     procurementRoutes: [
       'NCSC Secure by Design assessment',
       'Crown Commercial Service (UK) defence-route contract vehicles',
@@ -104,7 +104,7 @@ export const VERTICALS: Vertical[] = [
       { code: 'VT.HC.RK.03', title: 'Regulator hand-off',             body: 'Health regulator audit windows compress timelines. FlyttGo audit envelope exports a regulator-friendly archive (signed manifest + chain-of-custody) on demand; integrators add the clinical-evidence layer.' },
       { code: 'VT.HC.RK.04', title: 'Software-as-medical-device boundary', body: 'FlyttGo is not a medical device. Integrators building SaMD on top need a separate notified-body assessment; FlyttGo provides the audit envelope and identity stack the SaMD assembly needs.' },
     ],
-    caseRefs: ['CS.03', 'CS.04'],
+    caseRefs: [],
     procurementRoutes: [
       'NHS Shared Business Services framework',
       'EU Health Data Space (EHDS) compatible procurement',
@@ -150,7 +150,7 @@ export const VERTICALS: Vertical[] = [
       { code: 'VT.FN.RK.03', title: 'PSD3 transition exposure',          body: 'PSD2 → PSD3 migration is a cliff for hand-rolled SCA implementations. Payvera abstracts the SCA flow; PSD3 lands as a platform release, not a tenant-side rebuild.' },
       { code: 'VT.FN.RK.04', title: 'BCBS 239 risk-data aggregation',     body: 'Risk-data aggregation completeness + accuracy is the single most-cited examination finding. Ledgera produces the BCBS 239 export pack with provenance manifest baked in.' },
     ],
-    caseRefs: ['CS.05', 'CS.06'],
+    caseRefs: [],
     procurementRoutes: [
       'EBA Outsourcing Register documentation pack',
       'FCA Operational Resilience submission alignment',
